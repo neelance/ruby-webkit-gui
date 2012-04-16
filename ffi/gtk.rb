@@ -4,7 +4,13 @@ require 'ffi'
 
 module GTK
   extend FFI::Library
-  ffi_lib 'gtk-3'
+  ffi_lib 'gtk-3.so.0'
+  
+  def self.attach_function(name, *args)
+    begin; super; rescue FFI::NotFoundError => e
+      (class << self; self; end).class_eval { define_method(name) { |*args| raise e } }
+    end
+  end
   
   PATH_PRIO_MASK = 0x0f
   
@@ -7477,6 +7483,14 @@ module GTK
   # @return [nil] 
   # @scope class
   attach_function :scrolled_window_set_min_content_height, :gtk_scrolled_window_set_min_content_height, [ScrolledWindow, :int], :void
+  
+  # (Not documented)
+  # 
+  # @method gtk_scrolled_window_get_scrollbar_spacing(scrolled_window)
+  # @param [ScrolledWindow] scrolled_window 
+  # @return [Integer] 
+  # @scope class
+  attach_function :gtk_scrolled_window_get_scrollbar_spacing, :_gtk_scrolled_window_get_scrollbar_spacing, [ScrolledWindow], :int
   
   # (Not documented)
   # 

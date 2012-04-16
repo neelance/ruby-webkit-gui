@@ -4,7 +4,13 @@ require 'ffi'
 
 module GLIB
   extend FFI::Library
-  ffi_lib 'gobject-2.0'
+  ffi_lib 'gobject-2.0.so.0'
+  
+  def self.attach_function(name, *args)
+    begin; super; rescue FFI::NotFoundError => e
+      (class << self; self; end).class_eval { define_method(name) { |*args| raise e } }
+    end
+  end
   
   SIGNAL_FLAGS_MASK = 0xff
   
@@ -1798,5 +1804,13 @@ module GLIB
   # @return [nil] 
   # @scope class
   attach_function :signal_handlers_destroy, :g_signal_handlers_destroy, [:pointer], :void
+  
+  # (Not documented)
+  # 
+  # @method g_signals_destroy(itype)
+  # @param [Integer] itype 
+  # @return [nil] 
+  # @scope class
+  attach_function :g_signals_destroy, :_g_signals_destroy, [:ulong], :void
   
 end

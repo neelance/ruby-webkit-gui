@@ -1,3 +1,5 @@
+require "ffi"
+
 require "ffi/glib"
 require "ffi/gtk"
 require "ffi/webkit"

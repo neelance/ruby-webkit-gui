@@ -4,7 +4,13 @@ require 'ffi'
 
 module WebKit
   extend FFI::Library
-  ffi_lib 'webkitgtk-3.0'
+  ffi_lib 'webkitgtk-3.0.so.0'
+  
+  def self.attach_function(name, *args)
+    begin; super; rescue FFI::NotFoundError => e
+      (class << self; self; end).class_eval { define_method(name) { |*args| raise e } }
+    end
+  end
   
   # (Not documented)
   module SpellCheckerWrappers
@@ -58,6 +64,16 @@ module WebKit
   # @return [Integer] 
   # @scope class
   attach_function :micro_version, :webkit_micro_version, [], :uint
+  
+  # (Not documented)
+  # 
+  # @method check_version(major, minor, micro)
+  # @param [Integer] major 
+  # @param [Integer] minor 
+  # @param [Integer] micro 
+  # @return [Integer] 
+  # @scope class
+  attach_function :check_version, :webkit_check_version, [:uint, :uint, :uint], :int
   
   # (Not documented)
   # 
