@@ -1,3 +1,4 @@
+$: << "../lib"
 require "ruby_webkit_gui"
 
 interface = WebKitInterface.new "interface.rb"

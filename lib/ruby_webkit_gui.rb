@@ -1,8 +1,8 @@
 require "ffi"
 
-require "ffi/glib"
-require "ffi/gtk"
-require "ffi/webkit"
+require "ruby_webkit_gui/ffi/glib"
+require "ruby_webkit_gui/ffi/gtk"
+require "ruby_webkit_gui/ffi/webkit"
 
 module GLIB
   def self.signal_connect(instance, detailed_signal, c_handler, data)
