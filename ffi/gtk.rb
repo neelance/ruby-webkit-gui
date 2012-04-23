@@ -6,9 +6,9 @@ module GTK
   extend FFI::Library
   ffi_lib 'gtk-3.so.0'
   
-  def self.attach_function(name, *args)
+  def self.attach_function(name, *_)
     begin; super; rescue FFI::NotFoundError => e
-      (class << self; self; end).class_eval { define_method(name) { |*args| raise e } }
+      (class << self; self; end).class_eval { define_method(name) { |*_| raise e } }
     end
   end
   
@@ -23,7 +23,7 @@ module GTK
   #   
   # :start ::
   #   
-  # :end ::
+  # :end_ ::
   #   
   # :center ::
   #   
@@ -34,7 +34,7 @@ module GTK
   enum :gtk_align, [
     :fill,
     :start,
-    :end,
+    :end_,
     :center
   ]
   
@@ -583,7 +583,7 @@ module GTK
   # === Options:
   # :start ::
   #   
-  # :end ::
+  # :end_ ::
   #   
   # 
   # @method _enum_gtk_pack_type_
@@ -591,7 +591,7 @@ module GTK
   # @scope class
   enum :gtk_pack_type, [
     :start,
-    :end
+    :end_
   ]
   
   # priorities for path lookups
@@ -633,7 +633,7 @@ module GTK
   #   
   # :widget_class ::
   #   
-  # :class ::
+  # :class_ ::
   #   
   # 
   # @method _enum_gtk_path_type_
@@ -642,7 +642,7 @@ module GTK
   enum :gtk_path_type, [
     :widget,
     :widget_class,
-    :class
+    :class_
   ]
   
   # GtkPolicyType:
@@ -789,7 +789,7 @@ module GTK
   #   
   # :start ::
   #   
-  # :end ::
+  # :end_ ::
   #   
   # 
   # @method _enum_gtk_scroll_type_
@@ -811,7 +811,7 @@ module GTK
     :page_left,
     :page_right,
     :start,
-    :end
+    :end_
   ]
   
   # GtkSelectionMode:
@@ -867,7 +867,7 @@ module GTK
   # === Options:
   # :none ::
   #   
-  # :in ::
+  # :in_ ::
   #   
   # :out ::
   #   
@@ -881,7 +881,7 @@ module GTK
   # @scope class
   enum :gtk_shadow_type, [
     :none,
-    :in,
+    :in_,
     :out,
     :etched_in,
     :etched_out
@@ -7072,17 +7072,17 @@ module GTK
   
   # (Not documented)
   # 
-  # @method _true()
+  # @method true_()
   # @return [Integer] 
   # @scope class
-  attach_function :_true, :gtk_true, [], :int
+  attach_function :true_, :gtk_true, [], :int
   
   # (Not documented)
   # 
-  # @method _false()
+  # @method false_()
   # @return [Integer] 
   # @scope class
-  attach_function :_false, :gtk_false, [], :int
+  attach_function :false_, :gtk_false, [], :int
   
   # (Not documented)
   # 

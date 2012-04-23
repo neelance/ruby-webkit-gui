@@ -6,9 +6,9 @@ module WebKit
   extend FFI::Library
   ffi_lib 'webkitgtk-3.0.so.0'
   
-  def self.attach_function(name, *args)
+  def self.attach_function(name, *_)
     begin; super; rescue FFI::NotFoundError => e
-      (class << self; self; end).class_eval { define_method(name) { |*args| raise e } }
+      (class << self; self; end).class_eval { define_method(name) { |*_| raise e } }
     end
   end
   
@@ -343,8 +343,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_insert_before(self, new_child, ref_child, error)
-  # @param [DOMNode] self 
+  # @method dom_node_insert_before(self_, new_child, ref_child, error)
+  # @param [DOMNode] self_ 
   # @param [DOMNode] new_child 
   # @param [DOMNode] ref_child 
   # @param [FFI::Pointer(**GError)] error 
@@ -354,8 +354,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_replace_child(self, new_child, old_child, error)
-  # @param [DOMNode] self 
+  # @method dom_node_replace_child(self_, new_child, old_child, error)
+  # @param [DOMNode] self_ 
   # @param [DOMNode] new_child 
   # @param [DOMNode] old_child 
   # @param [FFI::Pointer(**GError)] error 
@@ -365,8 +365,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_remove_child(self, old_child, error)
-  # @param [DOMNode] self 
+  # @method dom_node_remove_child(self_, old_child, error)
+  # @param [DOMNode] self_ 
   # @param [DOMNode] old_child 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
@@ -375,8 +375,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_append_child(self, new_child, error)
-  # @param [DOMNode] self 
+  # @method dom_node_append_child(self_, new_child, error)
+  # @param [DOMNode] self_ 
   # @param [DOMNode] new_child 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
@@ -385,16 +385,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_has_child_nodes(self)
-  # @param [DOMNode] self 
+  # @method dom_node_has_child_nodes(self_)
+  # @param [DOMNode] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_node_has_child_nodes, :webkit_dom_node_has_child_nodes, [DOMNode], :int
   
   # (Not documented)
   # 
-  # @method dom_node_clone_node(self, deep)
-  # @param [DOMNode] self 
+  # @method dom_node_clone_node(self_, deep)
+  # @param [DOMNode] self_ 
   # @param [Integer] deep 
   # @return [DOMNode] 
   # @scope class
@@ -402,16 +402,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_normalize(self)
-  # @param [DOMNode] self 
+  # @method dom_node_normalize(self_)
+  # @param [DOMNode] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_node_normalize, :webkit_dom_node_normalize, [DOMNode], :void
   
   # (Not documented)
   # 
-  # @method dom_node_is_supported(self, feature, version)
-  # @param [DOMNode] self 
+  # @method dom_node_is_supported(self_, feature, version)
+  # @param [DOMNode] self_ 
   # @param [String] feature 
   # @param [String] version 
   # @return [Integer] 
@@ -420,16 +420,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_has_attributes(self)
-  # @param [DOMNode] self 
+  # @method dom_node_has_attributes(self_)
+  # @param [DOMNode] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_node_has_attributes, :webkit_dom_node_has_attributes, [DOMNode], :int
   
   # (Not documented)
   # 
-  # @method dom_node_is_same_node(self, other)
-  # @param [DOMNode] self 
+  # @method dom_node_is_same_node(self_, other)
+  # @param [DOMNode] self_ 
   # @param [DOMNode] other 
   # @return [Integer] 
   # @scope class
@@ -437,8 +437,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_is_equal_node(self, other)
-  # @param [DOMNode] self 
+  # @method dom_node_is_equal_node(self_, other)
+  # @param [DOMNode] self_ 
   # @param [DOMNode] other 
   # @return [Integer] 
   # @scope class
@@ -446,8 +446,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_lookup_prefix(self, namespace_uri)
-  # @param [DOMNode] self 
+  # @method dom_node_lookup_prefix(self_, namespace_uri)
+  # @param [DOMNode] self_ 
   # @param [String] namespace_uri 
   # @return [String] 
   # @scope class
@@ -455,8 +455,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_is_default_namespace(self, namespace_uri)
-  # @param [DOMNode] self 
+  # @method dom_node_is_default_namespace(self_, namespace_uri)
+  # @param [DOMNode] self_ 
   # @param [String] namespace_uri 
   # @return [Integer] 
   # @scope class
@@ -464,8 +464,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_lookup_namespace_uri(self, prefix)
-  # @param [DOMNode] self 
+  # @method dom_node_lookup_namespace_uri(self_, prefix)
+  # @param [DOMNode] self_ 
   # @param [String] prefix 
   # @return [String] 
   # @scope class
@@ -473,8 +473,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_compare_document_position(self, other)
-  # @param [DOMNode] self 
+  # @method dom_node_compare_document_position(self_, other)
+  # @param [DOMNode] self_ 
   # @param [DOMNode] other 
   # @return [Integer] 
   # @scope class
@@ -482,8 +482,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_contains(self, other)
-  # @param [DOMNode] self 
+  # @method dom_node_contains(self_, other)
+  # @param [DOMNode] self_ 
   # @param [DOMNode] other 
   # @return [Integer] 
   # @scope class
@@ -491,8 +491,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_dispatch_event(self, event, error)
-  # @param [DOMNode] self 
+  # @method dom_node_dispatch_event(self_, event, error)
+  # @param [DOMNode] self_ 
   # @param [FFI::Pointer(*WebKitDOMEvent)] event 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Integer] 
@@ -501,24 +501,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_get_node_name(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_node_name(self_)
+  # @param [DOMNode] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_node_get_node_name, :webkit_dom_node_get_node_name, [DOMNode], :string
   
   # (Not documented)
   # 
-  # @method dom_node_get_node_value(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_node_value(self_)
+  # @param [DOMNode] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_node_get_node_value, :webkit_dom_node_get_node_value, [DOMNode], :string
   
   # (Not documented)
   # 
-  # @method dom_node_set_node_value(self, value, error)
-  # @param [DOMNode] self 
+  # @method dom_node_set_node_value(self_, value, error)
+  # @param [DOMNode] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -527,96 +527,96 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_get_node_type(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_node_type(self_)
+  # @param [DOMNode] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_node_get_node_type, :webkit_dom_node_get_node_type, [DOMNode], :ushort
   
   # (Not documented)
   # 
-  # @method dom_node_get_parent_node(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_parent_node(self_)
+  # @param [DOMNode] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_node_get_parent_node, :webkit_dom_node_get_parent_node, [DOMNode], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_node_get_child_nodes(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_child_nodes(self_)
+  # @param [DOMNode] self_ 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
   # @scope class
   attach_function :dom_node_get_child_nodes, :webkit_dom_node_get_child_nodes, [DOMNode], :pointer
   
   # (Not documented)
   # 
-  # @method dom_node_get_first_child(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_first_child(self_)
+  # @param [DOMNode] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_node_get_first_child, :webkit_dom_node_get_first_child, [DOMNode], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_node_get_last_child(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_last_child(self_)
+  # @param [DOMNode] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_node_get_last_child, :webkit_dom_node_get_last_child, [DOMNode], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_node_get_previous_sibling(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_previous_sibling(self_)
+  # @param [DOMNode] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_node_get_previous_sibling, :webkit_dom_node_get_previous_sibling, [DOMNode], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_node_get_next_sibling(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_next_sibling(self_)
+  # @param [DOMNode] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_node_get_next_sibling, :webkit_dom_node_get_next_sibling, [DOMNode], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_node_get_attributes(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_attributes(self_)
+  # @param [DOMNode] self_ 
   # @return [FFI::Pointer(*WebKitDOMNamedNodeMap)] 
   # @scope class
   attach_function :dom_node_get_attributes, :webkit_dom_node_get_attributes, [DOMNode], :pointer
   
   # (Not documented)
   # 
-  # @method dom_node_get_owner_document(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_owner_document(self_)
+  # @param [DOMNode] self_ 
   # @return [FFI::Pointer(*WebKitDOMDocument)] 
   # @scope class
   attach_function :dom_node_get_owner_document, :webkit_dom_node_get_owner_document, [DOMNode], :pointer
   
   # (Not documented)
   # 
-  # @method dom_node_get_namespace_uri(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_namespace_uri(self_)
+  # @param [DOMNode] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_node_get_namespace_uri, :webkit_dom_node_get_namespace_uri, [DOMNode], :string
   
   # (Not documented)
   # 
-  # @method dom_node_get_prefix(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_prefix(self_)
+  # @param [DOMNode] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_node_get_prefix, :webkit_dom_node_get_prefix, [DOMNode], :string
   
   # (Not documented)
   # 
-  # @method dom_node_set_prefix(self, value, error)
-  # @param [DOMNode] self 
+  # @method dom_node_set_prefix(self_, value, error)
+  # @param [DOMNode] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -625,32 +625,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_get_local_name(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_local_name(self_)
+  # @param [DOMNode] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_node_get_local_name, :webkit_dom_node_get_local_name, [DOMNode], :string
   
   # (Not documented)
   # 
-  # @method dom_node_get_base_uri(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_base_uri(self_)
+  # @param [DOMNode] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_node_get_base_uri, :webkit_dom_node_get_base_uri, [DOMNode], :string
   
   # (Not documented)
   # 
-  # @method dom_node_get_text_content(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_text_content(self_)
+  # @param [DOMNode] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_node_get_text_content, :webkit_dom_node_get_text_content, [DOMNode], :string
   
   # (Not documented)
   # 
-  # @method dom_node_set_text_content(self, value, error)
-  # @param [DOMNode] self 
+  # @method dom_node_set_text_content(self_, value, error)
+  # @param [DOMNode] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -659,8 +659,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_get_parent_element(self)
-  # @param [DOMNode] self 
+  # @method dom_node_get_parent_element(self_)
+  # @param [DOMNode] self_ 
   # @return [FFI::Pointer(*WebKitDOMElement)] 
   # @scope class
   attach_function :dom_node_get_parent_element, :webkit_dom_node_get_parent_element, [DOMNode], :pointer
@@ -719,32 +719,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_attr_get_name(self)
-  # @param [DOMAttr] self 
+  # @method dom_attr_get_name(self_)
+  # @param [DOMAttr] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_attr_get_name, :webkit_dom_attr_get_name, [DOMAttr], :string
   
   # (Not documented)
   # 
-  # @method dom_attr_get_specified(self)
-  # @param [DOMAttr] self 
+  # @method dom_attr_get_specified(self_)
+  # @param [DOMAttr] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_attr_get_specified, :webkit_dom_attr_get_specified, [DOMAttr], :int
   
   # (Not documented)
   # 
-  # @method dom_attr_get_value(self)
-  # @param [DOMAttr] self 
+  # @method dom_attr_get_value(self_)
+  # @param [DOMAttr] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_attr_get_value, :webkit_dom_attr_get_value, [DOMAttr], :string
   
   # (Not documented)
   # 
-  # @method dom_attr_set_value(self, value, error)
-  # @param [DOMAttr] self 
+  # @method dom_attr_set_value(self_, value, error)
+  # @param [DOMAttr] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -753,16 +753,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_attr_get_owner_element(self)
-  # @param [DOMAttr] self 
+  # @method dom_attr_get_owner_element(self_)
+  # @param [DOMAttr] self_ 
   # @return [FFI::Pointer(*WebKitDOMElement)] 
   # @scope class
   attach_function :dom_attr_get_owner_element, :webkit_dom_attr_get_owner_element, [DOMAttr], :pointer
   
   # (Not documented)
   # 
-  # @method dom_attr_get_is_id(self)
-  # @param [DOMAttr] self 
+  # @method dom_attr_get_is_id(self_)
+  # @param [DOMAttr] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_attr_get_is_id, :webkit_dom_attr_get_is_id, [DOMAttr], :int
@@ -801,8 +801,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_bar_info_get_visible(self)
-  # @param [DOMBarInfo] self 
+  # @method dom_bar_info_get_visible(self_)
+  # @param [DOMBarInfo] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_bar_info_get_visible, :webkit_dom_bar_info_get_visible, [DOMBarInfo], :int
@@ -813,16 +813,16 @@ module WebKit
   # :parent_instance ::
   #   (DOMObject) 
   module DOMBlobWrappers
-    def webkit_slice(start, _end, content_type)
-      DOMBlob.new WebKit.dom_blob_webkit_slice(self, start, _end, content_type)
+    def webkit_slice(start, end_, content_type)
+      DOMBlob.new WebKit.dom_blob_webkit_slice(self, start, end_, content_type)
     end
     
     def get_size()
       WebKit.dom_blob_get_size(self)
     end
     
-    def slice(start, _end, content_type)
-      DOMBlob.new WebKit.dom_blob_slice(self, start, _end, content_type)
+    def slice(start, end_, content_type)
+      DOMBlob.new WebKit.dom_blob_slice(self, start, end_, content_type)
     end
   end
   
@@ -849,10 +849,10 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_blob_webkit_slice(self, start, end, content_type)
-  # @param [DOMBlob] self 
+  # @method dom_blob_webkit_slice(self_, start, end_, content_type)
+  # @param [DOMBlob] self_ 
   # @param [Integer] start 
-  # @param [Integer] end 
+  # @param [Integer] end_ 
   # @param [String] content_type 
   # @return [DOMBlob] 
   # @scope class
@@ -860,8 +860,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_blob_get_size(self)
-  # @param [DOMBlob] self 
+  # @method dom_blob_get_size(self_)
+  # @param [DOMBlob] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_blob_get_size, :webkit_dom_blob_get_size, [DOMBlob], :ulong
@@ -928,8 +928,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_character_data_substring_data(self, offset, length, error)
-  # @param [DOMCharacterData] self 
+  # @method dom_character_data_substring_data(self_, offset, length, error)
+  # @param [DOMCharacterData] self_ 
   # @param [Integer] offset 
   # @param [Integer] length 
   # @param [FFI::Pointer(**GError)] error 
@@ -939,8 +939,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_character_data_append_data(self, data, error)
-  # @param [DOMCharacterData] self 
+  # @method dom_character_data_append_data(self_, data, error)
+  # @param [DOMCharacterData] self_ 
   # @param [String] data 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -949,8 +949,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_character_data_insert_data(self, offset, data, error)
-  # @param [DOMCharacterData] self 
+  # @method dom_character_data_insert_data(self_, offset, data, error)
+  # @param [DOMCharacterData] self_ 
   # @param [Integer] offset 
   # @param [String] data 
   # @param [FFI::Pointer(**GError)] error 
@@ -960,8 +960,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_character_data_delete_data(self, offset, length, error)
-  # @param [DOMCharacterData] self 
+  # @method dom_character_data_delete_data(self_, offset, length, error)
+  # @param [DOMCharacterData] self_ 
   # @param [Integer] offset 
   # @param [Integer] length 
   # @param [FFI::Pointer(**GError)] error 
@@ -971,8 +971,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_character_data_replace_data(self, offset, length, data, error)
-  # @param [DOMCharacterData] self 
+  # @method dom_character_data_replace_data(self_, offset, length, data, error)
+  # @param [DOMCharacterData] self_ 
   # @param [Integer] offset 
   # @param [Integer] length 
   # @param [String] data 
@@ -983,16 +983,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_character_data_get_data(self)
-  # @param [DOMCharacterData] self 
+  # @method dom_character_data_get_data(self_)
+  # @param [DOMCharacterData] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_character_data_get_data, :webkit_dom_character_data_get_data, [DOMCharacterData], :string
   
   # (Not documented)
   # 
-  # @method dom_character_data_set_data(self, value, error)
-  # @param [DOMCharacterData] self 
+  # @method dom_character_data_set_data(self_, value, error)
+  # @param [DOMCharacterData] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -1001,8 +1001,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_character_data_get_length(self)
-  # @param [DOMCharacterData] self 
+  # @method dom_character_data_get_length(self_)
+  # @param [DOMCharacterData] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_character_data_get_length, :webkit_dom_character_data_get_length, [DOMCharacterData], :ulong
@@ -1049,8 +1049,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_text_split_text(self, offset, error)
-  # @param [DOMText] self 
+  # @method dom_text_split_text(self_, offset, error)
+  # @param [DOMText] self_ 
   # @param [Integer] offset 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMText] 
@@ -1059,8 +1059,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_text_replace_whole_text(self, content, error)
-  # @param [DOMText] self 
+  # @method dom_text_replace_whole_text(self_, content, error)
+  # @param [DOMText] self_ 
   # @param [String] content 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMText] 
@@ -1069,8 +1069,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_text_get_whole_text(self)
-  # @param [DOMText] self 
+  # @method dom_text_get_whole_text(self_)
+  # @param [DOMText] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_text_get_whole_text, :webkit_dom_text_get_whole_text, [DOMText], :string
@@ -1127,16 +1127,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_rule_get_css_text(self)
-  # @param [DOMCSSRule] self 
+  # @method dom_css_rule_get_css_text(self_)
+  # @param [DOMCSSRule] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_css_rule_get_css_text, :webkit_dom_css_rule_get_css_text, [DOMCSSRule], :string
   
   # (Not documented)
   # 
-  # @method dom_css_rule_set_css_text(self, value, error)
-  # @param [DOMCSSRule] self 
+  # @method dom_css_rule_set_css_text(self_, value, error)
+  # @param [DOMCSSRule] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -1145,16 +1145,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_rule_get_parent_style_sheet(self)
-  # @param [DOMCSSRule] self 
+  # @method dom_css_rule_get_parent_style_sheet(self_)
+  # @param [DOMCSSRule] self_ 
   # @return [FFI::Pointer(*WebKitDOMCSSStyleSheet)] 
   # @scope class
   attach_function :dom_css_rule_get_parent_style_sheet, :webkit_dom_css_rule_get_parent_style_sheet, [DOMCSSRule], :pointer
   
   # (Not documented)
   # 
-  # @method dom_css_rule_get_parent_rule(self)
-  # @param [DOMCSSRule] self 
+  # @method dom_css_rule_get_parent_rule(self_)
+  # @param [DOMCSSRule] self_ 
   # @return [DOMCSSRule] 
   # @scope class
   attach_function :dom_css_rule_get_parent_rule, :webkit_dom_css_rule_get_parent_rule, [DOMCSSRule], DOMCSSRule
@@ -1186,8 +1186,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_rule_list_item(self, index)
-  # @param [DOMCSSRuleList] self 
+  # @method dom_css_rule_list_item(self_, index)
+  # @param [DOMCSSRuleList] self_ 
   # @param [Integer] index 
   # @return [DOMCSSRule] 
   # @scope class
@@ -1195,8 +1195,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_rule_list_get_length(self)
-  # @param [DOMCSSRuleList] self 
+  # @method dom_css_rule_list_get_length(self_)
+  # @param [DOMCSSRuleList] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_css_rule_list_get_length, :webkit_dom_css_rule_list_get_length, [DOMCSSRuleList], :ulong
@@ -1228,8 +1228,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_declaration_get_property_value(self, property_name)
-  # @param [DOMCSSStyleDeclaration] self 
+  # @method dom_css_style_declaration_get_property_value(self_, property_name)
+  # @param [DOMCSSStyleDeclaration] self_ 
   # @param [String] property_name 
   # @return [String] 
   # @scope class
@@ -1237,8 +1237,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_declaration_get_property_css_value(self, property_name)
-  # @param [DOMCSSStyleDeclaration] self 
+  # @method dom_css_style_declaration_get_property_css_value(self_, property_name)
+  # @param [DOMCSSStyleDeclaration] self_ 
   # @param [String] property_name 
   # @return [FFI::Pointer(*WebKitDOMCSSValue)] 
   # @scope class
@@ -1246,8 +1246,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_declaration_remove_property(self, property_name, error)
-  # @param [DOMCSSStyleDeclaration] self 
+  # @method dom_css_style_declaration_remove_property(self_, property_name, error)
+  # @param [DOMCSSStyleDeclaration] self_ 
   # @param [String] property_name 
   # @param [FFI::Pointer(**GError)] error 
   # @return [String] 
@@ -1256,8 +1256,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_declaration_get_property_priority(self, property_name)
-  # @param [DOMCSSStyleDeclaration] self 
+  # @method dom_css_style_declaration_get_property_priority(self_, property_name)
+  # @param [DOMCSSStyleDeclaration] self_ 
   # @param [String] property_name 
   # @return [String] 
   # @scope class
@@ -1265,8 +1265,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_declaration_set_property(self, property_name, value, priority, error)
-  # @param [DOMCSSStyleDeclaration] self 
+  # @method dom_css_style_declaration_set_property(self_, property_name, value, priority, error)
+  # @param [DOMCSSStyleDeclaration] self_ 
   # @param [String] property_name 
   # @param [String] value 
   # @param [String] priority 
@@ -1277,8 +1277,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_declaration_item(self, index)
-  # @param [DOMCSSStyleDeclaration] self 
+  # @method dom_css_style_declaration_item(self_, index)
+  # @param [DOMCSSStyleDeclaration] self_ 
   # @param [Integer] index 
   # @return [String] 
   # @scope class
@@ -1286,8 +1286,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_declaration_get_property_shorthand(self, property_name)
-  # @param [DOMCSSStyleDeclaration] self 
+  # @method dom_css_style_declaration_get_property_shorthand(self_, property_name)
+  # @param [DOMCSSStyleDeclaration] self_ 
   # @param [String] property_name 
   # @return [String] 
   # @scope class
@@ -1295,8 +1295,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_declaration_is_property_implicit(self, property_name)
-  # @param [DOMCSSStyleDeclaration] self 
+  # @method dom_css_style_declaration_is_property_implicit(self_, property_name)
+  # @param [DOMCSSStyleDeclaration] self_ 
   # @param [String] property_name 
   # @return [Integer] 
   # @scope class
@@ -1304,16 +1304,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_declaration_get_css_text(self)
-  # @param [DOMCSSStyleDeclaration] self 
+  # @method dom_css_style_declaration_get_css_text(self_)
+  # @param [DOMCSSStyleDeclaration] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_css_style_declaration_get_css_text, :webkit_dom_css_style_declaration_get_css_text, [DOMCSSStyleDeclaration], :string
   
   # (Not documented)
   # 
-  # @method dom_css_style_declaration_set_css_text(self, value, error)
-  # @param [DOMCSSStyleDeclaration] self 
+  # @method dom_css_style_declaration_set_css_text(self_, value, error)
+  # @param [DOMCSSStyleDeclaration] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -1322,16 +1322,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_declaration_get_length(self)
-  # @param [DOMCSSStyleDeclaration] self 
+  # @method dom_css_style_declaration_get_length(self_)
+  # @param [DOMCSSStyleDeclaration] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_css_style_declaration_get_length, :webkit_dom_css_style_declaration_get_length, [DOMCSSStyleDeclaration], :ulong
   
   # (Not documented)
   # 
-  # @method dom_css_style_declaration_get_parent_rule(self)
-  # @param [DOMCSSStyleDeclaration] self 
+  # @method dom_css_style_declaration_get_parent_rule(self_)
+  # @param [DOMCSSStyleDeclaration] self_ 
   # @return [DOMCSSRule] 
   # @scope class
   attach_function :dom_css_style_declaration_get_parent_rule, :webkit_dom_css_style_declaration_get_parent_rule, [DOMCSSStyleDeclaration], DOMCSSRule
@@ -1394,16 +1394,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_style_sheet_get_disabled(self)
-  # @param [DOMStyleSheet] self 
+  # @method dom_style_sheet_get_disabled(self_)
+  # @param [DOMStyleSheet] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_style_sheet_get_disabled, :webkit_dom_style_sheet_get_disabled, [DOMStyleSheet], :int
   
   # (Not documented)
   # 
-  # @method dom_style_sheet_set_disabled(self, value)
-  # @param [DOMStyleSheet] self 
+  # @method dom_style_sheet_set_disabled(self_, value)
+  # @param [DOMStyleSheet] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -1411,40 +1411,40 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_style_sheet_get_owner_node(self)
-  # @param [DOMStyleSheet] self 
+  # @method dom_style_sheet_get_owner_node(self_)
+  # @param [DOMStyleSheet] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_style_sheet_get_owner_node, :webkit_dom_style_sheet_get_owner_node, [DOMStyleSheet], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_style_sheet_get_parent_style_sheet(self)
-  # @param [DOMStyleSheet] self 
+  # @method dom_style_sheet_get_parent_style_sheet(self_)
+  # @param [DOMStyleSheet] self_ 
   # @return [DOMStyleSheet] 
   # @scope class
   attach_function :dom_style_sheet_get_parent_style_sheet, :webkit_dom_style_sheet_get_parent_style_sheet, [DOMStyleSheet], DOMStyleSheet
   
   # (Not documented)
   # 
-  # @method dom_style_sheet_get_href(self)
-  # @param [DOMStyleSheet] self 
+  # @method dom_style_sheet_get_href(self_)
+  # @param [DOMStyleSheet] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_style_sheet_get_href, :webkit_dom_style_sheet_get_href, [DOMStyleSheet], :string
   
   # (Not documented)
   # 
-  # @method dom_style_sheet_get_title(self)
-  # @param [DOMStyleSheet] self 
+  # @method dom_style_sheet_get_title(self_)
+  # @param [DOMStyleSheet] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_style_sheet_get_title, :webkit_dom_style_sheet_get_title, [DOMStyleSheet], :string
   
   # (Not documented)
   # 
-  # @method dom_style_sheet_get_media(self)
-  # @param [DOMStyleSheet] self 
+  # @method dom_style_sheet_get_media(self_)
+  # @param [DOMStyleSheet] self_ 
   # @return [FFI::Pointer(*WebKitDOMMediaList)] 
   # @scope class
   attach_function :dom_style_sheet_get_media, :webkit_dom_style_sheet_get_media, [DOMStyleSheet], :pointer
@@ -1476,8 +1476,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_sheet_insert_rule(self, rule, index, error)
-  # @param [DOMCSSStyleSheet] self 
+  # @method dom_css_style_sheet_insert_rule(self_, rule, index, error)
+  # @param [DOMCSSStyleSheet] self_ 
   # @param [String] rule 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
@@ -1487,8 +1487,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_sheet_delete_rule(self, index, error)
-  # @param [DOMCSSStyleSheet] self 
+  # @method dom_css_style_sheet_delete_rule(self_, index, error)
+  # @param [DOMCSSStyleSheet] self_ 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -1497,8 +1497,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_sheet_add_rule(self, selector, style, index, error)
-  # @param [DOMCSSStyleSheet] self 
+  # @method dom_css_style_sheet_add_rule(self_, selector, style, index, error)
+  # @param [DOMCSSStyleSheet] self_ 
   # @param [String] selector 
   # @param [String] style 
   # @param [Integer] index 
@@ -1509,8 +1509,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_sheet_remove_rule(self, index, error)
-  # @param [DOMCSSStyleSheet] self 
+  # @method dom_css_style_sheet_remove_rule(self_, index, error)
+  # @param [DOMCSSStyleSheet] self_ 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -1519,24 +1519,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_style_sheet_get_owner_rule(self)
-  # @param [DOMCSSStyleSheet] self 
+  # @method dom_css_style_sheet_get_owner_rule(self_)
+  # @param [DOMCSSStyleSheet] self_ 
   # @return [DOMCSSRule] 
   # @scope class
   attach_function :dom_css_style_sheet_get_owner_rule, :webkit_dom_css_style_sheet_get_owner_rule, [DOMCSSStyleSheet], DOMCSSRule
   
   # (Not documented)
   # 
-  # @method dom_css_style_sheet_get_css_rules(self)
-  # @param [DOMCSSStyleSheet] self 
+  # @method dom_css_style_sheet_get_css_rules(self_)
+  # @param [DOMCSSStyleSheet] self_ 
   # @return [DOMCSSRuleList] 
   # @scope class
   attach_function :dom_css_style_sheet_get_css_rules, :webkit_dom_css_style_sheet_get_css_rules, [DOMCSSStyleSheet], DOMCSSRuleList
   
   # (Not documented)
   # 
-  # @method dom_css_style_sheet_get_rules(self)
-  # @param [DOMCSSStyleSheet] self 
+  # @method dom_css_style_sheet_get_rules(self_)
+  # @param [DOMCSSStyleSheet] self_ 
   # @return [DOMCSSRuleList] 
   # @scope class
   attach_function :dom_css_style_sheet_get_rules, :webkit_dom_css_style_sheet_get_rules, [DOMCSSStyleSheet], DOMCSSRuleList
@@ -1568,16 +1568,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_value_get_css_text(self)
-  # @param [DOMCSSValue] self 
+  # @method dom_css_value_get_css_text(self_)
+  # @param [DOMCSSValue] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_css_value_get_css_text, :webkit_dom_css_value_get_css_text, [DOMCSSValue], :string
   
   # (Not documented)
   # 
-  # @method dom_css_value_set_css_text(self, value, error)
-  # @param [DOMCSSValue] self 
+  # @method dom_css_value_set_css_text(self_, value, error)
+  # @param [DOMCSSValue] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -1586,8 +1586,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_css_value_get_css_value_type(self)
-  # @param [DOMCSSValue] self 
+  # @method dom_css_value_get_css_value_type(self_)
+  # @param [DOMCSSValue] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_css_value_get_css_value_type, :webkit_dom_css_value_get_css_value_type, [DOMCSSValue], :ushort
@@ -1659,8 +1659,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_console_time(self, title)
-  # @param [DOMConsole] self 
+  # @method dom_console_time(self_, title)
+  # @param [DOMConsole] self_ 
   # @param [String] title 
   # @return [nil] 
   # @scope class
@@ -1668,16 +1668,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_console_group_end(self)
-  # @param [DOMConsole] self 
+  # @method dom_console_group_end(self_)
+  # @param [DOMConsole] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_console_group_end, :webkit_dom_console_group_end, [DOMConsole], :void
   
   # (Not documented)
   # 
-  # @method dom_console_get_memory(self)
-  # @param [DOMConsole] self 
+  # @method dom_console_get_memory(self_)
+  # @param [DOMConsole] self_ 
   # @return [FFI::Pointer(*WebKitDOMMemoryInfo)] 
   # @scope class
   attach_function :dom_console_get_memory, :webkit_dom_console_get_memory, [DOMConsole], :pointer
@@ -1700,10 +1700,10 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_blob_slice(self, start, end, content_type)
-  # @param [DOMBlob] self 
+  # @method dom_blob_slice(self_, start, end_, content_type)
+  # @param [DOMBlob] self_ 
   # @param [Integer] start 
-  # @param [Integer] end 
+  # @param [Integer] end_ 
   # @param [String] content_type 
   # @return [DOMBlob] 
   # @scope class
@@ -1711,16 +1711,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_dispatch_form_change(self)
-  # @param [FFI::Pointer(*WebKitDOMHTMLFormElement)] self 
+  # @method dom_html_form_element_dispatch_form_change(self_)
+  # @param [FFI::Pointer(*WebKitDOMHTMLFormElement)] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_form_element_dispatch_form_change, :webkit_dom_html_form_element_dispatch_form_change, [:pointer], :void
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_dispatch_form_input(self)
-  # @param [FFI::Pointer(*WebKitDOMHTMLFormElement)] self 
+  # @method dom_html_form_element_dispatch_form_input(self_)
+  # @param [FFI::Pointer(*WebKitDOMHTMLFormElement)] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_form_element_dispatch_form_input, :webkit_dom_html_form_element_dispatch_form_input, [:pointer], :void
@@ -1752,8 +1752,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_application_cache_update(self, error)
-  # @param [DOMDOMApplicationCache] self 
+  # @method dom_dom_application_cache_update(self_, error)
+  # @param [DOMDOMApplicationCache] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
   # @scope class
@@ -1761,8 +1761,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_application_cache_swap_cache(self, error)
-  # @param [DOMDOMApplicationCache] self 
+  # @method dom_dom_application_cache_swap_cache(self_, error)
+  # @param [DOMDOMApplicationCache] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
   # @scope class
@@ -1770,8 +1770,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_application_cache_dispatch_event(self, evt, error)
-  # @param [DOMDOMApplicationCache] self 
+  # @method dom_dom_application_cache_dispatch_event(self_, evt, error)
+  # @param [DOMDOMApplicationCache] self_ 
   # @param [FFI::Pointer(*WebKitDOMEvent)] evt 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Integer] 
@@ -1780,8 +1780,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_application_cache_get_status(self)
-  # @param [DOMDOMApplicationCache] self 
+  # @method dom_dom_application_cache_get_status(self_)
+  # @param [DOMDOMApplicationCache] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_application_cache_get_status, :webkit_dom_dom_application_cache_get_status, [DOMDOMApplicationCache], :ushort
@@ -1813,8 +1813,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_implementation_has_feature(self, feature, version)
-  # @param [DOMDOMImplementation] self 
+  # @method dom_dom_implementation_has_feature(self_, feature, version)
+  # @param [DOMDOMImplementation] self_ 
   # @param [String] feature 
   # @param [String] version 
   # @return [Integer] 
@@ -1823,8 +1823,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_implementation_create_document_type(self, qualified_name, public_id, system_id, error)
-  # @param [DOMDOMImplementation] self 
+  # @method dom_dom_implementation_create_document_type(self_, qualified_name, public_id, system_id, error)
+  # @param [DOMDOMImplementation] self_ 
   # @param [String] qualified_name 
   # @param [String] public_id 
   # @param [String] system_id 
@@ -1835,8 +1835,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_implementation_create_document(self, namespace_uri, qualified_name, doctype, error)
-  # @param [DOMDOMImplementation] self 
+  # @method dom_dom_implementation_create_document(self_, namespace_uri, qualified_name, doctype, error)
+  # @param [DOMDOMImplementation] self_ 
   # @param [String] namespace_uri 
   # @param [String] qualified_name 
   # @param [FFI::Pointer(*WebKitDOMDocumentType)] doctype 
@@ -1847,8 +1847,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_implementation_create_css_style_sheet(self, title, media, error)
-  # @param [DOMDOMImplementation] self 
+  # @method dom_dom_implementation_create_css_style_sheet(self_, title, media, error)
+  # @param [DOMDOMImplementation] self_ 
   # @param [String] title 
   # @param [String] media 
   # @param [FFI::Pointer(**GError)] error 
@@ -1858,8 +1858,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_implementation_create_html_document(self, title)
-  # @param [DOMDOMImplementation] self 
+  # @method dom_dom_implementation_create_html_document(self_, title)
+  # @param [DOMDOMImplementation] self_ 
   # @param [String] title 
   # @return [FFI::Pointer(*WebKitDOMHTMLDocument)] 
   # @scope class
@@ -1892,24 +1892,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_mime_type_get_suffixes(self)
-  # @param [DOMDOMMimeType] self 
+  # @method dom_dom_mime_type_get_suffixes(self_)
+  # @param [DOMDOMMimeType] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_dom_mime_type_get_suffixes, :webkit_dom_dom_mime_type_get_suffixes, [DOMDOMMimeType], :string
   
   # (Not documented)
   # 
-  # @method dom_dom_mime_type_get_description(self)
-  # @param [DOMDOMMimeType] self 
+  # @method dom_dom_mime_type_get_description(self_)
+  # @param [DOMDOMMimeType] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_dom_mime_type_get_description, :webkit_dom_dom_mime_type_get_description, [DOMDOMMimeType], :string
   
   # (Not documented)
   # 
-  # @method dom_dom_mime_type_get_enabled_plugin(self)
-  # @param [DOMDOMMimeType] self 
+  # @method dom_dom_mime_type_get_enabled_plugin(self_)
+  # @param [DOMDOMMimeType] self_ 
   # @return [FFI::Pointer(*WebKitDOMDOMPlugin)] 
   # @scope class
   attach_function :dom_dom_mime_type_get_enabled_plugin, :webkit_dom_dom_mime_type_get_enabled_plugin, [DOMDOMMimeType], :pointer
@@ -1941,8 +1941,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_mime_type_array_item(self, index)
-  # @param [DOMDOMMimeTypeArray] self 
+  # @method dom_dom_mime_type_array_item(self_, index)
+  # @param [DOMDOMMimeTypeArray] self_ 
   # @param [Integer] index 
   # @return [DOMDOMMimeType] 
   # @scope class
@@ -1950,8 +1950,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_mime_type_array_named_item(self, name)
-  # @param [DOMDOMMimeTypeArray] self 
+  # @method dom_dom_mime_type_array_named_item(self_, name)
+  # @param [DOMDOMMimeTypeArray] self_ 
   # @param [String] name 
   # @return [DOMDOMMimeType] 
   # @scope class
@@ -1959,8 +1959,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_mime_type_array_get_length(self)
-  # @param [DOMDOMMimeTypeArray] self 
+  # @method dom_dom_mime_type_array_get_length(self_)
+  # @param [DOMDOMMimeTypeArray] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_mime_type_array_get_length, :webkit_dom_dom_mime_type_array_get_length, [DOMDOMMimeTypeArray], :ulong
@@ -1992,8 +1992,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_plugin_item(self, index)
-  # @param [DOMDOMPlugin] self 
+  # @method dom_dom_plugin_item(self_, index)
+  # @param [DOMDOMPlugin] self_ 
   # @param [Integer] index 
   # @return [DOMDOMMimeType] 
   # @scope class
@@ -2001,8 +2001,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_plugin_named_item(self, name)
-  # @param [DOMDOMPlugin] self 
+  # @method dom_dom_plugin_named_item(self_, name)
+  # @param [DOMDOMPlugin] self_ 
   # @param [String] name 
   # @return [DOMDOMMimeType] 
   # @scope class
@@ -2010,32 +2010,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_plugin_get_name(self)
-  # @param [DOMDOMPlugin] self 
+  # @method dom_dom_plugin_get_name(self_)
+  # @param [DOMDOMPlugin] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_dom_plugin_get_name, :webkit_dom_dom_plugin_get_name, [DOMDOMPlugin], :string
   
   # (Not documented)
   # 
-  # @method dom_dom_plugin_get_filename(self)
-  # @param [DOMDOMPlugin] self 
+  # @method dom_dom_plugin_get_filename(self_)
+  # @param [DOMDOMPlugin] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_dom_plugin_get_filename, :webkit_dom_dom_plugin_get_filename, [DOMDOMPlugin], :string
   
   # (Not documented)
   # 
-  # @method dom_dom_plugin_get_description(self)
-  # @param [DOMDOMPlugin] self 
+  # @method dom_dom_plugin_get_description(self_)
+  # @param [DOMDOMPlugin] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_dom_plugin_get_description, :webkit_dom_dom_plugin_get_description, [DOMDOMPlugin], :string
   
   # (Not documented)
   # 
-  # @method dom_dom_plugin_get_length(self)
-  # @param [DOMDOMPlugin] self 
+  # @method dom_dom_plugin_get_length(self_)
+  # @param [DOMDOMPlugin] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_plugin_get_length, :webkit_dom_dom_plugin_get_length, [DOMDOMPlugin], :ulong
@@ -2067,8 +2067,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_plugin_array_item(self, index)
-  # @param [DOMDOMPluginArray] self 
+  # @method dom_dom_plugin_array_item(self_, index)
+  # @param [DOMDOMPluginArray] self_ 
   # @param [Integer] index 
   # @return [DOMDOMPlugin] 
   # @scope class
@@ -2076,8 +2076,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_plugin_array_named_item(self, name)
-  # @param [DOMDOMPluginArray] self 
+  # @method dom_dom_plugin_array_named_item(self_, name)
+  # @param [DOMDOMPluginArray] self_ 
   # @param [String] name 
   # @return [DOMDOMPlugin] 
   # @scope class
@@ -2085,8 +2085,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_plugin_array_refresh(self, reload)
-  # @param [DOMDOMPluginArray] self 
+  # @method dom_dom_plugin_array_refresh(self_, reload)
+  # @param [DOMDOMPluginArray] self_ 
   # @param [Integer] reload 
   # @return [nil] 
   # @scope class
@@ -2094,8 +2094,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_plugin_array_get_length(self)
-  # @param [DOMDOMPluginArray] self 
+  # @method dom_dom_plugin_array_get_length(self_)
+  # @param [DOMDOMPluginArray] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_plugin_array_get_length, :webkit_dom_dom_plugin_array_get_length, [DOMDOMPluginArray], :ulong
@@ -2127,8 +2127,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_collapse(self, node, index, error)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_collapse(self_, node, index, error)
+  # @param [DOMDOMSelection] self_ 
   # @param [DOMNode] node 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
@@ -2138,8 +2138,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_collapse_to_end(self, error)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_collapse_to_end(self_, error)
+  # @param [DOMDOMSelection] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
   # @scope class
@@ -2147,8 +2147,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_collapse_to_start(self, error)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_collapse_to_start(self_, error)
+  # @param [DOMDOMSelection] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
   # @scope class
@@ -2156,16 +2156,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_delete_from_document(self)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_delete_from_document(self_)
+  # @param [DOMDOMSelection] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_dom_selection_delete_from_document, :webkit_dom_dom_selection_delete_from_document, [DOMDOMSelection], :void
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_contains_node(self, node, allow_partial)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_contains_node(self_, node, allow_partial)
+  # @param [DOMDOMSelection] self_ 
   # @param [DOMNode] node 
   # @param [Integer] allow_partial 
   # @return [Integer] 
@@ -2174,8 +2174,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_select_all_children(self, node, error)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_select_all_children(self_, node, error)
+  # @param [DOMDOMSelection] self_ 
   # @param [DOMNode] node 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -2184,8 +2184,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_extend(self, node, offset, error)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_extend(self_, node, offset, error)
+  # @param [DOMDOMSelection] self_ 
   # @param [DOMNode] node 
   # @param [Integer] offset 
   # @param [FFI::Pointer(**GError)] error 
@@ -2195,8 +2195,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_get_range_at(self, index, error)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_get_range_at(self_, index, error)
+  # @param [DOMDOMSelection] self_ 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
   # @return [FFI::Pointer(*WebKitDOMRange)] 
@@ -2205,16 +2205,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_remove_all_ranges(self)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_remove_all_ranges(self_)
+  # @param [DOMDOMSelection] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_dom_selection_remove_all_ranges, :webkit_dom_dom_selection_remove_all_ranges, [DOMDOMSelection], :void
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_add_range(self, range)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_add_range(self_, range)
+  # @param [DOMDOMSelection] self_ 
   # @param [FFI::Pointer(*WebKitDOMRange)] range 
   # @return [nil] 
   # @scope class
@@ -2222,8 +2222,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_modify(self, alter, direction, granularity)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_modify(self_, alter, direction, granularity)
+  # @param [DOMDOMSelection] self_ 
   # @param [String] alter 
   # @param [String] direction 
   # @param [String] granularity 
@@ -2233,8 +2233,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_set_base_and_extent(self, base_node, base_offset, extent_node, extent_offset, error)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_set_base_and_extent(self_, base_node, base_offset, extent_node, extent_offset, error)
+  # @param [DOMDOMSelection] self_ 
   # @param [DOMNode] base_node 
   # @param [Integer] base_offset 
   # @param [DOMNode] extent_node 
@@ -2246,8 +2246,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_set_position(self, node, offset, error)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_set_position(self_, node, offset, error)
+  # @param [DOMDOMSelection] self_ 
   # @param [DOMNode] node 
   # @param [Integer] offset 
   # @param [FFI::Pointer(**GError)] error 
@@ -2257,88 +2257,88 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_empty(self)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_empty(self_)
+  # @param [DOMDOMSelection] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_dom_selection_empty, :webkit_dom_dom_selection_empty, [DOMDOMSelection], :void
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_get_anchor_node(self)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_get_anchor_node(self_)
+  # @param [DOMDOMSelection] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_dom_selection_get_anchor_node, :webkit_dom_dom_selection_get_anchor_node, [DOMDOMSelection], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_get_anchor_offset(self)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_get_anchor_offset(self_)
+  # @param [DOMDOMSelection] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_selection_get_anchor_offset, :webkit_dom_dom_selection_get_anchor_offset, [DOMDOMSelection], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_get_focus_node(self)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_get_focus_node(self_)
+  # @param [DOMDOMSelection] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_dom_selection_get_focus_node, :webkit_dom_dom_selection_get_focus_node, [DOMDOMSelection], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_get_focus_offset(self)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_get_focus_offset(self_)
+  # @param [DOMDOMSelection] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_selection_get_focus_offset, :webkit_dom_dom_selection_get_focus_offset, [DOMDOMSelection], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_get_is_collapsed(self)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_get_is_collapsed(self_)
+  # @param [DOMDOMSelection] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_selection_get_is_collapsed, :webkit_dom_dom_selection_get_is_collapsed, [DOMDOMSelection], :int
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_get_range_count(self)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_get_range_count(self_)
+  # @param [DOMDOMSelection] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_selection_get_range_count, :webkit_dom_dom_selection_get_range_count, [DOMDOMSelection], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_get_base_node(self)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_get_base_node(self_)
+  # @param [DOMDOMSelection] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_dom_selection_get_base_node, :webkit_dom_dom_selection_get_base_node, [DOMDOMSelection], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_get_base_offset(self)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_get_base_offset(self_)
+  # @param [DOMDOMSelection] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_selection_get_base_offset, :webkit_dom_dom_selection_get_base_offset, [DOMDOMSelection], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_get_extent_node(self)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_get_extent_node(self_)
+  # @param [DOMDOMSelection] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_dom_selection_get_extent_node, :webkit_dom_dom_selection_get_extent_node, [DOMDOMSelection], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_dom_selection_get_extent_offset(self)
-  # @param [DOMDOMSelection] self 
+  # @method dom_dom_selection_get_extent_offset(self_)
+  # @param [DOMDOMSelection] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_selection_get_extent_offset, :webkit_dom_dom_selection_get_extent_offset, [DOMDOMSelection], :long
@@ -2370,8 +2370,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_token_list_item(self, index)
-  # @param [DOMDOMTokenList] self 
+  # @method dom_dom_token_list_item(self_, index)
+  # @param [DOMDOMTokenList] self_ 
   # @param [Integer] index 
   # @return [String] 
   # @scope class
@@ -2379,8 +2379,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_token_list_contains(self, token, error)
-  # @param [DOMDOMTokenList] self 
+  # @method dom_dom_token_list_contains(self_, token, error)
+  # @param [DOMDOMTokenList] self_ 
   # @param [String] token 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Integer] 
@@ -2389,8 +2389,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_token_list_add(self, token, error)
-  # @param [DOMDOMTokenList] self 
+  # @method dom_dom_token_list_add(self_, token, error)
+  # @param [DOMDOMTokenList] self_ 
   # @param [String] token 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -2399,8 +2399,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_token_list_remove(self, token, error)
-  # @param [DOMDOMTokenList] self 
+  # @method dom_dom_token_list_remove(self_, token, error)
+  # @param [DOMDOMTokenList] self_ 
   # @param [String] token 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -2409,8 +2409,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_token_list_toggle(self, token, error)
-  # @param [DOMDOMTokenList] self 
+  # @method dom_dom_token_list_toggle(self_, token, error)
+  # @param [DOMDOMTokenList] self_ 
   # @param [String] token 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Integer] 
@@ -2419,8 +2419,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_token_list_get_length(self)
-  # @param [DOMDOMTokenList] self 
+  # @method dom_dom_token_list_get_length(self_)
+  # @param [DOMDOMTokenList] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_token_list_get_length, :webkit_dom_dom_token_list_get_length, [DOMDOMTokenList], :ulong
@@ -2452,16 +2452,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_settable_token_list_get_value(self)
-  # @param [DOMDOMSettableTokenList] self 
+  # @method dom_dom_settable_token_list_get_value(self_)
+  # @param [DOMDOMSettableTokenList] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_dom_settable_token_list_get_value, :webkit_dom_dom_settable_token_list_get_value, [DOMDOMSettableTokenList], :string
   
   # (Not documented)
   # 
-  # @method dom_dom_settable_token_list_set_value(self, value)
-  # @param [DOMDOMSettableTokenList] self 
+  # @method dom_dom_settable_token_list_set_value(self_, value)
+  # @param [DOMDOMSettableTokenList] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -2494,8 +2494,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_string_list_item(self, index)
-  # @param [DOMDOMStringList] self 
+  # @method dom_dom_string_list_item(self_, index)
+  # @param [DOMDOMStringList] self_ 
   # @param [Integer] index 
   # @return [String] 
   # @scope class
@@ -2503,8 +2503,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_string_list_contains(self, string)
-  # @param [DOMDOMStringList] self 
+  # @method dom_dom_string_list_contains(self_, string)
+  # @param [DOMDOMStringList] self_ 
   # @param [String] string 
   # @return [Integer] 
   # @scope class
@@ -2512,8 +2512,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_string_list_get_length(self)
-  # @param [DOMDOMStringList] self 
+  # @method dom_dom_string_list_get_length(self_)
+  # @param [DOMDOMStringList] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_string_list_get_length, :webkit_dom_dom_string_list_get_length, [DOMDOMStringList], :ulong
@@ -2570,56 +2570,56 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_selection(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_selection(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMDOMSelection] 
   # @scope class
   attach_function :dom_dom_window_get_selection, :webkit_dom_dom_window_get_selection, [DOMDOMWindow], DOMDOMSelection
   
   # (Not documented)
   # 
-  # @method dom_dom_window_focus(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_focus(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_dom_window_focus, :webkit_dom_dom_window_focus, [DOMDOMWindow], :void
   
   # (Not documented)
   # 
-  # @method dom_dom_window_blur(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_blur(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_dom_window_blur, :webkit_dom_dom_window_blur, [DOMDOMWindow], :void
   
   # (Not documented)
   # 
-  # @method dom_dom_window_close(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_close(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_dom_window_close, :webkit_dom_dom_window_close, [DOMDOMWindow], :void
   
   # (Not documented)
   # 
-  # @method dom_dom_window_print(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_print(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_dom_window_print, :webkit_dom_dom_window_print, [DOMDOMWindow], :void
   
   # (Not documented)
   # 
-  # @method dom_dom_window_stop(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_stop(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_dom_window_stop, :webkit_dom_dom_window_stop, [DOMDOMWindow], :void
   
   # (Not documented)
   # 
-  # @method dom_dom_window_alert(self, message)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_alert(self_, message)
+  # @param [DOMDOMWindow] self_ 
   # @param [String] message 
   # @return [nil] 
   # @scope class
@@ -2627,8 +2627,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_confirm(self, message)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_confirm(self_, message)
+  # @param [DOMDOMWindow] self_ 
   # @param [String] message 
   # @return [Integer] 
   # @scope class
@@ -2636,8 +2636,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_prompt(self, message, default_value)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_prompt(self_, message, default_value)
+  # @param [DOMDOMWindow] self_ 
   # @param [String] message 
   # @param [String] default_value 
   # @return [String] 
@@ -2646,8 +2646,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_find(self, string, case_sensitive, backwards, wrap, whole_word, search_in_frames, show_dialog)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_find(self_, string, case_sensitive, backwards, wrap, whole_word, search_in_frames, show_dialog)
+  # @param [DOMDOMWindow] self_ 
   # @param [String] string 
   # @param [Integer] case_sensitive 
   # @param [Integer] backwards 
@@ -2661,8 +2661,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_scroll_by(self, x, y)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_scroll_by(self_, x, y)
+  # @param [DOMDOMWindow] self_ 
   # @param [Integer] x 
   # @param [Integer] y 
   # @return [nil] 
@@ -2671,8 +2671,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_scroll_to(self, x, y)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_scroll_to(self_, x, y)
+  # @param [DOMDOMWindow] self_ 
   # @param [Integer] x 
   # @param [Integer] y 
   # @return [nil] 
@@ -2681,8 +2681,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_scroll(self, x, y)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_scroll(self_, x, y)
+  # @param [DOMDOMWindow] self_ 
   # @param [Integer] x 
   # @param [Integer] y 
   # @return [nil] 
@@ -2691,8 +2691,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_move_by(self, x, y)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_move_by(self_, x, y)
+  # @param [DOMDOMWindow] self_ 
   # @param [Float] x 
   # @param [Float] y 
   # @return [nil] 
@@ -2701,8 +2701,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_move_to(self, x, y)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_move_to(self_, x, y)
+  # @param [DOMDOMWindow] self_ 
   # @param [Float] x 
   # @param [Float] y 
   # @return [nil] 
@@ -2711,8 +2711,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_resize_by(self, x, y)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_resize_by(self_, x, y)
+  # @param [DOMDOMWindow] self_ 
   # @param [Float] x 
   # @param [Float] y 
   # @return [nil] 
@@ -2721,8 +2721,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_resize_to(self, width, height)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_resize_to(self_, width, height)
+  # @param [DOMDOMWindow] self_ 
   # @param [Float] width 
   # @param [Float] height 
   # @return [nil] 
@@ -2731,8 +2731,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_match_media(self, query)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_match_media(self_, query)
+  # @param [DOMDOMWindow] self_ 
   # @param [String] query 
   # @return [FFI::Pointer(*WebKitDOMMediaQueryList)] 
   # @scope class
@@ -2740,8 +2740,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_computed_style(self, element, pseudo_element)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_computed_style(self_, element, pseudo_element)
+  # @param [DOMDOMWindow] self_ 
   # @param [FFI::Pointer(*WebKitDOMElement)] element 
   # @param [String] pseudo_element 
   # @return [DOMCSSStyleDeclaration] 
@@ -2750,8 +2750,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_webkit_convert_point_from_page_to_node(self, node, p)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_webkit_convert_point_from_page_to_node(self_, node, p)
+  # @param [DOMDOMWindow] self_ 
   # @param [DOMNode] node 
   # @param [FFI::Pointer(*WebKitDOMWebKitPoint)] p 
   # @return [FFI::Pointer(*WebKitDOMWebKitPoint)] 
@@ -2760,8 +2760,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_webkit_convert_point_from_node_to_page(self, node, p)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_webkit_convert_point_from_node_to_page(self_, node, p)
+  # @param [DOMDOMWindow] self_ 
   # @param [DOMNode] node 
   # @param [FFI::Pointer(*WebKitDOMWebKitPoint)] p 
   # @return [FFI::Pointer(*WebKitDOMWebKitPoint)] 
@@ -2770,8 +2770,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_clear_timeout(self, handle)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_clear_timeout(self_, handle)
+  # @param [DOMDOMWindow] self_ 
   # @param [Integer] handle 
   # @return [nil] 
   # @scope class
@@ -2779,8 +2779,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_clear_interval(self, handle)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_clear_interval(self_, handle)
+  # @param [DOMDOMWindow] self_ 
   # @param [Integer] handle 
   # @return [nil] 
   # @scope class
@@ -2788,8 +2788,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_atob(self, string, error)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_atob(self_, string, error)
+  # @param [DOMDOMWindow] self_ 
   # @param [String] string 
   # @param [FFI::Pointer(**GError)] error 
   # @return [String] 
@@ -2798,8 +2798,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_btoa(self, string, error)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_btoa(self_, string, error)
+  # @param [DOMDOMWindow] self_ 
   # @param [String] string 
   # @param [FFI::Pointer(**GError)] error 
   # @return [String] 
@@ -2808,8 +2808,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_dispatch_event(self, evt, error)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_dispatch_event(self_, evt, error)
+  # @param [DOMDOMWindow] self_ 
   # @param [FFI::Pointer(*WebKitDOMEvent)] evt 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Integer] 
@@ -2818,240 +2818,240 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_capture_events(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_capture_events(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_dom_window_capture_events, :webkit_dom_dom_window_capture_events, [DOMDOMWindow], :void
   
   # (Not documented)
   # 
-  # @method dom_dom_window_release_events(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_release_events(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_dom_window_release_events, :webkit_dom_dom_window_release_events, [DOMDOMWindow], :void
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_screen(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_screen(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [FFI::Pointer(*WebKitDOMScreen)] 
   # @scope class
   attach_function :dom_dom_window_get_screen, :webkit_dom_dom_window_get_screen, [DOMDOMWindow], :pointer
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_history(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_history(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [FFI::Pointer(*WebKitDOMHistory)] 
   # @scope class
   attach_function :dom_dom_window_get_history, :webkit_dom_dom_window_get_history, [DOMDOMWindow], :pointer
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_locationbar(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_locationbar(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMBarInfo] 
   # @scope class
   attach_function :dom_dom_window_get_locationbar, :webkit_dom_dom_window_get_locationbar, [DOMDOMWindow], DOMBarInfo
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_menubar(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_menubar(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMBarInfo] 
   # @scope class
   attach_function :dom_dom_window_get_menubar, :webkit_dom_dom_window_get_menubar, [DOMDOMWindow], DOMBarInfo
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_personalbar(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_personalbar(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMBarInfo] 
   # @scope class
   attach_function :dom_dom_window_get_personalbar, :webkit_dom_dom_window_get_personalbar, [DOMDOMWindow], DOMBarInfo
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_scrollbars(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_scrollbars(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMBarInfo] 
   # @scope class
   attach_function :dom_dom_window_get_scrollbars, :webkit_dom_dom_window_get_scrollbars, [DOMDOMWindow], DOMBarInfo
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_statusbar(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_statusbar(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMBarInfo] 
   # @scope class
   attach_function :dom_dom_window_get_statusbar, :webkit_dom_dom_window_get_statusbar, [DOMDOMWindow], DOMBarInfo
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_toolbar(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_toolbar(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMBarInfo] 
   # @scope class
   attach_function :dom_dom_window_get_toolbar, :webkit_dom_dom_window_get_toolbar, [DOMDOMWindow], DOMBarInfo
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_navigator(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_navigator(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [FFI::Pointer(*WebKitDOMNavigator)] 
   # @scope class
   attach_function :dom_dom_window_get_navigator, :webkit_dom_dom_window_get_navigator, [DOMDOMWindow], :pointer
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_client_information(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_client_information(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [FFI::Pointer(*WebKitDOMNavigator)] 
   # @scope class
   attach_function :dom_dom_window_get_client_information, :webkit_dom_dom_window_get_client_information, [DOMDOMWindow], :pointer
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_frame_element(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_frame_element(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [FFI::Pointer(*WebKitDOMElement)] 
   # @scope class
   attach_function :dom_dom_window_get_frame_element, :webkit_dom_dom_window_get_frame_element, [DOMDOMWindow], :pointer
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_offscreen_buffering(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_offscreen_buffering(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_offscreen_buffering, :webkit_dom_dom_window_get_offscreen_buffering, [DOMDOMWindow], :int
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_outer_height(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_outer_height(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_outer_height, :webkit_dom_dom_window_get_outer_height, [DOMDOMWindow], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_outer_width(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_outer_width(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_outer_width, :webkit_dom_dom_window_get_outer_width, [DOMDOMWindow], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_inner_height(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_inner_height(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_inner_height, :webkit_dom_dom_window_get_inner_height, [DOMDOMWindow], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_inner_width(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_inner_width(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_inner_width, :webkit_dom_dom_window_get_inner_width, [DOMDOMWindow], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_screen_x(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_screen_x(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_screen_x, :webkit_dom_dom_window_get_screen_x, [DOMDOMWindow], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_screen_y(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_screen_y(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_screen_y, :webkit_dom_dom_window_get_screen_y, [DOMDOMWindow], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_screen_left(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_screen_left(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_screen_left, :webkit_dom_dom_window_get_screen_left, [DOMDOMWindow], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_screen_top(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_screen_top(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_screen_top, :webkit_dom_dom_window_get_screen_top, [DOMDOMWindow], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_scroll_x(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_scroll_x(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_scroll_x, :webkit_dom_dom_window_get_scroll_x, [DOMDOMWindow], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_scroll_y(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_scroll_y(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_scroll_y, :webkit_dom_dom_window_get_scroll_y, [DOMDOMWindow], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_page_x_offset(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_page_x_offset(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_page_x_offset, :webkit_dom_dom_window_get_page_x_offset, [DOMDOMWindow], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_page_y_offset(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_page_y_offset(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_page_y_offset, :webkit_dom_dom_window_get_page_y_offset, [DOMDOMWindow], :long
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_closed(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_closed(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_closed, :webkit_dom_dom_window_get_closed, [DOMDOMWindow], :int
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_length(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_length(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_dom_window_get_length, :webkit_dom_dom_window_get_length, [DOMDOMWindow], :ulong
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_name(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_name(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_dom_window_get_name, :webkit_dom_dom_window_get_name, [DOMDOMWindow], :string
   
   # (Not documented)
   # 
-  # @method dom_dom_window_set_name(self, value)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_set_name(self_, value)
+  # @param [DOMDOMWindow] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -3059,16 +3059,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_status(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_status(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_dom_window_get_status, :webkit_dom_dom_window_get_status, [DOMDOMWindow], :string
   
   # (Not documented)
   # 
-  # @method dom_dom_window_set_status(self, value)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_set_status(self_, value)
+  # @param [DOMDOMWindow] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -3076,16 +3076,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_default_status(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_default_status(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_dom_window_get_default_status, :webkit_dom_dom_window_get_default_status, [DOMDOMWindow], :string
   
   # (Not documented)
   # 
-  # @method dom_dom_window_set_default_status(self, value)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_set_default_status(self_, value)
+  # @param [DOMDOMWindow] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -3093,88 +3093,88 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_self(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_self(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMDOMWindow] 
   # @scope class
   attach_function :dom_dom_window_get_self, :webkit_dom_dom_window_get_self, [DOMDOMWindow], DOMDOMWindow
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_window(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_window(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMDOMWindow] 
   # @scope class
   attach_function :dom_dom_window_get_window, :webkit_dom_dom_window_get_window, [DOMDOMWindow], DOMDOMWindow
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_frames(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_frames(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMDOMWindow] 
   # @scope class
   attach_function :dom_dom_window_get_frames, :webkit_dom_dom_window_get_frames, [DOMDOMWindow], DOMDOMWindow
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_opener(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_opener(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMDOMWindow] 
   # @scope class
   attach_function :dom_dom_window_get_opener, :webkit_dom_dom_window_get_opener, [DOMDOMWindow], DOMDOMWindow
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_parent(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_parent(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMDOMWindow] 
   # @scope class
   attach_function :dom_dom_window_get_parent, :webkit_dom_dom_window_get_parent, [DOMDOMWindow], DOMDOMWindow
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_top(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_top(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMDOMWindow] 
   # @scope class
   attach_function :dom_dom_window_get_top, :webkit_dom_dom_window_get_top, [DOMDOMWindow], DOMDOMWindow
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_document(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_document(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [FFI::Pointer(*WebKitDOMDocument)] 
   # @scope class
   attach_function :dom_dom_window_get_document, :webkit_dom_dom_window_get_document, [DOMDOMWindow], :pointer
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_style_media(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_style_media(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [FFI::Pointer(*WebKitDOMStyleMedia)] 
   # @scope class
   attach_function :dom_dom_window_get_style_media, :webkit_dom_dom_window_get_style_media, [DOMDOMWindow], :pointer
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_device_pixel_ratio(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_device_pixel_ratio(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_dom_window_get_device_pixel_ratio, :webkit_dom_dom_window_get_device_pixel_ratio, [DOMDOMWindow], :double
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_application_cache(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_application_cache(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMDOMApplicationCache] 
   # @scope class
   attach_function :dom_dom_window_get_application_cache, :webkit_dom_dom_window_get_application_cache, [DOMDOMWindow], DOMDOMApplicationCache
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_session_storage(self, error)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_session_storage(self_, error)
+  # @param [DOMDOMWindow] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [FFI::Pointer(*WebKitDOMStorage)] 
   # @scope class
@@ -3182,8 +3182,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_local_storage(self, error)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_local_storage(self_, error)
+  # @param [DOMDOMWindow] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [FFI::Pointer(*WebKitDOMStorage)] 
   # @scope class
@@ -3191,8 +3191,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_dom_window_get_console(self)
-  # @param [DOMDOMWindow] self 
+  # @method dom_dom_window_get_console(self_)
+  # @param [DOMDOMWindow] self_ 
   # @return [DOMConsole] 
   # @scope class
   attach_function :dom_dom_window_get_console, :webkit_dom_dom_window_get_console, [DOMDOMWindow], DOMConsole
@@ -3231,8 +3231,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_database_get_version(self)
-  # @param [DOMDatabase] self 
+  # @method dom_database_get_version(self_)
+  # @param [DOMDatabase] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_database_get_version, :webkit_dom_database_get_version, [DOMDatabase], :string
@@ -3583,8 +3583,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_element(self, tag_name, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_element(self_, tag_name, error)
+  # @param [DOMDocument] self_ 
   # @param [String] tag_name 
   # @param [FFI::Pointer(**GError)] error 
   # @return [FFI::Pointer(*WebKitDOMElement)] 
@@ -3593,16 +3593,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_document_fragment(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_document_fragment(self_)
+  # @param [DOMDocument] self_ 
   # @return [FFI::Pointer(*WebKitDOMDocumentFragment)] 
   # @scope class
   attach_function :dom_document_create_document_fragment, :webkit_dom_document_create_document_fragment, [DOMDocument], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_create_text_node(self, data)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_text_node(self_, data)
+  # @param [DOMDocument] self_ 
   # @param [String] data 
   # @return [DOMText] 
   # @scope class
@@ -3610,8 +3610,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_comment(self, data)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_comment(self_, data)
+  # @param [DOMDocument] self_ 
   # @param [String] data 
   # @return [DOMComment] 
   # @scope class
@@ -3619,8 +3619,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_cdata_section(self, data, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_cdata_section(self_, data, error)
+  # @param [DOMDocument] self_ 
   # @param [String] data 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMCDATASection] 
@@ -3629,8 +3629,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_processing_instruction(self, target, data, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_processing_instruction(self_, target, data, error)
+  # @param [DOMDocument] self_ 
   # @param [String] target 
   # @param [String] data 
   # @param [FFI::Pointer(**GError)] error 
@@ -3640,8 +3640,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_attribute(self, name, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_attribute(self_, name, error)
+  # @param [DOMDocument] self_ 
   # @param [String] name 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMAttr] 
@@ -3650,8 +3650,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_entity_reference(self, name, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_entity_reference(self_, name, error)
+  # @param [DOMDocument] self_ 
   # @param [String] name 
   # @param [FFI::Pointer(**GError)] error 
   # @return [FFI::Pointer(*WebKitDOMEntityReference)] 
@@ -3660,8 +3660,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_get_elements_by_tag_name(self, tagname)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_elements_by_tag_name(self_, tagname)
+  # @param [DOMDocument] self_ 
   # @param [String] tagname 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
   # @scope class
@@ -3669,8 +3669,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_import_node(self, imported_node, deep, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_import_node(self_, imported_node, deep, error)
+  # @param [DOMDocument] self_ 
   # @param [DOMNode] imported_node 
   # @param [Integer] deep 
   # @param [FFI::Pointer(**GError)] error 
@@ -3680,8 +3680,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_element_ns(self, namespace_uri, qualified_name, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_element_ns(self_, namespace_uri, qualified_name, error)
+  # @param [DOMDocument] self_ 
   # @param [String] namespace_uri 
   # @param [String] qualified_name 
   # @param [FFI::Pointer(**GError)] error 
@@ -3691,8 +3691,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_attribute_ns(self, namespace_uri, qualified_name, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_attribute_ns(self_, namespace_uri, qualified_name, error)
+  # @param [DOMDocument] self_ 
   # @param [String] namespace_uri 
   # @param [String] qualified_name 
   # @param [FFI::Pointer(**GError)] error 
@@ -3702,8 +3702,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_get_elements_by_tag_name_ns(self, namespace_uri, local_name)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_elements_by_tag_name_ns(self_, namespace_uri, local_name)
+  # @param [DOMDocument] self_ 
   # @param [String] namespace_uri 
   # @param [String] local_name 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
@@ -3712,8 +3712,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_get_element_by_id(self, element_id)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_element_by_id(self_, element_id)
+  # @param [DOMDocument] self_ 
   # @param [String] element_id 
   # @return [FFI::Pointer(*WebKitDOMElement)] 
   # @scope class
@@ -3721,8 +3721,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_adopt_node(self, source, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_adopt_node(self_, source, error)
+  # @param [DOMDocument] self_ 
   # @param [DOMNode] source 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
@@ -3731,8 +3731,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_event(self, event_type, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_event(self_, event_type, error)
+  # @param [DOMDocument] self_ 
   # @param [String] event_type 
   # @param [FFI::Pointer(**GError)] error 
   # @return [FFI::Pointer(*WebKitDOMEvent)] 
@@ -3741,16 +3741,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_range(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_range(self_)
+  # @param [DOMDocument] self_ 
   # @return [FFI::Pointer(*WebKitDOMRange)] 
   # @scope class
   attach_function :dom_document_create_range, :webkit_dom_document_create_range, [DOMDocument], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_create_node_iterator(self, root, what_to_show, filter, expand_entity_references, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_node_iterator(self_, root, what_to_show, filter, expand_entity_references, error)
+  # @param [DOMDocument] self_ 
   # @param [DOMNode] root 
   # @param [Integer] what_to_show 
   # @param [FFI::Pointer(*WebKitDOMNodeFilter)] filter 
@@ -3762,8 +3762,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_tree_walker(self, root, what_to_show, filter, expand_entity_references, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_tree_walker(self_, root, what_to_show, filter, expand_entity_references, error)
+  # @param [DOMDocument] self_ 
   # @param [DOMNode] root 
   # @param [Integer] what_to_show 
   # @param [FFI::Pointer(*WebKitDOMNodeFilter)] filter 
@@ -3775,8 +3775,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_get_override_style(self, element, pseudo_element)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_override_style(self_, element, pseudo_element)
+  # @param [DOMDocument] self_ 
   # @param [FFI::Pointer(*WebKitDOMElement)] element 
   # @param [String] pseudo_element 
   # @return [DOMCSSStyleDeclaration] 
@@ -3785,8 +3785,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_expression(self, expression, resolver, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_expression(self_, expression, resolver, error)
+  # @param [DOMDocument] self_ 
   # @param [String] expression 
   # @param [FFI::Pointer(*WebKitDOMXPathNSResolver)] resolver 
   # @param [FFI::Pointer(**GError)] error 
@@ -3796,8 +3796,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_ns_resolver(self, node_resolver)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_ns_resolver(self_, node_resolver)
+  # @param [DOMDocument] self_ 
   # @param [DOMNode] node_resolver 
   # @return [FFI::Pointer(*WebKitDOMXPathNSResolver)] 
   # @scope class
@@ -3805,8 +3805,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_evaluate(self, expression, context_node, resolver, type, in_result, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_evaluate(self_, expression, context_node, resolver, type, in_result, error)
+  # @param [DOMDocument] self_ 
   # @param [String] expression 
   # @param [DOMNode] context_node 
   # @param [FFI::Pointer(*WebKitDOMXPathNSResolver)] resolver 
@@ -3819,8 +3819,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_exec_command(self, command, user_interface, value)
-  # @param [DOMDocument] self 
+  # @method dom_document_exec_command(self_, command, user_interface, value)
+  # @param [DOMDocument] self_ 
   # @param [String] command 
   # @param [Integer] user_interface 
   # @param [String] value 
@@ -3830,8 +3830,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_query_command_enabled(self, command)
-  # @param [DOMDocument] self 
+  # @method dom_document_query_command_enabled(self_, command)
+  # @param [DOMDocument] self_ 
   # @param [String] command 
   # @return [Integer] 
   # @scope class
@@ -3839,8 +3839,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_query_command_indeterm(self, command)
-  # @param [DOMDocument] self 
+  # @method dom_document_query_command_indeterm(self_, command)
+  # @param [DOMDocument] self_ 
   # @param [String] command 
   # @return [Integer] 
   # @scope class
@@ -3848,8 +3848,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_query_command_state(self, command)
-  # @param [DOMDocument] self 
+  # @method dom_document_query_command_state(self_, command)
+  # @param [DOMDocument] self_ 
   # @param [String] command 
   # @return [Integer] 
   # @scope class
@@ -3857,8 +3857,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_query_command_supported(self, command)
-  # @param [DOMDocument] self 
+  # @method dom_document_query_command_supported(self_, command)
+  # @param [DOMDocument] self_ 
   # @param [String] command 
   # @return [Integer] 
   # @scope class
@@ -3866,8 +3866,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_query_command_value(self, command)
-  # @param [DOMDocument] self 
+  # @method dom_document_query_command_value(self_, command)
+  # @param [DOMDocument] self_ 
   # @param [String] command 
   # @return [String] 
   # @scope class
@@ -3875,8 +3875,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_get_elements_by_name(self, element_name)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_elements_by_name(self_, element_name)
+  # @param [DOMDocument] self_ 
   # @param [String] element_name 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
   # @scope class
@@ -3884,8 +3884,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_element_from_point(self, x, y)
-  # @param [DOMDocument] self 
+  # @method dom_document_element_from_point(self_, x, y)
+  # @param [DOMDocument] self_ 
   # @param [Integer] x 
   # @param [Integer] y 
   # @return [FFI::Pointer(*WebKitDOMElement)] 
@@ -3894,8 +3894,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_caret_range_from_point(self, x, y)
-  # @param [DOMDocument] self 
+  # @method dom_document_caret_range_from_point(self_, x, y)
+  # @param [DOMDocument] self_ 
   # @param [Integer] x 
   # @param [Integer] y 
   # @return [FFI::Pointer(*WebKitDOMRange)] 
@@ -3904,16 +3904,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_create_css_style_declaration(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_create_css_style_declaration(self_)
+  # @param [DOMDocument] self_ 
   # @return [DOMCSSStyleDeclaration] 
   # @scope class
   attach_function :dom_document_create_css_style_declaration, :webkit_dom_document_create_css_style_declaration, [DOMDocument], DOMCSSStyleDeclaration
   
   # (Not documented)
   # 
-  # @method dom_document_get_elements_by_class_name(self, tagname)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_elements_by_class_name(self_, tagname)
+  # @param [DOMDocument] self_ 
   # @param [String] tagname 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
   # @scope class
@@ -3921,8 +3921,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_query_selector(self, selectors, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_query_selector(self_, selectors, error)
+  # @param [DOMDocument] self_ 
   # @param [String] selectors 
   # @param [FFI::Pointer(**GError)] error 
   # @return [FFI::Pointer(*WebKitDOMElement)] 
@@ -3931,8 +3931,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_query_selector_all(self, selectors, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_query_selector_all(self_, selectors, error)
+  # @param [DOMDocument] self_ 
   # @param [String] selectors 
   # @param [FFI::Pointer(**GError)] error 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
@@ -3941,64 +3941,64 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_webkit_cancel_full_screen(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_webkit_cancel_full_screen(self_)
+  # @param [DOMDocument] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_document_webkit_cancel_full_screen, :webkit_dom_document_webkit_cancel_full_screen, [DOMDocument], :void
   
   # (Not documented)
   # 
-  # @method dom_document_get_doctype(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_doctype(self_)
+  # @param [DOMDocument] self_ 
   # @return [FFI::Pointer(*WebKitDOMDocumentType)] 
   # @scope class
   attach_function :dom_document_get_doctype, :webkit_dom_document_get_doctype, [DOMDocument], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_get_implementation(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_implementation(self_)
+  # @param [DOMDocument] self_ 
   # @return [DOMDOMImplementation] 
   # @scope class
   attach_function :dom_document_get_implementation, :webkit_dom_document_get_implementation, [DOMDocument], DOMDOMImplementation
   
   # (Not documented)
   # 
-  # @method dom_document_get_document_element(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_document_element(self_)
+  # @param [DOMDocument] self_ 
   # @return [FFI::Pointer(*WebKitDOMElement)] 
   # @scope class
   attach_function :dom_document_get_document_element, :webkit_dom_document_get_document_element, [DOMDocument], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_get_input_encoding(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_input_encoding(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_input_encoding, :webkit_dom_document_get_input_encoding, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_get_xml_encoding(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_xml_encoding(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_xml_encoding, :webkit_dom_document_get_xml_encoding, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_get_xml_version(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_xml_version(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_xml_version, :webkit_dom_document_get_xml_version, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_set_xml_version(self, value, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_set_xml_version(self_, value, error)
+  # @param [DOMDocument] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -4007,16 +4007,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_get_xml_standalone(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_xml_standalone(self_)
+  # @param [DOMDocument] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_document_get_xml_standalone, :webkit_dom_document_get_xml_standalone, [DOMDocument], :int
   
   # (Not documented)
   # 
-  # @method dom_document_set_xml_standalone(self, value, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_set_xml_standalone(self_, value, error)
+  # @param [DOMDocument] self_ 
   # @param [Integer] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -4025,16 +4025,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_get_document_uri(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_document_uri(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_document_uri, :webkit_dom_document_get_document_uri, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_set_document_uri(self, value)
-  # @param [DOMDocument] self 
+  # @method dom_document_set_document_uri(self_, value)
+  # @param [DOMDocument] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -4042,32 +4042,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_get_default_view(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_default_view(self_)
+  # @param [DOMDocument] self_ 
   # @return [DOMDOMWindow] 
   # @scope class
   attach_function :dom_document_get_default_view, :webkit_dom_document_get_default_view, [DOMDocument], DOMDOMWindow
   
   # (Not documented)
   # 
-  # @method dom_document_get_style_sheets(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_style_sheets(self_)
+  # @param [DOMDocument] self_ 
   # @return [FFI::Pointer(*WebKitDOMStyleSheetList)] 
   # @scope class
   attach_function :dom_document_get_style_sheets, :webkit_dom_document_get_style_sheets, [DOMDocument], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_get_title(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_title(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_title, :webkit_dom_document_get_title, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_set_title(self, value)
-  # @param [DOMDocument] self 
+  # @method dom_document_set_title(self_, value)
+  # @param [DOMDocument] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -4075,24 +4075,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_get_referrer(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_referrer(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_referrer, :webkit_dom_document_get_referrer, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_get_domain(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_domain(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_domain, :webkit_dom_document_get_domain, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_get_cookie(self, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_cookie(self_, error)
+  # @param [DOMDocument] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [String] 
   # @scope class
@@ -4100,8 +4100,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_set_cookie(self, value, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_set_cookie(self_, value, error)
+  # @param [DOMDocument] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -4110,16 +4110,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_get_body(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_body(self_)
+  # @param [DOMDocument] self_ 
   # @return [FFI::Pointer(*WebKitDOMHTMLElement)] 
   # @scope class
   attach_function :dom_document_get_body, :webkit_dom_document_get_body, [DOMDocument], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_set_body(self, value, error)
-  # @param [DOMDocument] self 
+  # @method dom_document_set_body(self_, value, error)
+  # @param [DOMDocument] self_ 
   # @param [FFI::Pointer(*WebKitDOMHTMLElement)] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -4128,72 +4128,72 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_get_head(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_head(self_)
+  # @param [DOMDocument] self_ 
   # @return [FFI::Pointer(*WebKitDOMHTMLHeadElement)] 
   # @scope class
   attach_function :dom_document_get_head, :webkit_dom_document_get_head, [DOMDocument], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_get_images(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_images(self_)
+  # @param [DOMDocument] self_ 
   # @return [FFI::Pointer(*WebKitDOMHTMLCollection)] 
   # @scope class
   attach_function :dom_document_get_images, :webkit_dom_document_get_images, [DOMDocument], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_get_applets(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_applets(self_)
+  # @param [DOMDocument] self_ 
   # @return [FFI::Pointer(*WebKitDOMHTMLCollection)] 
   # @scope class
   attach_function :dom_document_get_applets, :webkit_dom_document_get_applets, [DOMDocument], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_get_links(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_links(self_)
+  # @param [DOMDocument] self_ 
   # @return [FFI::Pointer(*WebKitDOMHTMLCollection)] 
   # @scope class
   attach_function :dom_document_get_links, :webkit_dom_document_get_links, [DOMDocument], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_get_forms(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_forms(self_)
+  # @param [DOMDocument] self_ 
   # @return [FFI::Pointer(*WebKitDOMHTMLCollection)] 
   # @scope class
   attach_function :dom_document_get_forms, :webkit_dom_document_get_forms, [DOMDocument], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_get_anchors(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_anchors(self_)
+  # @param [DOMDocument] self_ 
   # @return [FFI::Pointer(*WebKitDOMHTMLCollection)] 
   # @scope class
   attach_function :dom_document_get_anchors, :webkit_dom_document_get_anchors, [DOMDocument], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_get_last_modified(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_last_modified(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_last_modified, :webkit_dom_document_get_last_modified, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_get_charset(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_charset(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_charset, :webkit_dom_document_get_charset, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_set_charset(self, value)
-  # @param [DOMDocument] self 
+  # @method dom_document_set_charset(self_, value)
+  # @param [DOMDocument] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -4201,48 +4201,48 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_get_default_charset(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_default_charset(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_default_charset, :webkit_dom_document_get_default_charset, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_get_ready_state(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_ready_state(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_ready_state, :webkit_dom_document_get_ready_state, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_get_character_set(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_character_set(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_character_set, :webkit_dom_document_get_character_set, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_get_preferred_stylesheet_set(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_preferred_stylesheet_set(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_preferred_stylesheet_set, :webkit_dom_document_get_preferred_stylesheet_set, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_get_selected_stylesheet_set(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_selected_stylesheet_set(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_selected_stylesheet_set, :webkit_dom_document_get_selected_stylesheet_set, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_set_selected_stylesheet_set(self, value)
-  # @param [DOMDocument] self 
+  # @method dom_document_set_selected_stylesheet_set(self_, value)
+  # @param [DOMDocument] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -4250,48 +4250,48 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_get_compat_mode(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_compat_mode(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_compat_mode, :webkit_dom_document_get_compat_mode, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_get_webkit_is_full_screen(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_webkit_is_full_screen(self_)
+  # @param [DOMDocument] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_document_get_webkit_is_full_screen, :webkit_dom_document_get_webkit_is_full_screen, [DOMDocument], :int
   
   # (Not documented)
   # 
-  # @method dom_document_get_webkit_full_screen_keyboard_input_allowed(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_webkit_full_screen_keyboard_input_allowed(self_)
+  # @param [DOMDocument] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_document_get_webkit_full_screen_keyboard_input_allowed, :webkit_dom_document_get_webkit_full_screen_keyboard_input_allowed, [DOMDocument], :int
   
   # (Not documented)
   # 
-  # @method dom_document_get_webkit_current_full_screen_element(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_webkit_current_full_screen_element(self_)
+  # @param [DOMDocument] self_ 
   # @return [FFI::Pointer(*WebKitDOMElement)] 
   # @scope class
   attach_function :dom_document_get_webkit_current_full_screen_element, :webkit_dom_document_get_webkit_current_full_screen_element, [DOMDocument], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_get_webkit_visibility_state(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_webkit_visibility_state(self_)
+  # @param [DOMDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_get_webkit_visibility_state, :webkit_dom_document_get_webkit_visibility_state, [DOMDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_document_get_webkit_hidden(self)
-  # @param [DOMDocument] self 
+  # @method dom_document_get_webkit_hidden(self_)
+  # @param [DOMDocument] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_document_get_webkit_hidden, :webkit_dom_document_get_webkit_hidden, [DOMDocument], :int
@@ -4334,8 +4334,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_fragment_query_selector(self, selectors, error)
-  # @param [DOMDocumentFragment] self 
+  # @method dom_document_fragment_query_selector(self_, selectors, error)
+  # @param [DOMDocumentFragment] self_ 
   # @param [String] selectors 
   # @param [FFI::Pointer(**GError)] error 
   # @return [FFI::Pointer(*WebKitDOMElement)] 
@@ -4344,8 +4344,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_fragment_query_selector_all(self, selectors, error)
-  # @param [DOMDocumentFragment] self 
+  # @method dom_document_fragment_query_selector_all(self_, selectors, error)
+  # @param [DOMDocumentFragment] self_ 
   # @param [String] selectors 
   # @param [FFI::Pointer(**GError)] error 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
@@ -4406,48 +4406,48 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_document_type_get_name(self)
-  # @param [DOMDocumentType] self 
+  # @method dom_document_type_get_name(self_)
+  # @param [DOMDocumentType] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_type_get_name, :webkit_dom_document_type_get_name, [DOMDocumentType], :string
   
   # (Not documented)
   # 
-  # @method dom_document_type_get_entities(self)
-  # @param [DOMDocumentType] self 
+  # @method dom_document_type_get_entities(self_)
+  # @param [DOMDocumentType] self_ 
   # @return [FFI::Pointer(*WebKitDOMNamedNodeMap)] 
   # @scope class
   attach_function :dom_document_type_get_entities, :webkit_dom_document_type_get_entities, [DOMDocumentType], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_type_get_notations(self)
-  # @param [DOMDocumentType] self 
+  # @method dom_document_type_get_notations(self_)
+  # @param [DOMDocumentType] self_ 
   # @return [FFI::Pointer(*WebKitDOMNamedNodeMap)] 
   # @scope class
   attach_function :dom_document_type_get_notations, :webkit_dom_document_type_get_notations, [DOMDocumentType], :pointer
   
   # (Not documented)
   # 
-  # @method dom_document_type_get_public_id(self)
-  # @param [DOMDocumentType] self 
+  # @method dom_document_type_get_public_id(self_)
+  # @param [DOMDocumentType] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_type_get_public_id, :webkit_dom_document_type_get_public_id, [DOMDocumentType], :string
   
   # (Not documented)
   # 
-  # @method dom_document_type_get_system_id(self)
-  # @param [DOMDocumentType] self 
+  # @method dom_document_type_get_system_id(self_)
+  # @param [DOMDocumentType] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_type_get_system_id, :webkit_dom_document_type_get_system_id, [DOMDocumentType], :string
   
   # (Not documented)
   # 
-  # @method dom_document_type_get_internal_subset(self)
-  # @param [DOMDocumentType] self 
+  # @method dom_document_type_get_internal_subset(self_)
+  # @param [DOMDocumentType] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_document_type_get_internal_subset, :webkit_dom_document_type_get_internal_subset, [DOMDocumentType], :string
@@ -4674,8 +4674,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_get_attribute(self, name)
-  # @param [DOMElement] self 
+  # @method dom_element_get_attribute(self_, name)
+  # @param [DOMElement] self_ 
   # @param [String] name 
   # @return [String] 
   # @scope class
@@ -4683,8 +4683,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_set_attribute(self, name, value, error)
-  # @param [DOMElement] self 
+  # @method dom_element_set_attribute(self_, name, value, error)
+  # @param [DOMElement] self_ 
   # @param [String] name 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
@@ -4694,8 +4694,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_remove_attribute(self, name, error)
-  # @param [DOMElement] self 
+  # @method dom_element_remove_attribute(self_, name, error)
+  # @param [DOMElement] self_ 
   # @param [String] name 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -4704,8 +4704,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_get_attribute_node(self, name)
-  # @param [DOMElement] self 
+  # @method dom_element_get_attribute_node(self_, name)
+  # @param [DOMElement] self_ 
   # @param [String] name 
   # @return [DOMAttr] 
   # @scope class
@@ -4713,8 +4713,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_set_attribute_node(self, new_attr, error)
-  # @param [DOMElement] self 
+  # @method dom_element_set_attribute_node(self_, new_attr, error)
+  # @param [DOMElement] self_ 
   # @param [DOMAttr] new_attr 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMAttr] 
@@ -4723,8 +4723,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_remove_attribute_node(self, old_attr, error)
-  # @param [DOMElement] self 
+  # @method dom_element_remove_attribute_node(self_, old_attr, error)
+  # @param [DOMElement] self_ 
   # @param [DOMAttr] old_attr 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMAttr] 
@@ -4733,8 +4733,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_get_elements_by_tag_name(self, name)
-  # @param [DOMElement] self 
+  # @method dom_element_get_elements_by_tag_name(self_, name)
+  # @param [DOMElement] self_ 
   # @param [String] name 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
   # @scope class
@@ -4742,8 +4742,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_get_attribute_ns(self, namespace_uri, local_name)
-  # @param [DOMElement] self 
+  # @method dom_element_get_attribute_ns(self_, namespace_uri, local_name)
+  # @param [DOMElement] self_ 
   # @param [String] namespace_uri 
   # @param [String] local_name 
   # @return [String] 
@@ -4752,8 +4752,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_set_attribute_ns(self, namespace_uri, qualified_name, value, error)
-  # @param [DOMElement] self 
+  # @method dom_element_set_attribute_ns(self_, namespace_uri, qualified_name, value, error)
+  # @param [DOMElement] self_ 
   # @param [String] namespace_uri 
   # @param [String] qualified_name 
   # @param [String] value 
@@ -4764,8 +4764,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_remove_attribute_ns(self, namespace_uri, local_name, error)
-  # @param [DOMElement] self 
+  # @method dom_element_remove_attribute_ns(self_, namespace_uri, local_name, error)
+  # @param [DOMElement] self_ 
   # @param [String] namespace_uri 
   # @param [String] local_name 
   # @param [FFI::Pointer(**GError)] error 
@@ -4775,8 +4775,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_get_elements_by_tag_name_ns(self, namespace_uri, local_name)
-  # @param [DOMElement] self 
+  # @method dom_element_get_elements_by_tag_name_ns(self_, namespace_uri, local_name)
+  # @param [DOMElement] self_ 
   # @param [String] namespace_uri 
   # @param [String] local_name 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
@@ -4785,8 +4785,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_get_attribute_node_ns(self, namespace_uri, local_name)
-  # @param [DOMElement] self 
+  # @method dom_element_get_attribute_node_ns(self_, namespace_uri, local_name)
+  # @param [DOMElement] self_ 
   # @param [String] namespace_uri 
   # @param [String] local_name 
   # @return [DOMAttr] 
@@ -4795,8 +4795,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_set_attribute_node_ns(self, new_attr, error)
-  # @param [DOMElement] self 
+  # @method dom_element_set_attribute_node_ns(self_, new_attr, error)
+  # @param [DOMElement] self_ 
   # @param [DOMAttr] new_attr 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMAttr] 
@@ -4805,8 +4805,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_has_attribute(self, name)
-  # @param [DOMElement] self 
+  # @method dom_element_has_attribute(self_, name)
+  # @param [DOMElement] self_ 
   # @param [String] name 
   # @return [Integer] 
   # @scope class
@@ -4814,8 +4814,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_has_attribute_ns(self, namespace_uri, local_name)
-  # @param [DOMElement] self 
+  # @method dom_element_has_attribute_ns(self_, namespace_uri, local_name)
+  # @param [DOMElement] self_ 
   # @param [String] namespace_uri 
   # @param [String] local_name 
   # @return [Integer] 
@@ -4824,24 +4824,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_focus(self)
-  # @param [DOMElement] self 
+  # @method dom_element_focus(self_)
+  # @param [DOMElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_element_focus, :webkit_dom_element_focus, [DOMElement], :void
   
   # (Not documented)
   # 
-  # @method dom_element_blur(self)
-  # @param [DOMElement] self 
+  # @method dom_element_blur(self_)
+  # @param [DOMElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_element_blur, :webkit_dom_element_blur, [DOMElement], :void
   
   # (Not documented)
   # 
-  # @method dom_element_scroll_into_view(self, align_with_top)
-  # @param [DOMElement] self 
+  # @method dom_element_scroll_into_view(self_, align_with_top)
+  # @param [DOMElement] self_ 
   # @param [Integer] align_with_top 
   # @return [nil] 
   # @scope class
@@ -4849,8 +4849,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_scroll_into_view_if_needed(self, center_if_needed)
-  # @param [DOMElement] self 
+  # @method dom_element_scroll_into_view_if_needed(self_, center_if_needed)
+  # @param [DOMElement] self_ 
   # @param [Integer] center_if_needed 
   # @return [nil] 
   # @scope class
@@ -4858,8 +4858,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_scroll_by_lines(self, lines)
-  # @param [DOMElement] self 
+  # @method dom_element_scroll_by_lines(self_, lines)
+  # @param [DOMElement] self_ 
   # @param [Integer] lines 
   # @return [nil] 
   # @scope class
@@ -4867,8 +4867,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_scroll_by_pages(self, pages)
-  # @param [DOMElement] self 
+  # @method dom_element_scroll_by_pages(self_, pages)
+  # @param [DOMElement] self_ 
   # @param [Integer] pages 
   # @return [nil] 
   # @scope class
@@ -4876,8 +4876,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_get_elements_by_class_name(self, name)
-  # @param [DOMElement] self 
+  # @method dom_element_get_elements_by_class_name(self_, name)
+  # @param [DOMElement] self_ 
   # @param [String] name 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
   # @scope class
@@ -4885,8 +4885,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_query_selector(self, selectors, error)
-  # @param [DOMElement] self 
+  # @method dom_element_query_selector(self_, selectors, error)
+  # @param [DOMElement] self_ 
   # @param [String] selectors 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMElement] 
@@ -4895,8 +4895,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_query_selector_all(self, selectors, error)
-  # @param [DOMElement] self 
+  # @method dom_element_query_selector_all(self_, selectors, error)
+  # @param [DOMElement] self_ 
   # @param [String] selectors 
   # @param [FFI::Pointer(**GError)] error 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
@@ -4905,8 +4905,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_webkit_matches_selector(self, selectors, error)
-  # @param [DOMElement] self 
+  # @method dom_element_webkit_matches_selector(self_, selectors, error)
+  # @param [DOMElement] self_ 
   # @param [String] selectors 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Integer] 
@@ -4915,8 +4915,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_webkit_request_full_screen(self, flags)
-  # @param [DOMElement] self 
+  # @method dom_element_webkit_request_full_screen(self_, flags)
+  # @param [DOMElement] self_ 
   # @param [Integer] flags 
   # @return [nil] 
   # @scope class
@@ -4924,104 +4924,104 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_get_tag_name(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_tag_name(self_)
+  # @param [DOMElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_element_get_tag_name, :webkit_dom_element_get_tag_name, [DOMElement], :string
   
   # (Not documented)
   # 
-  # @method dom_element_get_style(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_style(self_)
+  # @param [DOMElement] self_ 
   # @return [DOMCSSStyleDeclaration] 
   # @scope class
   attach_function :dom_element_get_style, :webkit_dom_element_get_style, [DOMElement], DOMCSSStyleDeclaration
   
   # (Not documented)
   # 
-  # @method dom_element_get_offset_left(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_offset_left(self_)
+  # @param [DOMElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_element_get_offset_left, :webkit_dom_element_get_offset_left, [DOMElement], :long
   
   # (Not documented)
   # 
-  # @method dom_element_get_offset_top(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_offset_top(self_)
+  # @param [DOMElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_element_get_offset_top, :webkit_dom_element_get_offset_top, [DOMElement], :long
   
   # (Not documented)
   # 
-  # @method dom_element_get_offset_width(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_offset_width(self_)
+  # @param [DOMElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_element_get_offset_width, :webkit_dom_element_get_offset_width, [DOMElement], :long
   
   # (Not documented)
   # 
-  # @method dom_element_get_offset_height(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_offset_height(self_)
+  # @param [DOMElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_element_get_offset_height, :webkit_dom_element_get_offset_height, [DOMElement], :long
   
   # (Not documented)
   # 
-  # @method dom_element_get_offset_parent(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_offset_parent(self_)
+  # @param [DOMElement] self_ 
   # @return [DOMElement] 
   # @scope class
   attach_function :dom_element_get_offset_parent, :webkit_dom_element_get_offset_parent, [DOMElement], DOMElement
   
   # (Not documented)
   # 
-  # @method dom_element_get_client_left(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_client_left(self_)
+  # @param [DOMElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_element_get_client_left, :webkit_dom_element_get_client_left, [DOMElement], :long
   
   # (Not documented)
   # 
-  # @method dom_element_get_client_top(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_client_top(self_)
+  # @param [DOMElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_element_get_client_top, :webkit_dom_element_get_client_top, [DOMElement], :long
   
   # (Not documented)
   # 
-  # @method dom_element_get_client_width(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_client_width(self_)
+  # @param [DOMElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_element_get_client_width, :webkit_dom_element_get_client_width, [DOMElement], :long
   
   # (Not documented)
   # 
-  # @method dom_element_get_client_height(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_client_height(self_)
+  # @param [DOMElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_element_get_client_height, :webkit_dom_element_get_client_height, [DOMElement], :long
   
   # (Not documented)
   # 
-  # @method dom_element_get_scroll_left(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_scroll_left(self_)
+  # @param [DOMElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_element_get_scroll_left, :webkit_dom_element_get_scroll_left, [DOMElement], :long
   
   # (Not documented)
   # 
-  # @method dom_element_set_scroll_left(self, value)
-  # @param [DOMElement] self 
+  # @method dom_element_set_scroll_left(self_, value)
+  # @param [DOMElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -5029,16 +5029,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_get_scroll_top(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_scroll_top(self_)
+  # @param [DOMElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_element_get_scroll_top, :webkit_dom_element_get_scroll_top, [DOMElement], :long
   
   # (Not documented)
   # 
-  # @method dom_element_set_scroll_top(self, value)
-  # @param [DOMElement] self 
+  # @method dom_element_set_scroll_top(self_, value)
+  # @param [DOMElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -5046,56 +5046,56 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_element_get_scroll_width(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_scroll_width(self_)
+  # @param [DOMElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_element_get_scroll_width, :webkit_dom_element_get_scroll_width, [DOMElement], :long
   
   # (Not documented)
   # 
-  # @method dom_element_get_scroll_height(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_scroll_height(self_)
+  # @param [DOMElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_element_get_scroll_height, :webkit_dom_element_get_scroll_height, [DOMElement], :long
   
   # (Not documented)
   # 
-  # @method dom_element_get_first_element_child(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_first_element_child(self_)
+  # @param [DOMElement] self_ 
   # @return [DOMElement] 
   # @scope class
   attach_function :dom_element_get_first_element_child, :webkit_dom_element_get_first_element_child, [DOMElement], DOMElement
   
   # (Not documented)
   # 
-  # @method dom_element_get_last_element_child(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_last_element_child(self_)
+  # @param [DOMElement] self_ 
   # @return [DOMElement] 
   # @scope class
   attach_function :dom_element_get_last_element_child, :webkit_dom_element_get_last_element_child, [DOMElement], DOMElement
   
   # (Not documented)
   # 
-  # @method dom_element_get_previous_element_sibling(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_previous_element_sibling(self_)
+  # @param [DOMElement] self_ 
   # @return [DOMElement] 
   # @scope class
   attach_function :dom_element_get_previous_element_sibling, :webkit_dom_element_get_previous_element_sibling, [DOMElement], DOMElement
   
   # (Not documented)
   # 
-  # @method dom_element_get_next_element_sibling(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_next_element_sibling(self_)
+  # @param [DOMElement] self_ 
   # @return [DOMElement] 
   # @scope class
   attach_function :dom_element_get_next_element_sibling, :webkit_dom_element_get_next_element_sibling, [DOMElement], DOMElement
   
   # (Not documented)
   # 
-  # @method dom_element_get_child_element_count(self)
-  # @param [DOMElement] self 
+  # @method dom_element_get_child_element_count(self_)
+  # @param [DOMElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_element_get_child_element_count, :webkit_dom_element_get_child_element_count, [DOMElement], :ulong
@@ -5219,24 +5219,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_event_stop_propagation(self)
-  # @param [DOMEvent] self 
+  # @method dom_event_stop_propagation(self_)
+  # @param [DOMEvent] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_event_stop_propagation, :webkit_dom_event_stop_propagation, [DOMEvent], :void
   
   # (Not documented)
   # 
-  # @method dom_event_prevent_default(self)
-  # @param [DOMEvent] self 
+  # @method dom_event_prevent_default(self_)
+  # @param [DOMEvent] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_event_prevent_default, :webkit_dom_event_prevent_default, [DOMEvent], :void
   
   # (Not documented)
   # 
-  # @method dom_event_init_event(self, event_type_arg, can_bubble_arg, cancelable_arg)
-  # @param [DOMEvent] self 
+  # @method dom_event_init_event(self_, event_type_arg, can_bubble_arg, cancelable_arg)
+  # @param [DOMEvent] self_ 
   # @param [String] event_type_arg 
   # @param [Integer] can_bubble_arg 
   # @param [Integer] cancelable_arg 
@@ -5246,88 +5246,88 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_event_stop_immediate_propagation(self)
-  # @param [DOMEvent] self 
+  # @method dom_event_stop_immediate_propagation(self_)
+  # @param [DOMEvent] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_event_stop_immediate_propagation, :webkit_dom_event_stop_immediate_propagation, [DOMEvent], :void
   
   # (Not documented)
   # 
-  # @method dom_event_get_target(self)
-  # @param [DOMEvent] self 
+  # @method dom_event_get_target(self_)
+  # @param [DOMEvent] self_ 
   # @return [DOMEventTarget] 
   # @scope class
   attach_function :dom_event_get_target, :webkit_dom_event_get_target, [DOMEvent], DOMEventTarget
   
   # (Not documented)
   # 
-  # @method dom_event_get_current_target(self)
-  # @param [DOMEvent] self 
+  # @method dom_event_get_current_target(self_)
+  # @param [DOMEvent] self_ 
   # @return [DOMEventTarget] 
   # @scope class
   attach_function :dom_event_get_current_target, :webkit_dom_event_get_current_target, [DOMEvent], DOMEventTarget
   
   # (Not documented)
   # 
-  # @method dom_event_get_event_phase(self)
-  # @param [DOMEvent] self 
+  # @method dom_event_get_event_phase(self_)
+  # @param [DOMEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_event_get_event_phase, :webkit_dom_event_get_event_phase, [DOMEvent], :ushort
   
   # (Not documented)
   # 
-  # @method dom_event_get_bubbles(self)
-  # @param [DOMEvent] self 
+  # @method dom_event_get_bubbles(self_)
+  # @param [DOMEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_event_get_bubbles, :webkit_dom_event_get_bubbles, [DOMEvent], :int
   
   # (Not documented)
   # 
-  # @method dom_event_get_cancelable(self)
-  # @param [DOMEvent] self 
+  # @method dom_event_get_cancelable(self_)
+  # @param [DOMEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_event_get_cancelable, :webkit_dom_event_get_cancelable, [DOMEvent], :int
   
   # (Not documented)
   # 
-  # @method dom_event_get_time_stamp(self)
-  # @param [DOMEvent] self 
+  # @method dom_event_get_time_stamp(self_)
+  # @param [DOMEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_event_get_time_stamp, :webkit_dom_event_get_time_stamp, [DOMEvent], :uint
   
   # (Not documented)
   # 
-  # @method dom_event_get_default_prevented(self)
-  # @param [DOMEvent] self 
+  # @method dom_event_get_default_prevented(self_)
+  # @param [DOMEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_event_get_default_prevented, :webkit_dom_event_get_default_prevented, [DOMEvent], :int
   
   # (Not documented)
   # 
-  # @method dom_event_get_src_element(self)
-  # @param [DOMEvent] self 
+  # @method dom_event_get_src_element(self_)
+  # @param [DOMEvent] self_ 
   # @return [DOMEventTarget] 
   # @scope class
   attach_function :dom_event_get_src_element, :webkit_dom_event_get_src_element, [DOMEvent], DOMEventTarget
   
   # (Not documented)
   # 
-  # @method dom_event_get_return_value(self)
-  # @param [DOMEvent] self 
+  # @method dom_event_get_return_value(self_)
+  # @param [DOMEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_event_get_return_value, :webkit_dom_event_get_return_value, [DOMEvent], :int
   
   # (Not documented)
   # 
-  # @method dom_event_set_return_value(self, value)
-  # @param [DOMEvent] self 
+  # @method dom_event_set_return_value(self_, value)
+  # @param [DOMEvent] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -5335,16 +5335,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_event_get_cancel_bubble(self)
-  # @param [DOMEvent] self 
+  # @method dom_event_get_cancel_bubble(self_)
+  # @param [DOMEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_event_get_cancel_bubble, :webkit_dom_event_get_cancel_bubble, [DOMEvent], :int
   
   # (Not documented)
   # 
-  # @method dom_event_set_cancel_bubble(self, value)
-  # @param [DOMEvent] self 
+  # @method dom_event_set_cancel_bubble(self_, value)
+  # @param [DOMEvent] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -5450,24 +5450,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_file_get_name(self)
-  # @param [DOMFile] self 
+  # @method dom_file_get_name(self_)
+  # @param [DOMFile] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_file_get_name, :webkit_dom_file_get_name, [DOMFile], :string
   
   # (Not documented)
   # 
-  # @method dom_file_get_file_name(self)
-  # @param [DOMFile] self 
+  # @method dom_file_get_file_name(self_)
+  # @param [DOMFile] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_file_get_file_name, :webkit_dom_file_get_file_name, [DOMFile], :string
   
   # (Not documented)
   # 
-  # @method dom_file_get_file_size(self)
-  # @param [DOMFile] self 
+  # @method dom_file_get_file_size(self_)
+  # @param [DOMFile] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_file_get_file_size, :webkit_dom_file_get_file_size, [DOMFile], :ulong
@@ -5510,8 +5510,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_file_list_item(self, index)
-  # @param [DOMFileList] self 
+  # @method dom_file_list_item(self_, index)
+  # @param [DOMFileList] self_ 
   # @param [Integer] index 
   # @return [DOMFile] 
   # @scope class
@@ -5519,8 +5519,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_file_list_get_length(self)
-  # @param [DOMFileList] self 
+  # @method dom_file_list_get_length(self_)
+  # @param [DOMFileList] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_file_list_get_length, :webkit_dom_file_list_get_length, [DOMFileList], :ulong
@@ -5559,8 +5559,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_geolocation_clear_watch(self, watch_id)
-  # @param [DOMGeolocation] self 
+  # @method dom_geolocation_clear_watch(self_, watch_id)
+  # @param [DOMGeolocation] self_ 
   # @param [Integer] watch_id 
   # @return [nil] 
   # @scope class
@@ -5593,8 +5593,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_insert_adjacent_element(self, where, element, error)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_insert_adjacent_element(self_, where, element, error)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] where 
   # @param [DOMElement] element 
   # @param [FFI::Pointer(**GError)] error 
@@ -5604,8 +5604,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_insert_adjacent_html(self, where, html, error)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_insert_adjacent_html(self_, where, html, error)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] where 
   # @param [String] html 
   # @param [FFI::Pointer(**GError)] error 
@@ -5615,8 +5615,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_insert_adjacent_text(self, where, text, error)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_insert_adjacent_text(self_, where, text, error)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] where 
   # @param [String] text 
   # @param [FFI::Pointer(**GError)] error 
@@ -5626,16 +5626,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_id(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_id(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_element_get_id, :webkit_dom_html_element_get_id, [DOMHTMLElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_id(self, value)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_id(self_, value)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -5643,16 +5643,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_title(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_title(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_element_get_title, :webkit_dom_html_element_get_title, [DOMHTMLElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_title(self, value)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_title(self_, value)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -5660,16 +5660,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_lang(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_lang(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_element_get_lang, :webkit_dom_html_element_get_lang, [DOMHTMLElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_lang(self, value)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_lang(self_, value)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -5677,16 +5677,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_dir(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_dir(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_element_get_dir, :webkit_dom_html_element_get_dir, [DOMHTMLElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_dir(self, value)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_dir(self_, value)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -5694,16 +5694,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_class_name(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_class_name(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_element_get_class_name, :webkit_dom_html_element_get_class_name, [DOMHTMLElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_class_name(self, value)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_class_name(self_, value)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -5711,24 +5711,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_class_list(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_class_list(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [DOMDOMTokenList] 
   # @scope class
   attach_function :dom_html_element_get_class_list, :webkit_dom_html_element_get_class_list, [DOMHTMLElement], DOMDOMTokenList
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_tab_index(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_tab_index(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_element_get_tab_index, :webkit_dom_html_element_get_tab_index, [DOMHTMLElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_tab_index(self, value)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_tab_index(self_, value)
+  # @param [DOMHTMLElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -5736,16 +5736,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_draggable(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_draggable(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_element_get_draggable, :webkit_dom_html_element_get_draggable, [DOMHTMLElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_draggable(self, value)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_draggable(self_, value)
+  # @param [DOMHTMLElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -5753,16 +5753,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_webkitdropzone(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_webkitdropzone(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_element_get_webkitdropzone, :webkit_dom_html_element_get_webkitdropzone, [DOMHTMLElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_webkitdropzone(self, value)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_webkitdropzone(self_, value)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -5770,16 +5770,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_hidden(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_hidden(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_element_get_hidden, :webkit_dom_html_element_get_hidden, [DOMHTMLElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_hidden(self, value)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_hidden(self_, value)
+  # @param [DOMHTMLElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -5787,16 +5787,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_inner_html(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_inner_html(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_element_get_inner_html, :webkit_dom_html_element_get_inner_html, [DOMHTMLElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_inner_html(self, value, error)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_inner_html(self_, value, error)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -5805,16 +5805,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_inner_text(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_inner_text(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_element_get_inner_text, :webkit_dom_html_element_get_inner_text, [DOMHTMLElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_inner_text(self, value, error)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_inner_text(self_, value, error)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -5823,16 +5823,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_outer_html(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_outer_html(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_element_get_outer_html, :webkit_dom_html_element_get_outer_html, [DOMHTMLElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_outer_html(self, value, error)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_outer_html(self_, value, error)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -5841,16 +5841,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_outer_text(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_outer_text(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_element_get_outer_text, :webkit_dom_html_element_get_outer_text, [DOMHTMLElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_outer_text(self, value, error)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_outer_text(self_, value, error)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -5859,24 +5859,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_children(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_children(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMHTMLCollection)] 
   # @scope class
   attach_function :dom_html_element_get_children, :webkit_dom_html_element_get_children, [DOMHTMLElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_content_editable(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_content_editable(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_element_get_content_editable, :webkit_dom_html_element_get_content_editable, [DOMHTMLElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_content_editable(self, value, error)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_content_editable(self_, value, error)
+  # @param [DOMHTMLElement] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -5885,24 +5885,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_is_content_editable(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_is_content_editable(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_element_get_is_content_editable, :webkit_dom_html_element_get_is_content_editable, [DOMHTMLElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_element_get_spellcheck(self)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_get_spellcheck(self_)
+  # @param [DOMHTMLElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_element_get_spellcheck, :webkit_dom_html_element_get_spellcheck, [DOMHTMLElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_element_set_spellcheck(self, value)
-  # @param [DOMHTMLElement] self 
+  # @method dom_html_element_set_spellcheck(self_, value)
+  # @param [DOMHTMLElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -5935,8 +5935,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_parameter(self, name)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_parameter(self_, name)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] name 
   # @return [String] 
   # @scope class
@@ -5944,16 +5944,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_access_key(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_access_key(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_access_key, :webkit_dom_html_anchor_element_get_access_key, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_access_key(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_access_key(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -5961,16 +5961,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_charset(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_charset(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_charset, :webkit_dom_html_anchor_element_get_charset, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_charset(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_charset(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -5978,16 +5978,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_coords(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_coords(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_coords, :webkit_dom_html_anchor_element_get_coords, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_coords(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_coords(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -5995,16 +5995,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_download(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_download(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_download, :webkit_dom_html_anchor_element_get_download, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_download(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_download(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6012,16 +6012,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_href(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_href(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_href, :webkit_dom_html_anchor_element_get_href, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_href(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_href(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6029,16 +6029,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_hreflang(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_hreflang(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_hreflang, :webkit_dom_html_anchor_element_get_hreflang, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_hreflang(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_hreflang(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6046,16 +6046,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_name(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_name(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_name, :webkit_dom_html_anchor_element_get_name, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_name(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_name(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6063,16 +6063,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_ping(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_ping(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_ping, :webkit_dom_html_anchor_element_get_ping, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_ping(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_ping(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6080,16 +6080,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_rel(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_rel(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_rel, :webkit_dom_html_anchor_element_get_rel, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_rel(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_rel(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6097,16 +6097,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_rev(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_rev(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_rev, :webkit_dom_html_anchor_element_get_rev, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_rev(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_rev(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6114,16 +6114,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_shape(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_shape(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_shape, :webkit_dom_html_anchor_element_get_shape, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_shape(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_shape(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6131,16 +6131,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_target(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_target(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_target, :webkit_dom_html_anchor_element_get_target, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_target(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_target(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6148,16 +6148,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_hash(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_hash(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_hash, :webkit_dom_html_anchor_element_get_hash, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_hash(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_hash(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6165,16 +6165,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_host(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_host(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_host, :webkit_dom_html_anchor_element_get_host, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_host(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_host(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6182,16 +6182,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_hostname(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_hostname(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_hostname, :webkit_dom_html_anchor_element_get_hostname, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_hostname(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_hostname(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6199,16 +6199,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_pathname(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_pathname(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_pathname, :webkit_dom_html_anchor_element_get_pathname, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_pathname(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_pathname(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6216,16 +6216,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_port(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_port(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_port, :webkit_dom_html_anchor_element_get_port, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_port(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_port(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6233,16 +6233,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_protocol(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_protocol(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_protocol, :webkit_dom_html_anchor_element_get_protocol, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_protocol(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_protocol(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6250,16 +6250,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_search(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_search(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_search, :webkit_dom_html_anchor_element_get_search, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_set_search(self, value)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_set_search(self_, value)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6267,16 +6267,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_origin(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_origin(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_origin, :webkit_dom_html_anchor_element_get_origin, [DOMHTMLAnchorElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_anchor_element_get_text(self)
-  # @param [DOMHTMLAnchorElement] self 
+  # @method dom_html_anchor_element_get_text(self_)
+  # @param [DOMHTMLAnchorElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_anchor_element_get_text, :webkit_dom_html_anchor_element_get_text, [DOMHTMLAnchorElement], :string
@@ -6308,16 +6308,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_get_align(self)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_get_align(self_)
+  # @param [DOMHTMLAppletElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_applet_element_get_align, :webkit_dom_html_applet_element_get_align, [DOMHTMLAppletElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_set_align(self, value)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_set_align(self_, value)
+  # @param [DOMHTMLAppletElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6325,16 +6325,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_get_alt(self)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_get_alt(self_)
+  # @param [DOMHTMLAppletElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_applet_element_get_alt, :webkit_dom_html_applet_element_get_alt, [DOMHTMLAppletElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_set_alt(self, value)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_set_alt(self_, value)
+  # @param [DOMHTMLAppletElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6342,16 +6342,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_get_archive(self)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_get_archive(self_)
+  # @param [DOMHTMLAppletElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_applet_element_get_archive, :webkit_dom_html_applet_element_get_archive, [DOMHTMLAppletElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_set_archive(self, value)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_set_archive(self_, value)
+  # @param [DOMHTMLAppletElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6359,16 +6359,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_get_code(self)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_get_code(self_)
+  # @param [DOMHTMLAppletElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_applet_element_get_code, :webkit_dom_html_applet_element_get_code, [DOMHTMLAppletElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_set_code(self, value)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_set_code(self_, value)
+  # @param [DOMHTMLAppletElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6376,16 +6376,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_get_code_base(self)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_get_code_base(self_)
+  # @param [DOMHTMLAppletElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_applet_element_get_code_base, :webkit_dom_html_applet_element_get_code_base, [DOMHTMLAppletElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_set_code_base(self, value)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_set_code_base(self_, value)
+  # @param [DOMHTMLAppletElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6393,16 +6393,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_get_height(self)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_get_height(self_)
+  # @param [DOMHTMLAppletElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_applet_element_get_height, :webkit_dom_html_applet_element_get_height, [DOMHTMLAppletElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_set_height(self, value)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_set_height(self_, value)
+  # @param [DOMHTMLAppletElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6410,16 +6410,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_get_hspace(self)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_get_hspace(self_)
+  # @param [DOMHTMLAppletElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_applet_element_get_hspace, :webkit_dom_html_applet_element_get_hspace, [DOMHTMLAppletElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_set_hspace(self, value)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_set_hspace(self_, value)
+  # @param [DOMHTMLAppletElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -6427,16 +6427,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_get_name(self)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_get_name(self_)
+  # @param [DOMHTMLAppletElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_applet_element_get_name, :webkit_dom_html_applet_element_get_name, [DOMHTMLAppletElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_set_name(self, value)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_set_name(self_, value)
+  # @param [DOMHTMLAppletElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6444,16 +6444,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_get_object(self)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_get_object(self_)
+  # @param [DOMHTMLAppletElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_applet_element_get_object, :webkit_dom_html_applet_element_get_object, [DOMHTMLAppletElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_set_object(self, value)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_set_object(self_, value)
+  # @param [DOMHTMLAppletElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6461,16 +6461,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_get_vspace(self)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_get_vspace(self_)
+  # @param [DOMHTMLAppletElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_applet_element_get_vspace, :webkit_dom_html_applet_element_get_vspace, [DOMHTMLAppletElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_set_vspace(self, value)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_set_vspace(self_, value)
+  # @param [DOMHTMLAppletElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -6478,16 +6478,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_get_width(self)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_get_width(self_)
+  # @param [DOMHTMLAppletElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_applet_element_get_width, :webkit_dom_html_applet_element_get_width, [DOMHTMLAppletElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_applet_element_set_width(self, value)
-  # @param [DOMHTMLAppletElement] self 
+  # @method dom_html_applet_element_set_width(self_, value)
+  # @param [DOMHTMLAppletElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6520,16 +6520,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_access_key(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_access_key(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_access_key, :webkit_dom_html_area_element_get_access_key, [DOMHTMLAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_set_access_key(self, value)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_set_access_key(self_, value)
+  # @param [DOMHTMLAreaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6537,16 +6537,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_alt(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_alt(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_alt, :webkit_dom_html_area_element_get_alt, [DOMHTMLAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_set_alt(self, value)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_set_alt(self_, value)
+  # @param [DOMHTMLAreaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6554,16 +6554,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_coords(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_coords(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_coords, :webkit_dom_html_area_element_get_coords, [DOMHTMLAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_set_coords(self, value)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_set_coords(self_, value)
+  # @param [DOMHTMLAreaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6571,16 +6571,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_href(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_href(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_href, :webkit_dom_html_area_element_get_href, [DOMHTMLAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_set_href(self, value)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_set_href(self_, value)
+  # @param [DOMHTMLAreaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6588,16 +6588,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_no_href(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_no_href(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_area_element_get_no_href, :webkit_dom_html_area_element_get_no_href, [DOMHTMLAreaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_set_no_href(self, value)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_set_no_href(self_, value)
+  # @param [DOMHTMLAreaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -6605,16 +6605,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_ping(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_ping(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_ping, :webkit_dom_html_area_element_get_ping, [DOMHTMLAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_set_ping(self, value)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_set_ping(self_, value)
+  # @param [DOMHTMLAreaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6622,16 +6622,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_shape(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_shape(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_shape, :webkit_dom_html_area_element_get_shape, [DOMHTMLAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_set_shape(self, value)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_set_shape(self_, value)
+  # @param [DOMHTMLAreaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6639,16 +6639,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_target(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_target(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_target, :webkit_dom_html_area_element_get_target, [DOMHTMLAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_set_target(self, value)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_set_target(self_, value)
+  # @param [DOMHTMLAreaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6656,56 +6656,56 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_hash(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_hash(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_hash, :webkit_dom_html_area_element_get_hash, [DOMHTMLAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_host(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_host(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_host, :webkit_dom_html_area_element_get_host, [DOMHTMLAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_hostname(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_hostname(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_hostname, :webkit_dom_html_area_element_get_hostname, [DOMHTMLAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_pathname(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_pathname(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_pathname, :webkit_dom_html_area_element_get_pathname, [DOMHTMLAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_port(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_port(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_port, :webkit_dom_html_area_element_get_port, [DOMHTMLAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_protocol(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_protocol(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_protocol, :webkit_dom_html_area_element_get_protocol, [DOMHTMLAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_area_element_get_search(self)
-  # @param [DOMHTMLAreaElement] self 
+  # @method dom_html_area_element_get_search(self_)
+  # @param [DOMHTMLAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_area_element_get_search, :webkit_dom_html_area_element_get_search, [DOMHTMLAreaElement], :string
@@ -6737,8 +6737,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_load(self, error)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_load(self_, error)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
   # @scope class
@@ -6746,8 +6746,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_can_play_type(self, type)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_can_play_type(self_, type)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [String] type 
   # @return [String] 
   # @scope class
@@ -6755,40 +6755,40 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_play(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_play(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_media_element_play, :webkit_dom_html_media_element_play, [DOMHTMLMediaElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_pause(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_pause(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_media_element_pause, :webkit_dom_html_media_element_pause, [DOMHTMLMediaElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_error(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_error(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMMediaError)] 
   # @scope class
   attach_function :dom_html_media_element_get_error, :webkit_dom_html_media_element_get_error, [DOMHTMLMediaElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_src(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_src(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_media_element_get_src, :webkit_dom_html_media_element_get_src, [DOMHTMLMediaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_set_src(self, value)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_set_src(self_, value)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6796,32 +6796,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_current_src(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_current_src(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_media_element_get_current_src, :webkit_dom_html_media_element_get_current_src, [DOMHTMLMediaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_network_state(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_network_state(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_network_state, :webkit_dom_html_media_element_get_network_state, [DOMHTMLMediaElement], :ushort
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_preload(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_preload(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_media_element_get_preload, :webkit_dom_html_media_element_get_preload, [DOMHTMLMediaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_set_preload(self, value)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_set_preload(self_, value)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -6829,40 +6829,40 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_buffered(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_buffered(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMTimeRanges)] 
   # @scope class
   attach_function :dom_html_media_element_get_buffered, :webkit_dom_html_media_element_get_buffered, [DOMHTMLMediaElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_ready_state(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_ready_state(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_ready_state, :webkit_dom_html_media_element_get_ready_state, [DOMHTMLMediaElement], :ushort
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_seeking(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_seeking(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_seeking, :webkit_dom_html_media_element_get_seeking, [DOMHTMLMediaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_current_time(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_current_time(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_html_media_element_get_current_time, :webkit_dom_html_media_element_get_current_time, [DOMHTMLMediaElement], :float
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_set_current_time(self, value, error)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_set_current_time(self_, value, error)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [Float] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -6871,48 +6871,48 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_initial_time(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_initial_time(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_html_media_element_get_initial_time, :webkit_dom_html_media_element_get_initial_time, [DOMHTMLMediaElement], :double
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_start_time(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_start_time(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_html_media_element_get_start_time, :webkit_dom_html_media_element_get_start_time, [DOMHTMLMediaElement], :float
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_duration(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_duration(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_html_media_element_get_duration, :webkit_dom_html_media_element_get_duration, [DOMHTMLMediaElement], :float
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_paused(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_paused(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_paused, :webkit_dom_html_media_element_get_paused, [DOMHTMLMediaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_default_playback_rate(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_default_playback_rate(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_html_media_element_get_default_playback_rate, :webkit_dom_html_media_element_get_default_playback_rate, [DOMHTMLMediaElement], :float
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_set_default_playback_rate(self, value)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_set_default_playback_rate(self_, value)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [Float] value 
   # @return [nil] 
   # @scope class
@@ -6920,16 +6920,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_playback_rate(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_playback_rate(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_html_media_element_get_playback_rate, :webkit_dom_html_media_element_get_playback_rate, [DOMHTMLMediaElement], :float
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_set_playback_rate(self, value)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_set_playback_rate(self_, value)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [Float] value 
   # @return [nil] 
   # @scope class
@@ -6937,40 +6937,40 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_played(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_played(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMTimeRanges)] 
   # @scope class
   attach_function :dom_html_media_element_get_played, :webkit_dom_html_media_element_get_played, [DOMHTMLMediaElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_seekable(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_seekable(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMTimeRanges)] 
   # @scope class
   attach_function :dom_html_media_element_get_seekable, :webkit_dom_html_media_element_get_seekable, [DOMHTMLMediaElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_ended(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_ended(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_ended, :webkit_dom_html_media_element_get_ended, [DOMHTMLMediaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_autoplay(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_autoplay(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_autoplay, :webkit_dom_html_media_element_get_autoplay, [DOMHTMLMediaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_set_autoplay(self, value)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_set_autoplay(self_, value)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -6978,16 +6978,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_loop(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_loop(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_loop, :webkit_dom_html_media_element_get_loop, [DOMHTMLMediaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_set_loop(self, value)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_set_loop(self_, value)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -6995,16 +6995,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_controls(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_controls(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_controls, :webkit_dom_html_media_element_get_controls, [DOMHTMLMediaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_set_controls(self, value)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_set_controls(self_, value)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7012,16 +7012,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_volume(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_volume(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_html_media_element_get_volume, :webkit_dom_html_media_element_get_volume, [DOMHTMLMediaElement], :float
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_set_volume(self, value, error)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_set_volume(self_, value, error)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [Float] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -7030,16 +7030,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_muted(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_muted(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_muted, :webkit_dom_html_media_element_get_muted, [DOMHTMLMediaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_set_muted(self, value)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_set_muted(self_, value)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7047,16 +7047,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_default_muted(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_default_muted(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_default_muted, :webkit_dom_html_media_element_get_default_muted, [DOMHTMLMediaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_set_default_muted(self, value)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_set_default_muted(self_, value)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7064,16 +7064,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_webkit_preserves_pitch(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_webkit_preserves_pitch(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_webkit_preserves_pitch, :webkit_dom_html_media_element_get_webkit_preserves_pitch, [DOMHTMLMediaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_set_webkit_preserves_pitch(self, value)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_set_webkit_preserves_pitch(self_, value)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7081,24 +7081,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_webkit_has_closed_captions(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_webkit_has_closed_captions(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_webkit_has_closed_captions, :webkit_dom_html_media_element_get_webkit_has_closed_captions, [DOMHTMLMediaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_webkit_closed_captions_visible(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_webkit_closed_captions_visible(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_webkit_closed_captions_visible, :webkit_dom_html_media_element_get_webkit_closed_captions_visible, [DOMHTMLMediaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_set_webkit_closed_captions_visible(self, value)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_set_webkit_closed_captions_visible(self_, value)
+  # @param [DOMHTMLMediaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7106,16 +7106,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_webkit_audio_decoded_byte_count(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_webkit_audio_decoded_byte_count(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_webkit_audio_decoded_byte_count, :webkit_dom_html_media_element_get_webkit_audio_decoded_byte_count, [DOMHTMLMediaElement], :ulong
   
   # (Not documented)
   # 
-  # @method dom_html_media_element_get_webkit_video_decoded_byte_count(self)
-  # @param [DOMHTMLMediaElement] self 
+  # @method dom_html_media_element_get_webkit_video_decoded_byte_count(self_)
+  # @param [DOMHTMLMediaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_media_element_get_webkit_video_decoded_byte_count, :webkit_dom_html_media_element_get_webkit_video_decoded_byte_count, [DOMHTMLMediaElement], :ulong
@@ -7172,16 +7172,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_htmlbr_element_get_clear(self)
-  # @param [DOMHTMLBRElement] self 
+  # @method dom_htmlbr_element_get_clear(self_)
+  # @param [DOMHTMLBRElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_htmlbr_element_get_clear, :webkit_dom_htmlbr_element_get_clear, [DOMHTMLBRElement], :string
   
   # (Not documented)
   # 
-  # @method dom_htmlbr_element_set_clear(self, value)
-  # @param [DOMHTMLBRElement] self 
+  # @method dom_htmlbr_element_set_clear(self_, value)
+  # @param [DOMHTMLBRElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7214,16 +7214,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_base_element_get_href(self)
-  # @param [DOMHTMLBaseElement] self 
+  # @method dom_html_base_element_get_href(self_)
+  # @param [DOMHTMLBaseElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_base_element_get_href, :webkit_dom_html_base_element_get_href, [DOMHTMLBaseElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_base_element_set_href(self, value)
-  # @param [DOMHTMLBaseElement] self 
+  # @method dom_html_base_element_set_href(self_, value)
+  # @param [DOMHTMLBaseElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7231,16 +7231,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_base_element_get_target(self)
-  # @param [DOMHTMLBaseElement] self 
+  # @method dom_html_base_element_get_target(self_)
+  # @param [DOMHTMLBaseElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_base_element_get_target, :webkit_dom_html_base_element_get_target, [DOMHTMLBaseElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_base_element_set_target(self, value)
-  # @param [DOMHTMLBaseElement] self 
+  # @method dom_html_base_element_set_target(self_, value)
+  # @param [DOMHTMLBaseElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7273,16 +7273,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_base_font_element_get_color(self)
-  # @param [DOMHTMLBaseFontElement] self 
+  # @method dom_html_base_font_element_get_color(self_)
+  # @param [DOMHTMLBaseFontElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_base_font_element_get_color, :webkit_dom_html_base_font_element_get_color, [DOMHTMLBaseFontElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_base_font_element_set_color(self, value)
-  # @param [DOMHTMLBaseFontElement] self 
+  # @method dom_html_base_font_element_set_color(self_, value)
+  # @param [DOMHTMLBaseFontElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7290,16 +7290,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_base_font_element_get_face(self)
-  # @param [DOMHTMLBaseFontElement] self 
+  # @method dom_html_base_font_element_get_face(self_)
+  # @param [DOMHTMLBaseFontElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_base_font_element_get_face, :webkit_dom_html_base_font_element_get_face, [DOMHTMLBaseFontElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_base_font_element_set_face(self, value)
-  # @param [DOMHTMLBaseFontElement] self 
+  # @method dom_html_base_font_element_set_face(self_, value)
+  # @param [DOMHTMLBaseFontElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7307,16 +7307,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_base_font_element_get_size(self)
-  # @param [DOMHTMLBaseFontElement] self 
+  # @method dom_html_base_font_element_get_size(self_)
+  # @param [DOMHTMLBaseFontElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_base_font_element_get_size, :webkit_dom_html_base_font_element_get_size, [DOMHTMLBaseFontElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_base_font_element_set_size(self, value)
-  # @param [DOMHTMLBaseFontElement] self 
+  # @method dom_html_base_font_element_set_size(self_, value)
+  # @param [DOMHTMLBaseFontElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7349,16 +7349,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_body_element_get_a_link(self)
-  # @param [DOMHTMLBodyElement] self 
+  # @method dom_html_body_element_get_a_link(self_)
+  # @param [DOMHTMLBodyElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_body_element_get_a_link, :webkit_dom_html_body_element_get_a_link, [DOMHTMLBodyElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_body_element_set_a_link(self, value)
-  # @param [DOMHTMLBodyElement] self 
+  # @method dom_html_body_element_set_a_link(self_, value)
+  # @param [DOMHTMLBodyElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7366,16 +7366,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_body_element_get_background(self)
-  # @param [DOMHTMLBodyElement] self 
+  # @method dom_html_body_element_get_background(self_)
+  # @param [DOMHTMLBodyElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_body_element_get_background, :webkit_dom_html_body_element_get_background, [DOMHTMLBodyElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_body_element_set_background(self, value)
-  # @param [DOMHTMLBodyElement] self 
+  # @method dom_html_body_element_set_background(self_, value)
+  # @param [DOMHTMLBodyElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7383,16 +7383,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_body_element_get_bg_color(self)
-  # @param [DOMHTMLBodyElement] self 
+  # @method dom_html_body_element_get_bg_color(self_)
+  # @param [DOMHTMLBodyElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_body_element_get_bg_color, :webkit_dom_html_body_element_get_bg_color, [DOMHTMLBodyElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_body_element_set_bg_color(self, value)
-  # @param [DOMHTMLBodyElement] self 
+  # @method dom_html_body_element_set_bg_color(self_, value)
+  # @param [DOMHTMLBodyElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7400,16 +7400,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_body_element_get_link(self)
-  # @param [DOMHTMLBodyElement] self 
+  # @method dom_html_body_element_get_link(self_)
+  # @param [DOMHTMLBodyElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_body_element_get_link, :webkit_dom_html_body_element_get_link, [DOMHTMLBodyElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_body_element_set_link(self, value)
-  # @param [DOMHTMLBodyElement] self 
+  # @method dom_html_body_element_set_link(self_, value)
+  # @param [DOMHTMLBodyElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7417,16 +7417,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_body_element_get_text(self)
-  # @param [DOMHTMLBodyElement] self 
+  # @method dom_html_body_element_get_text(self_)
+  # @param [DOMHTMLBodyElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_body_element_get_text, :webkit_dom_html_body_element_get_text, [DOMHTMLBodyElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_body_element_set_text(self, value)
-  # @param [DOMHTMLBodyElement] self 
+  # @method dom_html_body_element_set_text(self_, value)
+  # @param [DOMHTMLBodyElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7434,16 +7434,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_body_element_get_v_link(self)
-  # @param [DOMHTMLBodyElement] self 
+  # @method dom_html_body_element_get_v_link(self_)
+  # @param [DOMHTMLBodyElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_body_element_get_v_link, :webkit_dom_html_body_element_get_v_link, [DOMHTMLBodyElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_body_element_set_v_link(self, value)
-  # @param [DOMHTMLBodyElement] self 
+  # @method dom_html_body_element_set_v_link(self_, value)
+  # @param [DOMHTMLBodyElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7476,16 +7476,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_check_validity(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_check_validity(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_button_element_check_validity, :webkit_dom_html_button_element_check_validity, [DOMHTMLButtonElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_set_custom_validity(self, error)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_set_custom_validity(self_, error)
+  # @param [DOMHTMLButtonElement] self_ 
   # @param [String] error 
   # @return [nil] 
   # @scope class
@@ -7493,32 +7493,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_click(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_click(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_button_element_click, :webkit_dom_html_button_element_click, [DOMHTMLButtonElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_form(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_form(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMHTMLFormElement)] 
   # @scope class
   attach_function :dom_html_button_element_get_form, :webkit_dom_html_button_element_get_form, [DOMHTMLButtonElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_form_action(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_form_action(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_button_element_get_form_action, :webkit_dom_html_button_element_get_form_action, [DOMHTMLButtonElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_set_form_action(self, value)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_set_form_action(self_, value)
+  # @param [DOMHTMLButtonElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7526,16 +7526,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_form_enctype(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_form_enctype(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_button_element_get_form_enctype, :webkit_dom_html_button_element_get_form_enctype, [DOMHTMLButtonElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_set_form_enctype(self, value)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_set_form_enctype(self_, value)
+  # @param [DOMHTMLButtonElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7543,16 +7543,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_form_method(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_form_method(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_button_element_get_form_method, :webkit_dom_html_button_element_get_form_method, [DOMHTMLButtonElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_set_form_method(self, value)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_set_form_method(self_, value)
+  # @param [DOMHTMLButtonElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7560,16 +7560,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_form_no_validate(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_form_no_validate(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_button_element_get_form_no_validate, :webkit_dom_html_button_element_get_form_no_validate, [DOMHTMLButtonElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_set_form_no_validate(self, value)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_set_form_no_validate(self_, value)
+  # @param [DOMHTMLButtonElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7577,16 +7577,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_form_target(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_form_target(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_button_element_get_form_target, :webkit_dom_html_button_element_get_form_target, [DOMHTMLButtonElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_set_form_target(self, value)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_set_form_target(self_, value)
+  # @param [DOMHTMLButtonElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7594,24 +7594,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_validity(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_validity(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMValidityState)] 
   # @scope class
   attach_function :dom_html_button_element_get_validity, :webkit_dom_html_button_element_get_validity, [DOMHTMLButtonElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_access_key(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_access_key(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_button_element_get_access_key, :webkit_dom_html_button_element_get_access_key, [DOMHTMLButtonElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_set_access_key(self, value)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_set_access_key(self_, value)
+  # @param [DOMHTMLButtonElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7619,16 +7619,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_disabled(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_disabled(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_button_element_get_disabled, :webkit_dom_html_button_element_get_disabled, [DOMHTMLButtonElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_set_disabled(self, value)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_set_disabled(self_, value)
+  # @param [DOMHTMLButtonElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7636,16 +7636,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_autofocus(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_autofocus(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_button_element_get_autofocus, :webkit_dom_html_button_element_get_autofocus, [DOMHTMLButtonElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_set_autofocus(self, value)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_set_autofocus(self_, value)
+  # @param [DOMHTMLButtonElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7653,16 +7653,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_name(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_name(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_button_element_get_name, :webkit_dom_html_button_element_get_name, [DOMHTMLButtonElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_set_name(self, value)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_set_name(self_, value)
+  # @param [DOMHTMLButtonElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7670,16 +7670,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_value(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_value(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_button_element_get_value, :webkit_dom_html_button_element_get_value, [DOMHTMLButtonElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_set_value(self, value)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_set_value(self_, value)
+  # @param [DOMHTMLButtonElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -7687,24 +7687,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_will_validate(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_will_validate(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_button_element_get_will_validate, :webkit_dom_html_button_element_get_will_validate, [DOMHTMLButtonElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_validation_message(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_validation_message(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_button_element_get_validation_message, :webkit_dom_html_button_element_get_validation_message, [DOMHTMLButtonElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_button_element_get_labels(self)
-  # @param [DOMHTMLButtonElement] self 
+  # @method dom_html_button_element_get_labels(self_)
+  # @param [DOMHTMLButtonElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
   # @scope class
   attach_function :dom_html_button_element_get_labels, :webkit_dom_html_button_element_get_labels, [DOMHTMLButtonElement], :pointer
@@ -7736,16 +7736,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_canvas_element_get_width(self)
-  # @param [DOMHTMLCanvasElement] self 
+  # @method dom_html_canvas_element_get_width(self_)
+  # @param [DOMHTMLCanvasElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_canvas_element_get_width, :webkit_dom_html_canvas_element_get_width, [DOMHTMLCanvasElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_canvas_element_set_width(self, value)
-  # @param [DOMHTMLCanvasElement] self 
+  # @method dom_html_canvas_element_set_width(self_, value)
+  # @param [DOMHTMLCanvasElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7753,16 +7753,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_canvas_element_get_height(self)
-  # @param [DOMHTMLCanvasElement] self 
+  # @method dom_html_canvas_element_get_height(self_)
+  # @param [DOMHTMLCanvasElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_canvas_element_get_height, :webkit_dom_html_canvas_element_get_height, [DOMHTMLCanvasElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_canvas_element_set_height(self, value)
-  # @param [DOMHTMLCanvasElement] self 
+  # @method dom_html_canvas_element_set_height(self_, value)
+  # @param [DOMHTMLCanvasElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7795,8 +7795,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_collection_item(self, index)
-  # @param [DOMHTMLCollection] self 
+  # @method dom_html_collection_item(self_, index)
+  # @param [DOMHTMLCollection] self_ 
   # @param [Integer] index 
   # @return [DOMNode] 
   # @scope class
@@ -7804,8 +7804,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_collection_named_item(self, name)
-  # @param [DOMHTMLCollection] self 
+  # @method dom_html_collection_named_item(self_, name)
+  # @param [DOMHTMLCollection] self_ 
   # @param [String] name 
   # @return [DOMNode] 
   # @scope class
@@ -7813,8 +7813,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_collection_get_length(self)
-  # @param [DOMHTMLCollection] self 
+  # @method dom_html_collection_get_length(self_)
+  # @param [DOMHTMLCollection] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_collection_get_length, :webkit_dom_html_collection_get_length, [DOMHTMLCollection], :ulong
@@ -7846,16 +7846,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_htmld_list_element_get_compact(self)
-  # @param [DOMHTMLDListElement] self 
+  # @method dom_htmld_list_element_get_compact(self_)
+  # @param [DOMHTMLDListElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_htmld_list_element_get_compact, :webkit_dom_htmld_list_element_get_compact, [DOMHTMLDListElement], :int
   
   # (Not documented)
   # 
-  # @method dom_htmld_list_element_set_compact(self, value)
-  # @param [DOMHTMLDListElement] self 
+  # @method dom_htmld_list_element_set_compact(self_, value)
+  # @param [DOMHTMLDListElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7888,16 +7888,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_details_element_get_open(self)
-  # @param [DOMHTMLDetailsElement] self 
+  # @method dom_html_details_element_get_open(self_)
+  # @param [DOMHTMLDetailsElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_details_element_get_open, :webkit_dom_html_details_element_get_open, [DOMHTMLDetailsElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_details_element_set_open(self, value)
-  # @param [DOMHTMLDetailsElement] self 
+  # @method dom_html_details_element_set_open(self_, value)
+  # @param [DOMHTMLDetailsElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7930,16 +7930,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_directory_element_get_compact(self)
-  # @param [DOMHTMLDirectoryElement] self 
+  # @method dom_html_directory_element_get_compact(self_)
+  # @param [DOMHTMLDirectoryElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_directory_element_get_compact, :webkit_dom_html_directory_element_get_compact, [DOMHTMLDirectoryElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_directory_element_set_compact(self, value)
-  # @param [DOMHTMLDirectoryElement] self 
+  # @method dom_html_directory_element_set_compact(self_, value)
+  # @param [DOMHTMLDirectoryElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -7972,16 +7972,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_div_element_get_align(self)
-  # @param [DOMHTMLDivElement] self 
+  # @method dom_html_div_element_get_align(self_)
+  # @param [DOMHTMLDivElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_div_element_get_align, :webkit_dom_html_div_element_get_align, [DOMHTMLDivElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_div_element_set_align(self, value)
-  # @param [DOMHTMLDivElement] self 
+  # @method dom_html_div_element_set_align(self_, value)
+  # @param [DOMHTMLDivElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8014,96 +8014,96 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_document_close(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_close(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_document_close, :webkit_dom_html_document_close, [DOMHTMLDocument], :void
   
   # (Not documented)
   # 
-  # @method dom_html_document_clear(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_clear(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_document_clear, :webkit_dom_html_document_clear, [DOMHTMLDocument], :void
   
   # (Not documented)
   # 
-  # @method dom_html_document_capture_events(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_capture_events(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_document_capture_events, :webkit_dom_html_document_capture_events, [DOMHTMLDocument], :void
   
   # (Not documented)
   # 
-  # @method dom_html_document_release_events(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_release_events(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_document_release_events, :webkit_dom_html_document_release_events, [DOMHTMLDocument], :void
   
   # (Not documented)
   # 
-  # @method dom_html_document_has_focus(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_has_focus(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_document_has_focus, :webkit_dom_html_document_has_focus, [DOMHTMLDocument], :int
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_embeds(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_embeds(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [DOMHTMLCollection] 
   # @scope class
   attach_function :dom_html_document_get_embeds, :webkit_dom_html_document_get_embeds, [DOMHTMLDocument], DOMHTMLCollection
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_plugins(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_plugins(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [DOMHTMLCollection] 
   # @scope class
   attach_function :dom_html_document_get_plugins, :webkit_dom_html_document_get_plugins, [DOMHTMLDocument], DOMHTMLCollection
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_scripts(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_scripts(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [DOMHTMLCollection] 
   # @scope class
   attach_function :dom_html_document_get_scripts, :webkit_dom_html_document_get_scripts, [DOMHTMLDocument], DOMHTMLCollection
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_width(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_width(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_document_get_width, :webkit_dom_html_document_get_width, [DOMHTMLDocument], :long
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_height(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_height(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_document_get_height, :webkit_dom_html_document_get_height, [DOMHTMLDocument], :long
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_dir(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_dir(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_document_get_dir, :webkit_dom_html_document_get_dir, [DOMHTMLDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_html_document_set_dir(self, value)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_set_dir(self_, value)
+  # @param [DOMHTMLDocument] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8111,16 +8111,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_design_mode(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_design_mode(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_document_get_design_mode, :webkit_dom_html_document_get_design_mode, [DOMHTMLDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_html_document_set_design_mode(self, value)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_set_design_mode(self_, value)
+  # @param [DOMHTMLDocument] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8128,32 +8128,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_compat_mode(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_compat_mode(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_document_get_compat_mode, :webkit_dom_html_document_get_compat_mode, [DOMHTMLDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_active_element(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_active_element(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [DOMElement] 
   # @scope class
   attach_function :dom_html_document_get_active_element, :webkit_dom_html_document_get_active_element, [DOMHTMLDocument], DOMElement
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_bg_color(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_bg_color(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_document_get_bg_color, :webkit_dom_html_document_get_bg_color, [DOMHTMLDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_html_document_set_bg_color(self, value)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_set_bg_color(self_, value)
+  # @param [DOMHTMLDocument] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8161,16 +8161,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_fg_color(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_fg_color(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_document_get_fg_color, :webkit_dom_html_document_get_fg_color, [DOMHTMLDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_html_document_set_fg_color(self, value)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_set_fg_color(self_, value)
+  # @param [DOMHTMLDocument] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8178,16 +8178,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_alink_color(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_alink_color(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_document_get_alink_color, :webkit_dom_html_document_get_alink_color, [DOMHTMLDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_html_document_set_alink_color(self, value)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_set_alink_color(self_, value)
+  # @param [DOMHTMLDocument] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8195,16 +8195,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_link_color(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_link_color(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_document_get_link_color, :webkit_dom_html_document_get_link_color, [DOMHTMLDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_html_document_set_link_color(self, value)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_set_link_color(self_, value)
+  # @param [DOMHTMLDocument] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8212,16 +8212,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_document_get_vlink_color(self)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_get_vlink_color(self_)
+  # @param [DOMHTMLDocument] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_document_get_vlink_color, :webkit_dom_html_document_get_vlink_color, [DOMHTMLDocument], :string
   
   # (Not documented)
   # 
-  # @method dom_html_document_set_vlink_color(self, value)
-  # @param [DOMHTMLDocument] self 
+  # @method dom_html_document_set_vlink_color(self_, value)
+  # @param [DOMHTMLDocument] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8254,16 +8254,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_embed_element_get_align(self)
-  # @param [DOMHTMLEmbedElement] self 
+  # @method dom_html_embed_element_get_align(self_)
+  # @param [DOMHTMLEmbedElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_embed_element_get_align, :webkit_dom_html_embed_element_get_align, [DOMHTMLEmbedElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_embed_element_set_align(self, value)
-  # @param [DOMHTMLEmbedElement] self 
+  # @method dom_html_embed_element_set_align(self_, value)
+  # @param [DOMHTMLEmbedElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8271,16 +8271,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_embed_element_get_height(self)
-  # @param [DOMHTMLEmbedElement] self 
+  # @method dom_html_embed_element_get_height(self_)
+  # @param [DOMHTMLEmbedElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_embed_element_get_height, :webkit_dom_html_embed_element_get_height, [DOMHTMLEmbedElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_embed_element_set_height(self, value)
-  # @param [DOMHTMLEmbedElement] self 
+  # @method dom_html_embed_element_set_height(self_, value)
+  # @param [DOMHTMLEmbedElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -8288,16 +8288,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_embed_element_get_name(self)
-  # @param [DOMHTMLEmbedElement] self 
+  # @method dom_html_embed_element_get_name(self_)
+  # @param [DOMHTMLEmbedElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_embed_element_get_name, :webkit_dom_html_embed_element_get_name, [DOMHTMLEmbedElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_embed_element_set_name(self, value)
-  # @param [DOMHTMLEmbedElement] self 
+  # @method dom_html_embed_element_set_name(self_, value)
+  # @param [DOMHTMLEmbedElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8305,16 +8305,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_embed_element_get_src(self)
-  # @param [DOMHTMLEmbedElement] self 
+  # @method dom_html_embed_element_get_src(self_)
+  # @param [DOMHTMLEmbedElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_embed_element_get_src, :webkit_dom_html_embed_element_get_src, [DOMHTMLEmbedElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_embed_element_set_src(self, value)
-  # @param [DOMHTMLEmbedElement] self 
+  # @method dom_html_embed_element_set_src(self_, value)
+  # @param [DOMHTMLEmbedElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8322,16 +8322,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_embed_element_get_width(self)
-  # @param [DOMHTMLEmbedElement] self 
+  # @method dom_html_embed_element_get_width(self_)
+  # @param [DOMHTMLEmbedElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_embed_element_get_width, :webkit_dom_html_embed_element_get_width, [DOMHTMLEmbedElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_embed_element_set_width(self, value)
-  # @param [DOMHTMLEmbedElement] self 
+  # @method dom_html_embed_element_set_width(self_, value)
+  # @param [DOMHTMLEmbedElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -8364,16 +8364,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_field_set_element_check_validity(self)
-  # @param [DOMHTMLFieldSetElement] self 
+  # @method dom_html_field_set_element_check_validity(self_)
+  # @param [DOMHTMLFieldSetElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_field_set_element_check_validity, :webkit_dom_html_field_set_element_check_validity, [DOMHTMLFieldSetElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_field_set_element_set_custom_validity(self, error)
-  # @param [DOMHTMLFieldSetElement] self 
+  # @method dom_html_field_set_element_set_custom_validity(self_, error)
+  # @param [DOMHTMLFieldSetElement] self_ 
   # @param [String] error 
   # @return [nil] 
   # @scope class
@@ -8381,32 +8381,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_field_set_element_get_form(self)
-  # @param [DOMHTMLFieldSetElement] self 
+  # @method dom_html_field_set_element_get_form(self_)
+  # @param [DOMHTMLFieldSetElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMHTMLFormElement)] 
   # @scope class
   attach_function :dom_html_field_set_element_get_form, :webkit_dom_html_field_set_element_get_form, [DOMHTMLFieldSetElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_field_set_element_get_validity(self)
-  # @param [DOMHTMLFieldSetElement] self 
+  # @method dom_html_field_set_element_get_validity(self_)
+  # @param [DOMHTMLFieldSetElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMValidityState)] 
   # @scope class
   attach_function :dom_html_field_set_element_get_validity, :webkit_dom_html_field_set_element_get_validity, [DOMHTMLFieldSetElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_field_set_element_get_will_validate(self)
-  # @param [DOMHTMLFieldSetElement] self 
+  # @method dom_html_field_set_element_get_will_validate(self_)
+  # @param [DOMHTMLFieldSetElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_field_set_element_get_will_validate, :webkit_dom_html_field_set_element_get_will_validate, [DOMHTMLFieldSetElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_field_set_element_get_validation_message(self)
-  # @param [DOMHTMLFieldSetElement] self 
+  # @method dom_html_field_set_element_get_validation_message(self_)
+  # @param [DOMHTMLFieldSetElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_field_set_element_get_validation_message, :webkit_dom_html_field_set_element_get_validation_message, [DOMHTMLFieldSetElement], :string
@@ -8438,16 +8438,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_font_element_get_color(self)
-  # @param [DOMHTMLFontElement] self 
+  # @method dom_html_font_element_get_color(self_)
+  # @param [DOMHTMLFontElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_font_element_get_color, :webkit_dom_html_font_element_get_color, [DOMHTMLFontElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_font_element_set_color(self, value)
-  # @param [DOMHTMLFontElement] self 
+  # @method dom_html_font_element_set_color(self_, value)
+  # @param [DOMHTMLFontElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8455,16 +8455,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_font_element_get_face(self)
-  # @param [DOMHTMLFontElement] self 
+  # @method dom_html_font_element_get_face(self_)
+  # @param [DOMHTMLFontElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_font_element_get_face, :webkit_dom_html_font_element_get_face, [DOMHTMLFontElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_font_element_set_face(self, value)
-  # @param [DOMHTMLFontElement] self 
+  # @method dom_html_font_element_set_face(self_, value)
+  # @param [DOMHTMLFontElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8472,16 +8472,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_font_element_get_size(self)
-  # @param [DOMHTMLFontElement] self 
+  # @method dom_html_font_element_get_size(self_)
+  # @param [DOMHTMLFontElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_font_element_get_size, :webkit_dom_html_font_element_get_size, [DOMHTMLFontElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_font_element_set_size(self, value)
-  # @param [DOMHTMLFontElement] self 
+  # @method dom_html_font_element_set_size(self_, value)
+  # @param [DOMHTMLFontElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8514,56 +8514,56 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_submit(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_submit(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_form_element_submit, :webkit_dom_html_form_element_submit, [DOMHTMLFormElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_reset(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_reset(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_form_element_reset, :webkit_dom_html_form_element_reset, [DOMHTMLFormElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_check_validity(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_check_validity(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_form_element_check_validity, :webkit_dom_html_form_element_check_validity, [DOMHTMLFormElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_get_elements(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_get_elements(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [DOMHTMLCollection] 
   # @scope class
   attach_function :dom_html_form_element_get_elements, :webkit_dom_html_form_element_get_elements, [DOMHTMLFormElement], DOMHTMLCollection
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_get_length(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_get_length(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_form_element_get_length, :webkit_dom_html_form_element_get_length, [DOMHTMLFormElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_get_name(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_get_name(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_form_element_get_name, :webkit_dom_html_form_element_get_name, [DOMHTMLFormElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_set_name(self, value)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_set_name(self_, value)
+  # @param [DOMHTMLFormElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8571,16 +8571,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_get_no_validate(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_get_no_validate(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_form_element_get_no_validate, :webkit_dom_html_form_element_get_no_validate, [DOMHTMLFormElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_set_no_validate(self, value)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_set_no_validate(self_, value)
+  # @param [DOMHTMLFormElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -8588,16 +8588,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_get_accept_charset(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_get_accept_charset(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_form_element_get_accept_charset, :webkit_dom_html_form_element_get_accept_charset, [DOMHTMLFormElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_set_accept_charset(self, value)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_set_accept_charset(self_, value)
+  # @param [DOMHTMLFormElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8605,16 +8605,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_get_action(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_get_action(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_form_element_get_action, :webkit_dom_html_form_element_get_action, [DOMHTMLFormElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_set_action(self, value)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_set_action(self_, value)
+  # @param [DOMHTMLFormElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8622,16 +8622,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_get_encoding(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_get_encoding(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_form_element_get_encoding, :webkit_dom_html_form_element_get_encoding, [DOMHTMLFormElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_set_encoding(self, value)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_set_encoding(self_, value)
+  # @param [DOMHTMLFormElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8639,16 +8639,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_get_enctype(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_get_enctype(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_form_element_get_enctype, :webkit_dom_html_form_element_get_enctype, [DOMHTMLFormElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_set_enctype(self, value)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_set_enctype(self_, value)
+  # @param [DOMHTMLFormElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8656,16 +8656,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_get_method(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_get_method(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_form_element_get_method, :webkit_dom_html_form_element_get_method, [DOMHTMLFormElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_set_method(self, value)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_set_method(self_, value)
+  # @param [DOMHTMLFormElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8673,16 +8673,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_get_target(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_get_target(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_form_element_get_target, :webkit_dom_html_form_element_get_target, [DOMHTMLFormElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_set_target(self, value)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_set_target(self_, value)
+  # @param [DOMHTMLFormElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8690,16 +8690,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_get_autocomplete(self)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_get_autocomplete(self_)
+  # @param [DOMHTMLFormElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_form_element_get_autocomplete, :webkit_dom_html_form_element_get_autocomplete, [DOMHTMLFormElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_form_element_set_autocomplete(self, value)
-  # @param [DOMHTMLFormElement] self 
+  # @method dom_html_form_element_set_autocomplete(self_, value)
+  # @param [DOMHTMLFormElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8732,16 +8732,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_get_frame_border(self)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_get_frame_border(self_)
+  # @param [DOMHTMLFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_frame_element_get_frame_border, :webkit_dom_html_frame_element_get_frame_border, [DOMHTMLFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_set_frame_border(self, value)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_set_frame_border(self_, value)
+  # @param [DOMHTMLFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8749,16 +8749,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_get_long_desc(self)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_get_long_desc(self_)
+  # @param [DOMHTMLFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_frame_element_get_long_desc, :webkit_dom_html_frame_element_get_long_desc, [DOMHTMLFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_set_long_desc(self, value)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_set_long_desc(self_, value)
+  # @param [DOMHTMLFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8766,16 +8766,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_get_margin_height(self)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_get_margin_height(self_)
+  # @param [DOMHTMLFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_frame_element_get_margin_height, :webkit_dom_html_frame_element_get_margin_height, [DOMHTMLFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_set_margin_height(self, value)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_set_margin_height(self_, value)
+  # @param [DOMHTMLFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8783,16 +8783,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_get_margin_width(self)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_get_margin_width(self_)
+  # @param [DOMHTMLFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_frame_element_get_margin_width, :webkit_dom_html_frame_element_get_margin_width, [DOMHTMLFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_set_margin_width(self, value)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_set_margin_width(self_, value)
+  # @param [DOMHTMLFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8800,16 +8800,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_get_name(self)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_get_name(self_)
+  # @param [DOMHTMLFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_frame_element_get_name, :webkit_dom_html_frame_element_get_name, [DOMHTMLFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_set_name(self, value)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_set_name(self_, value)
+  # @param [DOMHTMLFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8817,16 +8817,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_get_no_resize(self)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_get_no_resize(self_)
+  # @param [DOMHTMLFrameElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_frame_element_get_no_resize, :webkit_dom_html_frame_element_get_no_resize, [DOMHTMLFrameElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_set_no_resize(self, value)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_set_no_resize(self_, value)
+  # @param [DOMHTMLFrameElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -8834,16 +8834,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_get_scrolling(self)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_get_scrolling(self_)
+  # @param [DOMHTMLFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_frame_element_get_scrolling, :webkit_dom_html_frame_element_get_scrolling, [DOMHTMLFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_set_scrolling(self, value)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_set_scrolling(self_, value)
+  # @param [DOMHTMLFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8851,16 +8851,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_get_src(self)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_get_src(self_)
+  # @param [DOMHTMLFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_frame_element_get_src, :webkit_dom_html_frame_element_get_src, [DOMHTMLFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_set_src(self, value)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_set_src(self_, value)
+  # @param [DOMHTMLFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8868,32 +8868,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_get_content_document(self)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_get_content_document(self_)
+  # @param [DOMHTMLFrameElement] self_ 
   # @return [DOMDocument] 
   # @scope class
   attach_function :dom_html_frame_element_get_content_document, :webkit_dom_html_frame_element_get_content_document, [DOMHTMLFrameElement], DOMDocument
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_get_content_window(self)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_get_content_window(self_)
+  # @param [DOMHTMLFrameElement] self_ 
   # @return [DOMDOMWindow] 
   # @scope class
   attach_function :dom_html_frame_element_get_content_window, :webkit_dom_html_frame_element_get_content_window, [DOMHTMLFrameElement], DOMDOMWindow
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_get_width(self)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_get_width(self_)
+  # @param [DOMHTMLFrameElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_frame_element_get_width, :webkit_dom_html_frame_element_get_width, [DOMHTMLFrameElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_frame_element_get_height(self)
-  # @param [DOMHTMLFrameElement] self 
+  # @method dom_html_frame_element_get_height(self_)
+  # @param [DOMHTMLFrameElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_frame_element_get_height, :webkit_dom_html_frame_element_get_height, [DOMHTMLFrameElement], :long
@@ -8925,16 +8925,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_frame_set_element_get_cols(self)
-  # @param [DOMHTMLFrameSetElement] self 
+  # @method dom_html_frame_set_element_get_cols(self_)
+  # @param [DOMHTMLFrameSetElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_frame_set_element_get_cols, :webkit_dom_html_frame_set_element_get_cols, [DOMHTMLFrameSetElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_frame_set_element_set_cols(self, value)
-  # @param [DOMHTMLFrameSetElement] self 
+  # @method dom_html_frame_set_element_set_cols(self_, value)
+  # @param [DOMHTMLFrameSetElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8942,16 +8942,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_frame_set_element_get_rows(self)
-  # @param [DOMHTMLFrameSetElement] self 
+  # @method dom_html_frame_set_element_get_rows(self_)
+  # @param [DOMHTMLFrameSetElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_frame_set_element_get_rows, :webkit_dom_html_frame_set_element_get_rows, [DOMHTMLFrameSetElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_frame_set_element_set_rows(self, value)
-  # @param [DOMHTMLFrameSetElement] self 
+  # @method dom_html_frame_set_element_set_rows(self_, value)
+  # @param [DOMHTMLFrameSetElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -8984,16 +8984,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_htmlhr_element_get_align(self)
-  # @param [DOMHTMLHRElement] self 
+  # @method dom_htmlhr_element_get_align(self_)
+  # @param [DOMHTMLHRElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_htmlhr_element_get_align, :webkit_dom_htmlhr_element_get_align, [DOMHTMLHRElement], :string
   
   # (Not documented)
   # 
-  # @method dom_htmlhr_element_set_align(self, value)
-  # @param [DOMHTMLHRElement] self 
+  # @method dom_htmlhr_element_set_align(self_, value)
+  # @param [DOMHTMLHRElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9001,16 +9001,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_htmlhr_element_get_no_shade(self)
-  # @param [DOMHTMLHRElement] self 
+  # @method dom_htmlhr_element_get_no_shade(self_)
+  # @param [DOMHTMLHRElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_htmlhr_element_get_no_shade, :webkit_dom_htmlhr_element_get_no_shade, [DOMHTMLHRElement], :int
   
   # (Not documented)
   # 
-  # @method dom_htmlhr_element_set_no_shade(self, value)
-  # @param [DOMHTMLHRElement] self 
+  # @method dom_htmlhr_element_set_no_shade(self_, value)
+  # @param [DOMHTMLHRElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -9018,16 +9018,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_htmlhr_element_get_size(self)
-  # @param [DOMHTMLHRElement] self 
+  # @method dom_htmlhr_element_get_size(self_)
+  # @param [DOMHTMLHRElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_htmlhr_element_get_size, :webkit_dom_htmlhr_element_get_size, [DOMHTMLHRElement], :string
   
   # (Not documented)
   # 
-  # @method dom_htmlhr_element_set_size(self, value)
-  # @param [DOMHTMLHRElement] self 
+  # @method dom_htmlhr_element_set_size(self_, value)
+  # @param [DOMHTMLHRElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9035,16 +9035,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_htmlhr_element_get_width(self)
-  # @param [DOMHTMLHRElement] self 
+  # @method dom_htmlhr_element_get_width(self_)
+  # @param [DOMHTMLHRElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_htmlhr_element_get_width, :webkit_dom_htmlhr_element_get_width, [DOMHTMLHRElement], :string
   
   # (Not documented)
   # 
-  # @method dom_htmlhr_element_set_width(self, value)
-  # @param [DOMHTMLHRElement] self 
+  # @method dom_htmlhr_element_set_width(self_, value)
+  # @param [DOMHTMLHRElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9077,16 +9077,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_head_element_get_profile(self)
-  # @param [DOMHTMLHeadElement] self 
+  # @method dom_html_head_element_get_profile(self_)
+  # @param [DOMHTMLHeadElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_head_element_get_profile, :webkit_dom_html_head_element_get_profile, [DOMHTMLHeadElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_head_element_set_profile(self, value)
-  # @param [DOMHTMLHeadElement] self 
+  # @method dom_html_head_element_set_profile(self_, value)
+  # @param [DOMHTMLHeadElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9119,16 +9119,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_heading_element_get_align(self)
-  # @param [DOMHTMLHeadingElement] self 
+  # @method dom_html_heading_element_get_align(self_)
+  # @param [DOMHTMLHeadingElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_heading_element_get_align, :webkit_dom_html_heading_element_get_align, [DOMHTMLHeadingElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_heading_element_set_align(self, value)
-  # @param [DOMHTMLHeadingElement] self 
+  # @method dom_html_heading_element_set_align(self_, value)
+  # @param [DOMHTMLHeadingElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9161,16 +9161,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_html_element_get_version(self)
-  # @param [DOMHTMLHtmlElement] self 
+  # @method dom_html_html_element_get_version(self_)
+  # @param [DOMHTMLHtmlElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_html_element_get_version, :webkit_dom_html_html_element_get_version, [DOMHTMLHtmlElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_html_element_set_version(self, value)
-  # @param [DOMHTMLHtmlElement] self 
+  # @method dom_html_html_element_set_version(self_, value)
+  # @param [DOMHTMLHtmlElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9178,16 +9178,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_html_element_get_manifest(self)
-  # @param [DOMHTMLHtmlElement] self 
+  # @method dom_html_html_element_get_manifest(self_)
+  # @param [DOMHTMLHtmlElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_html_element_get_manifest, :webkit_dom_html_html_element_get_manifest, [DOMHTMLHtmlElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_html_element_set_manifest(self, value)
-  # @param [DOMHTMLHtmlElement] self 
+  # @method dom_html_html_element_set_manifest(self_, value)
+  # @param [DOMHTMLHtmlElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9220,16 +9220,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_get_align(self)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_get_align(self_)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_iframe_element_get_align, :webkit_dom_html_iframe_element_get_align, [DOMHTMLIFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_set_align(self, value)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_set_align(self_, value)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9237,16 +9237,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_get_frame_border(self)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_get_frame_border(self_)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_iframe_element_get_frame_border, :webkit_dom_html_iframe_element_get_frame_border, [DOMHTMLIFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_set_frame_border(self, value)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_set_frame_border(self_, value)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9254,16 +9254,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_get_height(self)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_get_height(self_)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_iframe_element_get_height, :webkit_dom_html_iframe_element_get_height, [DOMHTMLIFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_set_height(self, value)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_set_height(self_, value)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9271,16 +9271,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_get_long_desc(self)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_get_long_desc(self_)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_iframe_element_get_long_desc, :webkit_dom_html_iframe_element_get_long_desc, [DOMHTMLIFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_set_long_desc(self, value)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_set_long_desc(self_, value)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9288,16 +9288,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_get_margin_height(self)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_get_margin_height(self_)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_iframe_element_get_margin_height, :webkit_dom_html_iframe_element_get_margin_height, [DOMHTMLIFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_set_margin_height(self, value)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_set_margin_height(self_, value)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9305,16 +9305,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_get_margin_width(self)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_get_margin_width(self_)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_iframe_element_get_margin_width, :webkit_dom_html_iframe_element_get_margin_width, [DOMHTMLIFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_set_margin_width(self, value)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_set_margin_width(self_, value)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9322,16 +9322,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_get_name(self)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_get_name(self_)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_iframe_element_get_name, :webkit_dom_html_iframe_element_get_name, [DOMHTMLIFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_set_name(self, value)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_set_name(self_, value)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9339,16 +9339,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_get_sandbox(self)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_get_sandbox(self_)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_iframe_element_get_sandbox, :webkit_dom_html_iframe_element_get_sandbox, [DOMHTMLIFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_set_sandbox(self, value)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_set_sandbox(self_, value)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9356,16 +9356,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_get_scrolling(self)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_get_scrolling(self_)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_iframe_element_get_scrolling, :webkit_dom_html_iframe_element_get_scrolling, [DOMHTMLIFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_set_scrolling(self, value)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_set_scrolling(self_, value)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9373,16 +9373,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_get_src(self)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_get_src(self_)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_iframe_element_get_src, :webkit_dom_html_iframe_element_get_src, [DOMHTMLIFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_set_src(self, value)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_set_src(self_, value)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9390,16 +9390,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_get_width(self)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_get_width(self_)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_iframe_element_get_width, :webkit_dom_html_iframe_element_get_width, [DOMHTMLIFrameElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_set_width(self, value)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_set_width(self_, value)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9407,16 +9407,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_get_content_document(self)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_get_content_document(self_)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @return [DOMDocument] 
   # @scope class
   attach_function :dom_html_iframe_element_get_content_document, :webkit_dom_html_iframe_element_get_content_document, [DOMHTMLIFrameElement], DOMDocument
   
   # (Not documented)
   # 
-  # @method dom_html_iframe_element_get_content_window(self)
-  # @param [DOMHTMLIFrameElement] self 
+  # @method dom_html_iframe_element_get_content_window(self_)
+  # @param [DOMHTMLIFrameElement] self_ 
   # @return [DOMDOMWindow] 
   # @scope class
   attach_function :dom_html_iframe_element_get_content_window, :webkit_dom_html_iframe_element_get_content_window, [DOMHTMLIFrameElement], DOMDOMWindow
@@ -9448,16 +9448,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_name(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_name(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_image_element_get_name, :webkit_dom_html_image_element_get_name, [DOMHTMLImageElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_name(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_name(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9465,16 +9465,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_align(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_align(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_image_element_get_align, :webkit_dom_html_image_element_get_align, [DOMHTMLImageElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_align(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_align(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9482,16 +9482,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_alt(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_alt(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_image_element_get_alt, :webkit_dom_html_image_element_get_alt, [DOMHTMLImageElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_alt(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_alt(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9499,16 +9499,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_border(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_border(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_image_element_get_border, :webkit_dom_html_image_element_get_border, [DOMHTMLImageElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_border(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_border(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9516,16 +9516,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_cross_origin(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_cross_origin(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_image_element_get_cross_origin, :webkit_dom_html_image_element_get_cross_origin, [DOMHTMLImageElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_cross_origin(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_cross_origin(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9533,16 +9533,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_height(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_height(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_image_element_get_height, :webkit_dom_html_image_element_get_height, [DOMHTMLImageElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_height(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_height(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -9550,16 +9550,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_hspace(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_hspace(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_image_element_get_hspace, :webkit_dom_html_image_element_get_hspace, [DOMHTMLImageElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_hspace(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_hspace(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -9567,16 +9567,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_is_map(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_is_map(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_image_element_get_is_map, :webkit_dom_html_image_element_get_is_map, [DOMHTMLImageElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_is_map(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_is_map(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -9584,16 +9584,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_long_desc(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_long_desc(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_image_element_get_long_desc, :webkit_dom_html_image_element_get_long_desc, [DOMHTMLImageElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_long_desc(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_long_desc(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9601,16 +9601,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_src(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_src(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_image_element_get_src, :webkit_dom_html_image_element_get_src, [DOMHTMLImageElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_src(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_src(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9618,16 +9618,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_use_map(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_use_map(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_image_element_get_use_map, :webkit_dom_html_image_element_get_use_map, [DOMHTMLImageElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_use_map(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_use_map(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9635,16 +9635,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_vspace(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_vspace(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_image_element_get_vspace, :webkit_dom_html_image_element_get_vspace, [DOMHTMLImageElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_vspace(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_vspace(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -9652,16 +9652,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_width(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_width(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_image_element_get_width, :webkit_dom_html_image_element_get_width, [DOMHTMLImageElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_width(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_width(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -9669,24 +9669,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_complete(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_complete(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_image_element_get_complete, :webkit_dom_html_image_element_get_complete, [DOMHTMLImageElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_lowsrc(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_lowsrc(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_image_element_get_lowsrc, :webkit_dom_html_image_element_get_lowsrc, [DOMHTMLImageElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_set_lowsrc(self, value)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_set_lowsrc(self_, value)
+  # @param [DOMHTMLImageElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9694,32 +9694,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_natural_height(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_natural_height(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_image_element_get_natural_height, :webkit_dom_html_image_element_get_natural_height, [DOMHTMLImageElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_natural_width(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_natural_width(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_image_element_get_natural_width, :webkit_dom_html_image_element_get_natural_width, [DOMHTMLImageElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_x(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_x(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_image_element_get_x, :webkit_dom_html_image_element_get_x, [DOMHTMLImageElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_image_element_get_y(self)
-  # @param [DOMHTMLImageElement] self 
+  # @method dom_html_image_element_get_y(self_)
+  # @param [DOMHTMLImageElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_image_element_get_y, :webkit_dom_html_image_element_get_y, [DOMHTMLImageElement], :long
@@ -9751,8 +9751,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_step_up(self, n, error)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_step_up(self_, n, error)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] n 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -9761,8 +9761,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_step_down(self, n, error)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_step_down(self_, n, error)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] n 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -9771,16 +9771,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_check_validity(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_check_validity(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_check_validity, :webkit_dom_html_input_element_check_validity, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_custom_validity(self, error)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_custom_validity(self_, error)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] error 
   # @return [nil] 
   # @scope class
@@ -9788,24 +9788,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_select(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_select(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_input_element_select, :webkit_dom_html_input_element_select, [DOMHTMLInputElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_click(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_click(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_input_element_click, :webkit_dom_html_input_element_click, [DOMHTMLInputElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_value_for_user(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_value_for_user(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9813,16 +9813,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_default_value(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_default_value(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_default_value, :webkit_dom_html_input_element_get_default_value, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_default_value(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_default_value(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9830,16 +9830,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_default_checked(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_default_checked(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_default_checked, :webkit_dom_html_input_element_get_default_checked, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_default_checked(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_default_checked(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -9847,24 +9847,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_form(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_form(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [DOMHTMLFormElement] 
   # @scope class
   attach_function :dom_html_input_element_get_form, :webkit_dom_html_input_element_get_form, [DOMHTMLInputElement], DOMHTMLFormElement
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_form_action(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_form_action(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_form_action, :webkit_dom_html_input_element_get_form_action, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_form_action(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_form_action(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9872,16 +9872,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_form_enctype(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_form_enctype(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_form_enctype, :webkit_dom_html_input_element_get_form_enctype, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_form_enctype(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_form_enctype(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9889,16 +9889,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_form_method(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_form_method(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_form_method, :webkit_dom_html_input_element_get_form_method, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_form_method(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_form_method(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9906,16 +9906,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_form_no_validate(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_form_no_validate(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_form_no_validate, :webkit_dom_html_input_element_get_form_no_validate, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_form_no_validate(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_form_no_validate(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -9923,16 +9923,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_form_target(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_form_target(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_form_target, :webkit_dom_html_input_element_get_form_target, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_form_target(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_form_target(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9940,24 +9940,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_validity(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_validity(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMValidityState)] 
   # @scope class
   attach_function :dom_html_input_element_get_validity, :webkit_dom_html_input_element_get_validity, [DOMHTMLInputElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_accept(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_accept(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_accept, :webkit_dom_html_input_element_get_accept, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_accept(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_accept(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9965,16 +9965,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_access_key(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_access_key(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_access_key, :webkit_dom_html_input_element_get_access_key, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_access_key(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_access_key(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9982,16 +9982,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_align(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_align(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_align, :webkit_dom_html_input_element_get_align, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_align(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_align(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -9999,16 +9999,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_alt(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_alt(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_alt, :webkit_dom_html_input_element_get_alt, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_alt(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_alt(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10016,16 +10016,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_checked(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_checked(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_checked, :webkit_dom_html_input_element_get_checked, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_checked(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_checked(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10033,16 +10033,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_disabled(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_disabled(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_disabled, :webkit_dom_html_input_element_get_disabled, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_disabled(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_disabled(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10050,16 +10050,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_autofocus(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_autofocus(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_autofocus, :webkit_dom_html_input_element_get_autofocus, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_autofocus(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_autofocus(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10067,16 +10067,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_autocomplete(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_autocomplete(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_autocomplete, :webkit_dom_html_input_element_get_autocomplete, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_autocomplete(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_autocomplete(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10084,24 +10084,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_list(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_list(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [DOMHTMLElement] 
   # @scope class
   attach_function :dom_html_input_element_get_list, :webkit_dom_html_input_element_get_list, [DOMHTMLInputElement], DOMHTMLElement
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_max(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_max(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_max, :webkit_dom_html_input_element_get_max, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_max(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_max(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10109,16 +10109,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_max_length(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_max_length(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_max_length, :webkit_dom_html_input_element_get_max_length, [DOMHTMLInputElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_max_length(self, value, error)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_max_length(self_, value, error)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -10127,16 +10127,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_min(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_min(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_min, :webkit_dom_html_input_element_get_min, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_min(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_min(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10144,16 +10144,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_multiple(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_multiple(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_multiple, :webkit_dom_html_input_element_get_multiple, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_multiple(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_multiple(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10161,16 +10161,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_webkitdirectory(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_webkitdirectory(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_webkitdirectory, :webkit_dom_html_input_element_get_webkitdirectory, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_webkitdirectory(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_webkitdirectory(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10178,16 +10178,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_name(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_name(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_name, :webkit_dom_html_input_element_get_name, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_name(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_name(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10195,16 +10195,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_pattern(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_pattern(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_pattern, :webkit_dom_html_input_element_get_pattern, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_pattern(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_pattern(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10212,16 +10212,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_placeholder(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_placeholder(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_placeholder, :webkit_dom_html_input_element_get_placeholder, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_placeholder(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_placeholder(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10229,16 +10229,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_read_only(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_read_only(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_read_only, :webkit_dom_html_input_element_get_read_only, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_read_only(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_read_only(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10246,16 +10246,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_required(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_required(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_required, :webkit_dom_html_input_element_get_required, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_required(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_required(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10263,16 +10263,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_size(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_size(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_size, :webkit_dom_html_input_element_get_size, [DOMHTMLInputElement], :ulong
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_size(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_size(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10280,16 +10280,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_src(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_src(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_src, :webkit_dom_html_input_element_get_src, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_src(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_src(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10297,16 +10297,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_step(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_step(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_step, :webkit_dom_html_input_element_get_step, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_step(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_step(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10314,16 +10314,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_use_map(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_use_map(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_use_map, :webkit_dom_html_input_element_get_use_map, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_use_map(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_use_map(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10331,16 +10331,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_value(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_value(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_value, :webkit_dom_html_input_element_get_value, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_value(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_value(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10348,16 +10348,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_value_as_number(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_value_as_number(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_html_input_element_get_value_as_number, :webkit_dom_html_input_element_get_value_as_number, [DOMHTMLInputElement], :double
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_value_as_number(self, value, error)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_value_as_number(self_, value, error)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Float] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -10366,24 +10366,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_selected_option(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_selected_option(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMHTMLOptionElement)] 
   # @scope class
   attach_function :dom_html_input_element_get_selected_option, :webkit_dom_html_input_element_get_selected_option, [DOMHTMLInputElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_incremental(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_incremental(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_incremental, :webkit_dom_html_input_element_get_incremental, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_incremental(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_incremental(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10391,32 +10391,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_will_validate(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_will_validate(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_will_validate, :webkit_dom_html_input_element_get_will_validate, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_validation_message(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_validation_message(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_input_element_get_validation_message, :webkit_dom_html_input_element_get_validation_message, [DOMHTMLInputElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_indeterminate(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_indeterminate(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_indeterminate, :webkit_dom_html_input_element_get_indeterminate, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_indeterminate(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_indeterminate(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10424,32 +10424,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_files(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_files(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [DOMFileList] 
   # @scope class
   attach_function :dom_html_input_element_get_files, :webkit_dom_html_input_element_get_files, [DOMHTMLInputElement], DOMFileList
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_labels(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_labels(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
   # @scope class
   attach_function :dom_html_input_element_get_labels, :webkit_dom_html_input_element_get_labels, [DOMHTMLInputElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_webkit_speech(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_webkit_speech(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_webkit_speech, :webkit_dom_html_input_element_get_webkit_speech, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_webkit_speech(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_webkit_speech(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10457,16 +10457,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_get_webkit_grammar(self)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_get_webkit_grammar(self_)
+  # @param [DOMHTMLInputElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_input_element_get_webkit_grammar, :webkit_dom_html_input_element_get_webkit_grammar, [DOMHTMLInputElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_input_element_set_webkit_grammar(self, value)
-  # @param [DOMHTMLInputElement] self 
+  # @method dom_html_input_element_set_webkit_grammar(self_, value)
+  # @param [DOMHTMLInputElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10499,24 +10499,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_is_index_element_get_form(self)
-  # @param [DOMHTMLIsIndexElement] self 
+  # @method dom_html_is_index_element_get_form(self_)
+  # @param [DOMHTMLIsIndexElement] self_ 
   # @return [DOMHTMLFormElement] 
   # @scope class
   attach_function :dom_html_is_index_element_get_form, :webkit_dom_html_is_index_element_get_form, [DOMHTMLIsIndexElement], DOMHTMLFormElement
   
   # (Not documented)
   # 
-  # @method dom_html_is_index_element_get_prompt(self)
-  # @param [DOMHTMLIsIndexElement] self 
+  # @method dom_html_is_index_element_get_prompt(self_)
+  # @param [DOMHTMLIsIndexElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_is_index_element_get_prompt, :webkit_dom_html_is_index_element_get_prompt, [DOMHTMLIsIndexElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_is_index_element_set_prompt(self, value)
-  # @param [DOMHTMLIsIndexElement] self 
+  # @method dom_html_is_index_element_set_prompt(self_, value)
+  # @param [DOMHTMLIsIndexElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10549,16 +10549,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_check_validity(self)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_check_validity(self_)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_keygen_element_check_validity, :webkit_dom_html_keygen_element_check_validity, [DOMHTMLKeygenElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_set_custom_validity(self, error)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_set_custom_validity(self_, error)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @param [String] error 
   # @return [nil] 
   # @scope class
@@ -10566,16 +10566,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_get_autofocus(self)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_get_autofocus(self_)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_keygen_element_get_autofocus, :webkit_dom_html_keygen_element_get_autofocus, [DOMHTMLKeygenElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_set_autofocus(self, value)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_set_autofocus(self_, value)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10583,16 +10583,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_get_challenge(self)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_get_challenge(self_)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_keygen_element_get_challenge, :webkit_dom_html_keygen_element_get_challenge, [DOMHTMLKeygenElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_set_challenge(self, value)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_set_challenge(self_, value)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10600,16 +10600,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_get_disabled(self)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_get_disabled(self_)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_keygen_element_get_disabled, :webkit_dom_html_keygen_element_get_disabled, [DOMHTMLKeygenElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_set_disabled(self, value)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_set_disabled(self_, value)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10617,24 +10617,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_get_form(self)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_get_form(self_)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @return [DOMHTMLFormElement] 
   # @scope class
   attach_function :dom_html_keygen_element_get_form, :webkit_dom_html_keygen_element_get_form, [DOMHTMLKeygenElement], DOMHTMLFormElement
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_get_keytype(self)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_get_keytype(self_)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_keygen_element_get_keytype, :webkit_dom_html_keygen_element_get_keytype, [DOMHTMLKeygenElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_set_keytype(self, value)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_set_keytype(self_, value)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10642,16 +10642,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_get_name(self)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_get_name(self_)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_keygen_element_get_name, :webkit_dom_html_keygen_element_get_name, [DOMHTMLKeygenElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_set_name(self, value)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_set_name(self_, value)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10659,32 +10659,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_get_will_validate(self)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_get_will_validate(self_)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_keygen_element_get_will_validate, :webkit_dom_html_keygen_element_get_will_validate, [DOMHTMLKeygenElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_get_validity(self)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_get_validity(self_)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMValidityState)] 
   # @scope class
   attach_function :dom_html_keygen_element_get_validity, :webkit_dom_html_keygen_element_get_validity, [DOMHTMLKeygenElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_get_validation_message(self)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_get_validation_message(self_)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_keygen_element_get_validation_message, :webkit_dom_html_keygen_element_get_validation_message, [DOMHTMLKeygenElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_keygen_element_get_labels(self)
-  # @param [DOMHTMLKeygenElement] self 
+  # @method dom_html_keygen_element_get_labels(self_)
+  # @param [DOMHTMLKeygenElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
   # @scope class
   attach_function :dom_html_keygen_element_get_labels, :webkit_dom_html_keygen_element_get_labels, [DOMHTMLKeygenElement], :pointer
@@ -10716,16 +10716,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_htmlli_element_get_value(self)
-  # @param [DOMHTMLLIElement] self 
+  # @method dom_htmlli_element_get_value(self_)
+  # @param [DOMHTMLLIElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_htmlli_element_get_value, :webkit_dom_htmlli_element_get_value, [DOMHTMLLIElement], :long
   
   # (Not documented)
   # 
-  # @method dom_htmlli_element_set_value(self, value)
-  # @param [DOMHTMLLIElement] self 
+  # @method dom_htmlli_element_set_value(self_, value)
+  # @param [DOMHTMLLIElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10758,24 +10758,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_label_element_get_form(self)
-  # @param [DOMHTMLLabelElement] self 
+  # @method dom_html_label_element_get_form(self_)
+  # @param [DOMHTMLLabelElement] self_ 
   # @return [DOMHTMLFormElement] 
   # @scope class
   attach_function :dom_html_label_element_get_form, :webkit_dom_html_label_element_get_form, [DOMHTMLLabelElement], DOMHTMLFormElement
   
   # (Not documented)
   # 
-  # @method dom_html_label_element_get_access_key(self)
-  # @param [DOMHTMLLabelElement] self 
+  # @method dom_html_label_element_get_access_key(self_)
+  # @param [DOMHTMLLabelElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_label_element_get_access_key, :webkit_dom_html_label_element_get_access_key, [DOMHTMLLabelElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_label_element_set_access_key(self, value)
-  # @param [DOMHTMLLabelElement] self 
+  # @method dom_html_label_element_set_access_key(self_, value)
+  # @param [DOMHTMLLabelElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10783,16 +10783,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_label_element_get_html_for(self)
-  # @param [DOMHTMLLabelElement] self 
+  # @method dom_html_label_element_get_html_for(self_)
+  # @param [DOMHTMLLabelElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_label_element_get_html_for, :webkit_dom_html_label_element_get_html_for, [DOMHTMLLabelElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_label_element_set_html_for(self, value)
-  # @param [DOMHTMLLabelElement] self 
+  # @method dom_html_label_element_set_html_for(self_, value)
+  # @param [DOMHTMLLabelElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10800,8 +10800,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_label_element_get_control(self)
-  # @param [DOMHTMLLabelElement] self 
+  # @method dom_html_label_element_get_control(self_)
+  # @param [DOMHTMLLabelElement] self_ 
   # @return [DOMHTMLElement] 
   # @scope class
   attach_function :dom_html_label_element_get_control, :webkit_dom_html_label_element_get_control, [DOMHTMLLabelElement], DOMHTMLElement
@@ -10833,24 +10833,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_legend_element_get_form(self)
-  # @param [DOMHTMLLegendElement] self 
+  # @method dom_html_legend_element_get_form(self_)
+  # @param [DOMHTMLLegendElement] self_ 
   # @return [DOMHTMLFormElement] 
   # @scope class
   attach_function :dom_html_legend_element_get_form, :webkit_dom_html_legend_element_get_form, [DOMHTMLLegendElement], DOMHTMLFormElement
   
   # (Not documented)
   # 
-  # @method dom_html_legend_element_get_access_key(self)
-  # @param [DOMHTMLLegendElement] self 
+  # @method dom_html_legend_element_get_access_key(self_)
+  # @param [DOMHTMLLegendElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_legend_element_get_access_key, :webkit_dom_html_legend_element_get_access_key, [DOMHTMLLegendElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_legend_element_set_access_key(self, value)
-  # @param [DOMHTMLLegendElement] self 
+  # @method dom_html_legend_element_set_access_key(self_, value)
+  # @param [DOMHTMLLegendElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10858,16 +10858,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_legend_element_get_align(self)
-  # @param [DOMHTMLLegendElement] self 
+  # @method dom_html_legend_element_get_align(self_)
+  # @param [DOMHTMLLegendElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_legend_element_get_align, :webkit_dom_html_legend_element_get_align, [DOMHTMLLegendElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_legend_element_set_align(self, value)
-  # @param [DOMHTMLLegendElement] self 
+  # @method dom_html_legend_element_set_align(self_, value)
+  # @param [DOMHTMLLegendElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10900,16 +10900,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_get_disabled(self)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_get_disabled(self_)
+  # @param [DOMHTMLLinkElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_link_element_get_disabled, :webkit_dom_html_link_element_get_disabled, [DOMHTMLLinkElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_set_disabled(self, value)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_set_disabled(self_, value)
+  # @param [DOMHTMLLinkElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -10917,16 +10917,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_get_charset(self)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_get_charset(self_)
+  # @param [DOMHTMLLinkElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_link_element_get_charset, :webkit_dom_html_link_element_get_charset, [DOMHTMLLinkElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_set_charset(self, value)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_set_charset(self_, value)
+  # @param [DOMHTMLLinkElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10934,16 +10934,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_get_href(self)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_get_href(self_)
+  # @param [DOMHTMLLinkElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_link_element_get_href, :webkit_dom_html_link_element_get_href, [DOMHTMLLinkElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_set_href(self, value)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_set_href(self_, value)
+  # @param [DOMHTMLLinkElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10951,16 +10951,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_get_hreflang(self)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_get_hreflang(self_)
+  # @param [DOMHTMLLinkElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_link_element_get_hreflang, :webkit_dom_html_link_element_get_hreflang, [DOMHTMLLinkElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_set_hreflang(self, value)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_set_hreflang(self_, value)
+  # @param [DOMHTMLLinkElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10968,16 +10968,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_get_media(self)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_get_media(self_)
+  # @param [DOMHTMLLinkElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_link_element_get_media, :webkit_dom_html_link_element_get_media, [DOMHTMLLinkElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_set_media(self, value)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_set_media(self_, value)
+  # @param [DOMHTMLLinkElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -10985,16 +10985,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_get_rel(self)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_get_rel(self_)
+  # @param [DOMHTMLLinkElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_link_element_get_rel, :webkit_dom_html_link_element_get_rel, [DOMHTMLLinkElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_set_rel(self, value)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_set_rel(self_, value)
+  # @param [DOMHTMLLinkElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11002,16 +11002,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_get_rev(self)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_get_rev(self_)
+  # @param [DOMHTMLLinkElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_link_element_get_rev, :webkit_dom_html_link_element_get_rev, [DOMHTMLLinkElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_set_rev(self, value)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_set_rev(self_, value)
+  # @param [DOMHTMLLinkElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11019,16 +11019,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_get_target(self)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_get_target(self_)
+  # @param [DOMHTMLLinkElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_link_element_get_target, :webkit_dom_html_link_element_get_target, [DOMHTMLLinkElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_set_target(self, value)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_set_target(self_, value)
+  # @param [DOMHTMLLinkElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11036,8 +11036,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_link_element_get_sheet(self)
-  # @param [DOMHTMLLinkElement] self 
+  # @method dom_html_link_element_get_sheet(self_)
+  # @param [DOMHTMLLinkElement] self_ 
   # @return [DOMStyleSheet] 
   # @scope class
   attach_function :dom_html_link_element_get_sheet, :webkit_dom_html_link_element_get_sheet, [DOMHTMLLinkElement], DOMStyleSheet
@@ -11069,24 +11069,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_map_element_get_areas(self)
-  # @param [DOMHTMLMapElement] self 
+  # @method dom_html_map_element_get_areas(self_)
+  # @param [DOMHTMLMapElement] self_ 
   # @return [DOMHTMLCollection] 
   # @scope class
   attach_function :dom_html_map_element_get_areas, :webkit_dom_html_map_element_get_areas, [DOMHTMLMapElement], DOMHTMLCollection
   
   # (Not documented)
   # 
-  # @method dom_html_map_element_get_name(self)
-  # @param [DOMHTMLMapElement] self 
+  # @method dom_html_map_element_get_name(self_)
+  # @param [DOMHTMLMapElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_map_element_get_name, :webkit_dom_html_map_element_get_name, [DOMHTMLMapElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_map_element_set_name(self, value)
-  # @param [DOMHTMLMapElement] self 
+  # @method dom_html_map_element_set_name(self_, value)
+  # @param [DOMHTMLMapElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11119,32 +11119,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_start(self)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_start(self_)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_marquee_element_start, :webkit_dom_html_marquee_element_start, [DOMHTMLMarqueeElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_stop(self)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_stop(self_)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_marquee_element_stop, :webkit_dom_html_marquee_element_stop, [DOMHTMLMarqueeElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_get_behavior(self)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_get_behavior(self_)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_marquee_element_get_behavior, :webkit_dom_html_marquee_element_get_behavior, [DOMHTMLMarqueeElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_set_behavior(self, value)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_set_behavior(self_, value)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11152,16 +11152,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_get_bg_color(self)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_get_bg_color(self_)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_marquee_element_get_bg_color, :webkit_dom_html_marquee_element_get_bg_color, [DOMHTMLMarqueeElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_set_bg_color(self, value)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_set_bg_color(self_, value)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11169,16 +11169,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_get_direction(self)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_get_direction(self_)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_marquee_element_get_direction, :webkit_dom_html_marquee_element_get_direction, [DOMHTMLMarqueeElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_set_direction(self, value)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_set_direction(self_, value)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11186,16 +11186,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_get_height(self)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_get_height(self_)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_marquee_element_get_height, :webkit_dom_html_marquee_element_get_height, [DOMHTMLMarqueeElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_set_height(self, value)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_set_height(self_, value)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11203,16 +11203,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_get_hspace(self)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_get_hspace(self_)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_marquee_element_get_hspace, :webkit_dom_html_marquee_element_get_hspace, [DOMHTMLMarqueeElement], :ulong
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_set_hspace(self, value)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_set_hspace(self_, value)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -11220,16 +11220,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_get_loop(self)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_get_loop(self_)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_marquee_element_get_loop, :webkit_dom_html_marquee_element_get_loop, [DOMHTMLMarqueeElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_set_loop(self, value, error)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_set_loop(self_, value, error)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @param [Integer] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -11238,16 +11238,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_get_scroll_amount(self)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_get_scroll_amount(self_)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_marquee_element_get_scroll_amount, :webkit_dom_html_marquee_element_get_scroll_amount, [DOMHTMLMarqueeElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_set_scroll_amount(self, value, error)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_set_scroll_amount(self_, value, error)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @param [Integer] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -11256,16 +11256,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_get_scroll_delay(self)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_get_scroll_delay(self_)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_marquee_element_get_scroll_delay, :webkit_dom_html_marquee_element_get_scroll_delay, [DOMHTMLMarqueeElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_set_scroll_delay(self, value, error)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_set_scroll_delay(self_, value, error)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @param [Integer] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -11274,16 +11274,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_get_true_speed(self)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_get_true_speed(self_)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_marquee_element_get_true_speed, :webkit_dom_html_marquee_element_get_true_speed, [DOMHTMLMarqueeElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_set_true_speed(self, value)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_set_true_speed(self_, value)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -11291,16 +11291,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_get_vspace(self)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_get_vspace(self_)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_marquee_element_get_vspace, :webkit_dom_html_marquee_element_get_vspace, [DOMHTMLMarqueeElement], :ulong
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_set_vspace(self, value)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_set_vspace(self_, value)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -11308,16 +11308,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_get_width(self)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_get_width(self_)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_marquee_element_get_width, :webkit_dom_html_marquee_element_get_width, [DOMHTMLMarqueeElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_marquee_element_set_width(self, value)
-  # @param [DOMHTMLMarqueeElement] self 
+  # @method dom_html_marquee_element_set_width(self_, value)
+  # @param [DOMHTMLMarqueeElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11350,16 +11350,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_menu_element_get_compact(self)
-  # @param [DOMHTMLMenuElement] self 
+  # @method dom_html_menu_element_get_compact(self_)
+  # @param [DOMHTMLMenuElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_menu_element_get_compact, :webkit_dom_html_menu_element_get_compact, [DOMHTMLMenuElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_menu_element_set_compact(self, value)
-  # @param [DOMHTMLMenuElement] self 
+  # @method dom_html_menu_element_set_compact(self_, value)
+  # @param [DOMHTMLMenuElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -11392,16 +11392,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_meta_element_get_content(self)
-  # @param [DOMHTMLMetaElement] self 
+  # @method dom_html_meta_element_get_content(self_)
+  # @param [DOMHTMLMetaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_meta_element_get_content, :webkit_dom_html_meta_element_get_content, [DOMHTMLMetaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_meta_element_set_content(self, value)
-  # @param [DOMHTMLMetaElement] self 
+  # @method dom_html_meta_element_set_content(self_, value)
+  # @param [DOMHTMLMetaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11409,16 +11409,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_meta_element_get_http_equiv(self)
-  # @param [DOMHTMLMetaElement] self 
+  # @method dom_html_meta_element_get_http_equiv(self_)
+  # @param [DOMHTMLMetaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_meta_element_get_http_equiv, :webkit_dom_html_meta_element_get_http_equiv, [DOMHTMLMetaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_meta_element_set_http_equiv(self, value)
-  # @param [DOMHTMLMetaElement] self 
+  # @method dom_html_meta_element_set_http_equiv(self_, value)
+  # @param [DOMHTMLMetaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11426,16 +11426,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_meta_element_get_name(self)
-  # @param [DOMHTMLMetaElement] self 
+  # @method dom_html_meta_element_get_name(self_)
+  # @param [DOMHTMLMetaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_meta_element_get_name, :webkit_dom_html_meta_element_get_name, [DOMHTMLMetaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_meta_element_set_name(self, value)
-  # @param [DOMHTMLMetaElement] self 
+  # @method dom_html_meta_element_set_name(self_, value)
+  # @param [DOMHTMLMetaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11443,16 +11443,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_meta_element_get_scheme(self)
-  # @param [DOMHTMLMetaElement] self 
+  # @method dom_html_meta_element_get_scheme(self_)
+  # @param [DOMHTMLMetaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_meta_element_get_scheme, :webkit_dom_html_meta_element_get_scheme, [DOMHTMLMetaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_meta_element_set_scheme(self, value)
-  # @param [DOMHTMLMetaElement] self 
+  # @method dom_html_meta_element_set_scheme(self_, value)
+  # @param [DOMHTMLMetaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11485,16 +11485,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_mod_element_get_cite(self)
-  # @param [DOMHTMLModElement] self 
+  # @method dom_html_mod_element_get_cite(self_)
+  # @param [DOMHTMLModElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_mod_element_get_cite, :webkit_dom_html_mod_element_get_cite, [DOMHTMLModElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_mod_element_set_cite(self, value)
-  # @param [DOMHTMLModElement] self 
+  # @method dom_html_mod_element_set_cite(self_, value)
+  # @param [DOMHTMLModElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11502,16 +11502,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_mod_element_get_date_time(self)
-  # @param [DOMHTMLModElement] self 
+  # @method dom_html_mod_element_get_date_time(self_)
+  # @param [DOMHTMLModElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_mod_element_get_date_time, :webkit_dom_html_mod_element_get_date_time, [DOMHTMLModElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_mod_element_set_date_time(self, value)
-  # @param [DOMHTMLModElement] self 
+  # @method dom_html_mod_element_set_date_time(self_, value)
+  # @param [DOMHTMLModElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11544,16 +11544,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_htmlo_list_element_get_compact(self)
-  # @param [DOMHTMLOListElement] self 
+  # @method dom_htmlo_list_element_get_compact(self_)
+  # @param [DOMHTMLOListElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_htmlo_list_element_get_compact, :webkit_dom_htmlo_list_element_get_compact, [DOMHTMLOListElement], :int
   
   # (Not documented)
   # 
-  # @method dom_htmlo_list_element_set_compact(self, value)
-  # @param [DOMHTMLOListElement] self 
+  # @method dom_htmlo_list_element_set_compact(self_, value)
+  # @param [DOMHTMLOListElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -11561,16 +11561,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_htmlo_list_element_get_start(self)
-  # @param [DOMHTMLOListElement] self 
+  # @method dom_htmlo_list_element_get_start(self_)
+  # @param [DOMHTMLOListElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_htmlo_list_element_get_start, :webkit_dom_htmlo_list_element_get_start, [DOMHTMLOListElement], :long
   
   # (Not documented)
   # 
-  # @method dom_htmlo_list_element_set_start(self, value)
-  # @param [DOMHTMLOListElement] self 
+  # @method dom_htmlo_list_element_set_start(self_, value)
+  # @param [DOMHTMLOListElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -11603,16 +11603,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_check_validity(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_check_validity(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_object_element_check_validity, :webkit_dom_html_object_element_check_validity, [DOMHTMLObjectElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_custom_validity(self, error)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_custom_validity(self_, error)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [String] error 
   # @return [nil] 
   # @scope class
@@ -11620,24 +11620,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_form(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_form(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [DOMHTMLFormElement] 
   # @scope class
   attach_function :dom_html_object_element_get_form, :webkit_dom_html_object_element_get_form, [DOMHTMLObjectElement], DOMHTMLFormElement
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_code(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_code(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_object_element_get_code, :webkit_dom_html_object_element_get_code, [DOMHTMLObjectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_code(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_code(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11645,16 +11645,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_align(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_align(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_object_element_get_align, :webkit_dom_html_object_element_get_align, [DOMHTMLObjectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_align(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_align(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11662,16 +11662,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_archive(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_archive(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_object_element_get_archive, :webkit_dom_html_object_element_get_archive, [DOMHTMLObjectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_archive(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_archive(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11679,16 +11679,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_border(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_border(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_object_element_get_border, :webkit_dom_html_object_element_get_border, [DOMHTMLObjectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_border(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_border(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11696,16 +11696,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_code_base(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_code_base(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_object_element_get_code_base, :webkit_dom_html_object_element_get_code_base, [DOMHTMLObjectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_code_base(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_code_base(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11713,16 +11713,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_code_type(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_code_type(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_object_element_get_code_type, :webkit_dom_html_object_element_get_code_type, [DOMHTMLObjectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_code_type(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_code_type(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11730,16 +11730,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_data(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_data(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_object_element_get_data, :webkit_dom_html_object_element_get_data, [DOMHTMLObjectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_data(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_data(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11747,16 +11747,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_declare(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_declare(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_object_element_get_declare, :webkit_dom_html_object_element_get_declare, [DOMHTMLObjectElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_declare(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_declare(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -11764,16 +11764,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_height(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_height(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_object_element_get_height, :webkit_dom_html_object_element_get_height, [DOMHTMLObjectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_height(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_height(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11781,16 +11781,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_hspace(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_hspace(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_object_element_get_hspace, :webkit_dom_html_object_element_get_hspace, [DOMHTMLObjectElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_hspace(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_hspace(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -11798,16 +11798,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_name(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_name(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_object_element_get_name, :webkit_dom_html_object_element_get_name, [DOMHTMLObjectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_name(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_name(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11815,16 +11815,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_standby(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_standby(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_object_element_get_standby, :webkit_dom_html_object_element_get_standby, [DOMHTMLObjectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_standby(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_standby(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11832,16 +11832,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_use_map(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_use_map(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_object_element_get_use_map, :webkit_dom_html_object_element_get_use_map, [DOMHTMLObjectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_use_map(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_use_map(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11849,16 +11849,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_vspace(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_vspace(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_object_element_get_vspace, :webkit_dom_html_object_element_get_vspace, [DOMHTMLObjectElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_vspace(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_vspace(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -11866,16 +11866,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_width(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_width(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_object_element_get_width, :webkit_dom_html_object_element_get_width, [DOMHTMLObjectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_set_width(self, value)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_set_width(self_, value)
+  # @param [DOMHTMLObjectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11883,32 +11883,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_will_validate(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_will_validate(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_object_element_get_will_validate, :webkit_dom_html_object_element_get_will_validate, [DOMHTMLObjectElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_validity(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_validity(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMValidityState)] 
   # @scope class
   attach_function :dom_html_object_element_get_validity, :webkit_dom_html_object_element_get_validity, [DOMHTMLObjectElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_validation_message(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_validation_message(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_object_element_get_validation_message, :webkit_dom_html_object_element_get_validation_message, [DOMHTMLObjectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_object_element_get_content_document(self)
-  # @param [DOMHTMLObjectElement] self 
+  # @method dom_html_object_element_get_content_document(self_)
+  # @param [DOMHTMLObjectElement] self_ 
   # @return [DOMDocument] 
   # @scope class
   attach_function :dom_html_object_element_get_content_document, :webkit_dom_html_object_element_get_content_document, [DOMHTMLObjectElement], DOMDocument
@@ -11940,16 +11940,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_opt_group_element_get_disabled(self)
-  # @param [DOMHTMLOptGroupElement] self 
+  # @method dom_html_opt_group_element_get_disabled(self_)
+  # @param [DOMHTMLOptGroupElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_opt_group_element_get_disabled, :webkit_dom_html_opt_group_element_get_disabled, [DOMHTMLOptGroupElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_opt_group_element_set_disabled(self, value)
-  # @param [DOMHTMLOptGroupElement] self 
+  # @method dom_html_opt_group_element_set_disabled(self_, value)
+  # @param [DOMHTMLOptGroupElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -11957,16 +11957,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_opt_group_element_get_label(self)
-  # @param [DOMHTMLOptGroupElement] self 
+  # @method dom_html_opt_group_element_get_label(self_)
+  # @param [DOMHTMLOptGroupElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_opt_group_element_get_label, :webkit_dom_html_opt_group_element_get_label, [DOMHTMLOptGroupElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_opt_group_element_set_label(self, value)
-  # @param [DOMHTMLOptGroupElement] self 
+  # @method dom_html_opt_group_element_set_label(self_, value)
+  # @param [DOMHTMLOptGroupElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -11999,24 +11999,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_option_element_get_form(self)
-  # @param [DOMHTMLOptionElement] self 
+  # @method dom_html_option_element_get_form(self_)
+  # @param [DOMHTMLOptionElement] self_ 
   # @return [DOMHTMLFormElement] 
   # @scope class
   attach_function :dom_html_option_element_get_form, :webkit_dom_html_option_element_get_form, [DOMHTMLOptionElement], DOMHTMLFormElement
   
   # (Not documented)
   # 
-  # @method dom_html_option_element_get_default_selected(self)
-  # @param [DOMHTMLOptionElement] self 
+  # @method dom_html_option_element_get_default_selected(self_)
+  # @param [DOMHTMLOptionElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_option_element_get_default_selected, :webkit_dom_html_option_element_get_default_selected, [DOMHTMLOptionElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_option_element_set_default_selected(self, value)
-  # @param [DOMHTMLOptionElement] self 
+  # @method dom_html_option_element_set_default_selected(self_, value)
+  # @param [DOMHTMLOptionElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12024,32 +12024,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_option_element_get_text(self)
-  # @param [DOMHTMLOptionElement] self 
+  # @method dom_html_option_element_get_text(self_)
+  # @param [DOMHTMLOptionElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_option_element_get_text, :webkit_dom_html_option_element_get_text, [DOMHTMLOptionElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_option_element_get_index(self)
-  # @param [DOMHTMLOptionElement] self 
+  # @method dom_html_option_element_get_index(self_)
+  # @param [DOMHTMLOptionElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_option_element_get_index, :webkit_dom_html_option_element_get_index, [DOMHTMLOptionElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_option_element_get_disabled(self)
-  # @param [DOMHTMLOptionElement] self 
+  # @method dom_html_option_element_get_disabled(self_)
+  # @param [DOMHTMLOptionElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_option_element_get_disabled, :webkit_dom_html_option_element_get_disabled, [DOMHTMLOptionElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_option_element_set_disabled(self, value)
-  # @param [DOMHTMLOptionElement] self 
+  # @method dom_html_option_element_set_disabled(self_, value)
+  # @param [DOMHTMLOptionElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12057,16 +12057,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_option_element_get_label(self)
-  # @param [DOMHTMLOptionElement] self 
+  # @method dom_html_option_element_get_label(self_)
+  # @param [DOMHTMLOptionElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_option_element_get_label, :webkit_dom_html_option_element_get_label, [DOMHTMLOptionElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_option_element_set_label(self, value)
-  # @param [DOMHTMLOptionElement] self 
+  # @method dom_html_option_element_set_label(self_, value)
+  # @param [DOMHTMLOptionElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12074,16 +12074,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_option_element_get_selected(self)
-  # @param [DOMHTMLOptionElement] self 
+  # @method dom_html_option_element_get_selected(self_)
+  # @param [DOMHTMLOptionElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_option_element_get_selected, :webkit_dom_html_option_element_get_selected, [DOMHTMLOptionElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_option_element_set_selected(self, value)
-  # @param [DOMHTMLOptionElement] self 
+  # @method dom_html_option_element_set_selected(self_, value)
+  # @param [DOMHTMLOptionElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12091,16 +12091,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_option_element_get_value(self)
-  # @param [DOMHTMLOptionElement] self 
+  # @method dom_html_option_element_get_value(self_)
+  # @param [DOMHTMLOptionElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_option_element_get_value, :webkit_dom_html_option_element_get_value, [DOMHTMLOptionElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_option_element_set_value(self, value)
-  # @param [DOMHTMLOptionElement] self 
+  # @method dom_html_option_element_set_value(self_, value)
+  # @param [DOMHTMLOptionElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12133,16 +12133,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_options_collection_get_selected_index(self)
-  # @param [DOMHTMLOptionsCollection] self 
+  # @method dom_html_options_collection_get_selected_index(self_)
+  # @param [DOMHTMLOptionsCollection] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_options_collection_get_selected_index, :webkit_dom_html_options_collection_get_selected_index, [DOMHTMLOptionsCollection], :long
   
   # (Not documented)
   # 
-  # @method dom_html_options_collection_set_selected_index(self, value)
-  # @param [DOMHTMLOptionsCollection] self 
+  # @method dom_html_options_collection_set_selected_index(self_, value)
+  # @param [DOMHTMLOptionsCollection] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12175,16 +12175,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_paragraph_element_get_align(self)
-  # @param [DOMHTMLParagraphElement] self 
+  # @method dom_html_paragraph_element_get_align(self_)
+  # @param [DOMHTMLParagraphElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_paragraph_element_get_align, :webkit_dom_html_paragraph_element_get_align, [DOMHTMLParagraphElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_paragraph_element_set_align(self, value)
-  # @param [DOMHTMLParagraphElement] self 
+  # @method dom_html_paragraph_element_set_align(self_, value)
+  # @param [DOMHTMLParagraphElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12217,16 +12217,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_param_element_get_name(self)
-  # @param [DOMHTMLParamElement] self 
+  # @method dom_html_param_element_get_name(self_)
+  # @param [DOMHTMLParamElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_param_element_get_name, :webkit_dom_html_param_element_get_name, [DOMHTMLParamElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_param_element_set_name(self, value)
-  # @param [DOMHTMLParamElement] self 
+  # @method dom_html_param_element_set_name(self_, value)
+  # @param [DOMHTMLParamElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12234,16 +12234,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_param_element_get_value(self)
-  # @param [DOMHTMLParamElement] self 
+  # @method dom_html_param_element_get_value(self_)
+  # @param [DOMHTMLParamElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_param_element_get_value, :webkit_dom_html_param_element_get_value, [DOMHTMLParamElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_param_element_set_value(self, value)
-  # @param [DOMHTMLParamElement] self 
+  # @method dom_html_param_element_set_value(self_, value)
+  # @param [DOMHTMLParamElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12251,16 +12251,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_param_element_get_value_type(self)
-  # @param [DOMHTMLParamElement] self 
+  # @method dom_html_param_element_get_value_type(self_)
+  # @param [DOMHTMLParamElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_param_element_get_value_type, :webkit_dom_html_param_element_get_value_type, [DOMHTMLParamElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_param_element_set_value_type(self, value)
-  # @param [DOMHTMLParamElement] self 
+  # @method dom_html_param_element_set_value_type(self_, value)
+  # @param [DOMHTMLParamElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12293,16 +12293,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_pre_element_get_width(self)
-  # @param [DOMHTMLPreElement] self 
+  # @method dom_html_pre_element_get_width(self_)
+  # @param [DOMHTMLPreElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_pre_element_get_width, :webkit_dom_html_pre_element_get_width, [DOMHTMLPreElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_pre_element_set_width(self, value)
-  # @param [DOMHTMLPreElement] self 
+  # @method dom_html_pre_element_set_width(self_, value)
+  # @param [DOMHTMLPreElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12310,16 +12310,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_pre_element_get_wrap(self)
-  # @param [DOMHTMLPreElement] self 
+  # @method dom_html_pre_element_get_wrap(self_)
+  # @param [DOMHTMLPreElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_pre_element_get_wrap, :webkit_dom_html_pre_element_get_wrap, [DOMHTMLPreElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_pre_element_set_wrap(self, value)
-  # @param [DOMHTMLPreElement] self 
+  # @method dom_html_pre_element_set_wrap(self_, value)
+  # @param [DOMHTMLPreElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12352,16 +12352,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_quote_element_get_cite(self)
-  # @param [DOMHTMLQuoteElement] self 
+  # @method dom_html_quote_element_get_cite(self_)
+  # @param [DOMHTMLQuoteElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_quote_element_get_cite, :webkit_dom_html_quote_element_get_cite, [DOMHTMLQuoteElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_quote_element_set_cite(self, value)
-  # @param [DOMHTMLQuoteElement] self 
+  # @method dom_html_quote_element_set_cite(self_, value)
+  # @param [DOMHTMLQuoteElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12394,16 +12394,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_get_text(self)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_get_text(self_)
+  # @param [DOMHTMLScriptElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_script_element_get_text, :webkit_dom_html_script_element_get_text, [DOMHTMLScriptElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_set_text(self, value)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_set_text(self_, value)
+  # @param [DOMHTMLScriptElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12411,16 +12411,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_get_html_for(self)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_get_html_for(self_)
+  # @param [DOMHTMLScriptElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_script_element_get_html_for, :webkit_dom_html_script_element_get_html_for, [DOMHTMLScriptElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_set_html_for(self, value)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_set_html_for(self_, value)
+  # @param [DOMHTMLScriptElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12428,16 +12428,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_get_event(self)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_get_event(self_)
+  # @param [DOMHTMLScriptElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_script_element_get_event, :webkit_dom_html_script_element_get_event, [DOMHTMLScriptElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_set_event(self, value)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_set_event(self_, value)
+  # @param [DOMHTMLScriptElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12445,16 +12445,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_get_charset(self)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_get_charset(self_)
+  # @param [DOMHTMLScriptElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_script_element_get_charset, :webkit_dom_html_script_element_get_charset, [DOMHTMLScriptElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_set_charset(self, value)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_set_charset(self_, value)
+  # @param [DOMHTMLScriptElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12462,16 +12462,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_get_async(self)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_get_async(self_)
+  # @param [DOMHTMLScriptElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_script_element_get_async, :webkit_dom_html_script_element_get_async, [DOMHTMLScriptElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_set_async(self, value)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_set_async(self_, value)
+  # @param [DOMHTMLScriptElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12479,16 +12479,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_get_defer(self)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_get_defer(self_)
+  # @param [DOMHTMLScriptElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_script_element_get_defer, :webkit_dom_html_script_element_get_defer, [DOMHTMLScriptElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_set_defer(self, value)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_set_defer(self_, value)
+  # @param [DOMHTMLScriptElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12496,16 +12496,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_get_src(self)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_get_src(self_)
+  # @param [DOMHTMLScriptElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_script_element_get_src, :webkit_dom_html_script_element_get_src, [DOMHTMLScriptElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_script_element_set_src(self, value)
-  # @param [DOMHTMLScriptElement] self 
+  # @method dom_html_script_element_set_src(self_, value)
+  # @param [DOMHTMLScriptElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12538,16 +12538,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_check_validity(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_check_validity(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_select_element_check_validity, :webkit_dom_html_select_element_check_validity, [DOMHTMLSelectElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_set_custom_validity(self, error)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_set_custom_validity(self_, error)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [String] error 
   # @return [nil] 
   # @scope class
@@ -12555,8 +12555,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_add(self, element, before, error)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_add(self_, element, before, error)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [DOMHTMLElement] element 
   # @param [DOMHTMLElement] before 
   # @param [FFI::Pointer(**GError)] error 
@@ -12566,8 +12566,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_remove(self, index)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_remove(self_, index)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [Integer] index 
   # @return [nil] 
   # @scope class
@@ -12575,8 +12575,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_item(self, index)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_item(self_, index)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [Integer] index 
   # @return [DOMNode] 
   # @scope class
@@ -12584,8 +12584,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_named_item(self, name)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_named_item(self_, name)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [String] name 
   # @return [DOMNode] 
   # @scope class
@@ -12593,16 +12593,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_selected_index(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_selected_index(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_select_element_get_selected_index, :webkit_dom_html_select_element_get_selected_index, [DOMHTMLSelectElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_set_selected_index(self, value)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_set_selected_index(self_, value)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12610,16 +12610,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_value(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_value(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_select_element_get_value, :webkit_dom_html_select_element_get_value, [DOMHTMLSelectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_set_value(self, value)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_set_value(self_, value)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12627,16 +12627,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_length(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_length(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_select_element_get_length, :webkit_dom_html_select_element_get_length, [DOMHTMLSelectElement], :ulong
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_set_length(self, value, error)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_set_length(self_, value, error)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [Integer] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -12645,56 +12645,56 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_form(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_form(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [DOMHTMLFormElement] 
   # @scope class
   attach_function :dom_html_select_element_get_form, :webkit_dom_html_select_element_get_form, [DOMHTMLSelectElement], DOMHTMLFormElement
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_validity(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_validity(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMValidityState)] 
   # @scope class
   attach_function :dom_html_select_element_get_validity, :webkit_dom_html_select_element_get_validity, [DOMHTMLSelectElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_will_validate(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_will_validate(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_select_element_get_will_validate, :webkit_dom_html_select_element_get_will_validate, [DOMHTMLSelectElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_validation_message(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_validation_message(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_select_element_get_validation_message, :webkit_dom_html_select_element_get_validation_message, [DOMHTMLSelectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_options(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_options(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [DOMHTMLOptionsCollection] 
   # @scope class
   attach_function :dom_html_select_element_get_options, :webkit_dom_html_select_element_get_options, [DOMHTMLSelectElement], DOMHTMLOptionsCollection
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_disabled(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_disabled(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_select_element_get_disabled, :webkit_dom_html_select_element_get_disabled, [DOMHTMLSelectElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_set_disabled(self, value)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_set_disabled(self_, value)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12702,16 +12702,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_autofocus(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_autofocus(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_select_element_get_autofocus, :webkit_dom_html_select_element_get_autofocus, [DOMHTMLSelectElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_set_autofocus(self, value)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_set_autofocus(self_, value)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12719,16 +12719,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_multiple(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_multiple(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_select_element_get_multiple, :webkit_dom_html_select_element_get_multiple, [DOMHTMLSelectElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_set_multiple(self, value)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_set_multiple(self_, value)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12736,16 +12736,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_name(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_name(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_select_element_get_name, :webkit_dom_html_select_element_get_name, [DOMHTMLSelectElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_set_name(self, value)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_set_name(self_, value)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12753,16 +12753,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_required(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_required(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_select_element_get_required, :webkit_dom_html_select_element_get_required, [DOMHTMLSelectElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_set_required(self, value)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_set_required(self_, value)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12770,16 +12770,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_size(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_size(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_select_element_get_size, :webkit_dom_html_select_element_get_size, [DOMHTMLSelectElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_set_size(self, value)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_set_size(self_, value)
+  # @param [DOMHTMLSelectElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12787,8 +12787,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_select_element_get_labels(self)
-  # @param [DOMHTMLSelectElement] self 
+  # @method dom_html_select_element_get_labels(self_)
+  # @param [DOMHTMLSelectElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
   # @scope class
   attach_function :dom_html_select_element_get_labels, :webkit_dom_html_select_element_get_labels, [DOMHTMLSelectElement], :pointer
@@ -12820,16 +12820,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_style_element_get_disabled(self)
-  # @param [DOMHTMLStyleElement] self 
+  # @method dom_html_style_element_get_disabled(self_)
+  # @param [DOMHTMLStyleElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_style_element_get_disabled, :webkit_dom_html_style_element_get_disabled, [DOMHTMLStyleElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_style_element_set_disabled(self, value)
-  # @param [DOMHTMLStyleElement] self 
+  # @method dom_html_style_element_set_disabled(self_, value)
+  # @param [DOMHTMLStyleElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -12837,16 +12837,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_style_element_get_media(self)
-  # @param [DOMHTMLStyleElement] self 
+  # @method dom_html_style_element_get_media(self_)
+  # @param [DOMHTMLStyleElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_style_element_get_media, :webkit_dom_html_style_element_get_media, [DOMHTMLStyleElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_style_element_set_media(self, value)
-  # @param [DOMHTMLStyleElement] self 
+  # @method dom_html_style_element_set_media(self_, value)
+  # @param [DOMHTMLStyleElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12854,8 +12854,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_style_element_get_sheet(self)
-  # @param [DOMHTMLStyleElement] self 
+  # @method dom_html_style_element_get_sheet(self_)
+  # @param [DOMHTMLStyleElement] self_ 
   # @return [DOMStyleSheet] 
   # @scope class
   attach_function :dom_html_style_element_get_sheet, :webkit_dom_html_style_element_get_sheet, [DOMHTMLStyleElement], DOMStyleSheet
@@ -12887,16 +12887,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_caption_element_get_align(self)
-  # @param [DOMHTMLTableCaptionElement] self 
+  # @method dom_html_table_caption_element_get_align(self_)
+  # @param [DOMHTMLTableCaptionElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_caption_element_get_align, :webkit_dom_html_table_caption_element_get_align, [DOMHTMLTableCaptionElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_caption_element_set_align(self, value)
-  # @param [DOMHTMLTableCaptionElement] self 
+  # @method dom_html_table_caption_element_set_align(self_, value)
+  # @param [DOMHTMLTableCaptionElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12929,24 +12929,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_cell_index(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_cell_index(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_cell_index, :webkit_dom_html_table_cell_element_get_cell_index, [DOMHTMLTableCellElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_abbr(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_abbr(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_abbr, :webkit_dom_html_table_cell_element_get_abbr, [DOMHTMLTableCellElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_abbr(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_abbr(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12954,16 +12954,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_align(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_align(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_align, :webkit_dom_html_table_cell_element_get_align, [DOMHTMLTableCellElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_align(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_align(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12971,16 +12971,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_axis(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_axis(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_axis, :webkit_dom_html_table_cell_element_get_axis, [DOMHTMLTableCellElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_axis(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_axis(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -12988,16 +12988,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_bg_color(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_bg_color(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_bg_color, :webkit_dom_html_table_cell_element_get_bg_color, [DOMHTMLTableCellElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_bg_color(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_bg_color(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13005,16 +13005,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_ch(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_ch(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_ch, :webkit_dom_html_table_cell_element_get_ch, [DOMHTMLTableCellElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_ch(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_ch(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13022,16 +13022,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_ch_off(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_ch_off(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_ch_off, :webkit_dom_html_table_cell_element_get_ch_off, [DOMHTMLTableCellElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_ch_off(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_ch_off(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13039,16 +13039,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_col_span(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_col_span(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_col_span, :webkit_dom_html_table_cell_element_get_col_span, [DOMHTMLTableCellElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_col_span(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_col_span(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -13056,16 +13056,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_headers(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_headers(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_headers, :webkit_dom_html_table_cell_element_get_headers, [DOMHTMLTableCellElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_headers(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_headers(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13073,16 +13073,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_height(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_height(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_height, :webkit_dom_html_table_cell_element_get_height, [DOMHTMLTableCellElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_height(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_height(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13090,16 +13090,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_no_wrap(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_no_wrap(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_no_wrap, :webkit_dom_html_table_cell_element_get_no_wrap, [DOMHTMLTableCellElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_no_wrap(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_no_wrap(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -13107,16 +13107,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_row_span(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_row_span(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_row_span, :webkit_dom_html_table_cell_element_get_row_span, [DOMHTMLTableCellElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_row_span(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_row_span(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -13124,16 +13124,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_scope(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_scope(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_scope, :webkit_dom_html_table_cell_element_get_scope, [DOMHTMLTableCellElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_scope(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_scope(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13141,16 +13141,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_v_align(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_v_align(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_v_align, :webkit_dom_html_table_cell_element_get_v_align, [DOMHTMLTableCellElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_v_align(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_v_align(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13158,16 +13158,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_get_width(self)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_get_width(self_)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_cell_element_get_width, :webkit_dom_html_table_cell_element_get_width, [DOMHTMLTableCellElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_cell_element_set_width(self, value)
-  # @param [DOMHTMLTableCellElement] self 
+  # @method dom_html_table_cell_element_set_width(self_, value)
+  # @param [DOMHTMLTableCellElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13200,16 +13200,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_col_element_get_align(self)
-  # @param [DOMHTMLTableColElement] self 
+  # @method dom_html_table_col_element_get_align(self_)
+  # @param [DOMHTMLTableColElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_col_element_get_align, :webkit_dom_html_table_col_element_get_align, [DOMHTMLTableColElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_col_element_set_align(self, value)
-  # @param [DOMHTMLTableColElement] self 
+  # @method dom_html_table_col_element_set_align(self_, value)
+  # @param [DOMHTMLTableColElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13217,16 +13217,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_col_element_get_ch(self)
-  # @param [DOMHTMLTableColElement] self 
+  # @method dom_html_table_col_element_get_ch(self_)
+  # @param [DOMHTMLTableColElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_col_element_get_ch, :webkit_dom_html_table_col_element_get_ch, [DOMHTMLTableColElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_col_element_set_ch(self, value)
-  # @param [DOMHTMLTableColElement] self 
+  # @method dom_html_table_col_element_set_ch(self_, value)
+  # @param [DOMHTMLTableColElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13234,16 +13234,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_col_element_get_ch_off(self)
-  # @param [DOMHTMLTableColElement] self 
+  # @method dom_html_table_col_element_get_ch_off(self_)
+  # @param [DOMHTMLTableColElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_col_element_get_ch_off, :webkit_dom_html_table_col_element_get_ch_off, [DOMHTMLTableColElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_col_element_set_ch_off(self, value)
-  # @param [DOMHTMLTableColElement] self 
+  # @method dom_html_table_col_element_set_ch_off(self_, value)
+  # @param [DOMHTMLTableColElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13251,16 +13251,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_col_element_get_span(self)
-  # @param [DOMHTMLTableColElement] self 
+  # @method dom_html_table_col_element_get_span(self_)
+  # @param [DOMHTMLTableColElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_table_col_element_get_span, :webkit_dom_html_table_col_element_get_span, [DOMHTMLTableColElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_table_col_element_set_span(self, value)
-  # @param [DOMHTMLTableColElement] self 
+  # @method dom_html_table_col_element_set_span(self_, value)
+  # @param [DOMHTMLTableColElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -13268,16 +13268,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_col_element_get_v_align(self)
-  # @param [DOMHTMLTableColElement] self 
+  # @method dom_html_table_col_element_get_v_align(self_)
+  # @param [DOMHTMLTableColElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_col_element_get_v_align, :webkit_dom_html_table_col_element_get_v_align, [DOMHTMLTableColElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_col_element_set_v_align(self, value)
-  # @param [DOMHTMLTableColElement] self 
+  # @method dom_html_table_col_element_set_v_align(self_, value)
+  # @param [DOMHTMLTableColElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13285,16 +13285,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_col_element_get_width(self)
-  # @param [DOMHTMLTableColElement] self 
+  # @method dom_html_table_col_element_get_width(self_)
+  # @param [DOMHTMLTableColElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_col_element_get_width, :webkit_dom_html_table_col_element_get_width, [DOMHTMLTableColElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_col_element_set_width(self, value)
-  # @param [DOMHTMLTableColElement] self 
+  # @method dom_html_table_col_element_set_width(self_, value)
+  # @param [DOMHTMLTableColElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13327,56 +13327,56 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_create_t_head(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_create_t_head(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [DOMHTMLElement] 
   # @scope class
   attach_function :dom_html_table_element_create_t_head, :webkit_dom_html_table_element_create_t_head, [DOMHTMLTableElement], DOMHTMLElement
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_delete_t_head(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_delete_t_head(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_table_element_delete_t_head, :webkit_dom_html_table_element_delete_t_head, [DOMHTMLTableElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_create_t_foot(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_create_t_foot(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [DOMHTMLElement] 
   # @scope class
   attach_function :dom_html_table_element_create_t_foot, :webkit_dom_html_table_element_create_t_foot, [DOMHTMLTableElement], DOMHTMLElement
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_delete_t_foot(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_delete_t_foot(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_table_element_delete_t_foot, :webkit_dom_html_table_element_delete_t_foot, [DOMHTMLTableElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_create_caption(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_create_caption(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [DOMHTMLElement] 
   # @scope class
   attach_function :dom_html_table_element_create_caption, :webkit_dom_html_table_element_create_caption, [DOMHTMLTableElement], DOMHTMLElement
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_delete_caption(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_delete_caption(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_table_element_delete_caption, :webkit_dom_html_table_element_delete_caption, [DOMHTMLTableElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_insert_row(self, index, error)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_insert_row(self_, index, error)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMHTMLElement] 
@@ -13385,8 +13385,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_delete_row(self, index, error)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_delete_row(self_, index, error)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -13395,16 +13395,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_caption(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_caption(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [DOMHTMLTableCaptionElement] 
   # @scope class
   attach_function :dom_html_table_element_get_caption, :webkit_dom_html_table_element_get_caption, [DOMHTMLTableElement], DOMHTMLTableCaptionElement
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_set_caption(self, value, error)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_set_caption(self_, value, error)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [DOMHTMLTableCaptionElement] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -13413,16 +13413,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_t_head(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_t_head(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMHTMLTableSectionElement)] 
   # @scope class
   attach_function :dom_html_table_element_get_t_head, :webkit_dom_html_table_element_get_t_head, [DOMHTMLTableElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_set_t_head(self, value, error)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_set_t_head(self_, value, error)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [FFI::Pointer(*WebKitDOMHTMLTableSectionElement)] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -13431,16 +13431,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_t_foot(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_t_foot(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMHTMLTableSectionElement)] 
   # @scope class
   attach_function :dom_html_table_element_get_t_foot, :webkit_dom_html_table_element_get_t_foot, [DOMHTMLTableElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_set_t_foot(self, value, error)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_set_t_foot(self_, value, error)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [FFI::Pointer(*WebKitDOMHTMLTableSectionElement)] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -13449,32 +13449,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_rows(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_rows(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [DOMHTMLCollection] 
   # @scope class
   attach_function :dom_html_table_element_get_rows, :webkit_dom_html_table_element_get_rows, [DOMHTMLTableElement], DOMHTMLCollection
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_t_bodies(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_t_bodies(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [DOMHTMLCollection] 
   # @scope class
   attach_function :dom_html_table_element_get_t_bodies, :webkit_dom_html_table_element_get_t_bodies, [DOMHTMLTableElement], DOMHTMLCollection
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_align(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_align(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_element_get_align, :webkit_dom_html_table_element_get_align, [DOMHTMLTableElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_set_align(self, value)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_set_align(self_, value)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13482,16 +13482,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_bg_color(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_bg_color(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_element_get_bg_color, :webkit_dom_html_table_element_get_bg_color, [DOMHTMLTableElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_set_bg_color(self, value)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_set_bg_color(self_, value)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13499,16 +13499,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_border(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_border(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_element_get_border, :webkit_dom_html_table_element_get_border, [DOMHTMLTableElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_set_border(self, value)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_set_border(self_, value)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13516,16 +13516,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_cell_padding(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_cell_padding(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_element_get_cell_padding, :webkit_dom_html_table_element_get_cell_padding, [DOMHTMLTableElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_set_cell_padding(self, value)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_set_cell_padding(self_, value)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13533,16 +13533,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_cell_spacing(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_cell_spacing(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_element_get_cell_spacing, :webkit_dom_html_table_element_get_cell_spacing, [DOMHTMLTableElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_set_cell_spacing(self, value)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_set_cell_spacing(self_, value)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13550,16 +13550,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_frame(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_frame(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_element_get_frame, :webkit_dom_html_table_element_get_frame, [DOMHTMLTableElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_set_frame(self, value)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_set_frame(self_, value)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13567,16 +13567,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_rules(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_rules(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_element_get_rules, :webkit_dom_html_table_element_get_rules, [DOMHTMLTableElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_set_rules(self, value)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_set_rules(self_, value)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13584,16 +13584,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_summary(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_summary(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_element_get_summary, :webkit_dom_html_table_element_get_summary, [DOMHTMLTableElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_set_summary(self, value)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_set_summary(self_, value)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13601,16 +13601,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_get_width(self)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_get_width(self_)
+  # @param [DOMHTMLTableElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_element_get_width, :webkit_dom_html_table_element_get_width, [DOMHTMLTableElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_element_set_width(self, value)
-  # @param [DOMHTMLTableElement] self 
+  # @method dom_html_table_element_set_width(self_, value)
+  # @param [DOMHTMLTableElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13643,8 +13643,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_insert_cell(self, index, error)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_insert_cell(self_, index, error)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMHTMLElement] 
@@ -13653,8 +13653,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_delete_cell(self, index, error)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_delete_cell(self_, index, error)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -13663,40 +13663,40 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_get_row_index(self)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_get_row_index(self_)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_table_row_element_get_row_index, :webkit_dom_html_table_row_element_get_row_index, [DOMHTMLTableRowElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_get_section_row_index(self)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_get_section_row_index(self_)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_table_row_element_get_section_row_index, :webkit_dom_html_table_row_element_get_section_row_index, [DOMHTMLTableRowElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_get_cells(self)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_get_cells(self_)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @return [DOMHTMLCollection] 
   # @scope class
   attach_function :dom_html_table_row_element_get_cells, :webkit_dom_html_table_row_element_get_cells, [DOMHTMLTableRowElement], DOMHTMLCollection
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_get_align(self)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_get_align(self_)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_row_element_get_align, :webkit_dom_html_table_row_element_get_align, [DOMHTMLTableRowElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_set_align(self, value)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_set_align(self_, value)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13704,16 +13704,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_get_bg_color(self)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_get_bg_color(self_)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_row_element_get_bg_color, :webkit_dom_html_table_row_element_get_bg_color, [DOMHTMLTableRowElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_set_bg_color(self, value)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_set_bg_color(self_, value)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13721,16 +13721,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_get_ch(self)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_get_ch(self_)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_row_element_get_ch, :webkit_dom_html_table_row_element_get_ch, [DOMHTMLTableRowElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_set_ch(self, value)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_set_ch(self_, value)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13738,16 +13738,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_get_ch_off(self)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_get_ch_off(self_)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_row_element_get_ch_off, :webkit_dom_html_table_row_element_get_ch_off, [DOMHTMLTableRowElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_set_ch_off(self, value)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_set_ch_off(self_, value)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13755,16 +13755,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_get_v_align(self)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_get_v_align(self_)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_row_element_get_v_align, :webkit_dom_html_table_row_element_get_v_align, [DOMHTMLTableRowElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_row_element_set_v_align(self, value)
-  # @param [DOMHTMLTableRowElement] self 
+  # @method dom_html_table_row_element_set_v_align(self_, value)
+  # @param [DOMHTMLTableRowElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13797,8 +13797,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_section_element_insert_row(self, index, error)
-  # @param [DOMHTMLTableSectionElement] self 
+  # @method dom_html_table_section_element_insert_row(self_, index, error)
+  # @param [DOMHTMLTableSectionElement] self_ 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMHTMLElement] 
@@ -13807,8 +13807,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_section_element_delete_row(self, index, error)
-  # @param [DOMHTMLTableSectionElement] self 
+  # @method dom_html_table_section_element_delete_row(self_, index, error)
+  # @param [DOMHTMLTableSectionElement] self_ 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -13817,16 +13817,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_section_element_get_align(self)
-  # @param [DOMHTMLTableSectionElement] self 
+  # @method dom_html_table_section_element_get_align(self_)
+  # @param [DOMHTMLTableSectionElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_section_element_get_align, :webkit_dom_html_table_section_element_get_align, [DOMHTMLTableSectionElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_section_element_set_align(self, value)
-  # @param [DOMHTMLTableSectionElement] self 
+  # @method dom_html_table_section_element_set_align(self_, value)
+  # @param [DOMHTMLTableSectionElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13834,16 +13834,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_section_element_get_ch(self)
-  # @param [DOMHTMLTableSectionElement] self 
+  # @method dom_html_table_section_element_get_ch(self_)
+  # @param [DOMHTMLTableSectionElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_section_element_get_ch, :webkit_dom_html_table_section_element_get_ch, [DOMHTMLTableSectionElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_section_element_set_ch(self, value)
-  # @param [DOMHTMLTableSectionElement] self 
+  # @method dom_html_table_section_element_set_ch(self_, value)
+  # @param [DOMHTMLTableSectionElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13851,16 +13851,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_section_element_get_ch_off(self)
-  # @param [DOMHTMLTableSectionElement] self 
+  # @method dom_html_table_section_element_get_ch_off(self_)
+  # @param [DOMHTMLTableSectionElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_section_element_get_ch_off, :webkit_dom_html_table_section_element_get_ch_off, [DOMHTMLTableSectionElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_section_element_set_ch_off(self, value)
-  # @param [DOMHTMLTableSectionElement] self 
+  # @method dom_html_table_section_element_set_ch_off(self_, value)
+  # @param [DOMHTMLTableSectionElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13868,16 +13868,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_section_element_get_v_align(self)
-  # @param [DOMHTMLTableSectionElement] self 
+  # @method dom_html_table_section_element_get_v_align(self_)
+  # @param [DOMHTMLTableSectionElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_table_section_element_get_v_align, :webkit_dom_html_table_section_element_get_v_align, [DOMHTMLTableSectionElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_table_section_element_set_v_align(self, value)
-  # @param [DOMHTMLTableSectionElement] self 
+  # @method dom_html_table_section_element_set_v_align(self_, value)
+  # @param [DOMHTMLTableSectionElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13885,8 +13885,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_table_section_element_get_rows(self)
-  # @param [DOMHTMLTableSectionElement] self 
+  # @method dom_html_table_section_element_get_rows(self_)
+  # @param [DOMHTMLTableSectionElement] self_ 
   # @return [DOMHTMLCollection] 
   # @scope class
   attach_function :dom_html_table_section_element_get_rows, :webkit_dom_html_table_section_element_get_rows, [DOMHTMLTableSectionElement], DOMHTMLCollection
@@ -13918,24 +13918,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_select(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_select(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_text_area_element_select, :webkit_dom_html_text_area_element_select, [DOMHTMLTextAreaElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_check_validity(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_check_validity(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_text_area_element_check_validity, :webkit_dom_html_text_area_element_check_validity, [DOMHTMLTextAreaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_custom_validity(self, error)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_custom_validity(self_, error)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [String] error 
   # @return [nil] 
   # @scope class
@@ -13943,10 +13943,10 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_selection_range(self, start, end, direction)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_selection_range(self_, start, end_, direction)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [Integer] start 
-  # @param [Integer] end 
+  # @param [Integer] end_ 
   # @param [String] direction 
   # @return [nil] 
   # @scope class
@@ -13954,16 +13954,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_default_value(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_default_value(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_text_area_element_get_default_value, :webkit_dom_html_text_area_element_get_default_value, [DOMHTMLTextAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_default_value(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_default_value(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -13971,32 +13971,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_form(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_form(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [DOMHTMLFormElement] 
   # @scope class
   attach_function :dom_html_text_area_element_get_form, :webkit_dom_html_text_area_element_get_form, [DOMHTMLTextAreaElement], DOMHTMLFormElement
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_validity(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_validity(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMValidityState)] 
   # @scope class
   attach_function :dom_html_text_area_element_get_validity, :webkit_dom_html_text_area_element_get_validity, [DOMHTMLTextAreaElement], :pointer
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_access_key(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_access_key(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_text_area_element_get_access_key, :webkit_dom_html_text_area_element_get_access_key, [DOMHTMLTextAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_access_key(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_access_key(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -14004,16 +14004,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_cols(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_cols(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_text_area_element_get_cols, :webkit_dom_html_text_area_element_get_cols, [DOMHTMLTextAreaElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_cols(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_cols(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -14021,16 +14021,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_disabled(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_disabled(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_text_area_element_get_disabled, :webkit_dom_html_text_area_element_get_disabled, [DOMHTMLTextAreaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_disabled(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_disabled(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -14038,16 +14038,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_autofocus(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_autofocus(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_text_area_element_get_autofocus, :webkit_dom_html_text_area_element_get_autofocus, [DOMHTMLTextAreaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_autofocus(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_autofocus(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -14055,16 +14055,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_max_length(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_max_length(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_text_area_element_get_max_length, :webkit_dom_html_text_area_element_get_max_length, [DOMHTMLTextAreaElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_max_length(self, value, error)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_max_length(self_, value, error)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [Integer] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -14073,16 +14073,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_name(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_name(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_text_area_element_get_name, :webkit_dom_html_text_area_element_get_name, [DOMHTMLTextAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_name(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_name(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -14090,16 +14090,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_placeholder(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_placeholder(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_text_area_element_get_placeholder, :webkit_dom_html_text_area_element_get_placeholder, [DOMHTMLTextAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_placeholder(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_placeholder(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -14107,16 +14107,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_read_only(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_read_only(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_text_area_element_get_read_only, :webkit_dom_html_text_area_element_get_read_only, [DOMHTMLTextAreaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_read_only(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_read_only(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -14124,16 +14124,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_required(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_required(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_text_area_element_get_required, :webkit_dom_html_text_area_element_get_required, [DOMHTMLTextAreaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_required(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_required(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -14141,16 +14141,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_rows(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_rows(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_text_area_element_get_rows, :webkit_dom_html_text_area_element_get_rows, [DOMHTMLTextAreaElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_rows(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_rows(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -14158,16 +14158,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_value(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_value(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_text_area_element_get_value, :webkit_dom_html_text_area_element_get_value, [DOMHTMLTextAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_value(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_value(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -14175,40 +14175,40 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_text_length(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_text_length(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_text_area_element_get_text_length, :webkit_dom_html_text_area_element_get_text_length, [DOMHTMLTextAreaElement], :ulong
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_will_validate(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_will_validate(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_text_area_element_get_will_validate, :webkit_dom_html_text_area_element_get_will_validate, [DOMHTMLTextAreaElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_validation_message(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_validation_message(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_text_area_element_get_validation_message, :webkit_dom_html_text_area_element_get_validation_message, [DOMHTMLTextAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_selection_start(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_selection_start(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_text_area_element_get_selection_start, :webkit_dom_html_text_area_element_get_selection_start, [DOMHTMLTextAreaElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_selection_start(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_selection_start(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -14216,16 +14216,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_selection_end(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_selection_end(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_text_area_element_get_selection_end, :webkit_dom_html_text_area_element_get_selection_end, [DOMHTMLTextAreaElement], :long
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_selection_end(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_selection_end(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -14233,16 +14233,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_selection_direction(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_selection_direction(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_text_area_element_get_selection_direction, :webkit_dom_html_text_area_element_get_selection_direction, [DOMHTMLTextAreaElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_set_selection_direction(self, value)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_set_selection_direction(self_, value)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -14250,8 +14250,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_text_area_element_get_labels(self)
-  # @param [DOMHTMLTextAreaElement] self 
+  # @method dom_html_text_area_element_get_labels(self_)
+  # @param [DOMHTMLTextAreaElement] self_ 
   # @return [FFI::Pointer(*WebKitDOMNodeList)] 
   # @scope class
   attach_function :dom_html_text_area_element_get_labels, :webkit_dom_html_text_area_element_get_labels, [DOMHTMLTextAreaElement], :pointer
@@ -14283,16 +14283,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_title_element_get_text(self)
-  # @param [DOMHTMLTitleElement] self 
+  # @method dom_html_title_element_get_text(self_)
+  # @param [DOMHTMLTitleElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_title_element_get_text, :webkit_dom_html_title_element_get_text, [DOMHTMLTitleElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_title_element_set_text(self, value)
-  # @param [DOMHTMLTitleElement] self 
+  # @method dom_html_title_element_set_text(self_, value)
+  # @param [DOMHTMLTitleElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -14325,16 +14325,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_htmlu_list_element_get_compact(self)
-  # @param [DOMHTMLUListElement] self 
+  # @method dom_htmlu_list_element_get_compact(self_)
+  # @param [DOMHTMLUListElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_htmlu_list_element_get_compact, :webkit_dom_htmlu_list_element_get_compact, [DOMHTMLUListElement], :int
   
   # (Not documented)
   # 
-  # @method dom_htmlu_list_element_set_compact(self, value)
-  # @param [DOMHTMLUListElement] self 
+  # @method dom_htmlu_list_element_set_compact(self_, value)
+  # @param [DOMHTMLUListElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -14367,8 +14367,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_webkit_enter_fullscreen(self, error)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_webkit_enter_fullscreen(self_, error)
+  # @param [DOMHTMLVideoElement] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
   # @scope class
@@ -14376,16 +14376,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_webkit_exit_fullscreen(self)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_webkit_exit_fullscreen(self_)
+  # @param [DOMHTMLVideoElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_video_element_webkit_exit_fullscreen, :webkit_dom_html_video_element_webkit_exit_fullscreen, [DOMHTMLVideoElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_webkit_enter_full_screen(self, error)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_webkit_enter_full_screen(self_, error)
+  # @param [DOMHTMLVideoElement] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
   # @scope class
@@ -14393,24 +14393,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_webkit_exit_full_screen(self)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_webkit_exit_full_screen(self_)
+  # @param [DOMHTMLVideoElement] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_html_video_element_webkit_exit_full_screen, :webkit_dom_html_video_element_webkit_exit_full_screen, [DOMHTMLVideoElement], :void
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_get_width(self)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_get_width(self_)
+  # @param [DOMHTMLVideoElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_video_element_get_width, :webkit_dom_html_video_element_get_width, [DOMHTMLVideoElement], :ulong
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_set_width(self, value)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_set_width(self_, value)
+  # @param [DOMHTMLVideoElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -14418,16 +14418,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_get_height(self)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_get_height(self_)
+  # @param [DOMHTMLVideoElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_video_element_get_height, :webkit_dom_html_video_element_get_height, [DOMHTMLVideoElement], :ulong
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_set_height(self, value)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_set_height(self_, value)
+  # @param [DOMHTMLVideoElement] self_ 
   # @param [Integer] value 
   # @return [nil] 
   # @scope class
@@ -14435,32 +14435,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_get_video_width(self)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_get_video_width(self_)
+  # @param [DOMHTMLVideoElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_video_element_get_video_width, :webkit_dom_html_video_element_get_video_width, [DOMHTMLVideoElement], :ulong
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_get_video_height(self)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_get_video_height(self_)
+  # @param [DOMHTMLVideoElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_video_element_get_video_height, :webkit_dom_html_video_element_get_video_height, [DOMHTMLVideoElement], :ulong
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_get_poster(self)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_get_poster(self_)
+  # @param [DOMHTMLVideoElement] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_html_video_element_get_poster, :webkit_dom_html_video_element_get_poster, [DOMHTMLVideoElement], :string
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_set_poster(self, value)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_set_poster(self_, value)
+  # @param [DOMHTMLVideoElement] self_ 
   # @param [String] value 
   # @return [nil] 
   # @scope class
@@ -14468,32 +14468,32 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_get_webkit_supports_fullscreen(self)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_get_webkit_supports_fullscreen(self_)
+  # @param [DOMHTMLVideoElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_video_element_get_webkit_supports_fullscreen, :webkit_dom_html_video_element_get_webkit_supports_fullscreen, [DOMHTMLVideoElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_get_webkit_displaying_fullscreen(self)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_get_webkit_displaying_fullscreen(self_)
+  # @param [DOMHTMLVideoElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_video_element_get_webkit_displaying_fullscreen, :webkit_dom_html_video_element_get_webkit_displaying_fullscreen, [DOMHTMLVideoElement], :int
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_get_webkit_decoded_frame_count(self)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_get_webkit_decoded_frame_count(self_)
+  # @param [DOMHTMLVideoElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_video_element_get_webkit_decoded_frame_count, :webkit_dom_html_video_element_get_webkit_decoded_frame_count, [DOMHTMLVideoElement], :ulong
   
   # (Not documented)
   # 
-  # @method dom_html_video_element_get_webkit_dropped_frame_count(self)
-  # @param [DOMHTMLVideoElement] self 
+  # @method dom_html_video_element_get_webkit_dropped_frame_count(self_)
+  # @param [DOMHTMLVideoElement] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_html_video_element_get_webkit_dropped_frame_count, :webkit_dom_html_video_element_get_webkit_dropped_frame_count, [DOMHTMLVideoElement], :ulong
@@ -14544,24 +14544,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_history_back(self)
-  # @param [DOMHistory] self 
+  # @method dom_history_back(self_)
+  # @param [DOMHistory] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_history_back, :webkit_dom_history_back, [DOMHistory], :void
   
   # (Not documented)
   # 
-  # @method dom_history_forward(self)
-  # @param [DOMHistory] self 
+  # @method dom_history_forward(self_)
+  # @param [DOMHistory] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_history_forward, :webkit_dom_history_forward, [DOMHistory], :void
   
   # (Not documented)
   # 
-  # @method dom_history_go(self, distance)
-  # @param [DOMHistory] self 
+  # @method dom_history_go(self_, distance)
+  # @param [DOMHistory] self_ 
   # @param [Integer] distance 
   # @return [nil] 
   # @scope class
@@ -14569,8 +14569,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_history_get_length(self)
-  # @param [DOMHistory] self 
+  # @method dom_history_get_length(self_)
+  # @param [DOMHistory] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_history_get_length, :webkit_dom_history_get_length, [DOMHistory], :ulong
@@ -14613,8 +14613,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_location_get_parameter(self, name)
-  # @param [DOMLocation] self 
+  # @method dom_location_get_parameter(self_, name)
+  # @param [DOMLocation] self_ 
   # @param [String] name 
   # @return [String] 
   # @scope class
@@ -14622,8 +14622,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_location_get_origin(self)
-  # @param [DOMLocation] self 
+  # @method dom_location_get_origin(self_)
+  # @param [DOMLocation] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_location_get_origin, :webkit_dom_location_get_origin, [DOMLocation], :string
@@ -14662,8 +14662,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_media_error_get_code(self)
-  # @param [DOMMediaError] self 
+  # @method dom_media_error_get_code(self_)
+  # @param [DOMMediaError] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_media_error_get_code, :webkit_dom_media_error_get_code, [DOMMediaError], :ushort
@@ -14722,8 +14722,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_media_list_item(self, index)
-  # @param [DOMMediaList] self 
+  # @method dom_media_list_item(self_, index)
+  # @param [DOMMediaList] self_ 
   # @param [Integer] index 
   # @return [String] 
   # @scope class
@@ -14731,8 +14731,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_media_list_delete_medium(self, old_medium, error)
-  # @param [DOMMediaList] self 
+  # @method dom_media_list_delete_medium(self_, old_medium, error)
+  # @param [DOMMediaList] self_ 
   # @param [String] old_medium 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -14741,8 +14741,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_media_list_append_medium(self, new_medium, error)
-  # @param [DOMMediaList] self 
+  # @method dom_media_list_append_medium(self_, new_medium, error)
+  # @param [DOMMediaList] self_ 
   # @param [String] new_medium 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -14751,16 +14751,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_media_list_get_media_text(self)
-  # @param [DOMMediaList] self 
+  # @method dom_media_list_get_media_text(self_)
+  # @param [DOMMediaList] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_media_list_get_media_text, :webkit_dom_media_list_get_media_text, [DOMMediaList], :string
   
   # (Not documented)
   # 
-  # @method dom_media_list_set_media_text(self, value, error)
-  # @param [DOMMediaList] self 
+  # @method dom_media_list_set_media_text(self_, value, error)
+  # @param [DOMMediaList] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -14769,8 +14769,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_media_list_get_length(self)
-  # @param [DOMMediaList] self 
+  # @method dom_media_list_get_length(self_)
+  # @param [DOMMediaList] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_media_list_get_length, :webkit_dom_media_list_get_length, [DOMMediaList], :ulong
@@ -14813,16 +14813,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_media_query_list_get_media(self)
-  # @param [DOMMediaQueryList] self 
+  # @method dom_media_query_list_get_media(self_)
+  # @param [DOMMediaQueryList] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_media_query_list_get_media, :webkit_dom_media_query_list_get_media, [DOMMediaQueryList], :string
   
   # (Not documented)
   # 
-  # @method dom_media_query_list_get_matches(self)
-  # @param [DOMMediaQueryList] self 
+  # @method dom_media_query_list_get_matches(self_)
+  # @param [DOMMediaQueryList] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_media_query_list_get_matches, :webkit_dom_media_query_list_get_matches, [DOMMediaQueryList], :int
@@ -14869,24 +14869,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_memory_info_get_total_js_heap_size(self)
-  # @param [DOMMemoryInfo] self 
+  # @method dom_memory_info_get_total_js_heap_size(self_)
+  # @param [DOMMemoryInfo] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_memory_info_get_total_js_heap_size, :webkit_dom_memory_info_get_total_js_heap_size, [DOMMemoryInfo], :ulong
   
   # (Not documented)
   # 
-  # @method dom_memory_info_get_used_js_heap_size(self)
-  # @param [DOMMemoryInfo] self 
+  # @method dom_memory_info_get_used_js_heap_size(self_)
+  # @param [DOMMemoryInfo] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_memory_info_get_used_js_heap_size, :webkit_dom_memory_info_get_used_js_heap_size, [DOMMemoryInfo], :ulong
   
   # (Not documented)
   # 
-  # @method dom_memory_info_get_js_heap_size_limit(self)
-  # @param [DOMMemoryInfo] self 
+  # @method dom_memory_info_get_js_heap_size_limit(self_)
+  # @param [DOMMemoryInfo] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_memory_info_get_js_heap_size_limit, :webkit_dom_memory_info_get_js_heap_size_limit, [DOMMemoryInfo], :ulong
@@ -14943,8 +14943,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_ui_event_init_ui_event(self, type, can_bubble, cancelable, view, detail)
-  # @param [DOMUIEvent] self 
+  # @method dom_ui_event_init_ui_event(self_, type, can_bubble, cancelable, view, detail)
+  # @param [DOMUIEvent] self_ 
   # @param [String] type 
   # @param [Integer] can_bubble 
   # @param [Integer] cancelable 
@@ -14956,72 +14956,72 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_ui_event_get_view(self)
-  # @param [DOMUIEvent] self 
+  # @method dom_ui_event_get_view(self_)
+  # @param [DOMUIEvent] self_ 
   # @return [DOMDOMWindow] 
   # @scope class
   attach_function :dom_ui_event_get_view, :webkit_dom_ui_event_get_view, [DOMUIEvent], DOMDOMWindow
   
   # (Not documented)
   # 
-  # @method dom_ui_event_get_detail(self)
-  # @param [DOMUIEvent] self 
+  # @method dom_ui_event_get_detail(self_)
+  # @param [DOMUIEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_ui_event_get_detail, :webkit_dom_ui_event_get_detail, [DOMUIEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_ui_event_get_key_code(self)
-  # @param [DOMUIEvent] self 
+  # @method dom_ui_event_get_key_code(self_)
+  # @param [DOMUIEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_ui_event_get_key_code, :webkit_dom_ui_event_get_key_code, [DOMUIEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_ui_event_get_char_code(self)
-  # @param [DOMUIEvent] self 
+  # @method dom_ui_event_get_char_code(self_)
+  # @param [DOMUIEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_ui_event_get_char_code, :webkit_dom_ui_event_get_char_code, [DOMUIEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_ui_event_get_layer_x(self)
-  # @param [DOMUIEvent] self 
+  # @method dom_ui_event_get_layer_x(self_)
+  # @param [DOMUIEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_ui_event_get_layer_x, :webkit_dom_ui_event_get_layer_x, [DOMUIEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_ui_event_get_layer_y(self)
-  # @param [DOMUIEvent] self 
+  # @method dom_ui_event_get_layer_y(self_)
+  # @param [DOMUIEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_ui_event_get_layer_y, :webkit_dom_ui_event_get_layer_y, [DOMUIEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_ui_event_get_page_x(self)
-  # @param [DOMUIEvent] self 
+  # @method dom_ui_event_get_page_x(self_)
+  # @param [DOMUIEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_ui_event_get_page_x, :webkit_dom_ui_event_get_page_x, [DOMUIEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_ui_event_get_page_y(self)
-  # @param [DOMUIEvent] self 
+  # @method dom_ui_event_get_page_y(self_)
+  # @param [DOMUIEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_ui_event_get_page_y, :webkit_dom_ui_event_get_page_y, [DOMUIEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_ui_event_get_which(self)
-  # @param [DOMUIEvent] self 
+  # @method dom_ui_event_get_which(self_)
+  # @param [DOMUIEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_ui_event_get_which, :webkit_dom_ui_event_get_which, [DOMUIEvent], :long
@@ -15124,8 +15124,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_init_mouse_event(self, type, can_bubble, cancelable, view, detail, screen_x, screen_y, client_x, client_y, ctrl_key, alt_key, shift_key, meta_key, button, related_target)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_init_mouse_event(self_, type, can_bubble, cancelable, view, detail, screen_x, screen_y, client_x, client_y, ctrl_key, alt_key, shift_key, meta_key, button, related_target)
+  # @param [DOMMouseEvent] self_ 
   # @param [String] type 
   # @param [Integer] can_bubble 
   # @param [Integer] cancelable 
@@ -15147,128 +15147,128 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_screen_x(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_screen_x(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_mouse_event_get_screen_x, :webkit_dom_mouse_event_get_screen_x, [DOMMouseEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_screen_y(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_screen_y(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_mouse_event_get_screen_y, :webkit_dom_mouse_event_get_screen_y, [DOMMouseEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_client_x(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_client_x(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_mouse_event_get_client_x, :webkit_dom_mouse_event_get_client_x, [DOMMouseEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_client_y(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_client_y(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_mouse_event_get_client_y, :webkit_dom_mouse_event_get_client_y, [DOMMouseEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_ctrl_key(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_ctrl_key(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_mouse_event_get_ctrl_key, :webkit_dom_mouse_event_get_ctrl_key, [DOMMouseEvent], :int
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_shift_key(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_shift_key(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_mouse_event_get_shift_key, :webkit_dom_mouse_event_get_shift_key, [DOMMouseEvent], :int
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_alt_key(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_alt_key(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_mouse_event_get_alt_key, :webkit_dom_mouse_event_get_alt_key, [DOMMouseEvent], :int
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_meta_key(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_meta_key(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_mouse_event_get_meta_key, :webkit_dom_mouse_event_get_meta_key, [DOMMouseEvent], :int
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_button(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_button(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_mouse_event_get_button, :webkit_dom_mouse_event_get_button, [DOMMouseEvent], :ushort
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_related_target(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_related_target(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [DOMEventTarget] 
   # @scope class
   attach_function :dom_mouse_event_get_related_target, :webkit_dom_mouse_event_get_related_target, [DOMMouseEvent], DOMEventTarget
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_offset_x(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_offset_x(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_mouse_event_get_offset_x, :webkit_dom_mouse_event_get_offset_x, [DOMMouseEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_offset_y(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_offset_y(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_mouse_event_get_offset_y, :webkit_dom_mouse_event_get_offset_y, [DOMMouseEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_x(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_x(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_mouse_event_get_x, :webkit_dom_mouse_event_get_x, [DOMMouseEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_y(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_y(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_mouse_event_get_y, :webkit_dom_mouse_event_get_y, [DOMMouseEvent], :long
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_from_element(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_from_element(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_mouse_event_get_from_element, :webkit_dom_mouse_event_get_from_element, [DOMMouseEvent], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_mouse_event_get_to_element(self)
-  # @param [DOMMouseEvent] self 
+  # @method dom_mouse_event_get_to_element(self_)
+  # @param [DOMMouseEvent] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_mouse_event_get_to_element, :webkit_dom_mouse_event_get_to_element, [DOMMouseEvent], DOMNode
@@ -15335,8 +15335,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_named_node_map_get_named_item(self, name)
-  # @param [DOMNamedNodeMap] self 
+  # @method dom_named_node_map_get_named_item(self_, name)
+  # @param [DOMNamedNodeMap] self_ 
   # @param [String] name 
   # @return [DOMNode] 
   # @scope class
@@ -15344,8 +15344,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_named_node_map_set_named_item(self, node, error)
-  # @param [DOMNamedNodeMap] self 
+  # @method dom_named_node_map_set_named_item(self_, node, error)
+  # @param [DOMNamedNodeMap] self_ 
   # @param [DOMNode] node 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
@@ -15354,8 +15354,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_named_node_map_remove_named_item(self, name, error)
-  # @param [DOMNamedNodeMap] self 
+  # @method dom_named_node_map_remove_named_item(self_, name, error)
+  # @param [DOMNamedNodeMap] self_ 
   # @param [String] name 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
@@ -15364,8 +15364,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_named_node_map_item(self, index)
-  # @param [DOMNamedNodeMap] self 
+  # @method dom_named_node_map_item(self_, index)
+  # @param [DOMNamedNodeMap] self_ 
   # @param [Integer] index 
   # @return [DOMNode] 
   # @scope class
@@ -15373,8 +15373,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_named_node_map_get_named_item_ns(self, namespace_uri, local_name)
-  # @param [DOMNamedNodeMap] self 
+  # @method dom_named_node_map_get_named_item_ns(self_, namespace_uri, local_name)
+  # @param [DOMNamedNodeMap] self_ 
   # @param [String] namespace_uri 
   # @param [String] local_name 
   # @return [DOMNode] 
@@ -15383,8 +15383,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_named_node_map_set_named_item_ns(self, node, error)
-  # @param [DOMNamedNodeMap] self 
+  # @method dom_named_node_map_set_named_item_ns(self_, node, error)
+  # @param [DOMNamedNodeMap] self_ 
   # @param [DOMNode] node 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
@@ -15393,8 +15393,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_named_node_map_remove_named_item_ns(self, namespace_uri, local_name, error)
-  # @param [DOMNamedNodeMap] self 
+  # @method dom_named_node_map_remove_named_item_ns(self_, namespace_uri, local_name, error)
+  # @param [DOMNamedNodeMap] self_ 
   # @param [String] namespace_uri 
   # @param [String] local_name 
   # @param [FFI::Pointer(**GError)] error 
@@ -15404,8 +15404,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_named_node_map_get_length(self)
-  # @param [DOMNamedNodeMap] self 
+  # @method dom_named_node_map_get_length(self_)
+  # @param [DOMNamedNodeMap] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_named_node_map_get_length, :webkit_dom_named_node_map_get_length, [DOMNamedNodeMap], :ulong
@@ -15508,136 +15508,136 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_navigator_java_enabled(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_java_enabled(self_)
+  # @param [DOMNavigator] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_navigator_java_enabled, :webkit_dom_navigator_java_enabled, [DOMNavigator], :int
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_storage_updates(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_storage_updates(self_)
+  # @param [DOMNavigator] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_navigator_get_storage_updates, :webkit_dom_navigator_get_storage_updates, [DOMNavigator], :void
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_app_code_name(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_app_code_name(self_)
+  # @param [DOMNavigator] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_navigator_get_app_code_name, :webkit_dom_navigator_get_app_code_name, [DOMNavigator], :string
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_app_name(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_app_name(self_)
+  # @param [DOMNavigator] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_navigator_get_app_name, :webkit_dom_navigator_get_app_name, [DOMNavigator], :string
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_app_version(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_app_version(self_)
+  # @param [DOMNavigator] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_navigator_get_app_version, :webkit_dom_navigator_get_app_version, [DOMNavigator], :string
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_language(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_language(self_)
+  # @param [DOMNavigator] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_navigator_get_language, :webkit_dom_navigator_get_language, [DOMNavigator], :string
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_user_agent(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_user_agent(self_)
+  # @param [DOMNavigator] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_navigator_get_user_agent, :webkit_dom_navigator_get_user_agent, [DOMNavigator], :string
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_platform(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_platform(self_)
+  # @param [DOMNavigator] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_navigator_get_platform, :webkit_dom_navigator_get_platform, [DOMNavigator], :string
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_plugins(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_plugins(self_)
+  # @param [DOMNavigator] self_ 
   # @return [DOMDOMPluginArray] 
   # @scope class
   attach_function :dom_navigator_get_plugins, :webkit_dom_navigator_get_plugins, [DOMNavigator], DOMDOMPluginArray
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_mime_types(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_mime_types(self_)
+  # @param [DOMNavigator] self_ 
   # @return [DOMDOMMimeTypeArray] 
   # @scope class
   attach_function :dom_navigator_get_mime_types, :webkit_dom_navigator_get_mime_types, [DOMNavigator], DOMDOMMimeTypeArray
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_product(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_product(self_)
+  # @param [DOMNavigator] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_navigator_get_product, :webkit_dom_navigator_get_product, [DOMNavigator], :string
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_product_sub(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_product_sub(self_)
+  # @param [DOMNavigator] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_navigator_get_product_sub, :webkit_dom_navigator_get_product_sub, [DOMNavigator], :string
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_vendor(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_vendor(self_)
+  # @param [DOMNavigator] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_navigator_get_vendor, :webkit_dom_navigator_get_vendor, [DOMNavigator], :string
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_vendor_sub(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_vendor_sub(self_)
+  # @param [DOMNavigator] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_navigator_get_vendor_sub, :webkit_dom_navigator_get_vendor_sub, [DOMNavigator], :string
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_cookie_enabled(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_cookie_enabled(self_)
+  # @param [DOMNavigator] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_navigator_get_cookie_enabled, :webkit_dom_navigator_get_cookie_enabled, [DOMNavigator], :int
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_on_line(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_on_line(self_)
+  # @param [DOMNavigator] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_navigator_get_on_line, :webkit_dom_navigator_get_on_line, [DOMNavigator], :int
   
   # (Not documented)
   # 
-  # @method dom_navigator_get_geolocation(self)
-  # @param [DOMNavigator] self 
+  # @method dom_navigator_get_geolocation(self_)
+  # @param [DOMNavigator] self_ 
   # @return [DOMGeolocation] 
   # @scope class
   attach_function :dom_navigator_get_geolocation, :webkit_dom_navigator_get_geolocation, [DOMNavigator], DOMGeolocation
@@ -15676,8 +15676,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_filter_accept_node(self, n)
-  # @param [DOMNodeFilter] self 
+  # @method dom_node_filter_accept_node(self_, n)
+  # @param [DOMNodeFilter] self_ 
   # @param [DOMNode] n 
   # @return [Integer] 
   # @scope class
@@ -15749,8 +15749,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_iterator_next_node(self, error)
-  # @param [DOMNodeIterator] self 
+  # @method dom_node_iterator_next_node(self_, error)
+  # @param [DOMNodeIterator] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
   # @scope class
@@ -15758,8 +15758,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_iterator_previous_node(self, error)
-  # @param [DOMNodeIterator] self 
+  # @method dom_node_iterator_previous_node(self_, error)
+  # @param [DOMNodeIterator] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
   # @scope class
@@ -15767,56 +15767,56 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_iterator_detach(self)
-  # @param [DOMNodeIterator] self 
+  # @method dom_node_iterator_detach(self_)
+  # @param [DOMNodeIterator] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_node_iterator_detach, :webkit_dom_node_iterator_detach, [DOMNodeIterator], :void
   
   # (Not documented)
   # 
-  # @method dom_node_iterator_get_root(self)
-  # @param [DOMNodeIterator] self 
+  # @method dom_node_iterator_get_root(self_)
+  # @param [DOMNodeIterator] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_node_iterator_get_root, :webkit_dom_node_iterator_get_root, [DOMNodeIterator], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_node_iterator_get_what_to_show(self)
-  # @param [DOMNodeIterator] self 
+  # @method dom_node_iterator_get_what_to_show(self_)
+  # @param [DOMNodeIterator] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_node_iterator_get_what_to_show, :webkit_dom_node_iterator_get_what_to_show, [DOMNodeIterator], :ulong
   
   # (Not documented)
   # 
-  # @method dom_node_iterator_get_filter(self)
-  # @param [DOMNodeIterator] self 
+  # @method dom_node_iterator_get_filter(self_)
+  # @param [DOMNodeIterator] self_ 
   # @return [DOMNodeFilter] 
   # @scope class
   attach_function :dom_node_iterator_get_filter, :webkit_dom_node_iterator_get_filter, [DOMNodeIterator], DOMNodeFilter
   
   # (Not documented)
   # 
-  # @method dom_node_iterator_get_expand_entity_references(self)
-  # @param [DOMNodeIterator] self 
+  # @method dom_node_iterator_get_expand_entity_references(self_)
+  # @param [DOMNodeIterator] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_node_iterator_get_expand_entity_references, :webkit_dom_node_iterator_get_expand_entity_references, [DOMNodeIterator], :int
   
   # (Not documented)
   # 
-  # @method dom_node_iterator_get_reference_node(self)
-  # @param [DOMNodeIterator] self 
+  # @method dom_node_iterator_get_reference_node(self_)
+  # @param [DOMNodeIterator] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_node_iterator_get_reference_node, :webkit_dom_node_iterator_get_reference_node, [DOMNodeIterator], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_node_iterator_get_pointer_before_reference_node(self)
-  # @param [DOMNodeIterator] self 
+  # @method dom_node_iterator_get_pointer_before_reference_node(self_)
+  # @param [DOMNodeIterator] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_node_iterator_get_pointer_before_reference_node, :webkit_dom_node_iterator_get_pointer_before_reference_node, [DOMNodeIterator], :int
@@ -15859,8 +15859,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_list_item(self, index)
-  # @param [DOMNodeList] self 
+  # @method dom_node_list_item(self_, index)
+  # @param [DOMNodeList] self_ 
   # @param [Integer] index 
   # @return [DOMNode] 
   # @scope class
@@ -15868,8 +15868,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_node_list_get_length(self)
-  # @param [DOMNodeList] self 
+  # @method dom_node_list_get_length(self_)
+  # @param [DOMNodeList] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_node_list_get_length, :webkit_dom_node_list_get_length, [DOMNodeList], :ulong
@@ -15920,24 +15920,24 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_processing_instruction_get_target(self)
-  # @param [DOMProcessingInstruction] self 
+  # @method dom_processing_instruction_get_target(self_)
+  # @param [DOMProcessingInstruction] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_processing_instruction_get_target, :webkit_dom_processing_instruction_get_target, [DOMProcessingInstruction], :string
   
   # (Not documented)
   # 
-  # @method dom_processing_instruction_get_data(self)
-  # @param [DOMProcessingInstruction] self 
+  # @method dom_processing_instruction_get_data(self_)
+  # @param [DOMProcessingInstruction] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_processing_instruction_get_data, :webkit_dom_processing_instruction_get_data, [DOMProcessingInstruction], :string
   
   # (Not documented)
   # 
-  # @method dom_processing_instruction_set_data(self, value, error)
-  # @param [DOMProcessingInstruction] self 
+  # @method dom_processing_instruction_set_data(self_, value, error)
+  # @param [DOMProcessingInstruction] self_ 
   # @param [String] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -15946,8 +15946,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_processing_instruction_get_sheet(self)
-  # @param [DOMProcessingInstruction] self 
+  # @method dom_processing_instruction_get_sheet(self_)
+  # @param [DOMProcessingInstruction] self_ 
   # @return [DOMStyleSheet] 
   # @scope class
   attach_function :dom_processing_instruction_get_sheet, :webkit_dom_processing_instruction_get_sheet, [DOMProcessingInstruction], DOMStyleSheet
@@ -16106,8 +16106,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_set_start(self, ref_node, offset, error)
-  # @param [DOMRange] self 
+  # @method dom_range_set_start(self_, ref_node, offset, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] ref_node 
   # @param [Integer] offset 
   # @param [FFI::Pointer(**GError)] error 
@@ -16117,8 +16117,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_set_end(self, ref_node, offset, error)
-  # @param [DOMRange] self 
+  # @method dom_range_set_end(self_, ref_node, offset, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] ref_node 
   # @param [Integer] offset 
   # @param [FFI::Pointer(**GError)] error 
@@ -16128,8 +16128,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_set_start_before(self, ref_node, error)
-  # @param [DOMRange] self 
+  # @method dom_range_set_start_before(self_, ref_node, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] ref_node 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -16138,8 +16138,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_set_start_after(self, ref_node, error)
-  # @param [DOMRange] self 
+  # @method dom_range_set_start_after(self_, ref_node, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] ref_node 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -16148,8 +16148,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_set_end_before(self, ref_node, error)
-  # @param [DOMRange] self 
+  # @method dom_range_set_end_before(self_, ref_node, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] ref_node 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -16158,8 +16158,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_set_end_after(self, ref_node, error)
-  # @param [DOMRange] self 
+  # @method dom_range_set_end_after(self_, ref_node, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] ref_node 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -16168,8 +16168,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_collapse(self, to_start, error)
-  # @param [DOMRange] self 
+  # @method dom_range_collapse(self_, to_start, error)
+  # @param [DOMRange] self_ 
   # @param [Integer] to_start 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -16178,8 +16178,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_select_node(self, ref_node, error)
-  # @param [DOMRange] self 
+  # @method dom_range_select_node(self_, ref_node, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] ref_node 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -16188,8 +16188,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_select_node_contents(self, ref_node, error)
-  # @param [DOMRange] self 
+  # @method dom_range_select_node_contents(self_, ref_node, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] ref_node 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -16198,8 +16198,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_compare_boundary_points(self, how, source_range, error)
-  # @param [DOMRange] self 
+  # @method dom_range_compare_boundary_points(self_, how, source_range, error)
+  # @param [DOMRange] self_ 
   # @param [Integer] how 
   # @param [DOMRange] source_range 
   # @param [FFI::Pointer(**GError)] error 
@@ -16209,8 +16209,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_delete_contents(self, error)
-  # @param [DOMRange] self 
+  # @method dom_range_delete_contents(self_, error)
+  # @param [DOMRange] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
   # @scope class
@@ -16218,8 +16218,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_extract_contents(self, error)
-  # @param [DOMRange] self 
+  # @method dom_range_extract_contents(self_, error)
+  # @param [DOMRange] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMDocumentFragment] 
   # @scope class
@@ -16227,8 +16227,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_clone_contents(self, error)
-  # @param [DOMRange] self 
+  # @method dom_range_clone_contents(self_, error)
+  # @param [DOMRange] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMDocumentFragment] 
   # @scope class
@@ -16236,8 +16236,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_insert_node(self, new_node, error)
-  # @param [DOMRange] self 
+  # @method dom_range_insert_node(self_, new_node, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] new_node 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -16246,8 +16246,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_surround_contents(self, new_parent, error)
-  # @param [DOMRange] self 
+  # @method dom_range_surround_contents(self_, new_parent, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] new_parent 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -16256,8 +16256,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_clone_range(self, error)
-  # @param [DOMRange] self 
+  # @method dom_range_clone_range(self_, error)
+  # @param [DOMRange] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMRange] 
   # @scope class
@@ -16265,8 +16265,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_to_string(self, error)
-  # @param [DOMRange] self 
+  # @method dom_range_to_string(self_, error)
+  # @param [DOMRange] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [String] 
   # @scope class
@@ -16274,8 +16274,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_detach(self, error)
-  # @param [DOMRange] self 
+  # @method dom_range_detach(self_, error)
+  # @param [DOMRange] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
   # @scope class
@@ -16283,8 +16283,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_create_contextual_fragment(self, html, error)
-  # @param [DOMRange] self 
+  # @method dom_range_create_contextual_fragment(self_, html, error)
+  # @param [DOMRange] self_ 
   # @param [String] html 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMDocumentFragment] 
@@ -16293,8 +16293,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_intersects_node(self, ref_node, error)
-  # @param [DOMRange] self 
+  # @method dom_range_intersects_node(self_, ref_node, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] ref_node 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Integer] 
@@ -16303,8 +16303,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_compare_node(self, ref_node, error)
-  # @param [DOMRange] self 
+  # @method dom_range_compare_node(self_, ref_node, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] ref_node 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Integer] 
@@ -16313,8 +16313,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_compare_point(self, ref_node, offset, error)
-  # @param [DOMRange] self 
+  # @method dom_range_compare_point(self_, ref_node, offset, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] ref_node 
   # @param [Integer] offset 
   # @param [FFI::Pointer(**GError)] error 
@@ -16324,8 +16324,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_is_point_in_range(self, ref_node, offset, error)
-  # @param [DOMRange] self 
+  # @method dom_range_is_point_in_range(self_, ref_node, offset, error)
+  # @param [DOMRange] self_ 
   # @param [DOMNode] ref_node 
   # @param [Integer] offset 
   # @param [FFI::Pointer(**GError)] error 
@@ -16335,8 +16335,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_expand(self, unit, error)
-  # @param [DOMRange] self 
+  # @method dom_range_expand(self_, unit, error)
+  # @param [DOMRange] self_ 
   # @param [String] unit 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -16345,8 +16345,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_get_start_container(self, error)
-  # @param [DOMRange] self 
+  # @method dom_range_get_start_container(self_, error)
+  # @param [DOMRange] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
   # @scope class
@@ -16354,8 +16354,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_get_start_offset(self, error)
-  # @param [DOMRange] self 
+  # @method dom_range_get_start_offset(self_, error)
+  # @param [DOMRange] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Integer] 
   # @scope class
@@ -16363,8 +16363,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_get_end_container(self, error)
-  # @param [DOMRange] self 
+  # @method dom_range_get_end_container(self_, error)
+  # @param [DOMRange] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
   # @scope class
@@ -16372,8 +16372,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_get_end_offset(self, error)
-  # @param [DOMRange] self 
+  # @method dom_range_get_end_offset(self_, error)
+  # @param [DOMRange] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Integer] 
   # @scope class
@@ -16381,8 +16381,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_get_collapsed(self, error)
-  # @param [DOMRange] self 
+  # @method dom_range_get_collapsed(self_, error)
+  # @param [DOMRange] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Integer] 
   # @scope class
@@ -16390,8 +16390,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_get_common_ancestor_container(self, error)
-  # @param [DOMRange] self 
+  # @method dom_range_get_common_ancestor_container(self_, error)
+  # @param [DOMRange] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
   # @scope class
@@ -16399,8 +16399,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_range_get_text(self)
-  # @param [DOMRange] self 
+  # @method dom_range_get_text(self_)
+  # @param [DOMRange] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_range_get_text, :webkit_dom_range_get_text, [DOMRange], :string
@@ -16467,64 +16467,64 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_screen_get_height(self)
-  # @param [DOMScreen] self 
+  # @method dom_screen_get_height(self_)
+  # @param [DOMScreen] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_screen_get_height, :webkit_dom_screen_get_height, [DOMScreen], :ulong
   
   # (Not documented)
   # 
-  # @method dom_screen_get_width(self)
-  # @param [DOMScreen] self 
+  # @method dom_screen_get_width(self_)
+  # @param [DOMScreen] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_screen_get_width, :webkit_dom_screen_get_width, [DOMScreen], :ulong
   
   # (Not documented)
   # 
-  # @method dom_screen_get_color_depth(self)
-  # @param [DOMScreen] self 
+  # @method dom_screen_get_color_depth(self_)
+  # @param [DOMScreen] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_screen_get_color_depth, :webkit_dom_screen_get_color_depth, [DOMScreen], :ulong
   
   # (Not documented)
   # 
-  # @method dom_screen_get_pixel_depth(self)
-  # @param [DOMScreen] self 
+  # @method dom_screen_get_pixel_depth(self_)
+  # @param [DOMScreen] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_screen_get_pixel_depth, :webkit_dom_screen_get_pixel_depth, [DOMScreen], :ulong
   
   # (Not documented)
   # 
-  # @method dom_screen_get_avail_left(self)
-  # @param [DOMScreen] self 
+  # @method dom_screen_get_avail_left(self_)
+  # @param [DOMScreen] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_screen_get_avail_left, :webkit_dom_screen_get_avail_left, [DOMScreen], :long
   
   # (Not documented)
   # 
-  # @method dom_screen_get_avail_top(self)
-  # @param [DOMScreen] self 
+  # @method dom_screen_get_avail_top(self_)
+  # @param [DOMScreen] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_screen_get_avail_top, :webkit_dom_screen_get_avail_top, [DOMScreen], :long
   
   # (Not documented)
   # 
-  # @method dom_screen_get_avail_height(self)
-  # @param [DOMScreen] self 
+  # @method dom_screen_get_avail_height(self_)
+  # @param [DOMScreen] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_screen_get_avail_height, :webkit_dom_screen_get_avail_height, [DOMScreen], :ulong
   
   # (Not documented)
   # 
-  # @method dom_screen_get_avail_width(self)
-  # @param [DOMScreen] self 
+  # @method dom_screen_get_avail_width(self_)
+  # @param [DOMScreen] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_screen_get_avail_width, :webkit_dom_screen_get_avail_width, [DOMScreen], :ulong
@@ -16583,8 +16583,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_storage_key(self, index)
-  # @param [DOMStorage] self 
+  # @method dom_storage_key(self_, index)
+  # @param [DOMStorage] self_ 
   # @param [Integer] index 
   # @return [String] 
   # @scope class
@@ -16592,8 +16592,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_storage_get_item(self, key)
-  # @param [DOMStorage] self 
+  # @method dom_storage_get_item(self_, key)
+  # @param [DOMStorage] self_ 
   # @param [String] key 
   # @return [String] 
   # @scope class
@@ -16601,8 +16601,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_storage_set_item(self, key, data, error)
-  # @param [DOMStorage] self 
+  # @method dom_storage_set_item(self_, key, data, error)
+  # @param [DOMStorage] self_ 
   # @param [String] key 
   # @param [String] data 
   # @param [FFI::Pointer(**GError)] error 
@@ -16612,8 +16612,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_storage_remove_item(self, key)
-  # @param [DOMStorage] self 
+  # @method dom_storage_remove_item(self_, key)
+  # @param [DOMStorage] self_ 
   # @param [String] key 
   # @return [nil] 
   # @scope class
@@ -16621,16 +16621,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_storage_clear(self)
-  # @param [DOMStorage] self 
+  # @method dom_storage_clear(self_)
+  # @param [DOMStorage] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_storage_clear, :webkit_dom_storage_clear, [DOMStorage], :void
   
   # (Not documented)
   # 
-  # @method dom_storage_get_length(self)
-  # @param [DOMStorage] self 
+  # @method dom_storage_get_length(self_)
+  # @param [DOMStorage] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_storage_get_length, :webkit_dom_storage_get_length, [DOMStorage], :ulong
@@ -16669,8 +16669,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_style_media_match_medium(self, mediaquery)
-  # @param [DOMStyleMedia] self 
+  # @method dom_style_media_match_medium(self_, mediaquery)
+  # @param [DOMStyleMedia] self_ 
   # @param [String] mediaquery 
   # @return [Integer] 
   # @scope class
@@ -16714,8 +16714,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_style_sheet_list_item(self, index)
-  # @param [DOMStyleSheetList] self 
+  # @method dom_style_sheet_list_item(self_, index)
+  # @param [DOMStyleSheetList] self_ 
   # @param [Integer] index 
   # @return [DOMStyleSheet] 
   # @scope class
@@ -16723,8 +16723,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_style_sheet_list_get_length(self)
-  # @param [DOMStyleSheetList] self 
+  # @method dom_style_sheet_list_get_length(self_)
+  # @param [DOMStyleSheetList] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_style_sheet_list_get_length, :webkit_dom_style_sheet_list_get_length, [DOMStyleSheetList], :ulong
@@ -16739,7 +16739,7 @@ module WebKit
       WebKit.dom_time_ranges_start(self, index, error)
     end
     
-    def end(index, error)
+    def end_(index, error)
       WebKit.dom_time_ranges_end(self, index, error)
     end
     
@@ -16771,8 +16771,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_time_ranges_start(self, index, error)
-  # @param [DOMTimeRanges] self 
+  # @method dom_time_ranges_start(self_, index, error)
+  # @param [DOMTimeRanges] self_ 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Float] 
@@ -16781,8 +16781,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_time_ranges_end(self, index, error)
-  # @param [DOMTimeRanges] self 
+  # @method dom_time_ranges_end(self_, index, error)
+  # @param [DOMTimeRanges] self_ 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Float] 
@@ -16791,8 +16791,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_time_ranges_get_length(self)
-  # @param [DOMTimeRanges] self 
+  # @method dom_time_ranges_get_length(self_)
+  # @param [DOMTimeRanges] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_time_ranges_get_length, :webkit_dom_time_ranges_get_length, [DOMTimeRanges], :ulong
@@ -16879,104 +16879,104 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_tree_walker_parent_node(self)
-  # @param [DOMTreeWalker] self 
+  # @method dom_tree_walker_parent_node(self_)
+  # @param [DOMTreeWalker] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_tree_walker_parent_node, :webkit_dom_tree_walker_parent_node, [DOMTreeWalker], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_tree_walker_first_child(self)
-  # @param [DOMTreeWalker] self 
+  # @method dom_tree_walker_first_child(self_)
+  # @param [DOMTreeWalker] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_tree_walker_first_child, :webkit_dom_tree_walker_first_child, [DOMTreeWalker], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_tree_walker_last_child(self)
-  # @param [DOMTreeWalker] self 
+  # @method dom_tree_walker_last_child(self_)
+  # @param [DOMTreeWalker] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_tree_walker_last_child, :webkit_dom_tree_walker_last_child, [DOMTreeWalker], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_tree_walker_previous_sibling(self)
-  # @param [DOMTreeWalker] self 
+  # @method dom_tree_walker_previous_sibling(self_)
+  # @param [DOMTreeWalker] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_tree_walker_previous_sibling, :webkit_dom_tree_walker_previous_sibling, [DOMTreeWalker], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_tree_walker_next_sibling(self)
-  # @param [DOMTreeWalker] self 
+  # @method dom_tree_walker_next_sibling(self_)
+  # @param [DOMTreeWalker] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_tree_walker_next_sibling, :webkit_dom_tree_walker_next_sibling, [DOMTreeWalker], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_tree_walker_previous_node(self)
-  # @param [DOMTreeWalker] self 
+  # @method dom_tree_walker_previous_node(self_)
+  # @param [DOMTreeWalker] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_tree_walker_previous_node, :webkit_dom_tree_walker_previous_node, [DOMTreeWalker], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_tree_walker_next_node(self)
-  # @param [DOMTreeWalker] self 
+  # @method dom_tree_walker_next_node(self_)
+  # @param [DOMTreeWalker] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_tree_walker_next_node, :webkit_dom_tree_walker_next_node, [DOMTreeWalker], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_tree_walker_get_root(self)
-  # @param [DOMTreeWalker] self 
+  # @method dom_tree_walker_get_root(self_)
+  # @param [DOMTreeWalker] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_tree_walker_get_root, :webkit_dom_tree_walker_get_root, [DOMTreeWalker], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_tree_walker_get_what_to_show(self)
-  # @param [DOMTreeWalker] self 
+  # @method dom_tree_walker_get_what_to_show(self_)
+  # @param [DOMTreeWalker] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_tree_walker_get_what_to_show, :webkit_dom_tree_walker_get_what_to_show, [DOMTreeWalker], :ulong
   
   # (Not documented)
   # 
-  # @method dom_tree_walker_get_filter(self)
-  # @param [DOMTreeWalker] self 
+  # @method dom_tree_walker_get_filter(self_)
+  # @param [DOMTreeWalker] self_ 
   # @return [DOMNodeFilter] 
   # @scope class
   attach_function :dom_tree_walker_get_filter, :webkit_dom_tree_walker_get_filter, [DOMTreeWalker], DOMNodeFilter
   
   # (Not documented)
   # 
-  # @method dom_tree_walker_get_expand_entity_references(self)
-  # @param [DOMTreeWalker] self 
+  # @method dom_tree_walker_get_expand_entity_references(self_)
+  # @param [DOMTreeWalker] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_tree_walker_get_expand_entity_references, :webkit_dom_tree_walker_get_expand_entity_references, [DOMTreeWalker], :int
   
   # (Not documented)
   # 
-  # @method dom_tree_walker_get_current_node(self)
-  # @param [DOMTreeWalker] self 
+  # @method dom_tree_walker_get_current_node(self_)
+  # @param [DOMTreeWalker] self_ 
   # @return [DOMNode] 
   # @scope class
   attach_function :dom_tree_walker_get_current_node, :webkit_dom_tree_walker_get_current_node, [DOMTreeWalker], DOMNode
   
   # (Not documented)
   # 
-  # @method dom_tree_walker_set_current_node(self, value, error)
-  # @param [DOMTreeWalker] self 
+  # @method dom_tree_walker_set_current_node(self_, value, error)
+  # @param [DOMTreeWalker] self_ 
   # @param [DOMNode] value 
   # @param [FFI::Pointer(**GError)] error 
   # @return [nil] 
@@ -17049,72 +17049,72 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_validity_state_get_value_missing(self)
-  # @param [DOMValidityState] self 
+  # @method dom_validity_state_get_value_missing(self_)
+  # @param [DOMValidityState] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_validity_state_get_value_missing, :webkit_dom_validity_state_get_value_missing, [DOMValidityState], :int
   
   # (Not documented)
   # 
-  # @method dom_validity_state_get_type_mismatch(self)
-  # @param [DOMValidityState] self 
+  # @method dom_validity_state_get_type_mismatch(self_)
+  # @param [DOMValidityState] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_validity_state_get_type_mismatch, :webkit_dom_validity_state_get_type_mismatch, [DOMValidityState], :int
   
   # (Not documented)
   # 
-  # @method dom_validity_state_get_pattern_mismatch(self)
-  # @param [DOMValidityState] self 
+  # @method dom_validity_state_get_pattern_mismatch(self_)
+  # @param [DOMValidityState] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_validity_state_get_pattern_mismatch, :webkit_dom_validity_state_get_pattern_mismatch, [DOMValidityState], :int
   
   # (Not documented)
   # 
-  # @method dom_validity_state_get_too_long(self)
-  # @param [DOMValidityState] self 
+  # @method dom_validity_state_get_too_long(self_)
+  # @param [DOMValidityState] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_validity_state_get_too_long, :webkit_dom_validity_state_get_too_long, [DOMValidityState], :int
   
   # (Not documented)
   # 
-  # @method dom_validity_state_get_range_underflow(self)
-  # @param [DOMValidityState] self 
+  # @method dom_validity_state_get_range_underflow(self_)
+  # @param [DOMValidityState] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_validity_state_get_range_underflow, :webkit_dom_validity_state_get_range_underflow, [DOMValidityState], :int
   
   # (Not documented)
   # 
-  # @method dom_validity_state_get_range_overflow(self)
-  # @param [DOMValidityState] self 
+  # @method dom_validity_state_get_range_overflow(self_)
+  # @param [DOMValidityState] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_validity_state_get_range_overflow, :webkit_dom_validity_state_get_range_overflow, [DOMValidityState], :int
   
   # (Not documented)
   # 
-  # @method dom_validity_state_get_step_mismatch(self)
-  # @param [DOMValidityState] self 
+  # @method dom_validity_state_get_step_mismatch(self_)
+  # @param [DOMValidityState] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_validity_state_get_step_mismatch, :webkit_dom_validity_state_get_step_mismatch, [DOMValidityState], :int
   
   # (Not documented)
   # 
-  # @method dom_validity_state_get_custom_error(self)
-  # @param [DOMValidityState] self 
+  # @method dom_validity_state_get_custom_error(self_)
+  # @param [DOMValidityState] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_validity_state_get_custom_error, :webkit_dom_validity_state_get_custom_error, [DOMValidityState], :int
   
   # (Not documented)
   # 
-  # @method dom_validity_state_get_valid(self)
-  # @param [DOMValidityState] self 
+  # @method dom_validity_state_get_valid(self_)
+  # @param [DOMValidityState] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_validity_state_get_valid, :webkit_dom_validity_state_get_valid, [DOMValidityState], :int
@@ -17146,48 +17146,48 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_webkit_animation_play(self)
-  # @param [DOMWebKitAnimation] self 
+  # @method dom_webkit_animation_play(self_)
+  # @param [DOMWebKitAnimation] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_webkit_animation_play, :webkit_dom_webkit_animation_play, [DOMWebKitAnimation], :void
   
   # (Not documented)
   # 
-  # @method dom_webkit_animation_pause(self)
-  # @param [DOMWebKitAnimation] self 
+  # @method dom_webkit_animation_pause(self_)
+  # @param [DOMWebKitAnimation] self_ 
   # @return [nil] 
   # @scope class
   attach_function :dom_webkit_animation_pause, :webkit_dom_webkit_animation_pause, [DOMWebKitAnimation], :void
   
   # (Not documented)
   # 
-  # @method dom_webkit_animation_get_name(self)
-  # @param [DOMWebKitAnimation] self 
+  # @method dom_webkit_animation_get_name(self_)
+  # @param [DOMWebKitAnimation] self_ 
   # @return [String] 
   # @scope class
   attach_function :dom_webkit_animation_get_name, :webkit_dom_webkit_animation_get_name, [DOMWebKitAnimation], :string
   
   # (Not documented)
   # 
-  # @method dom_webkit_animation_get_duration(self)
-  # @param [DOMWebKitAnimation] self 
+  # @method dom_webkit_animation_get_duration(self_)
+  # @param [DOMWebKitAnimation] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_webkit_animation_get_duration, :webkit_dom_webkit_animation_get_duration, [DOMWebKitAnimation], :double
   
   # (Not documented)
   # 
-  # @method dom_webkit_animation_get_elapsed_time(self)
-  # @param [DOMWebKitAnimation] self 
+  # @method dom_webkit_animation_get_elapsed_time(self_)
+  # @param [DOMWebKitAnimation] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_webkit_animation_get_elapsed_time, :webkit_dom_webkit_animation_get_elapsed_time, [DOMWebKitAnimation], :double
   
   # (Not documented)
   # 
-  # @method dom_webkit_animation_set_elapsed_time(self, value)
-  # @param [DOMWebKitAnimation] self 
+  # @method dom_webkit_animation_set_elapsed_time(self_, value)
+  # @param [DOMWebKitAnimation] self_ 
   # @param [Float] value 
   # @return [nil] 
   # @scope class
@@ -17195,40 +17195,40 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_webkit_animation_get_delay(self)
-  # @param [DOMWebKitAnimation] self 
+  # @method dom_webkit_animation_get_delay(self_)
+  # @param [DOMWebKitAnimation] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_webkit_animation_get_delay, :webkit_dom_webkit_animation_get_delay, [DOMWebKitAnimation], :double
   
   # (Not documented)
   # 
-  # @method dom_webkit_animation_get_paused(self)
-  # @param [DOMWebKitAnimation] self 
+  # @method dom_webkit_animation_get_paused(self_)
+  # @param [DOMWebKitAnimation] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_webkit_animation_get_paused, :webkit_dom_webkit_animation_get_paused, [DOMWebKitAnimation], :int
   
   # (Not documented)
   # 
-  # @method dom_webkit_animation_get_ended(self)
-  # @param [DOMWebKitAnimation] self 
+  # @method dom_webkit_animation_get_ended(self_)
+  # @param [DOMWebKitAnimation] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_webkit_animation_get_ended, :webkit_dom_webkit_animation_get_ended, [DOMWebKitAnimation], :int
   
   # (Not documented)
   # 
-  # @method dom_webkit_animation_get_direction(self)
-  # @param [DOMWebKitAnimation] self 
+  # @method dom_webkit_animation_get_direction(self_)
+  # @param [DOMWebKitAnimation] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_webkit_animation_get_direction, :webkit_dom_webkit_animation_get_direction, [DOMWebKitAnimation], :ushort
   
   # (Not documented)
   # 
-  # @method dom_webkit_animation_get_fill_mode(self)
-  # @param [DOMWebKitAnimation] self 
+  # @method dom_webkit_animation_get_fill_mode(self_)
+  # @param [DOMWebKitAnimation] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_webkit_animation_get_fill_mode, :webkit_dom_webkit_animation_get_fill_mode, [DOMWebKitAnimation], :ushort
@@ -17260,8 +17260,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_webkit_animation_list_item(self, index)
-  # @param [DOMWebKitAnimationList] self 
+  # @method dom_webkit_animation_list_item(self_, index)
+  # @param [DOMWebKitAnimationList] self_ 
   # @param [Integer] index 
   # @return [DOMWebKitAnimation] 
   # @scope class
@@ -17269,8 +17269,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_webkit_animation_list_get_length(self)
-  # @param [DOMWebKitAnimationList] self 
+  # @method dom_webkit_animation_list_get_length(self_)
+  # @param [DOMWebKitAnimationList] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_webkit_animation_list_get_length, :webkit_dom_webkit_animation_list_get_length, [DOMWebKitAnimationList], :ulong
@@ -17302,16 +17302,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_webkit_point_get_x(self)
-  # @param [DOMWebKitPoint] self 
+  # @method dom_webkit_point_get_x(self_)
+  # @param [DOMWebKitPoint] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_webkit_point_get_x, :webkit_dom_webkit_point_get_x, [DOMWebKitPoint], :float
   
   # (Not documented)
   # 
-  # @method dom_webkit_point_set_x(self, value)
-  # @param [DOMWebKitPoint] self 
+  # @method dom_webkit_point_set_x(self_, value)
+  # @param [DOMWebKitPoint] self_ 
   # @param [Float] value 
   # @return [nil] 
   # @scope class
@@ -17319,16 +17319,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_webkit_point_get_y(self)
-  # @param [DOMWebKitPoint] self 
+  # @method dom_webkit_point_get_y(self_)
+  # @param [DOMWebKitPoint] self_ 
   # @return [Float] 
   # @scope class
   attach_function :dom_webkit_point_get_y, :webkit_dom_webkit_point_get_y, [DOMWebKitPoint], :float
   
   # (Not documented)
   # 
-  # @method dom_webkit_point_set_y(self, value)
-  # @param [DOMWebKitPoint] self 
+  # @method dom_webkit_point_set_y(self_, value)
+  # @param [DOMWebKitPoint] self_ 
   # @param [Float] value 
   # @return [nil] 
   # @scope class
@@ -17361,8 +17361,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_xpath_expression_evaluate(self, context_node, type, in_result, error)
-  # @param [DOMXPathExpression] self 
+  # @method dom_xpath_expression_evaluate(self_, context_node, type, in_result, error)
+  # @param [DOMXPathExpression] self_ 
   # @param [DOMNode] context_node 
   # @param [Integer] type 
   # @param [FFI::Pointer(*WebKitDOMXPathResult)] in_result 
@@ -17398,8 +17398,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_xpath_ns_resolver_lookup_namespace_uri(self, prefix)
-  # @param [DOMXPathNSResolver] self 
+  # @method dom_xpath_ns_resolver_lookup_namespace_uri(self_, prefix)
+  # @param [DOMXPathNSResolver] self_ 
   # @param [String] prefix 
   # @return [String] 
   # @scope class
@@ -17432,8 +17432,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_xpath_result_iterate_next(self, error)
-  # @param [DOMXPathResult] self 
+  # @method dom_xpath_result_iterate_next(self_, error)
+  # @param [DOMXPathResult] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
   # @scope class
@@ -17441,8 +17441,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_xpath_result_snapshot_item(self, index, error)
-  # @param [DOMXPathResult] self 
+  # @method dom_xpath_result_snapshot_item(self_, index, error)
+  # @param [DOMXPathResult] self_ 
   # @param [Integer] index 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
@@ -17451,16 +17451,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_xpath_result_get_result_type(self)
-  # @param [DOMXPathResult] self 
+  # @method dom_xpath_result_get_result_type(self_)
+  # @param [DOMXPathResult] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_xpath_result_get_result_type, :webkit_dom_xpath_result_get_result_type, [DOMXPathResult], :ushort
   
   # (Not documented)
   # 
-  # @method dom_xpath_result_get_number_value(self, error)
-  # @param [DOMXPathResult] self 
+  # @method dom_xpath_result_get_number_value(self_, error)
+  # @param [DOMXPathResult] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Float] 
   # @scope class
@@ -17468,8 +17468,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_xpath_result_get_string_value(self, error)
-  # @param [DOMXPathResult] self 
+  # @method dom_xpath_result_get_string_value(self_, error)
+  # @param [DOMXPathResult] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [String] 
   # @scope class
@@ -17477,8 +17477,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_xpath_result_get_boolean_value(self, error)
-  # @param [DOMXPathResult] self 
+  # @method dom_xpath_result_get_boolean_value(self_, error)
+  # @param [DOMXPathResult] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Integer] 
   # @scope class
@@ -17486,8 +17486,8 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_xpath_result_get_single_node_value(self, error)
-  # @param [DOMXPathResult] self 
+  # @method dom_xpath_result_get_single_node_value(self_, error)
+  # @param [DOMXPathResult] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [DOMNode] 
   # @scope class
@@ -17495,16 +17495,16 @@ module WebKit
   
   # (Not documented)
   # 
-  # @method dom_xpath_result_get_invalid_iterator_state(self)
-  # @param [DOMXPathResult] self 
+  # @method dom_xpath_result_get_invalid_iterator_state(self_)
+  # @param [DOMXPathResult] self_ 
   # @return [Integer] 
   # @scope class
   attach_function :dom_xpath_result_get_invalid_iterator_state, :webkit_dom_xpath_result_get_invalid_iterator_state, [DOMXPathResult], :int
   
   # (Not documented)
   # 
-  # @method dom_xpath_result_get_snapshot_length(self, error)
-  # @param [DOMXPathResult] self 
+  # @method dom_xpath_result_get_snapshot_length(self_, error)
+  # @param [DOMXPathResult] self_ 
   # @param [FFI::Pointer(**GError)] error 
   # @return [Integer] 
   # @scope class
@@ -19798,7 +19798,7 @@ module WebKit
       WebKit.web_view_can_undo(self)
     end
     
-    def redo()
+    def redo_()
       WebKit.web_view_redo(self)
     end
     
@@ -19880,7 +19880,7 @@ module WebKit
   #   (FFI::Pointer(*)) internal
   # :undo ::
   #   (FFI::Pointer(*)) 
-  # :redo ::
+  # :redo_ ::
   #   (FFI::Pointer(*)) 
   # :should_allow_editing_action ::
   #   (FFI::Pointer(*)) 
@@ -19909,7 +19909,7 @@ module WebKit
            :move_cursor, :pointer,
            :set_scroll_adjustments, :pointer,
            :undo, :pointer,
-           :redo, :pointer,
+           :redo_, :pointer,
            :should_allow_editing_action, :pointer,
            :webkit_reserved0, :pointer,
            :webkit_reserved1, :pointer,

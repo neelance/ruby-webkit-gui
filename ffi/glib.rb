@@ -6,9 +6,9 @@ module GLIB
   extend FFI::Library
   ffi_lib 'gobject-2.0.so.0'
   
-  def self.attach_function(name, *args)
+  def self.attach_function(name, *_)
     begin; super; rescue FFI::NotFoundError => e
-      (class << self; self; end).class_eval { define_method(name) { |*args| raise e } }
+      (class << self; self; end).class_eval { define_method(name) { |*_| raise e } }
     end
   end
   
@@ -47,10 +47,10 @@ module GLIB
   # An opaque structure used as the base of all type instances.
   # 
   # = Fields:
-  # :class ::
+  # :class_ ::
   #   (GTypeClass) < private >
   class GTypeInstance < FFI::Struct
-    layout :class, GTypeClass
+    layout :class_, GTypeClass
   end
   
   # GTypeInterface:
@@ -219,16 +219,16 @@ module GLIB
   
   # (Not documented)
   # 
-  # @method type_class_unref(class)
-  # @param [FFI::Pointer(Gpointer)] class 
+  # @method type_class_unref(class_)
+  # @param [FFI::Pointer(Gpointer)] class_ 
   # @return [nil] 
   # @scope class
   attach_function :type_class_unref, :g_type_class_unref, [:pointer], :void
   
   # (Not documented)
   # 
-  # @method type_class_peek_parent(class)
-  # @param [FFI::Pointer(Gpointer)] class 
+  # @method type_class_peek_parent(class_)
+  # @param [FFI::Pointer(Gpointer)] class_ 
   # @return [FFI::Pointer(Gpointer)] 
   # @scope class
   attach_function :type_class_peek_parent, :g_type_class_peek_parent, [:pointer], :pointer
@@ -330,19 +330,19 @@ module GLIB
   # The initialization process of a class involves:
   # <itemizedlist>
   # <listitem><para>
-  # 	1 - Copying common members from the parent class over to the
-  # 	derived class structure.
+  #     1 - Copying common members from the parent class over to the
+  #     derived class structure.
   # </para></listitem>
   # <listitem><para>
-  # 	2 -  Zero initialization of the remaining members not copied
-  # 	over from the parent class.
+  #     2 -  Zero initialization of the remaining members not copied
+  #     over from the parent class.
   # </para></listitem>
   # <listitem><para>
-  # 	3 - Invocation of the GBaseInitFunc() initializers of all parent
-  # 	types and the class' type.
+  #     3 - Invocation of the GBaseInitFunc() initializers of all parent
+  #     types and the class' type.
   # </para></listitem>
   # <listitem><para>
-  # 	4 - Invocation of the class' GClassInitFunc() initializer.
+  #     4 - Invocation of the class' GClassInitFunc() initializer.
   # </para></listitem>
   # </itemizedlist>
   # Since derived classes are partially initialized through a memory copy
@@ -465,8 +465,8 @@ module GLIB
   # 
   # <em>This entry is only for documentation and no real method.</em>
   # 
-  # @method _callback_g_instance_init_func_(class)
-  # @param [FFI::Pointer(Gpointer)] class 
+  # @method _callback_g_instance_init_func_(class_)
+  # @param [FFI::Pointer(Gpointer)] class_ 
   # @return [GTypeInstance] 
   # @scope class
   callback :g_instance_init_func, [:pointer], GTypeInstance
@@ -522,9 +522,9 @@ module GLIB
   # 
   # <em>This entry is only for documentation and no real method.</em>
   # 
-  # @method _callback_g_type_class_cache_func_(cache_data, class)
+  # @method _callback_g_type_class_cache_func_(cache_data, class_)
   # @param [FFI::Pointer(Gpointer)] cache_data 
-  # @param [GTypeClass] class 
+  # @param [GTypeClass] class_ 
   # @return [Integer] 
   # @scope class
   callback :g_type_class_cache_func, [:pointer, GTypeClass], :int
@@ -964,8 +964,8 @@ module GLIB
   
   # (Not documented)
   # 
-  # @method type_class_add_private(class, private_size)
-  # @param [FFI::Pointer(Gpointer)] class 
+  # @method type_class_add_private(class_, private_size)
+  # @param [FFI::Pointer(Gpointer)] class_ 
   # @param [Integer] private_size 
   # @return [nil] 
   # @scope class
@@ -1066,8 +1066,8 @@ module GLIB
   
   # (Not documented)
   # 
-  # @method type_class_unref_uncached(class)
-  # @param [FFI::Pointer(Gpointer)] class 
+  # @method type_class_unref_uncached(class_)
+  # @param [FFI::Pointer(Gpointer)] class_ 
   # @return [nil] 
   # @scope class
   attach_function :type_class_unref_uncached, :g_type_class_unref_uncached, [:pointer], :void
@@ -1126,8 +1126,8 @@ module GLIB
   
   # (Not documented)
   # 
-  # @method type_check_class_cast(class, is_a_type)
-  # @param [GTypeClass] class 
+  # @method type_check_class_cast(class_, is_a_type)
+  # @param [GTypeClass] class_ 
   # @param [Integer] is_a_type 
   # @return [GTypeClass] 
   # @scope class
@@ -1135,8 +1135,8 @@ module GLIB
   
   # (Not documented)
   # 
-  # @method type_check_class_is_a(class, is_a_type)
-  # @param [GTypeClass] class 
+  # @method type_check_class_is_a(class_, is_a_type)
+  # @param [GTypeClass] class_ 
   # @param [Integer] is_a_type 
   # @return [Integer] 
   # @scope class
@@ -1186,8 +1186,8 @@ module GLIB
   
   # (Not documented)
   # 
-  # @method type_name_from_class(class)
-  # @param [GTypeClass] class 
+  # @method type_name_from_class(class_)
+  # @param [GTypeClass] class_ 
   # @return [String] 
   # @scope class
   attach_function :type_name_from_class, :g_type_name_from_class, [GTypeClass], :string
