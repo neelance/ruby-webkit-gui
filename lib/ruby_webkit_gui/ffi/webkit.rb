@@ -1105,7 +1105,26 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMCSSRuleWrappers
+    def get_css_text()
+      WebKit.dom_css_rule_get_css_text(self)
+    end
+    
+    def set_css_text(value, error)
+      WebKit.dom_css_rule_set_css_text(self, value, error)
+    end
+    
+    def get_parent_style_sheet()
+      DOMCSSStyleSheet.new WebKit.dom_css_rule_get_parent_style_sheet(self)
+    end
+    
+    def get_parent_rule()
+      DOMCSSRule.new WebKit.dom_css_rule_get_parent_rule(self)
+    end
+  end
+  
   class DOMCSSRule < FFI::Struct
+    include DOMCSSRuleWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -1164,7 +1183,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMCSSRuleListWrappers
+    def item(index)
+      DOMCSSRule.new WebKit.dom_css_rule_list_item(self, index)
+    end
+    
+    def get_length()
+      WebKit.dom_css_rule_list_get_length(self)
+    end
+  end
+  
   class DOMCSSRuleList < FFI::Struct
+    include DOMCSSRuleListWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -1206,7 +1236,58 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMCSSStyleDeclarationWrappers
+    def get_property_value(property_name)
+      WebKit.dom_css_style_declaration_get_property_value(self, property_name)
+    end
+    
+    def get_property_css_value(property_name)
+      DOMCSSValue.new WebKit.dom_css_style_declaration_get_property_css_value(self, property_name)
+    end
+    
+    def remove_property(property_name, error)
+      WebKit.dom_css_style_declaration_remove_property(self, property_name, error)
+    end
+    
+    def get_property_priority(property_name)
+      WebKit.dom_css_style_declaration_get_property_priority(self, property_name)
+    end
+    
+    def set_property(property_name, value, priority, error)
+      WebKit.dom_css_style_declaration_set_property(self, property_name, value, priority, error)
+    end
+    
+    def item(index)
+      WebKit.dom_css_style_declaration_item(self, index)
+    end
+    
+    def get_property_shorthand(property_name)
+      WebKit.dom_css_style_declaration_get_property_shorthand(self, property_name)
+    end
+    
+    def is_property_implicit(property_name)
+      WebKit.dom_css_style_declaration_is_property_implicit(self, property_name)
+    end
+    
+    def get_css_text()
+      WebKit.dom_css_style_declaration_get_css_text(self)
+    end
+    
+    def set_css_text(value, error)
+      WebKit.dom_css_style_declaration_set_css_text(self, value, error)
+    end
+    
+    def get_length()
+      WebKit.dom_css_style_declaration_get_length(self)
+    end
+    
+    def get_parent_rule()
+      DOMCSSRule.new WebKit.dom_css_style_declaration_get_parent_rule(self)
+    end
+  end
+  
   class DOMCSSStyleDeclaration < FFI::Struct
+    include DOMCSSStyleDeclarationWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -1454,7 +1535,38 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMStyleSheet) 
+  module DOMCSSStyleSheetWrappers
+    def insert_rule(rule, index, error)
+      WebKit.dom_css_style_sheet_insert_rule(self, rule, index, error)
+    end
+    
+    def delete_rule(index, error)
+      WebKit.dom_css_style_sheet_delete_rule(self, index, error)
+    end
+    
+    def add_rule(selector, style, index, error)
+      WebKit.dom_css_style_sheet_add_rule(self, selector, style, index, error)
+    end
+    
+    def remove_rule(index, error)
+      WebKit.dom_css_style_sheet_remove_rule(self, index, error)
+    end
+    
+    def get_owner_rule()
+      DOMCSSRule.new WebKit.dom_css_style_sheet_get_owner_rule(self)
+    end
+    
+    def get_css_rules()
+      DOMCSSRuleList.new WebKit.dom_css_style_sheet_get_css_rules(self)
+    end
+    
+    def get_rules()
+      DOMCSSRuleList.new WebKit.dom_css_style_sheet_get_rules(self)
+    end
+  end
+  
   class DOMCSSStyleSheet < FFI::Struct
+    include DOMCSSStyleSheetWrappers
     layout :parent_instance, DOMStyleSheet.by_value
   end
   
@@ -1546,7 +1658,22 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMCSSValueWrappers
+    def get_css_text()
+      WebKit.dom_css_value_get_css_text(self)
+    end
+    
+    def set_css_text(value, error)
+      WebKit.dom_css_value_set_css_text(self, value, error)
+    end
+    
+    def get_css_value_type()
+      WebKit.dom_css_value_get_css_value_type(self)
+    end
+  end
+  
   class DOMCSSValue < FFI::Struct
+    include DOMCSSValueWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -1730,7 +1857,26 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMDOMApplicationCacheWrappers
+    def update(error)
+      WebKit.dom_dom_application_cache_update(self, error)
+    end
+    
+    def swap_cache(error)
+      WebKit.dom_dom_application_cache_swap_cache(self, error)
+    end
+    
+    def dispatch_event(evt, error)
+      WebKit.dom_dom_application_cache_dispatch_event(self, evt, error)
+    end
+    
+    def get_status()
+      WebKit.dom_dom_application_cache_get_status(self)
+    end
+  end
+  
   class DOMDOMApplicationCache < FFI::Struct
+    include DOMDOMApplicationCacheWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -1791,7 +1937,30 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMDOMImplementationWrappers
+    def has_feature(feature, version)
+      WebKit.dom_dom_implementation_has_feature(self, feature, version)
+    end
+    
+    def create_document_type(qualified_name, public_id, system_id, error)
+      DOMDocumentType.new WebKit.dom_dom_implementation_create_document_type(self, qualified_name, public_id, system_id, error)
+    end
+    
+    def create_document(namespace_uri, qualified_name, doctype, error)
+      DOMDocument.new WebKit.dom_dom_implementation_create_document(self, namespace_uri, qualified_name, doctype, error)
+    end
+    
+    def create_css_style_sheet(title, media, error)
+      DOMCSSStyleSheet.new WebKit.dom_dom_implementation_create_css_style_sheet(self, title, media, error)
+    end
+    
+    def create_html_document(title)
+      DOMHTMLDocument.new WebKit.dom_dom_implementation_create_html_document(self, title)
+    end
+  end
+  
   class DOMDOMImplementation < FFI::Struct
+    include DOMDOMImplementationWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -1870,7 +2039,22 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMDOMMimeTypeWrappers
+    def get_suffixes()
+      WebKit.dom_dom_mime_type_get_suffixes(self)
+    end
+    
+    def get_description()
+      WebKit.dom_dom_mime_type_get_description(self)
+    end
+    
+    def get_enabled_plugin()
+      DOMDOMPlugin.new WebKit.dom_dom_mime_type_get_enabled_plugin(self)
+    end
+  end
+  
   class DOMDOMMimeType < FFI::Struct
+    include DOMDOMMimeTypeWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -1919,7 +2103,22 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMDOMMimeTypeArrayWrappers
+    def item(index)
+      DOMDOMMimeType.new WebKit.dom_dom_mime_type_array_item(self, index)
+    end
+    
+    def named_item(name)
+      DOMDOMMimeType.new WebKit.dom_dom_mime_type_array_named_item(self, name)
+    end
+    
+    def get_length()
+      WebKit.dom_dom_mime_type_array_get_length(self)
+    end
+  end
+  
   class DOMDOMMimeTypeArray < FFI::Struct
+    include DOMDOMMimeTypeArrayWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -1970,7 +2169,34 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMDOMPluginWrappers
+    def item(index)
+      DOMDOMMimeType.new WebKit.dom_dom_plugin_item(self, index)
+    end
+    
+    def named_item(name)
+      DOMDOMMimeType.new WebKit.dom_dom_plugin_named_item(self, name)
+    end
+    
+    def get_name()
+      WebKit.dom_dom_plugin_get_name(self)
+    end
+    
+    def get_filename()
+      WebKit.dom_dom_plugin_get_filename(self)
+    end
+    
+    def get_description()
+      WebKit.dom_dom_plugin_get_description(self)
+    end
+    
+    def get_length()
+      WebKit.dom_dom_plugin_get_length(self)
+    end
+  end
+  
   class DOMDOMPlugin < FFI::Struct
+    include DOMDOMPluginWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -2045,7 +2271,26 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMDOMPluginArrayWrappers
+    def item(index)
+      DOMDOMPlugin.new WebKit.dom_dom_plugin_array_item(self, index)
+    end
+    
+    def named_item(name)
+      DOMDOMPlugin.new WebKit.dom_dom_plugin_array_named_item(self, name)
+    end
+    
+    def refresh(reload)
+      WebKit.dom_dom_plugin_array_refresh(self, reload)
+    end
+    
+    def get_length()
+      WebKit.dom_dom_plugin_array_get_length(self)
+    end
+  end
+  
   class DOMDOMPluginArray < FFI::Struct
+    include DOMDOMPluginArrayWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -2105,7 +2350,106 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMDOMSelectionWrappers
+    def collapse(node, index, error)
+      WebKit.dom_dom_selection_collapse(self, node, index, error)
+    end
+    
+    def collapse_to_end(error)
+      WebKit.dom_dom_selection_collapse_to_end(self, error)
+    end
+    
+    def collapse_to_start(error)
+      WebKit.dom_dom_selection_collapse_to_start(self, error)
+    end
+    
+    def delete_from_document()
+      WebKit.dom_dom_selection_delete_from_document(self)
+    end
+    
+    def contains_node(node, allow_partial)
+      WebKit.dom_dom_selection_contains_node(self, node, allow_partial)
+    end
+    
+    def select_all_children(node, error)
+      WebKit.dom_dom_selection_select_all_children(self, node, error)
+    end
+    
+    def extend(node, offset, error)
+      WebKit.dom_dom_selection_extend(self, node, offset, error)
+    end
+    
+    def get_range_at(index, error)
+      DOMRange.new WebKit.dom_dom_selection_get_range_at(self, index, error)
+    end
+    
+    def remove_all_ranges()
+      WebKit.dom_dom_selection_remove_all_ranges(self)
+    end
+    
+    def add_range(range)
+      WebKit.dom_dom_selection_add_range(self, range)
+    end
+    
+    def modify(alter, direction, granularity)
+      WebKit.dom_dom_selection_modify(self, alter, direction, granularity)
+    end
+    
+    def set_base_and_extent(base_node, base_offset, extent_node, extent_offset, error)
+      WebKit.dom_dom_selection_set_base_and_extent(self, base_node, base_offset, extent_node, extent_offset, error)
+    end
+    
+    def set_position(node, offset, error)
+      WebKit.dom_dom_selection_set_position(self, node, offset, error)
+    end
+    
+    def empty()
+      WebKit.dom_dom_selection_empty(self)
+    end
+    
+    def get_anchor_node()
+      DOMNode.new WebKit.dom_dom_selection_get_anchor_node(self)
+    end
+    
+    def get_anchor_offset()
+      WebKit.dom_dom_selection_get_anchor_offset(self)
+    end
+    
+    def get_focus_node()
+      DOMNode.new WebKit.dom_dom_selection_get_focus_node(self)
+    end
+    
+    def get_focus_offset()
+      WebKit.dom_dom_selection_get_focus_offset(self)
+    end
+    
+    def get_is_collapsed()
+      WebKit.dom_dom_selection_get_is_collapsed(self)
+    end
+    
+    def get_range_count()
+      WebKit.dom_dom_selection_get_range_count(self)
+    end
+    
+    def get_base_node()
+      DOMNode.new WebKit.dom_dom_selection_get_base_node(self)
+    end
+    
+    def get_base_offset()
+      WebKit.dom_dom_selection_get_base_offset(self)
+    end
+    
+    def get_extent_node()
+      DOMNode.new WebKit.dom_dom_selection_get_extent_node(self)
+    end
+    
+    def get_extent_offset()
+      WebKit.dom_dom_selection_get_extent_offset(self)
+    end
+  end
+  
   class DOMDOMSelection < FFI::Struct
+    include DOMDOMSelectionWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -2348,7 +2692,34 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMDOMTokenListWrappers
+    def item(index)
+      WebKit.dom_dom_token_list_item(self, index)
+    end
+    
+    def contains(token, error)
+      WebKit.dom_dom_token_list_contains(self, token, error)
+    end
+    
+    def add(token, error)
+      WebKit.dom_dom_token_list_add(self, token, error)
+    end
+    
+    def remove(token, error)
+      WebKit.dom_dom_token_list_remove(self, token, error)
+    end
+    
+    def toggle(token, error)
+      WebKit.dom_dom_token_list_toggle(self, token, error)
+    end
+    
+    def get_length()
+      WebKit.dom_dom_token_list_get_length(self)
+    end
+  end
+  
   class DOMDOMTokenList < FFI::Struct
+    include DOMDOMTokenListWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -2430,7 +2801,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMDOMTokenList) 
+  module DOMDOMSettableTokenListWrappers
+    def get_value()
+      WebKit.dom_dom_settable_token_list_get_value(self)
+    end
+    
+    def set_value(value)
+      WebKit.dom_dom_settable_token_list_set_value(self, value)
+    end
+  end
+  
   class DOMDOMSettableTokenList < FFI::Struct
+    include DOMDOMSettableTokenListWrappers
     layout :parent_instance, DOMDOMTokenList.by_value
   end
   
@@ -2472,7 +2854,22 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMDOMStringListWrappers
+    def item(index)
+      WebKit.dom_dom_string_list_item(self, index)
+    end
+    
+    def contains(string)
+      WebKit.dom_dom_string_list_contains(self, string)
+    end
+    
+    def get_length()
+      WebKit.dom_dom_string_list_get_length(self)
+    end
+  end
+  
   class DOMDOMStringList < FFI::Struct
+    include DOMDOMStringListWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -2548,7 +2945,302 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMDOMWindowWrappers
+    def get_selection()
+      DOMDOMSelection.new WebKit.dom_dom_window_get_selection(self)
+    end
+    
+    def focus()
+      WebKit.dom_dom_window_focus(self)
+    end
+    
+    def blur()
+      WebKit.dom_dom_window_blur(self)
+    end
+    
+    def close()
+      WebKit.dom_dom_window_close(self)
+    end
+    
+    def print()
+      WebKit.dom_dom_window_print(self)
+    end
+    
+    def stop()
+      WebKit.dom_dom_window_stop(self)
+    end
+    
+    def alert(message)
+      WebKit.dom_dom_window_alert(self, message)
+    end
+    
+    def confirm(message)
+      WebKit.dom_dom_window_confirm(self, message)
+    end
+    
+    def prompt(message, default_value)
+      WebKit.dom_dom_window_prompt(self, message, default_value)
+    end
+    
+    def find(string, case_sensitive, backwards, wrap, whole_word, search_in_frames, show_dialog)
+      WebKit.dom_dom_window_find(self, string, case_sensitive, backwards, wrap, whole_word, search_in_frames, show_dialog)
+    end
+    
+    def scroll_by(x, y)
+      WebKit.dom_dom_window_scroll_by(self, x, y)
+    end
+    
+    def scroll_to(x, y)
+      WebKit.dom_dom_window_scroll_to(self, x, y)
+    end
+    
+    def scroll(x, y)
+      WebKit.dom_dom_window_scroll(self, x, y)
+    end
+    
+    def move_by(x, y)
+      WebKit.dom_dom_window_move_by(self, x, y)
+    end
+    
+    def move_to(x, y)
+      WebKit.dom_dom_window_move_to(self, x, y)
+    end
+    
+    def resize_by(x, y)
+      WebKit.dom_dom_window_resize_by(self, x, y)
+    end
+    
+    def resize_to(width, height)
+      WebKit.dom_dom_window_resize_to(self, width, height)
+    end
+    
+    def match_media(query)
+      DOMMediaQueryList.new WebKit.dom_dom_window_match_media(self, query)
+    end
+    
+    def get_computed_style(element, pseudo_element)
+      DOMCSSStyleDeclaration.new WebKit.dom_dom_window_get_computed_style(self, element, pseudo_element)
+    end
+    
+    def webkit_convert_point_from_page_to_node(node, p)
+      DOMWebKitPoint.new WebKit.dom_dom_window_webkit_convert_point_from_page_to_node(self, node, p)
+    end
+    
+    def webkit_convert_point_from_node_to_page(node, p)
+      DOMWebKitPoint.new WebKit.dom_dom_window_webkit_convert_point_from_node_to_page(self, node, p)
+    end
+    
+    def clear_timeout(handle)
+      WebKit.dom_dom_window_clear_timeout(self, handle)
+    end
+    
+    def clear_interval(handle)
+      WebKit.dom_dom_window_clear_interval(self, handle)
+    end
+    
+    def atob(string, error)
+      WebKit.dom_dom_window_atob(self, string, error)
+    end
+    
+    def btoa(string, error)
+      WebKit.dom_dom_window_btoa(self, string, error)
+    end
+    
+    def dispatch_event(evt, error)
+      WebKit.dom_dom_window_dispatch_event(self, evt, error)
+    end
+    
+    def capture_events()
+      WebKit.dom_dom_window_capture_events(self)
+    end
+    
+    def release_events()
+      WebKit.dom_dom_window_release_events(self)
+    end
+    
+    def get_screen()
+      DOMScreen.new WebKit.dom_dom_window_get_screen(self)
+    end
+    
+    def get_history()
+      DOMHistory.new WebKit.dom_dom_window_get_history(self)
+    end
+    
+    def get_locationbar()
+      DOMBarInfo.new WebKit.dom_dom_window_get_locationbar(self)
+    end
+    
+    def get_menubar()
+      DOMBarInfo.new WebKit.dom_dom_window_get_menubar(self)
+    end
+    
+    def get_personalbar()
+      DOMBarInfo.new WebKit.dom_dom_window_get_personalbar(self)
+    end
+    
+    def get_scrollbars()
+      DOMBarInfo.new WebKit.dom_dom_window_get_scrollbars(self)
+    end
+    
+    def get_statusbar()
+      DOMBarInfo.new WebKit.dom_dom_window_get_statusbar(self)
+    end
+    
+    def get_toolbar()
+      DOMBarInfo.new WebKit.dom_dom_window_get_toolbar(self)
+    end
+    
+    def get_navigator()
+      DOMNavigator.new WebKit.dom_dom_window_get_navigator(self)
+    end
+    
+    def get_client_information()
+      DOMNavigator.new WebKit.dom_dom_window_get_client_information(self)
+    end
+    
+    def get_frame_element()
+      DOMElement.new WebKit.dom_dom_window_get_frame_element(self)
+    end
+    
+    def get_offscreen_buffering()
+      WebKit.dom_dom_window_get_offscreen_buffering(self)
+    end
+    
+    def get_outer_height()
+      WebKit.dom_dom_window_get_outer_height(self)
+    end
+    
+    def get_outer_width()
+      WebKit.dom_dom_window_get_outer_width(self)
+    end
+    
+    def get_inner_height()
+      WebKit.dom_dom_window_get_inner_height(self)
+    end
+    
+    def get_inner_width()
+      WebKit.dom_dom_window_get_inner_width(self)
+    end
+    
+    def get_screen_x()
+      WebKit.dom_dom_window_get_screen_x(self)
+    end
+    
+    def get_screen_y()
+      WebKit.dom_dom_window_get_screen_y(self)
+    end
+    
+    def get_screen_left()
+      WebKit.dom_dom_window_get_screen_left(self)
+    end
+    
+    def get_screen_top()
+      WebKit.dom_dom_window_get_screen_top(self)
+    end
+    
+    def get_scroll_x()
+      WebKit.dom_dom_window_get_scroll_x(self)
+    end
+    
+    def get_scroll_y()
+      WebKit.dom_dom_window_get_scroll_y(self)
+    end
+    
+    def get_page_x_offset()
+      WebKit.dom_dom_window_get_page_x_offset(self)
+    end
+    
+    def get_page_y_offset()
+      WebKit.dom_dom_window_get_page_y_offset(self)
+    end
+    
+    def get_closed()
+      WebKit.dom_dom_window_get_closed(self)
+    end
+    
+    def get_length()
+      WebKit.dom_dom_window_get_length(self)
+    end
+    
+    def get_name()
+      WebKit.dom_dom_window_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_dom_window_set_name(self, value)
+    end
+    
+    def get_status()
+      WebKit.dom_dom_window_get_status(self)
+    end
+    
+    def set_status(value)
+      WebKit.dom_dom_window_set_status(self, value)
+    end
+    
+    def get_default_status()
+      WebKit.dom_dom_window_get_default_status(self)
+    end
+    
+    def set_default_status(value)
+      WebKit.dom_dom_window_set_default_status(self, value)
+    end
+    
+    def get_self()
+      DOMDOMWindow.new WebKit.dom_dom_window_get_self(self)
+    end
+    
+    def get_window()
+      DOMDOMWindow.new WebKit.dom_dom_window_get_window(self)
+    end
+    
+    def get_frames()
+      DOMDOMWindow.new WebKit.dom_dom_window_get_frames(self)
+    end
+    
+    def get_opener()
+      DOMDOMWindow.new WebKit.dom_dom_window_get_opener(self)
+    end
+    
+    def get_parent()
+      DOMDOMWindow.new WebKit.dom_dom_window_get_parent(self)
+    end
+    
+    def get_top()
+      DOMDOMWindow.new WebKit.dom_dom_window_get_top(self)
+    end
+    
+    def get_document()
+      DOMDocument.new WebKit.dom_dom_window_get_document(self)
+    end
+    
+    def get_style_media()
+      DOMStyleMedia.new WebKit.dom_dom_window_get_style_media(self)
+    end
+    
+    def get_device_pixel_ratio()
+      WebKit.dom_dom_window_get_device_pixel_ratio(self)
+    end
+    
+    def get_application_cache()
+      DOMDOMApplicationCache.new WebKit.dom_dom_window_get_application_cache(self)
+    end
+    
+    def get_session_storage(error)
+      DOMStorage.new WebKit.dom_dom_window_get_session_storage(self, error)
+    end
+    
+    def get_local_storage(error)
+      DOMStorage.new WebKit.dom_dom_window_get_local_storage(self, error)
+    end
+    
+    def get_console()
+      DOMConsole.new WebKit.dom_dom_window_get_console(self)
+    end
+  end
+  
   class DOMDOMWindow < FFI::Struct
+    include DOMDOMWindowWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -5571,7 +6263,154 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMElement) 
+  module DOMHTMLElementWrappers
+    def insert_adjacent_element(where, element, error)
+      DOMElement.new WebKit.dom_html_element_insert_adjacent_element(self, where, element, error)
+    end
+    
+    def insert_adjacent_html(where, html, error)
+      WebKit.dom_html_element_insert_adjacent_html(self, where, html, error)
+    end
+    
+    def insert_adjacent_text(where, text, error)
+      WebKit.dom_html_element_insert_adjacent_text(self, where, text, error)
+    end
+    
+    def get_id()
+      WebKit.dom_html_element_get_id(self)
+    end
+    
+    def set_id(value)
+      WebKit.dom_html_element_set_id(self, value)
+    end
+    
+    def get_title()
+      WebKit.dom_html_element_get_title(self)
+    end
+    
+    def set_title(value)
+      WebKit.dom_html_element_set_title(self, value)
+    end
+    
+    def get_lang()
+      WebKit.dom_html_element_get_lang(self)
+    end
+    
+    def set_lang(value)
+      WebKit.dom_html_element_set_lang(self, value)
+    end
+    
+    def get_dir()
+      WebKit.dom_html_element_get_dir(self)
+    end
+    
+    def set_dir(value)
+      WebKit.dom_html_element_set_dir(self, value)
+    end
+    
+    def get_class_name()
+      WebKit.dom_html_element_get_class_name(self)
+    end
+    
+    def set_class_name(value)
+      WebKit.dom_html_element_set_class_name(self, value)
+    end
+    
+    def get_class_list()
+      DOMDOMTokenList.new WebKit.dom_html_element_get_class_list(self)
+    end
+    
+    def get_tab_index()
+      WebKit.dom_html_element_get_tab_index(self)
+    end
+    
+    def set_tab_index(value)
+      WebKit.dom_html_element_set_tab_index(self, value)
+    end
+    
+    def get_draggable()
+      WebKit.dom_html_element_get_draggable(self)
+    end
+    
+    def set_draggable(value)
+      WebKit.dom_html_element_set_draggable(self, value)
+    end
+    
+    def get_webkitdropzone()
+      WebKit.dom_html_element_get_webkitdropzone(self)
+    end
+    
+    def set_webkitdropzone(value)
+      WebKit.dom_html_element_set_webkitdropzone(self, value)
+    end
+    
+    def get_hidden()
+      WebKit.dom_html_element_get_hidden(self)
+    end
+    
+    def set_hidden(value)
+      WebKit.dom_html_element_set_hidden(self, value)
+    end
+    
+    def get_inner_html()
+      WebKit.dom_html_element_get_inner_html(self)
+    end
+    
+    def set_inner_html(value, error)
+      WebKit.dom_html_element_set_inner_html(self, value, error)
+    end
+    
+    def get_inner_text()
+      WebKit.dom_html_element_get_inner_text(self)
+    end
+    
+    def set_inner_text(value, error)
+      WebKit.dom_html_element_set_inner_text(self, value, error)
+    end
+    
+    def get_outer_html()
+      WebKit.dom_html_element_get_outer_html(self)
+    end
+    
+    def set_outer_html(value, error)
+      WebKit.dom_html_element_set_outer_html(self, value, error)
+    end
+    
+    def get_outer_text()
+      WebKit.dom_html_element_get_outer_text(self)
+    end
+    
+    def set_outer_text(value, error)
+      WebKit.dom_html_element_set_outer_text(self, value, error)
+    end
+    
+    def get_children()
+      DOMHTMLCollection.new WebKit.dom_html_element_get_children(self)
+    end
+    
+    def get_content_editable()
+      WebKit.dom_html_element_get_content_editable(self)
+    end
+    
+    def set_content_editable(value, error)
+      WebKit.dom_html_element_set_content_editable(self, value, error)
+    end
+    
+    def get_is_content_editable()
+      WebKit.dom_html_element_get_is_content_editable(self)
+    end
+    
+    def get_spellcheck()
+      WebKit.dom_html_element_get_spellcheck(self)
+    end
+    
+    def set_spellcheck(value)
+      WebKit.dom_html_element_set_spellcheck(self, value)
+    end
+  end
+  
   class DOMHTMLElement < FFI::Struct
+    include DOMHTMLElementWrappers
     layout :parent_instance, DOMElement.by_value
   end
   
@@ -5913,7 +6752,174 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLAnchorElementWrappers
+    def get_parameter(name)
+      WebKit.dom_html_anchor_element_get_parameter(self, name)
+    end
+    
+    def get_access_key()
+      WebKit.dom_html_anchor_element_get_access_key(self)
+    end
+    
+    def set_access_key(value)
+      WebKit.dom_html_anchor_element_set_access_key(self, value)
+    end
+    
+    def get_charset()
+      WebKit.dom_html_anchor_element_get_charset(self)
+    end
+    
+    def set_charset(value)
+      WebKit.dom_html_anchor_element_set_charset(self, value)
+    end
+    
+    def get_coords()
+      WebKit.dom_html_anchor_element_get_coords(self)
+    end
+    
+    def set_coords(value)
+      WebKit.dom_html_anchor_element_set_coords(self, value)
+    end
+    
+    def get_download()
+      WebKit.dom_html_anchor_element_get_download(self)
+    end
+    
+    def set_download(value)
+      WebKit.dom_html_anchor_element_set_download(self, value)
+    end
+    
+    def get_href()
+      WebKit.dom_html_anchor_element_get_href(self)
+    end
+    
+    def set_href(value)
+      WebKit.dom_html_anchor_element_set_href(self, value)
+    end
+    
+    def get_hreflang()
+      WebKit.dom_html_anchor_element_get_hreflang(self)
+    end
+    
+    def set_hreflang(value)
+      WebKit.dom_html_anchor_element_set_hreflang(self, value)
+    end
+    
+    def get_name()
+      WebKit.dom_html_anchor_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_anchor_element_set_name(self, value)
+    end
+    
+    def get_ping()
+      WebKit.dom_html_anchor_element_get_ping(self)
+    end
+    
+    def set_ping(value)
+      WebKit.dom_html_anchor_element_set_ping(self, value)
+    end
+    
+    def get_rel()
+      WebKit.dom_html_anchor_element_get_rel(self)
+    end
+    
+    def set_rel(value)
+      WebKit.dom_html_anchor_element_set_rel(self, value)
+    end
+    
+    def get_rev()
+      WebKit.dom_html_anchor_element_get_rev(self)
+    end
+    
+    def set_rev(value)
+      WebKit.dom_html_anchor_element_set_rev(self, value)
+    end
+    
+    def get_shape()
+      WebKit.dom_html_anchor_element_get_shape(self)
+    end
+    
+    def set_shape(value)
+      WebKit.dom_html_anchor_element_set_shape(self, value)
+    end
+    
+    def get_target()
+      WebKit.dom_html_anchor_element_get_target(self)
+    end
+    
+    def set_target(value)
+      WebKit.dom_html_anchor_element_set_target(self, value)
+    end
+    
+    def get_hash()
+      WebKit.dom_html_anchor_element_get_hash(self)
+    end
+    
+    def set_hash(value)
+      WebKit.dom_html_anchor_element_set_hash(self, value)
+    end
+    
+    def get_host()
+      WebKit.dom_html_anchor_element_get_host(self)
+    end
+    
+    def set_host(value)
+      WebKit.dom_html_anchor_element_set_host(self, value)
+    end
+    
+    def get_hostname()
+      WebKit.dom_html_anchor_element_get_hostname(self)
+    end
+    
+    def set_hostname(value)
+      WebKit.dom_html_anchor_element_set_hostname(self, value)
+    end
+    
+    def get_pathname()
+      WebKit.dom_html_anchor_element_get_pathname(self)
+    end
+    
+    def set_pathname(value)
+      WebKit.dom_html_anchor_element_set_pathname(self, value)
+    end
+    
+    def get_port()
+      WebKit.dom_html_anchor_element_get_port(self)
+    end
+    
+    def set_port(value)
+      WebKit.dom_html_anchor_element_set_port(self, value)
+    end
+    
+    def get_protocol()
+      WebKit.dom_html_anchor_element_get_protocol(self)
+    end
+    
+    def set_protocol(value)
+      WebKit.dom_html_anchor_element_set_protocol(self, value)
+    end
+    
+    def get_search()
+      WebKit.dom_html_anchor_element_get_search(self)
+    end
+    
+    def set_search(value)
+      WebKit.dom_html_anchor_element_set_search(self, value)
+    end
+    
+    def get_origin()
+      WebKit.dom_html_anchor_element_get_origin(self)
+    end
+    
+    def get_text()
+      WebKit.dom_html_anchor_element_get_text(self)
+    end
+  end
+  
   class DOMHTMLAnchorElement < FFI::Struct
+    include DOMHTMLAnchorElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -6286,7 +7292,98 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLAppletElementWrappers
+    def get_align()
+      WebKit.dom_html_applet_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_applet_element_set_align(self, value)
+    end
+    
+    def get_alt()
+      WebKit.dom_html_applet_element_get_alt(self)
+    end
+    
+    def set_alt(value)
+      WebKit.dom_html_applet_element_set_alt(self, value)
+    end
+    
+    def get_archive()
+      WebKit.dom_html_applet_element_get_archive(self)
+    end
+    
+    def set_archive(value)
+      WebKit.dom_html_applet_element_set_archive(self, value)
+    end
+    
+    def get_code()
+      WebKit.dom_html_applet_element_get_code(self)
+    end
+    
+    def set_code(value)
+      WebKit.dom_html_applet_element_set_code(self, value)
+    end
+    
+    def get_code_base()
+      WebKit.dom_html_applet_element_get_code_base(self)
+    end
+    
+    def set_code_base(value)
+      WebKit.dom_html_applet_element_set_code_base(self, value)
+    end
+    
+    def get_height()
+      WebKit.dom_html_applet_element_get_height(self)
+    end
+    
+    def set_height(value)
+      WebKit.dom_html_applet_element_set_height(self, value)
+    end
+    
+    def get_hspace()
+      WebKit.dom_html_applet_element_get_hspace(self)
+    end
+    
+    def set_hspace(value)
+      WebKit.dom_html_applet_element_set_hspace(self, value)
+    end
+    
+    def get_name()
+      WebKit.dom_html_applet_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_applet_element_set_name(self, value)
+    end
+    
+    def get_object()
+      WebKit.dom_html_applet_element_get_object(self)
+    end
+    
+    def set_object(value)
+      WebKit.dom_html_applet_element_set_object(self, value)
+    end
+    
+    def get_vspace()
+      WebKit.dom_html_applet_element_get_vspace(self)
+    end
+    
+    def set_vspace(value)
+      WebKit.dom_html_applet_element_set_vspace(self, value)
+    end
+    
+    def get_width()
+      WebKit.dom_html_applet_element_get_width(self)
+    end
+    
+    def set_width(value)
+      WebKit.dom_html_applet_element_set_width(self, value)
+    end
+  end
+  
   class DOMHTMLAppletElement < FFI::Struct
+    include DOMHTMLAppletElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -6498,7 +7595,102 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLAreaElementWrappers
+    def get_access_key()
+      WebKit.dom_html_area_element_get_access_key(self)
+    end
+    
+    def set_access_key(value)
+      WebKit.dom_html_area_element_set_access_key(self, value)
+    end
+    
+    def get_alt()
+      WebKit.dom_html_area_element_get_alt(self)
+    end
+    
+    def set_alt(value)
+      WebKit.dom_html_area_element_set_alt(self, value)
+    end
+    
+    def get_coords()
+      WebKit.dom_html_area_element_get_coords(self)
+    end
+    
+    def set_coords(value)
+      WebKit.dom_html_area_element_set_coords(self, value)
+    end
+    
+    def get_href()
+      WebKit.dom_html_area_element_get_href(self)
+    end
+    
+    def set_href(value)
+      WebKit.dom_html_area_element_set_href(self, value)
+    end
+    
+    def get_no_href()
+      WebKit.dom_html_area_element_get_no_href(self)
+    end
+    
+    def set_no_href(value)
+      WebKit.dom_html_area_element_set_no_href(self, value)
+    end
+    
+    def get_ping()
+      WebKit.dom_html_area_element_get_ping(self)
+    end
+    
+    def set_ping(value)
+      WebKit.dom_html_area_element_set_ping(self, value)
+    end
+    
+    def get_shape()
+      WebKit.dom_html_area_element_get_shape(self)
+    end
+    
+    def set_shape(value)
+      WebKit.dom_html_area_element_set_shape(self, value)
+    end
+    
+    def get_target()
+      WebKit.dom_html_area_element_get_target(self)
+    end
+    
+    def set_target(value)
+      WebKit.dom_html_area_element_set_target(self, value)
+    end
+    
+    def get_hash()
+      WebKit.dom_html_area_element_get_hash(self)
+    end
+    
+    def get_host()
+      WebKit.dom_html_area_element_get_host(self)
+    end
+    
+    def get_hostname()
+      WebKit.dom_html_area_element_get_hostname(self)
+    end
+    
+    def get_pathname()
+      WebKit.dom_html_area_element_get_pathname(self)
+    end
+    
+    def get_port()
+      WebKit.dom_html_area_element_get_port(self)
+    end
+    
+    def get_protocol()
+      WebKit.dom_html_area_element_get_protocol(self)
+    end
+    
+    def get_search()
+      WebKit.dom_html_area_element_get_search(self)
+    end
+  end
+  
   class DOMHTMLAreaElement < FFI::Struct
+    include DOMHTMLAreaElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -6715,7 +7907,194 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLMediaElementWrappers
+    def load(error)
+      WebKit.dom_html_media_element_load(self, error)
+    end
+    
+    def can_play_type(type)
+      WebKit.dom_html_media_element_can_play_type(self, type)
+    end
+    
+    def play()
+      WebKit.dom_html_media_element_play(self)
+    end
+    
+    def pause()
+      WebKit.dom_html_media_element_pause(self)
+    end
+    
+    def get_error()
+      DOMMediaError.new WebKit.dom_html_media_element_get_error(self)
+    end
+    
+    def get_src()
+      WebKit.dom_html_media_element_get_src(self)
+    end
+    
+    def set_src(value)
+      WebKit.dom_html_media_element_set_src(self, value)
+    end
+    
+    def get_current_src()
+      WebKit.dom_html_media_element_get_current_src(self)
+    end
+    
+    def get_network_state()
+      WebKit.dom_html_media_element_get_network_state(self)
+    end
+    
+    def get_preload()
+      WebKit.dom_html_media_element_get_preload(self)
+    end
+    
+    def set_preload(value)
+      WebKit.dom_html_media_element_set_preload(self, value)
+    end
+    
+    def get_buffered()
+      DOMTimeRanges.new WebKit.dom_html_media_element_get_buffered(self)
+    end
+    
+    def get_ready_state()
+      WebKit.dom_html_media_element_get_ready_state(self)
+    end
+    
+    def get_seeking()
+      WebKit.dom_html_media_element_get_seeking(self)
+    end
+    
+    def get_current_time()
+      WebKit.dom_html_media_element_get_current_time(self)
+    end
+    
+    def set_current_time(value, error)
+      WebKit.dom_html_media_element_set_current_time(self, value, error)
+    end
+    
+    def get_initial_time()
+      WebKit.dom_html_media_element_get_initial_time(self)
+    end
+    
+    def get_start_time()
+      WebKit.dom_html_media_element_get_start_time(self)
+    end
+    
+    def get_duration()
+      WebKit.dom_html_media_element_get_duration(self)
+    end
+    
+    def get_paused()
+      WebKit.dom_html_media_element_get_paused(self)
+    end
+    
+    def get_default_playback_rate()
+      WebKit.dom_html_media_element_get_default_playback_rate(self)
+    end
+    
+    def set_default_playback_rate(value)
+      WebKit.dom_html_media_element_set_default_playback_rate(self, value)
+    end
+    
+    def get_playback_rate()
+      WebKit.dom_html_media_element_get_playback_rate(self)
+    end
+    
+    def set_playback_rate(value)
+      WebKit.dom_html_media_element_set_playback_rate(self, value)
+    end
+    
+    def get_played()
+      DOMTimeRanges.new WebKit.dom_html_media_element_get_played(self)
+    end
+    
+    def get_seekable()
+      DOMTimeRanges.new WebKit.dom_html_media_element_get_seekable(self)
+    end
+    
+    def get_ended()
+      WebKit.dom_html_media_element_get_ended(self)
+    end
+    
+    def get_autoplay()
+      WebKit.dom_html_media_element_get_autoplay(self)
+    end
+    
+    def set_autoplay(value)
+      WebKit.dom_html_media_element_set_autoplay(self, value)
+    end
+    
+    def get_loop()
+      WebKit.dom_html_media_element_get_loop(self)
+    end
+    
+    def set_loop(value)
+      WebKit.dom_html_media_element_set_loop(self, value)
+    end
+    
+    def get_controls()
+      WebKit.dom_html_media_element_get_controls(self)
+    end
+    
+    def set_controls(value)
+      WebKit.dom_html_media_element_set_controls(self, value)
+    end
+    
+    def get_volume()
+      WebKit.dom_html_media_element_get_volume(self)
+    end
+    
+    def set_volume(value, error)
+      WebKit.dom_html_media_element_set_volume(self, value, error)
+    end
+    
+    def get_muted()
+      WebKit.dom_html_media_element_get_muted(self)
+    end
+    
+    def set_muted(value)
+      WebKit.dom_html_media_element_set_muted(self, value)
+    end
+    
+    def get_default_muted()
+      WebKit.dom_html_media_element_get_default_muted(self)
+    end
+    
+    def set_default_muted(value)
+      WebKit.dom_html_media_element_set_default_muted(self, value)
+    end
+    
+    def get_webkit_preserves_pitch()
+      WebKit.dom_html_media_element_get_webkit_preserves_pitch(self)
+    end
+    
+    def set_webkit_preserves_pitch(value)
+      WebKit.dom_html_media_element_set_webkit_preserves_pitch(self, value)
+    end
+    
+    def get_webkit_has_closed_captions()
+      WebKit.dom_html_media_element_get_webkit_has_closed_captions(self)
+    end
+    
+    def get_webkit_closed_captions_visible()
+      WebKit.dom_html_media_element_get_webkit_closed_captions_visible(self)
+    end
+    
+    def set_webkit_closed_captions_visible(value)
+      WebKit.dom_html_media_element_set_webkit_closed_captions_visible(self, value)
+    end
+    
+    def get_webkit_audio_decoded_byte_count()
+      WebKit.dom_html_media_element_get_webkit_audio_decoded_byte_count(self)
+    end
+    
+    def get_webkit_video_decoded_byte_count()
+      WebKit.dom_html_media_element_get_webkit_video_decoded_byte_count(self)
+    end
+  end
+  
   class DOMHTMLMediaElement < FFI::Struct
+    include DOMHTMLMediaElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -7150,7 +8529,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLBRElementWrappers
+    def get_clear()
+      WebKit.dom_htmlbr_element_get_clear(self)
+    end
+    
+    def set_clear(value)
+      WebKit.dom_htmlbr_element_set_clear(self, value)
+    end
+  end
+  
   class DOMHTMLBRElement < FFI::Struct
+    include DOMHTMLBRElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -7192,7 +8582,26 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLBaseElementWrappers
+    def get_href()
+      WebKit.dom_html_base_element_get_href(self)
+    end
+    
+    def set_href(value)
+      WebKit.dom_html_base_element_set_href(self, value)
+    end
+    
+    def get_target()
+      WebKit.dom_html_base_element_get_target(self)
+    end
+    
+    def set_target(value)
+      WebKit.dom_html_base_element_set_target(self, value)
+    end
+  end
+  
   class DOMHTMLBaseElement < FFI::Struct
+    include DOMHTMLBaseElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -7251,7 +8660,34 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLBaseFontElementWrappers
+    def get_color()
+      WebKit.dom_html_base_font_element_get_color(self)
+    end
+    
+    def set_color(value)
+      WebKit.dom_html_base_font_element_set_color(self, value)
+    end
+    
+    def get_face()
+      WebKit.dom_html_base_font_element_get_face(self)
+    end
+    
+    def set_face(value)
+      WebKit.dom_html_base_font_element_set_face(self, value)
+    end
+    
+    def get_size()
+      WebKit.dom_html_base_font_element_get_size(self)
+    end
+    
+    def set_size(value)
+      WebKit.dom_html_base_font_element_set_size(self, value)
+    end
+  end
+  
   class DOMHTMLBaseFontElement < FFI::Struct
+    include DOMHTMLBaseFontElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -7327,7 +8763,58 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLBodyElementWrappers
+    def get_a_link()
+      WebKit.dom_html_body_element_get_a_link(self)
+    end
+    
+    def set_a_link(value)
+      WebKit.dom_html_body_element_set_a_link(self, value)
+    end
+    
+    def get_background()
+      WebKit.dom_html_body_element_get_background(self)
+    end
+    
+    def set_background(value)
+      WebKit.dom_html_body_element_set_background(self, value)
+    end
+    
+    def get_bg_color()
+      WebKit.dom_html_body_element_get_bg_color(self)
+    end
+    
+    def set_bg_color(value)
+      WebKit.dom_html_body_element_set_bg_color(self, value)
+    end
+    
+    def get_link()
+      WebKit.dom_html_body_element_get_link(self)
+    end
+    
+    def set_link(value)
+      WebKit.dom_html_body_element_set_link(self, value)
+    end
+    
+    def get_text()
+      WebKit.dom_html_body_element_get_text(self)
+    end
+    
+    def set_text(value)
+      WebKit.dom_html_body_element_set_text(self, value)
+    end
+    
+    def get_v_link()
+      WebKit.dom_html_body_element_get_v_link(self)
+    end
+    
+    def set_v_link(value)
+      WebKit.dom_html_body_element_set_v_link(self, value)
+    end
+  end
+  
   class DOMHTMLBodyElement < FFI::Struct
+    include DOMHTMLBodyElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -7454,7 +8941,122 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLButtonElementWrappers
+    def check_validity()
+      WebKit.dom_html_button_element_check_validity(self)
+    end
+    
+    def set_custom_validity(error)
+      WebKit.dom_html_button_element_set_custom_validity(self, error)
+    end
+    
+    def click()
+      WebKit.dom_html_button_element_click(self)
+    end
+    
+    def get_form()
+      DOMHTMLFormElement.new WebKit.dom_html_button_element_get_form(self)
+    end
+    
+    def get_form_action()
+      WebKit.dom_html_button_element_get_form_action(self)
+    end
+    
+    def set_form_action(value)
+      WebKit.dom_html_button_element_set_form_action(self, value)
+    end
+    
+    def get_form_enctype()
+      WebKit.dom_html_button_element_get_form_enctype(self)
+    end
+    
+    def set_form_enctype(value)
+      WebKit.dom_html_button_element_set_form_enctype(self, value)
+    end
+    
+    def get_form_method()
+      WebKit.dom_html_button_element_get_form_method(self)
+    end
+    
+    def set_form_method(value)
+      WebKit.dom_html_button_element_set_form_method(self, value)
+    end
+    
+    def get_form_no_validate()
+      WebKit.dom_html_button_element_get_form_no_validate(self)
+    end
+    
+    def set_form_no_validate(value)
+      WebKit.dom_html_button_element_set_form_no_validate(self, value)
+    end
+    
+    def get_form_target()
+      WebKit.dom_html_button_element_get_form_target(self)
+    end
+    
+    def set_form_target(value)
+      WebKit.dom_html_button_element_set_form_target(self, value)
+    end
+    
+    def get_validity()
+      DOMValidityState.new WebKit.dom_html_button_element_get_validity(self)
+    end
+    
+    def get_access_key()
+      WebKit.dom_html_button_element_get_access_key(self)
+    end
+    
+    def set_access_key(value)
+      WebKit.dom_html_button_element_set_access_key(self, value)
+    end
+    
+    def get_disabled()
+      WebKit.dom_html_button_element_get_disabled(self)
+    end
+    
+    def set_disabled(value)
+      WebKit.dom_html_button_element_set_disabled(self, value)
+    end
+    
+    def get_autofocus()
+      WebKit.dom_html_button_element_get_autofocus(self)
+    end
+    
+    def set_autofocus(value)
+      WebKit.dom_html_button_element_set_autofocus(self, value)
+    end
+    
+    def get_name()
+      WebKit.dom_html_button_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_button_element_set_name(self, value)
+    end
+    
+    def get_value()
+      WebKit.dom_html_button_element_get_value(self)
+    end
+    
+    def set_value(value)
+      WebKit.dom_html_button_element_set_value(self, value)
+    end
+    
+    def get_will_validate()
+      WebKit.dom_html_button_element_get_will_validate(self)
+    end
+    
+    def get_validation_message()
+      WebKit.dom_html_button_element_get_validation_message(self)
+    end
+    
+    def get_labels()
+      DOMNodeList.new WebKit.dom_html_button_element_get_labels(self)
+    end
+  end
+  
   class DOMHTMLButtonElement < FFI::Struct
+    include DOMHTMLButtonElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -7714,7 +9316,26 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLCanvasElementWrappers
+    def get_width()
+      WebKit.dom_html_canvas_element_get_width(self)
+    end
+    
+    def set_width(value)
+      WebKit.dom_html_canvas_element_set_width(self, value)
+    end
+    
+    def get_height()
+      WebKit.dom_html_canvas_element_get_height(self)
+    end
+    
+    def set_height(value)
+      WebKit.dom_html_canvas_element_set_height(self, value)
+    end
+  end
+  
   class DOMHTMLCanvasElement < FFI::Struct
+    include DOMHTMLCanvasElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -7773,7 +9394,22 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMHTMLCollectionWrappers
+    def item(index)
+      DOMNode.new WebKit.dom_html_collection_item(self, index)
+    end
+    
+    def named_item(name)
+      DOMNode.new WebKit.dom_html_collection_named_item(self, name)
+    end
+    
+    def get_length()
+      WebKit.dom_html_collection_get_length(self)
+    end
+  end
+  
   class DOMHTMLCollection < FFI::Struct
+    include DOMHTMLCollectionWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -7824,7 +9460,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLDListElementWrappers
+    def get_compact()
+      WebKit.dom_htmld_list_element_get_compact(self)
+    end
+    
+    def set_compact(value)
+      WebKit.dom_htmld_list_element_set_compact(self, value)
+    end
+  end
+  
   class DOMHTMLDListElement < FFI::Struct
+    include DOMHTMLDListElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -7866,7 +9513,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLDetailsElementWrappers
+    def get_open()
+      WebKit.dom_html_details_element_get_open(self)
+    end
+    
+    def set_open(value)
+      WebKit.dom_html_details_element_set_open(self, value)
+    end
+  end
+  
   class DOMHTMLDetailsElement < FFI::Struct
+    include DOMHTMLDetailsElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -7908,7 +9566,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLDirectoryElementWrappers
+    def get_compact()
+      WebKit.dom_html_directory_element_get_compact(self)
+    end
+    
+    def set_compact(value)
+      WebKit.dom_html_directory_element_set_compact(self, value)
+    end
+  end
+  
   class DOMHTMLDirectoryElement < FFI::Struct
+    include DOMHTMLDirectoryElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -7950,7 +9619,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLDivElementWrappers
+    def get_align()
+      WebKit.dom_html_div_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_div_element_set_align(self, value)
+    end
+  end
+  
   class DOMHTMLDivElement < FFI::Struct
+    include DOMHTMLDivElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -7992,7 +9672,114 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMDocument) 
+  module DOMHTMLDocumentWrappers
+    def close()
+      WebKit.dom_html_document_close(self)
+    end
+    
+    def clear()
+      WebKit.dom_html_document_clear(self)
+    end
+    
+    def capture_events()
+      WebKit.dom_html_document_capture_events(self)
+    end
+    
+    def release_events()
+      WebKit.dom_html_document_release_events(self)
+    end
+    
+    def has_focus()
+      WebKit.dom_html_document_has_focus(self)
+    end
+    
+    def get_embeds()
+      DOMHTMLCollection.new WebKit.dom_html_document_get_embeds(self)
+    end
+    
+    def get_plugins()
+      DOMHTMLCollection.new WebKit.dom_html_document_get_plugins(self)
+    end
+    
+    def get_scripts()
+      DOMHTMLCollection.new WebKit.dom_html_document_get_scripts(self)
+    end
+    
+    def get_width()
+      WebKit.dom_html_document_get_width(self)
+    end
+    
+    def get_height()
+      WebKit.dom_html_document_get_height(self)
+    end
+    
+    def get_dir()
+      WebKit.dom_html_document_get_dir(self)
+    end
+    
+    def set_dir(value)
+      WebKit.dom_html_document_set_dir(self, value)
+    end
+    
+    def get_design_mode()
+      WebKit.dom_html_document_get_design_mode(self)
+    end
+    
+    def set_design_mode(value)
+      WebKit.dom_html_document_set_design_mode(self, value)
+    end
+    
+    def get_compat_mode()
+      WebKit.dom_html_document_get_compat_mode(self)
+    end
+    
+    def get_active_element()
+      DOMElement.new WebKit.dom_html_document_get_active_element(self)
+    end
+    
+    def get_bg_color()
+      WebKit.dom_html_document_get_bg_color(self)
+    end
+    
+    def set_bg_color(value)
+      WebKit.dom_html_document_set_bg_color(self, value)
+    end
+    
+    def get_fg_color()
+      WebKit.dom_html_document_get_fg_color(self)
+    end
+    
+    def set_fg_color(value)
+      WebKit.dom_html_document_set_fg_color(self, value)
+    end
+    
+    def get_alink_color()
+      WebKit.dom_html_document_get_alink_color(self)
+    end
+    
+    def set_alink_color(value)
+      WebKit.dom_html_document_set_alink_color(self, value)
+    end
+    
+    def get_link_color()
+      WebKit.dom_html_document_get_link_color(self)
+    end
+    
+    def set_link_color(value)
+      WebKit.dom_html_document_set_link_color(self, value)
+    end
+    
+    def get_vlink_color()
+      WebKit.dom_html_document_get_vlink_color(self)
+    end
+    
+    def set_vlink_color(value)
+      WebKit.dom_html_document_set_vlink_color(self, value)
+    end
+  end
+  
   class DOMHTMLDocument < FFI::Struct
+    include DOMHTMLDocumentWrappers
     layout :parent_instance, DOMDocument.by_value
   end
   
@@ -8232,7 +10019,50 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLEmbedElementWrappers
+    def get_align()
+      WebKit.dom_html_embed_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_embed_element_set_align(self, value)
+    end
+    
+    def get_height()
+      WebKit.dom_html_embed_element_get_height(self)
+    end
+    
+    def set_height(value)
+      WebKit.dom_html_embed_element_set_height(self, value)
+    end
+    
+    def get_name()
+      WebKit.dom_html_embed_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_embed_element_set_name(self, value)
+    end
+    
+    def get_src()
+      WebKit.dom_html_embed_element_get_src(self)
+    end
+    
+    def set_src(value)
+      WebKit.dom_html_embed_element_set_src(self, value)
+    end
+    
+    def get_width()
+      WebKit.dom_html_embed_element_get_width(self)
+    end
+    
+    def set_width(value)
+      WebKit.dom_html_embed_element_set_width(self, value)
+    end
+  end
+  
   class DOMHTMLEmbedElement < FFI::Struct
+    include DOMHTMLEmbedElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -8342,7 +10172,34 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLFieldSetElementWrappers
+    def check_validity()
+      WebKit.dom_html_field_set_element_check_validity(self)
+    end
+    
+    def set_custom_validity(error)
+      WebKit.dom_html_field_set_element_set_custom_validity(self, error)
+    end
+    
+    def get_form()
+      DOMHTMLFormElement.new WebKit.dom_html_field_set_element_get_form(self)
+    end
+    
+    def get_validity()
+      DOMValidityState.new WebKit.dom_html_field_set_element_get_validity(self)
+    end
+    
+    def get_will_validate()
+      WebKit.dom_html_field_set_element_get_will_validate(self)
+    end
+    
+    def get_validation_message()
+      WebKit.dom_html_field_set_element_get_validation_message(self)
+    end
+  end
+  
   class DOMHTMLFieldSetElement < FFI::Struct
+    include DOMHTMLFieldSetElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -8416,7 +10273,34 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLFontElementWrappers
+    def get_color()
+      WebKit.dom_html_font_element_get_color(self)
+    end
+    
+    def set_color(value)
+      WebKit.dom_html_font_element_set_color(self, value)
+    end
+    
+    def get_face()
+      WebKit.dom_html_font_element_get_face(self)
+    end
+    
+    def set_face(value)
+      WebKit.dom_html_font_element_set_face(self, value)
+    end
+    
+    def get_size()
+      WebKit.dom_html_font_element_get_size(self)
+    end
+    
+    def set_size(value)
+      WebKit.dom_html_font_element_set_size(self, value)
+    end
+  end
+  
   class DOMHTMLFontElement < FFI::Struct
+    include DOMHTMLFontElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -8492,7 +10376,110 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLFormElementWrappers
+    def dispatch_form_change()
+      WebKit.dom_html_form_element_dispatch_form_change(self)
+    end
+    
+    def dispatch_form_input()
+      WebKit.dom_html_form_element_dispatch_form_input(self)
+    end
+    
+    def submit()
+      WebKit.dom_html_form_element_submit(self)
+    end
+    
+    def reset()
+      WebKit.dom_html_form_element_reset(self)
+    end
+    
+    def check_validity()
+      WebKit.dom_html_form_element_check_validity(self)
+    end
+    
+    def get_elements()
+      DOMHTMLCollection.new WebKit.dom_html_form_element_get_elements(self)
+    end
+    
+    def get_length()
+      WebKit.dom_html_form_element_get_length(self)
+    end
+    
+    def get_name()
+      WebKit.dom_html_form_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_form_element_set_name(self, value)
+    end
+    
+    def get_no_validate()
+      WebKit.dom_html_form_element_get_no_validate(self)
+    end
+    
+    def set_no_validate(value)
+      WebKit.dom_html_form_element_set_no_validate(self, value)
+    end
+    
+    def get_accept_charset()
+      WebKit.dom_html_form_element_get_accept_charset(self)
+    end
+    
+    def set_accept_charset(value)
+      WebKit.dom_html_form_element_set_accept_charset(self, value)
+    end
+    
+    def get_action()
+      WebKit.dom_html_form_element_get_action(self)
+    end
+    
+    def set_action(value)
+      WebKit.dom_html_form_element_set_action(self, value)
+    end
+    
+    def get_encoding()
+      WebKit.dom_html_form_element_get_encoding(self)
+    end
+    
+    def set_encoding(value)
+      WebKit.dom_html_form_element_set_encoding(self, value)
+    end
+    
+    def get_enctype()
+      WebKit.dom_html_form_element_get_enctype(self)
+    end
+    
+    def set_enctype(value)
+      WebKit.dom_html_form_element_set_enctype(self, value)
+    end
+    
+    def get_method()
+      WebKit.dom_html_form_element_get_method(self)
+    end
+    
+    def set_method(value)
+      WebKit.dom_html_form_element_set_method(self, value)
+    end
+    
+    def get_target()
+      WebKit.dom_html_form_element_get_target(self)
+    end
+    
+    def set_target(value)
+      WebKit.dom_html_form_element_set_target(self, value)
+    end
+    
+    def get_autocomplete()
+      WebKit.dom_html_form_element_get_autocomplete(self)
+    end
+    
+    def set_autocomplete(value)
+      WebKit.dom_html_form_element_set_autocomplete(self, value)
+    end
+  end
+  
   class DOMHTMLFormElement < FFI::Struct
+    include DOMHTMLFormElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -8710,7 +10697,90 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLFrameElementWrappers
+    def get_frame_border()
+      WebKit.dom_html_frame_element_get_frame_border(self)
+    end
+    
+    def set_frame_border(value)
+      WebKit.dom_html_frame_element_set_frame_border(self, value)
+    end
+    
+    def get_long_desc()
+      WebKit.dom_html_frame_element_get_long_desc(self)
+    end
+    
+    def set_long_desc(value)
+      WebKit.dom_html_frame_element_set_long_desc(self, value)
+    end
+    
+    def get_margin_height()
+      WebKit.dom_html_frame_element_get_margin_height(self)
+    end
+    
+    def set_margin_height(value)
+      WebKit.dom_html_frame_element_set_margin_height(self, value)
+    end
+    
+    def get_margin_width()
+      WebKit.dom_html_frame_element_get_margin_width(self)
+    end
+    
+    def set_margin_width(value)
+      WebKit.dom_html_frame_element_set_margin_width(self, value)
+    end
+    
+    def get_name()
+      WebKit.dom_html_frame_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_frame_element_set_name(self, value)
+    end
+    
+    def get_no_resize()
+      WebKit.dom_html_frame_element_get_no_resize(self)
+    end
+    
+    def set_no_resize(value)
+      WebKit.dom_html_frame_element_set_no_resize(self, value)
+    end
+    
+    def get_scrolling()
+      WebKit.dom_html_frame_element_get_scrolling(self)
+    end
+    
+    def set_scrolling(value)
+      WebKit.dom_html_frame_element_set_scrolling(self, value)
+    end
+    
+    def get_src()
+      WebKit.dom_html_frame_element_get_src(self)
+    end
+    
+    def set_src(value)
+      WebKit.dom_html_frame_element_set_src(self, value)
+    end
+    
+    def get_content_document()
+      DOMDocument.new WebKit.dom_html_frame_element_get_content_document(self)
+    end
+    
+    def get_content_window()
+      DOMDOMWindow.new WebKit.dom_html_frame_element_get_content_window(self)
+    end
+    
+    def get_width()
+      WebKit.dom_html_frame_element_get_width(self)
+    end
+    
+    def get_height()
+      WebKit.dom_html_frame_element_get_height(self)
+    end
+  end
+  
   class DOMHTMLFrameElement < FFI::Struct
+    include DOMHTMLFrameElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -8903,7 +10973,26 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLFrameSetElementWrappers
+    def get_cols()
+      WebKit.dom_html_frame_set_element_get_cols(self)
+    end
+    
+    def set_cols(value)
+      WebKit.dom_html_frame_set_element_set_cols(self, value)
+    end
+    
+    def get_rows()
+      WebKit.dom_html_frame_set_element_get_rows(self)
+    end
+    
+    def set_rows(value)
+      WebKit.dom_html_frame_set_element_set_rows(self, value)
+    end
+  end
+  
   class DOMHTMLFrameSetElement < FFI::Struct
+    include DOMHTMLFrameSetElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -8962,7 +11051,42 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLHRElementWrappers
+    def get_align()
+      WebKit.dom_htmlhr_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_htmlhr_element_set_align(self, value)
+    end
+    
+    def get_no_shade()
+      WebKit.dom_htmlhr_element_get_no_shade(self)
+    end
+    
+    def set_no_shade(value)
+      WebKit.dom_htmlhr_element_set_no_shade(self, value)
+    end
+    
+    def get_size()
+      WebKit.dom_htmlhr_element_get_size(self)
+    end
+    
+    def set_size(value)
+      WebKit.dom_htmlhr_element_set_size(self, value)
+    end
+    
+    def get_width()
+      WebKit.dom_htmlhr_element_get_width(self)
+    end
+    
+    def set_width(value)
+      WebKit.dom_htmlhr_element_set_width(self, value)
+    end
+  end
+  
   class DOMHTMLHRElement < FFI::Struct
+    include DOMHTMLHRElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -9055,7 +11179,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLHeadElementWrappers
+    def get_profile()
+      WebKit.dom_html_head_element_get_profile(self)
+    end
+    
+    def set_profile(value)
+      WebKit.dom_html_head_element_set_profile(self, value)
+    end
+  end
+  
   class DOMHTMLHeadElement < FFI::Struct
+    include DOMHTMLHeadElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -9097,7 +11232,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLHeadingElementWrappers
+    def get_align()
+      WebKit.dom_html_heading_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_heading_element_set_align(self, value)
+    end
+  end
+  
   class DOMHTMLHeadingElement < FFI::Struct
+    include DOMHTMLHeadingElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -9139,7 +11285,26 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLHtmlElementWrappers
+    def get_version()
+      WebKit.dom_html_html_element_get_version(self)
+    end
+    
+    def set_version(value)
+      WebKit.dom_html_html_element_set_version(self, value)
+    end
+    
+    def get_manifest()
+      WebKit.dom_html_html_element_get_manifest(self)
+    end
+    
+    def set_manifest(value)
+      WebKit.dom_html_html_element_set_manifest(self, value)
+    end
+  end
+  
   class DOMHTMLHtmlElement < FFI::Struct
+    include DOMHTMLHtmlElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -9198,7 +11363,106 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLIFrameElementWrappers
+    def get_align()
+      WebKit.dom_html_iframe_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_iframe_element_set_align(self, value)
+    end
+    
+    def get_frame_border()
+      WebKit.dom_html_iframe_element_get_frame_border(self)
+    end
+    
+    def set_frame_border(value)
+      WebKit.dom_html_iframe_element_set_frame_border(self, value)
+    end
+    
+    def get_height()
+      WebKit.dom_html_iframe_element_get_height(self)
+    end
+    
+    def set_height(value)
+      WebKit.dom_html_iframe_element_set_height(self, value)
+    end
+    
+    def get_long_desc()
+      WebKit.dom_html_iframe_element_get_long_desc(self)
+    end
+    
+    def set_long_desc(value)
+      WebKit.dom_html_iframe_element_set_long_desc(self, value)
+    end
+    
+    def get_margin_height()
+      WebKit.dom_html_iframe_element_get_margin_height(self)
+    end
+    
+    def set_margin_height(value)
+      WebKit.dom_html_iframe_element_set_margin_height(self, value)
+    end
+    
+    def get_margin_width()
+      WebKit.dom_html_iframe_element_get_margin_width(self)
+    end
+    
+    def set_margin_width(value)
+      WebKit.dom_html_iframe_element_set_margin_width(self, value)
+    end
+    
+    def get_name()
+      WebKit.dom_html_iframe_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_iframe_element_set_name(self, value)
+    end
+    
+    def get_sandbox()
+      WebKit.dom_html_iframe_element_get_sandbox(self)
+    end
+    
+    def set_sandbox(value)
+      WebKit.dom_html_iframe_element_set_sandbox(self, value)
+    end
+    
+    def get_scrolling()
+      WebKit.dom_html_iframe_element_get_scrolling(self)
+    end
+    
+    def set_scrolling(value)
+      WebKit.dom_html_iframe_element_set_scrolling(self, value)
+    end
+    
+    def get_src()
+      WebKit.dom_html_iframe_element_get_src(self)
+    end
+    
+    def set_src(value)
+      WebKit.dom_html_iframe_element_set_src(self, value)
+    end
+    
+    def get_width()
+      WebKit.dom_html_iframe_element_get_width(self)
+    end
+    
+    def set_width(value)
+      WebKit.dom_html_iframe_element_set_width(self, value)
+    end
+    
+    def get_content_document()
+      DOMDocument.new WebKit.dom_html_iframe_element_get_content_document(self)
+    end
+    
+    def get_content_window()
+      DOMDOMWindow.new WebKit.dom_html_iframe_element_get_content_window(self)
+    end
+  end
+  
   class DOMHTMLIFrameElement < FFI::Struct
+    include DOMHTMLIFrameElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -9426,7 +11690,142 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLImageElementWrappers
+    def get_name()
+      WebKit.dom_html_image_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_image_element_set_name(self, value)
+    end
+    
+    def get_align()
+      WebKit.dom_html_image_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_image_element_set_align(self, value)
+    end
+    
+    def get_alt()
+      WebKit.dom_html_image_element_get_alt(self)
+    end
+    
+    def set_alt(value)
+      WebKit.dom_html_image_element_set_alt(self, value)
+    end
+    
+    def get_border()
+      WebKit.dom_html_image_element_get_border(self)
+    end
+    
+    def set_border(value)
+      WebKit.dom_html_image_element_set_border(self, value)
+    end
+    
+    def get_cross_origin()
+      WebKit.dom_html_image_element_get_cross_origin(self)
+    end
+    
+    def set_cross_origin(value)
+      WebKit.dom_html_image_element_set_cross_origin(self, value)
+    end
+    
+    def get_height()
+      WebKit.dom_html_image_element_get_height(self)
+    end
+    
+    def set_height(value)
+      WebKit.dom_html_image_element_set_height(self, value)
+    end
+    
+    def get_hspace()
+      WebKit.dom_html_image_element_get_hspace(self)
+    end
+    
+    def set_hspace(value)
+      WebKit.dom_html_image_element_set_hspace(self, value)
+    end
+    
+    def get_is_map()
+      WebKit.dom_html_image_element_get_is_map(self)
+    end
+    
+    def set_is_map(value)
+      WebKit.dom_html_image_element_set_is_map(self, value)
+    end
+    
+    def get_long_desc()
+      WebKit.dom_html_image_element_get_long_desc(self)
+    end
+    
+    def set_long_desc(value)
+      WebKit.dom_html_image_element_set_long_desc(self, value)
+    end
+    
+    def get_src()
+      WebKit.dom_html_image_element_get_src(self)
+    end
+    
+    def set_src(value)
+      WebKit.dom_html_image_element_set_src(self, value)
+    end
+    
+    def get_use_map()
+      WebKit.dom_html_image_element_get_use_map(self)
+    end
+    
+    def set_use_map(value)
+      WebKit.dom_html_image_element_set_use_map(self, value)
+    end
+    
+    def get_vspace()
+      WebKit.dom_html_image_element_get_vspace(self)
+    end
+    
+    def set_vspace(value)
+      WebKit.dom_html_image_element_set_vspace(self, value)
+    end
+    
+    def get_width()
+      WebKit.dom_html_image_element_get_width(self)
+    end
+    
+    def set_width(value)
+      WebKit.dom_html_image_element_set_width(self, value)
+    end
+    
+    def get_complete()
+      WebKit.dom_html_image_element_get_complete(self)
+    end
+    
+    def get_lowsrc()
+      WebKit.dom_html_image_element_get_lowsrc(self)
+    end
+    
+    def set_lowsrc(value)
+      WebKit.dom_html_image_element_set_lowsrc(self, value)
+    end
+    
+    def get_natural_height()
+      WebKit.dom_html_image_element_get_natural_height(self)
+    end
+    
+    def get_natural_width()
+      WebKit.dom_html_image_element_get_natural_width(self)
+    end
+    
+    def get_x()
+      WebKit.dom_html_image_element_get_x(self)
+    end
+    
+    def get_y()
+      WebKit.dom_html_image_element_get_y(self)
+    end
+  end
+  
   class DOMHTMLImageElement < FFI::Struct
+    include DOMHTMLImageElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -9729,7 +12128,354 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLInputElementWrappers
+    def is_edited()
+      WebKit.dom_html_input_element_is_edited(self)
+    end
+    
+    def step_up(n, error)
+      WebKit.dom_html_input_element_step_up(self, n, error)
+    end
+    
+    def step_down(n, error)
+      WebKit.dom_html_input_element_step_down(self, n, error)
+    end
+    
+    def check_validity()
+      WebKit.dom_html_input_element_check_validity(self)
+    end
+    
+    def set_custom_validity(error)
+      WebKit.dom_html_input_element_set_custom_validity(self, error)
+    end
+    
+    def select()
+      WebKit.dom_html_input_element_select(self)
+    end
+    
+    def click()
+      WebKit.dom_html_input_element_click(self)
+    end
+    
+    def set_value_for_user(value)
+      WebKit.dom_html_input_element_set_value_for_user(self, value)
+    end
+    
+    def get_default_value()
+      WebKit.dom_html_input_element_get_default_value(self)
+    end
+    
+    def set_default_value(value)
+      WebKit.dom_html_input_element_set_default_value(self, value)
+    end
+    
+    def get_default_checked()
+      WebKit.dom_html_input_element_get_default_checked(self)
+    end
+    
+    def set_default_checked(value)
+      WebKit.dom_html_input_element_set_default_checked(self, value)
+    end
+    
+    def get_form()
+      DOMHTMLFormElement.new WebKit.dom_html_input_element_get_form(self)
+    end
+    
+    def get_form_action()
+      WebKit.dom_html_input_element_get_form_action(self)
+    end
+    
+    def set_form_action(value)
+      WebKit.dom_html_input_element_set_form_action(self, value)
+    end
+    
+    def get_form_enctype()
+      WebKit.dom_html_input_element_get_form_enctype(self)
+    end
+    
+    def set_form_enctype(value)
+      WebKit.dom_html_input_element_set_form_enctype(self, value)
+    end
+    
+    def get_form_method()
+      WebKit.dom_html_input_element_get_form_method(self)
+    end
+    
+    def set_form_method(value)
+      WebKit.dom_html_input_element_set_form_method(self, value)
+    end
+    
+    def get_form_no_validate()
+      WebKit.dom_html_input_element_get_form_no_validate(self)
+    end
+    
+    def set_form_no_validate(value)
+      WebKit.dom_html_input_element_set_form_no_validate(self, value)
+    end
+    
+    def get_form_target()
+      WebKit.dom_html_input_element_get_form_target(self)
+    end
+    
+    def set_form_target(value)
+      WebKit.dom_html_input_element_set_form_target(self, value)
+    end
+    
+    def get_validity()
+      DOMValidityState.new WebKit.dom_html_input_element_get_validity(self)
+    end
+    
+    def get_accept()
+      WebKit.dom_html_input_element_get_accept(self)
+    end
+    
+    def set_accept(value)
+      WebKit.dom_html_input_element_set_accept(self, value)
+    end
+    
+    def get_access_key()
+      WebKit.dom_html_input_element_get_access_key(self)
+    end
+    
+    def set_access_key(value)
+      WebKit.dom_html_input_element_set_access_key(self, value)
+    end
+    
+    def get_align()
+      WebKit.dom_html_input_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_input_element_set_align(self, value)
+    end
+    
+    def get_alt()
+      WebKit.dom_html_input_element_get_alt(self)
+    end
+    
+    def set_alt(value)
+      WebKit.dom_html_input_element_set_alt(self, value)
+    end
+    
+    def get_checked()
+      WebKit.dom_html_input_element_get_checked(self)
+    end
+    
+    def set_checked(value)
+      WebKit.dom_html_input_element_set_checked(self, value)
+    end
+    
+    def get_disabled()
+      WebKit.dom_html_input_element_get_disabled(self)
+    end
+    
+    def set_disabled(value)
+      WebKit.dom_html_input_element_set_disabled(self, value)
+    end
+    
+    def get_autofocus()
+      WebKit.dom_html_input_element_get_autofocus(self)
+    end
+    
+    def set_autofocus(value)
+      WebKit.dom_html_input_element_set_autofocus(self, value)
+    end
+    
+    def get_autocomplete()
+      WebKit.dom_html_input_element_get_autocomplete(self)
+    end
+    
+    def set_autocomplete(value)
+      WebKit.dom_html_input_element_set_autocomplete(self, value)
+    end
+    
+    def get_list()
+      DOMHTMLElement.new WebKit.dom_html_input_element_get_list(self)
+    end
+    
+    def get_max()
+      WebKit.dom_html_input_element_get_max(self)
+    end
+    
+    def set_max(value)
+      WebKit.dom_html_input_element_set_max(self, value)
+    end
+    
+    def get_max_length()
+      WebKit.dom_html_input_element_get_max_length(self)
+    end
+    
+    def set_max_length(value, error)
+      WebKit.dom_html_input_element_set_max_length(self, value, error)
+    end
+    
+    def get_min()
+      WebKit.dom_html_input_element_get_min(self)
+    end
+    
+    def set_min(value)
+      WebKit.dom_html_input_element_set_min(self, value)
+    end
+    
+    def get_multiple()
+      WebKit.dom_html_input_element_get_multiple(self)
+    end
+    
+    def set_multiple(value)
+      WebKit.dom_html_input_element_set_multiple(self, value)
+    end
+    
+    def get_webkitdirectory()
+      WebKit.dom_html_input_element_get_webkitdirectory(self)
+    end
+    
+    def set_webkitdirectory(value)
+      WebKit.dom_html_input_element_set_webkitdirectory(self, value)
+    end
+    
+    def get_name()
+      WebKit.dom_html_input_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_input_element_set_name(self, value)
+    end
+    
+    def get_pattern()
+      WebKit.dom_html_input_element_get_pattern(self)
+    end
+    
+    def set_pattern(value)
+      WebKit.dom_html_input_element_set_pattern(self, value)
+    end
+    
+    def get_placeholder()
+      WebKit.dom_html_input_element_get_placeholder(self)
+    end
+    
+    def set_placeholder(value)
+      WebKit.dom_html_input_element_set_placeholder(self, value)
+    end
+    
+    def get_read_only()
+      WebKit.dom_html_input_element_get_read_only(self)
+    end
+    
+    def set_read_only(value)
+      WebKit.dom_html_input_element_set_read_only(self, value)
+    end
+    
+    def get_required()
+      WebKit.dom_html_input_element_get_required(self)
+    end
+    
+    def set_required(value)
+      WebKit.dom_html_input_element_set_required(self, value)
+    end
+    
+    def get_size()
+      WebKit.dom_html_input_element_get_size(self)
+    end
+    
+    def set_size(value)
+      WebKit.dom_html_input_element_set_size(self, value)
+    end
+    
+    def get_src()
+      WebKit.dom_html_input_element_get_src(self)
+    end
+    
+    def set_src(value)
+      WebKit.dom_html_input_element_set_src(self, value)
+    end
+    
+    def get_step()
+      WebKit.dom_html_input_element_get_step(self)
+    end
+    
+    def set_step(value)
+      WebKit.dom_html_input_element_set_step(self, value)
+    end
+    
+    def get_use_map()
+      WebKit.dom_html_input_element_get_use_map(self)
+    end
+    
+    def set_use_map(value)
+      WebKit.dom_html_input_element_set_use_map(self, value)
+    end
+    
+    def get_value()
+      WebKit.dom_html_input_element_get_value(self)
+    end
+    
+    def set_value(value)
+      WebKit.dom_html_input_element_set_value(self, value)
+    end
+    
+    def get_value_as_number()
+      WebKit.dom_html_input_element_get_value_as_number(self)
+    end
+    
+    def set_value_as_number(value, error)
+      WebKit.dom_html_input_element_set_value_as_number(self, value, error)
+    end
+    
+    def get_selected_option()
+      DOMHTMLOptionElement.new WebKit.dom_html_input_element_get_selected_option(self)
+    end
+    
+    def get_incremental()
+      WebKit.dom_html_input_element_get_incremental(self)
+    end
+    
+    def set_incremental(value)
+      WebKit.dom_html_input_element_set_incremental(self, value)
+    end
+    
+    def get_will_validate()
+      WebKit.dom_html_input_element_get_will_validate(self)
+    end
+    
+    def get_validation_message()
+      WebKit.dom_html_input_element_get_validation_message(self)
+    end
+    
+    def get_indeterminate()
+      WebKit.dom_html_input_element_get_indeterminate(self)
+    end
+    
+    def set_indeterminate(value)
+      WebKit.dom_html_input_element_set_indeterminate(self, value)
+    end
+    
+    def get_files()
+      DOMFileList.new WebKit.dom_html_input_element_get_files(self)
+    end
+    
+    def get_labels()
+      DOMNodeList.new WebKit.dom_html_input_element_get_labels(self)
+    end
+    
+    def get_webkit_speech()
+      WebKit.dom_html_input_element_get_webkit_speech(self)
+    end
+    
+    def set_webkit_speech(value)
+      WebKit.dom_html_input_element_set_webkit_speech(self, value)
+    end
+    
+    def get_webkit_grammar()
+      WebKit.dom_html_input_element_get_webkit_grammar(self)
+    end
+    
+    def set_webkit_grammar(value)
+      WebKit.dom_html_input_element_set_webkit_grammar(self, value)
+    end
+  end
+  
   class DOMHTMLInputElement < FFI::Struct
+    include DOMHTMLInputElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -10477,7 +13223,22 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLInputElement) 
+  module DOMHTMLIsIndexElementWrappers
+    def get_form()
+      DOMHTMLFormElement.new WebKit.dom_html_is_index_element_get_form(self)
+    end
+    
+    def get_prompt()
+      WebKit.dom_html_is_index_element_get_prompt(self)
+    end
+    
+    def set_prompt(value)
+      WebKit.dom_html_is_index_element_set_prompt(self, value)
+    end
+  end
+  
   class DOMHTMLIsIndexElement < FFI::Struct
+    include DOMHTMLIsIndexElementWrappers
     layout :parent_instance, DOMHTMLInputElement.by_value
   end
   
@@ -10527,7 +13288,78 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLKeygenElementWrappers
+    def check_validity()
+      WebKit.dom_html_keygen_element_check_validity(self)
+    end
+    
+    def set_custom_validity(error)
+      WebKit.dom_html_keygen_element_set_custom_validity(self, error)
+    end
+    
+    def get_autofocus()
+      WebKit.dom_html_keygen_element_get_autofocus(self)
+    end
+    
+    def set_autofocus(value)
+      WebKit.dom_html_keygen_element_set_autofocus(self, value)
+    end
+    
+    def get_challenge()
+      WebKit.dom_html_keygen_element_get_challenge(self)
+    end
+    
+    def set_challenge(value)
+      WebKit.dom_html_keygen_element_set_challenge(self, value)
+    end
+    
+    def get_disabled()
+      WebKit.dom_html_keygen_element_get_disabled(self)
+    end
+    
+    def set_disabled(value)
+      WebKit.dom_html_keygen_element_set_disabled(self, value)
+    end
+    
+    def get_form()
+      DOMHTMLFormElement.new WebKit.dom_html_keygen_element_get_form(self)
+    end
+    
+    def get_keytype()
+      WebKit.dom_html_keygen_element_get_keytype(self)
+    end
+    
+    def set_keytype(value)
+      WebKit.dom_html_keygen_element_set_keytype(self, value)
+    end
+    
+    def get_name()
+      WebKit.dom_html_keygen_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_keygen_element_set_name(self, value)
+    end
+    
+    def get_will_validate()
+      WebKit.dom_html_keygen_element_get_will_validate(self)
+    end
+    
+    def get_validity()
+      DOMValidityState.new WebKit.dom_html_keygen_element_get_validity(self)
+    end
+    
+    def get_validation_message()
+      WebKit.dom_html_keygen_element_get_validation_message(self)
+    end
+    
+    def get_labels()
+      DOMNodeList.new WebKit.dom_html_keygen_element_get_labels(self)
+    end
+  end
+  
   class DOMHTMLKeygenElement < FFI::Struct
+    include DOMHTMLKeygenElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -10694,7 +13526,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLLIElementWrappers
+    def get_value()
+      WebKit.dom_htmlli_element_get_value(self)
+    end
+    
+    def set_value(value)
+      WebKit.dom_htmlli_element_set_value(self, value)
+    end
+  end
+  
   class DOMHTMLLIElement < FFI::Struct
+    include DOMHTMLLIElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -10736,7 +13579,34 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLLabelElementWrappers
+    def get_form()
+      DOMHTMLFormElement.new WebKit.dom_html_label_element_get_form(self)
+    end
+    
+    def get_access_key()
+      WebKit.dom_html_label_element_get_access_key(self)
+    end
+    
+    def set_access_key(value)
+      WebKit.dom_html_label_element_set_access_key(self, value)
+    end
+    
+    def get_html_for()
+      WebKit.dom_html_label_element_get_html_for(self)
+    end
+    
+    def set_html_for(value)
+      WebKit.dom_html_label_element_set_html_for(self, value)
+    end
+    
+    def get_control()
+      DOMHTMLElement.new WebKit.dom_html_label_element_get_control(self)
+    end
+  end
+  
   class DOMHTMLLabelElement < FFI::Struct
+    include DOMHTMLLabelElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -10811,7 +13681,30 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLLegendElementWrappers
+    def get_form()
+      DOMHTMLFormElement.new WebKit.dom_html_legend_element_get_form(self)
+    end
+    
+    def get_access_key()
+      WebKit.dom_html_legend_element_get_access_key(self)
+    end
+    
+    def set_access_key(value)
+      WebKit.dom_html_legend_element_set_access_key(self, value)
+    end
+    
+    def get_align()
+      WebKit.dom_html_legend_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_legend_element_set_align(self, value)
+    end
+  end
+  
   class DOMHTMLLegendElement < FFI::Struct
+    include DOMHTMLLegendElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -10878,7 +13771,78 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLLinkElementWrappers
+    def get_disabled()
+      WebKit.dom_html_link_element_get_disabled(self)
+    end
+    
+    def set_disabled(value)
+      WebKit.dom_html_link_element_set_disabled(self, value)
+    end
+    
+    def get_charset()
+      WebKit.dom_html_link_element_get_charset(self)
+    end
+    
+    def set_charset(value)
+      WebKit.dom_html_link_element_set_charset(self, value)
+    end
+    
+    def get_href()
+      WebKit.dom_html_link_element_get_href(self)
+    end
+    
+    def set_href(value)
+      WebKit.dom_html_link_element_set_href(self, value)
+    end
+    
+    def get_hreflang()
+      WebKit.dom_html_link_element_get_hreflang(self)
+    end
+    
+    def set_hreflang(value)
+      WebKit.dom_html_link_element_set_hreflang(self, value)
+    end
+    
+    def get_media()
+      WebKit.dom_html_link_element_get_media(self)
+    end
+    
+    def set_media(value)
+      WebKit.dom_html_link_element_set_media(self, value)
+    end
+    
+    def get_rel()
+      WebKit.dom_html_link_element_get_rel(self)
+    end
+    
+    def set_rel(value)
+      WebKit.dom_html_link_element_set_rel(self, value)
+    end
+    
+    def get_rev()
+      WebKit.dom_html_link_element_get_rev(self)
+    end
+    
+    def set_rev(value)
+      WebKit.dom_html_link_element_set_rev(self, value)
+    end
+    
+    def get_target()
+      WebKit.dom_html_link_element_get_target(self)
+    end
+    
+    def set_target(value)
+      WebKit.dom_html_link_element_set_target(self, value)
+    end
+    
+    def get_sheet()
+      DOMStyleSheet.new WebKit.dom_html_link_element_get_sheet(self)
+    end
+  end
+  
   class DOMHTMLLinkElement < FFI::Struct
+    include DOMHTMLLinkElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -11047,7 +14011,22 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLMapElementWrappers
+    def get_areas()
+      DOMHTMLCollection.new WebKit.dom_html_map_element_get_areas(self)
+    end
+    
+    def get_name()
+      WebKit.dom_html_map_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_map_element_set_name(self, value)
+    end
+  end
+  
   class DOMHTMLMapElement < FFI::Struct
+    include DOMHTMLMapElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -11097,7 +14076,106 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLMarqueeElementWrappers
+    def start()
+      WebKit.dom_html_marquee_element_start(self)
+    end
+    
+    def stop()
+      WebKit.dom_html_marquee_element_stop(self)
+    end
+    
+    def get_behavior()
+      WebKit.dom_html_marquee_element_get_behavior(self)
+    end
+    
+    def set_behavior(value)
+      WebKit.dom_html_marquee_element_set_behavior(self, value)
+    end
+    
+    def get_bg_color()
+      WebKit.dom_html_marquee_element_get_bg_color(self)
+    end
+    
+    def set_bg_color(value)
+      WebKit.dom_html_marquee_element_set_bg_color(self, value)
+    end
+    
+    def get_direction()
+      WebKit.dom_html_marquee_element_get_direction(self)
+    end
+    
+    def set_direction(value)
+      WebKit.dom_html_marquee_element_set_direction(self, value)
+    end
+    
+    def get_height()
+      WebKit.dom_html_marquee_element_get_height(self)
+    end
+    
+    def set_height(value)
+      WebKit.dom_html_marquee_element_set_height(self, value)
+    end
+    
+    def get_hspace()
+      WebKit.dom_html_marquee_element_get_hspace(self)
+    end
+    
+    def set_hspace(value)
+      WebKit.dom_html_marquee_element_set_hspace(self, value)
+    end
+    
+    def get_loop()
+      WebKit.dom_html_marquee_element_get_loop(self)
+    end
+    
+    def set_loop(value, error)
+      WebKit.dom_html_marquee_element_set_loop(self, value, error)
+    end
+    
+    def get_scroll_amount()
+      WebKit.dom_html_marquee_element_get_scroll_amount(self)
+    end
+    
+    def set_scroll_amount(value, error)
+      WebKit.dom_html_marquee_element_set_scroll_amount(self, value, error)
+    end
+    
+    def get_scroll_delay()
+      WebKit.dom_html_marquee_element_get_scroll_delay(self)
+    end
+    
+    def set_scroll_delay(value, error)
+      WebKit.dom_html_marquee_element_set_scroll_delay(self, value, error)
+    end
+    
+    def get_true_speed()
+      WebKit.dom_html_marquee_element_get_true_speed(self)
+    end
+    
+    def set_true_speed(value)
+      WebKit.dom_html_marquee_element_set_true_speed(self, value)
+    end
+    
+    def get_vspace()
+      WebKit.dom_html_marquee_element_get_vspace(self)
+    end
+    
+    def set_vspace(value)
+      WebKit.dom_html_marquee_element_set_vspace(self, value)
+    end
+    
+    def get_width()
+      WebKit.dom_html_marquee_element_get_width(self)
+    end
+    
+    def set_width(value)
+      WebKit.dom_html_marquee_element_set_width(self, value)
+    end
+  end
+  
   class DOMHTMLMarqueeElement < FFI::Struct
+    include DOMHTMLMarqueeElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -11328,7 +14406,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLMenuElementWrappers
+    def get_compact()
+      WebKit.dom_html_menu_element_get_compact(self)
+    end
+    
+    def set_compact(value)
+      WebKit.dom_html_menu_element_set_compact(self, value)
+    end
+  end
+  
   class DOMHTMLMenuElement < FFI::Struct
+    include DOMHTMLMenuElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -11370,7 +14459,42 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLMetaElementWrappers
+    def get_content()
+      WebKit.dom_html_meta_element_get_content(self)
+    end
+    
+    def set_content(value)
+      WebKit.dom_html_meta_element_set_content(self, value)
+    end
+    
+    def get_http_equiv()
+      WebKit.dom_html_meta_element_get_http_equiv(self)
+    end
+    
+    def set_http_equiv(value)
+      WebKit.dom_html_meta_element_set_http_equiv(self, value)
+    end
+    
+    def get_name()
+      WebKit.dom_html_meta_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_meta_element_set_name(self, value)
+    end
+    
+    def get_scheme()
+      WebKit.dom_html_meta_element_get_scheme(self)
+    end
+    
+    def set_scheme(value)
+      WebKit.dom_html_meta_element_set_scheme(self, value)
+    end
+  end
+  
   class DOMHTMLMetaElement < FFI::Struct
+    include DOMHTMLMetaElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -11463,7 +14587,26 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLModElementWrappers
+    def get_cite()
+      WebKit.dom_html_mod_element_get_cite(self)
+    end
+    
+    def set_cite(value)
+      WebKit.dom_html_mod_element_set_cite(self, value)
+    end
+    
+    def get_date_time()
+      WebKit.dom_html_mod_element_get_date_time(self)
+    end
+    
+    def set_date_time(value)
+      WebKit.dom_html_mod_element_set_date_time(self, value)
+    end
+  end
+  
   class DOMHTMLModElement < FFI::Struct
+    include DOMHTMLModElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -11522,7 +14665,26 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLOListElementWrappers
+    def get_compact()
+      WebKit.dom_htmlo_list_element_get_compact(self)
+    end
+    
+    def set_compact(value)
+      WebKit.dom_htmlo_list_element_set_compact(self, value)
+    end
+    
+    def get_start()
+      WebKit.dom_htmlo_list_element_get_start(self)
+    end
+    
+    def set_start(value)
+      WebKit.dom_htmlo_list_element_set_start(self, value)
+    end
+  end
+  
   class DOMHTMLOListElement < FFI::Struct
+    include DOMHTMLOListElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -11581,7 +14743,158 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLObjectElementWrappers
+    def check_validity()
+      WebKit.dom_html_object_element_check_validity(self)
+    end
+    
+    def set_custom_validity(error)
+      WebKit.dom_html_object_element_set_custom_validity(self, error)
+    end
+    
+    def get_form()
+      DOMHTMLFormElement.new WebKit.dom_html_object_element_get_form(self)
+    end
+    
+    def get_code()
+      WebKit.dom_html_object_element_get_code(self)
+    end
+    
+    def set_code(value)
+      WebKit.dom_html_object_element_set_code(self, value)
+    end
+    
+    def get_align()
+      WebKit.dom_html_object_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_object_element_set_align(self, value)
+    end
+    
+    def get_archive()
+      WebKit.dom_html_object_element_get_archive(self)
+    end
+    
+    def set_archive(value)
+      WebKit.dom_html_object_element_set_archive(self, value)
+    end
+    
+    def get_border()
+      WebKit.dom_html_object_element_get_border(self)
+    end
+    
+    def set_border(value)
+      WebKit.dom_html_object_element_set_border(self, value)
+    end
+    
+    def get_code_base()
+      WebKit.dom_html_object_element_get_code_base(self)
+    end
+    
+    def set_code_base(value)
+      WebKit.dom_html_object_element_set_code_base(self, value)
+    end
+    
+    def get_code_type()
+      WebKit.dom_html_object_element_get_code_type(self)
+    end
+    
+    def set_code_type(value)
+      WebKit.dom_html_object_element_set_code_type(self, value)
+    end
+    
+    def get_data()
+      WebKit.dom_html_object_element_get_data(self)
+    end
+    
+    def set_data(value)
+      WebKit.dom_html_object_element_set_data(self, value)
+    end
+    
+    def get_declare()
+      WebKit.dom_html_object_element_get_declare(self)
+    end
+    
+    def set_declare(value)
+      WebKit.dom_html_object_element_set_declare(self, value)
+    end
+    
+    def get_height()
+      WebKit.dom_html_object_element_get_height(self)
+    end
+    
+    def set_height(value)
+      WebKit.dom_html_object_element_set_height(self, value)
+    end
+    
+    def get_hspace()
+      WebKit.dom_html_object_element_get_hspace(self)
+    end
+    
+    def set_hspace(value)
+      WebKit.dom_html_object_element_set_hspace(self, value)
+    end
+    
+    def get_name()
+      WebKit.dom_html_object_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_object_element_set_name(self, value)
+    end
+    
+    def get_standby()
+      WebKit.dom_html_object_element_get_standby(self)
+    end
+    
+    def set_standby(value)
+      WebKit.dom_html_object_element_set_standby(self, value)
+    end
+    
+    def get_use_map()
+      WebKit.dom_html_object_element_get_use_map(self)
+    end
+    
+    def set_use_map(value)
+      WebKit.dom_html_object_element_set_use_map(self, value)
+    end
+    
+    def get_vspace()
+      WebKit.dom_html_object_element_get_vspace(self)
+    end
+    
+    def set_vspace(value)
+      WebKit.dom_html_object_element_set_vspace(self, value)
+    end
+    
+    def get_width()
+      WebKit.dom_html_object_element_get_width(self)
+    end
+    
+    def set_width(value)
+      WebKit.dom_html_object_element_set_width(self, value)
+    end
+    
+    def get_will_validate()
+      WebKit.dom_html_object_element_get_will_validate(self)
+    end
+    
+    def get_validity()
+      DOMValidityState.new WebKit.dom_html_object_element_get_validity(self)
+    end
+    
+    def get_validation_message()
+      WebKit.dom_html_object_element_get_validation_message(self)
+    end
+    
+    def get_content_document()
+      DOMDocument.new WebKit.dom_html_object_element_get_content_document(self)
+    end
+  end
+  
   class DOMHTMLObjectElement < FFI::Struct
+    include DOMHTMLObjectElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -11918,7 +15231,26 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLOptGroupElementWrappers
+    def get_disabled()
+      WebKit.dom_html_opt_group_element_get_disabled(self)
+    end
+    
+    def set_disabled(value)
+      WebKit.dom_html_opt_group_element_set_disabled(self, value)
+    end
+    
+    def get_label()
+      WebKit.dom_html_opt_group_element_get_label(self)
+    end
+    
+    def set_label(value)
+      WebKit.dom_html_opt_group_element_set_label(self, value)
+    end
+  end
+  
   class DOMHTMLOptGroupElement < FFI::Struct
+    include DOMHTMLOptGroupElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -11977,7 +15309,62 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLOptionElementWrappers
+    def get_form()
+      DOMHTMLFormElement.new WebKit.dom_html_option_element_get_form(self)
+    end
+    
+    def get_default_selected()
+      WebKit.dom_html_option_element_get_default_selected(self)
+    end
+    
+    def set_default_selected(value)
+      WebKit.dom_html_option_element_set_default_selected(self, value)
+    end
+    
+    def get_text()
+      WebKit.dom_html_option_element_get_text(self)
+    end
+    
+    def get_index()
+      WebKit.dom_html_option_element_get_index(self)
+    end
+    
+    def get_disabled()
+      WebKit.dom_html_option_element_get_disabled(self)
+    end
+    
+    def set_disabled(value)
+      WebKit.dom_html_option_element_set_disabled(self, value)
+    end
+    
+    def get_label()
+      WebKit.dom_html_option_element_get_label(self)
+    end
+    
+    def set_label(value)
+      WebKit.dom_html_option_element_set_label(self, value)
+    end
+    
+    def get_selected()
+      WebKit.dom_html_option_element_get_selected(self)
+    end
+    
+    def set_selected(value)
+      WebKit.dom_html_option_element_set_selected(self, value)
+    end
+    
+    def get_value()
+      WebKit.dom_html_option_element_get_value(self)
+    end
+    
+    def set_value(value)
+      WebKit.dom_html_option_element_set_value(self, value)
+    end
+  end
+  
   class DOMHTMLOptionElement < FFI::Struct
+    include DOMHTMLOptionElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -12111,7 +15498,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLCollection) 
+  module DOMHTMLOptionsCollectionWrappers
+    def get_selected_index()
+      WebKit.dom_html_options_collection_get_selected_index(self)
+    end
+    
+    def set_selected_index(value)
+      WebKit.dom_html_options_collection_set_selected_index(self, value)
+    end
+  end
+  
   class DOMHTMLOptionsCollection < FFI::Struct
+    include DOMHTMLOptionsCollectionWrappers
     layout :parent_instance, DOMHTMLCollection.by_value
   end
   
@@ -12153,7 +15551,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLParagraphElementWrappers
+    def get_align()
+      WebKit.dom_html_paragraph_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_paragraph_element_set_align(self, value)
+    end
+  end
+  
   class DOMHTMLParagraphElement < FFI::Struct
+    include DOMHTMLParagraphElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -12195,7 +15604,34 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLParamElementWrappers
+    def get_name()
+      WebKit.dom_html_param_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_param_element_set_name(self, value)
+    end
+    
+    def get_value()
+      WebKit.dom_html_param_element_get_value(self)
+    end
+    
+    def set_value(value)
+      WebKit.dom_html_param_element_set_value(self, value)
+    end
+    
+    def get_value_type()
+      WebKit.dom_html_param_element_get_value_type(self)
+    end
+    
+    def set_value_type(value)
+      WebKit.dom_html_param_element_set_value_type(self, value)
+    end
+  end
+  
   class DOMHTMLParamElement < FFI::Struct
+    include DOMHTMLParamElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -12271,7 +15707,26 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLPreElementWrappers
+    def get_width()
+      WebKit.dom_html_pre_element_get_width(self)
+    end
+    
+    def set_width(value)
+      WebKit.dom_html_pre_element_set_width(self, value)
+    end
+    
+    def get_wrap()
+      WebKit.dom_html_pre_element_get_wrap(self)
+    end
+    
+    def set_wrap(value)
+      WebKit.dom_html_pre_element_set_wrap(self, value)
+    end
+  end
+  
   class DOMHTMLPreElement < FFI::Struct
+    include DOMHTMLPreElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -12330,7 +15785,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLQuoteElementWrappers
+    def get_cite()
+      WebKit.dom_html_quote_element_get_cite(self)
+    end
+    
+    def set_cite(value)
+      WebKit.dom_html_quote_element_set_cite(self, value)
+    end
+  end
+  
   class DOMHTMLQuoteElement < FFI::Struct
+    include DOMHTMLQuoteElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -12372,7 +15838,66 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLScriptElementWrappers
+    def get_text()
+      WebKit.dom_html_script_element_get_text(self)
+    end
+    
+    def set_text(value)
+      WebKit.dom_html_script_element_set_text(self, value)
+    end
+    
+    def get_html_for()
+      WebKit.dom_html_script_element_get_html_for(self)
+    end
+    
+    def set_html_for(value)
+      WebKit.dom_html_script_element_set_html_for(self, value)
+    end
+    
+    def get_event()
+      WebKit.dom_html_script_element_get_event(self)
+    end
+    
+    def set_event(value)
+      WebKit.dom_html_script_element_set_event(self, value)
+    end
+    
+    def get_charset()
+      WebKit.dom_html_script_element_get_charset(self)
+    end
+    
+    def set_charset(value)
+      WebKit.dom_html_script_element_set_charset(self, value)
+    end
+    
+    def get_async()
+      WebKit.dom_html_script_element_get_async(self)
+    end
+    
+    def set_async(value)
+      WebKit.dom_html_script_element_set_async(self, value)
+    end
+    
+    def get_defer()
+      WebKit.dom_html_script_element_get_defer(self)
+    end
+    
+    def set_defer(value)
+      WebKit.dom_html_script_element_set_defer(self, value)
+    end
+    
+    def get_src()
+      WebKit.dom_html_script_element_get_src(self)
+    end
+    
+    def set_src(value)
+      WebKit.dom_html_script_element_set_src(self, value)
+    end
+  end
+  
   class DOMHTMLScriptElement < FFI::Struct
+    include DOMHTMLScriptElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -12516,7 +16041,130 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLSelectElementWrappers
+    def check_validity()
+      WebKit.dom_html_select_element_check_validity(self)
+    end
+    
+    def set_custom_validity(error)
+      WebKit.dom_html_select_element_set_custom_validity(self, error)
+    end
+    
+    def add(element, before, error)
+      WebKit.dom_html_select_element_add(self, element, before, error)
+    end
+    
+    def remove(index)
+      WebKit.dom_html_select_element_remove(self, index)
+    end
+    
+    def item(index)
+      DOMNode.new WebKit.dom_html_select_element_item(self, index)
+    end
+    
+    def named_item(name)
+      DOMNode.new WebKit.dom_html_select_element_named_item(self, name)
+    end
+    
+    def get_selected_index()
+      WebKit.dom_html_select_element_get_selected_index(self)
+    end
+    
+    def set_selected_index(value)
+      WebKit.dom_html_select_element_set_selected_index(self, value)
+    end
+    
+    def get_value()
+      WebKit.dom_html_select_element_get_value(self)
+    end
+    
+    def set_value(value)
+      WebKit.dom_html_select_element_set_value(self, value)
+    end
+    
+    def get_length()
+      WebKit.dom_html_select_element_get_length(self)
+    end
+    
+    def set_length(value, error)
+      WebKit.dom_html_select_element_set_length(self, value, error)
+    end
+    
+    def get_form()
+      DOMHTMLFormElement.new WebKit.dom_html_select_element_get_form(self)
+    end
+    
+    def get_validity()
+      DOMValidityState.new WebKit.dom_html_select_element_get_validity(self)
+    end
+    
+    def get_will_validate()
+      WebKit.dom_html_select_element_get_will_validate(self)
+    end
+    
+    def get_validation_message()
+      WebKit.dom_html_select_element_get_validation_message(self)
+    end
+    
+    def get_options()
+      DOMHTMLOptionsCollection.new WebKit.dom_html_select_element_get_options(self)
+    end
+    
+    def get_disabled()
+      WebKit.dom_html_select_element_get_disabled(self)
+    end
+    
+    def set_disabled(value)
+      WebKit.dom_html_select_element_set_disabled(self, value)
+    end
+    
+    def get_autofocus()
+      WebKit.dom_html_select_element_get_autofocus(self)
+    end
+    
+    def set_autofocus(value)
+      WebKit.dom_html_select_element_set_autofocus(self, value)
+    end
+    
+    def get_multiple()
+      WebKit.dom_html_select_element_get_multiple(self)
+    end
+    
+    def set_multiple(value)
+      WebKit.dom_html_select_element_set_multiple(self, value)
+    end
+    
+    def get_name()
+      WebKit.dom_html_select_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_select_element_set_name(self, value)
+    end
+    
+    def get_required()
+      WebKit.dom_html_select_element_get_required(self)
+    end
+    
+    def set_required(value)
+      WebKit.dom_html_select_element_set_required(self, value)
+    end
+    
+    def get_size()
+      WebKit.dom_html_select_element_get_size(self)
+    end
+    
+    def set_size(value)
+      WebKit.dom_html_select_element_set_size(self, value)
+    end
+    
+    def get_labels()
+      DOMNodeList.new WebKit.dom_html_select_element_get_labels(self)
+    end
+  end
+  
   class DOMHTMLSelectElement < FFI::Struct
+    include DOMHTMLSelectElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -12798,7 +16446,30 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLStyleElementWrappers
+    def get_disabled()
+      WebKit.dom_html_style_element_get_disabled(self)
+    end
+    
+    def set_disabled(value)
+      WebKit.dom_html_style_element_set_disabled(self, value)
+    end
+    
+    def get_media()
+      WebKit.dom_html_style_element_get_media(self)
+    end
+    
+    def set_media(value)
+      WebKit.dom_html_style_element_set_media(self, value)
+    end
+    
+    def get_sheet()
+      DOMStyleSheet.new WebKit.dom_html_style_element_get_sheet(self)
+    end
+  end
+  
   class DOMHTMLStyleElement < FFI::Struct
+    include DOMHTMLStyleElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -12865,7 +16536,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLTableCaptionElementWrappers
+    def get_align()
+      WebKit.dom_html_table_caption_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_table_caption_element_set_align(self, value)
+    end
+  end
+  
   class DOMHTMLTableCaptionElement < FFI::Struct
+    include DOMHTMLTableCaptionElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -12907,7 +16589,126 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLTableCellElementWrappers
+    def get_cell_index()
+      WebKit.dom_html_table_cell_element_get_cell_index(self)
+    end
+    
+    def get_abbr()
+      WebKit.dom_html_table_cell_element_get_abbr(self)
+    end
+    
+    def set_abbr(value)
+      WebKit.dom_html_table_cell_element_set_abbr(self, value)
+    end
+    
+    def get_align()
+      WebKit.dom_html_table_cell_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_table_cell_element_set_align(self, value)
+    end
+    
+    def get_axis()
+      WebKit.dom_html_table_cell_element_get_axis(self)
+    end
+    
+    def set_axis(value)
+      WebKit.dom_html_table_cell_element_set_axis(self, value)
+    end
+    
+    def get_bg_color()
+      WebKit.dom_html_table_cell_element_get_bg_color(self)
+    end
+    
+    def set_bg_color(value)
+      WebKit.dom_html_table_cell_element_set_bg_color(self, value)
+    end
+    
+    def get_ch()
+      WebKit.dom_html_table_cell_element_get_ch(self)
+    end
+    
+    def set_ch(value)
+      WebKit.dom_html_table_cell_element_set_ch(self, value)
+    end
+    
+    def get_ch_off()
+      WebKit.dom_html_table_cell_element_get_ch_off(self)
+    end
+    
+    def set_ch_off(value)
+      WebKit.dom_html_table_cell_element_set_ch_off(self, value)
+    end
+    
+    def get_col_span()
+      WebKit.dom_html_table_cell_element_get_col_span(self)
+    end
+    
+    def set_col_span(value)
+      WebKit.dom_html_table_cell_element_set_col_span(self, value)
+    end
+    
+    def get_headers()
+      WebKit.dom_html_table_cell_element_get_headers(self)
+    end
+    
+    def set_headers(value)
+      WebKit.dom_html_table_cell_element_set_headers(self, value)
+    end
+    
+    def get_height()
+      WebKit.dom_html_table_cell_element_get_height(self)
+    end
+    
+    def set_height(value)
+      WebKit.dom_html_table_cell_element_set_height(self, value)
+    end
+    
+    def get_no_wrap()
+      WebKit.dom_html_table_cell_element_get_no_wrap(self)
+    end
+    
+    def set_no_wrap(value)
+      WebKit.dom_html_table_cell_element_set_no_wrap(self, value)
+    end
+    
+    def get_row_span()
+      WebKit.dom_html_table_cell_element_get_row_span(self)
+    end
+    
+    def set_row_span(value)
+      WebKit.dom_html_table_cell_element_set_row_span(self, value)
+    end
+    
+    def get_scope()
+      WebKit.dom_html_table_cell_element_get_scope(self)
+    end
+    
+    def set_scope(value)
+      WebKit.dom_html_table_cell_element_set_scope(self, value)
+    end
+    
+    def get_v_align()
+      WebKit.dom_html_table_cell_element_get_v_align(self)
+    end
+    
+    def set_v_align(value)
+      WebKit.dom_html_table_cell_element_set_v_align(self, value)
+    end
+    
+    def get_width()
+      WebKit.dom_html_table_cell_element_get_width(self)
+    end
+    
+    def set_width(value)
+      WebKit.dom_html_table_cell_element_set_width(self, value)
+    end
+  end
+  
   class DOMHTMLTableCellElement < FFI::Struct
+    include DOMHTMLTableCellElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -13178,7 +16979,58 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLTableColElementWrappers
+    def get_align()
+      WebKit.dom_html_table_col_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_table_col_element_set_align(self, value)
+    end
+    
+    def get_ch()
+      WebKit.dom_html_table_col_element_get_ch(self)
+    end
+    
+    def set_ch(value)
+      WebKit.dom_html_table_col_element_set_ch(self, value)
+    end
+    
+    def get_ch_off()
+      WebKit.dom_html_table_col_element_get_ch_off(self)
+    end
+    
+    def set_ch_off(value)
+      WebKit.dom_html_table_col_element_set_ch_off(self, value)
+    end
+    
+    def get_span()
+      WebKit.dom_html_table_col_element_get_span(self)
+    end
+    
+    def set_span(value)
+      WebKit.dom_html_table_col_element_set_span(self, value)
+    end
+    
+    def get_v_align()
+      WebKit.dom_html_table_col_element_get_v_align(self)
+    end
+    
+    def set_v_align(value)
+      WebKit.dom_html_table_col_element_set_v_align(self, value)
+    end
+    
+    def get_width()
+      WebKit.dom_html_table_col_element_get_width(self)
+    end
+    
+    def set_width(value)
+      WebKit.dom_html_table_col_element_set_width(self, value)
+    end
+  end
+  
   class DOMHTMLTableColElement < FFI::Struct
+    include DOMHTMLTableColElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -13305,7 +17157,146 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLTableElementWrappers
+    def create_t_head()
+      DOMHTMLElement.new WebKit.dom_html_table_element_create_t_head(self)
+    end
+    
+    def delete_t_head()
+      WebKit.dom_html_table_element_delete_t_head(self)
+    end
+    
+    def create_t_foot()
+      DOMHTMLElement.new WebKit.dom_html_table_element_create_t_foot(self)
+    end
+    
+    def delete_t_foot()
+      WebKit.dom_html_table_element_delete_t_foot(self)
+    end
+    
+    def create_caption()
+      DOMHTMLElement.new WebKit.dom_html_table_element_create_caption(self)
+    end
+    
+    def delete_caption()
+      WebKit.dom_html_table_element_delete_caption(self)
+    end
+    
+    def insert_row(index, error)
+      DOMHTMLElement.new WebKit.dom_html_table_element_insert_row(self, index, error)
+    end
+    
+    def delete_row(index, error)
+      WebKit.dom_html_table_element_delete_row(self, index, error)
+    end
+    
+    def get_caption()
+      DOMHTMLTableCaptionElement.new WebKit.dom_html_table_element_get_caption(self)
+    end
+    
+    def set_caption(value, error)
+      WebKit.dom_html_table_element_set_caption(self, value, error)
+    end
+    
+    def get_t_head()
+      DOMHTMLTableSectionElement.new WebKit.dom_html_table_element_get_t_head(self)
+    end
+    
+    def set_t_head(value, error)
+      WebKit.dom_html_table_element_set_t_head(self, value, error)
+    end
+    
+    def get_t_foot()
+      DOMHTMLTableSectionElement.new WebKit.dom_html_table_element_get_t_foot(self)
+    end
+    
+    def set_t_foot(value, error)
+      WebKit.dom_html_table_element_set_t_foot(self, value, error)
+    end
+    
+    def get_rows()
+      DOMHTMLCollection.new WebKit.dom_html_table_element_get_rows(self)
+    end
+    
+    def get_t_bodies()
+      DOMHTMLCollection.new WebKit.dom_html_table_element_get_t_bodies(self)
+    end
+    
+    def get_align()
+      WebKit.dom_html_table_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_table_element_set_align(self, value)
+    end
+    
+    def get_bg_color()
+      WebKit.dom_html_table_element_get_bg_color(self)
+    end
+    
+    def set_bg_color(value)
+      WebKit.dom_html_table_element_set_bg_color(self, value)
+    end
+    
+    def get_border()
+      WebKit.dom_html_table_element_get_border(self)
+    end
+    
+    def set_border(value)
+      WebKit.dom_html_table_element_set_border(self, value)
+    end
+    
+    def get_cell_padding()
+      WebKit.dom_html_table_element_get_cell_padding(self)
+    end
+    
+    def set_cell_padding(value)
+      WebKit.dom_html_table_element_set_cell_padding(self, value)
+    end
+    
+    def get_cell_spacing()
+      WebKit.dom_html_table_element_get_cell_spacing(self)
+    end
+    
+    def set_cell_spacing(value)
+      WebKit.dom_html_table_element_set_cell_spacing(self, value)
+    end
+    
+    def get_frame()
+      WebKit.dom_html_table_element_get_frame(self)
+    end
+    
+    def set_frame(value)
+      WebKit.dom_html_table_element_set_frame(self, value)
+    end
+    
+    def get_rules()
+      WebKit.dom_html_table_element_get_rules(self)
+    end
+    
+    def set_rules(value)
+      WebKit.dom_html_table_element_set_rules(self, value)
+    end
+    
+    def get_summary()
+      WebKit.dom_html_table_element_get_summary(self)
+    end
+    
+    def set_summary(value)
+      WebKit.dom_html_table_element_set_summary(self, value)
+    end
+    
+    def get_width()
+      WebKit.dom_html_table_element_get_width(self)
+    end
+    
+    def set_width(value)
+      WebKit.dom_html_table_element_set_width(self, value)
+    end
+  end
+  
   class DOMHTMLTableElement < FFI::Struct
+    include DOMHTMLTableElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -13621,7 +17612,70 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLTableRowElementWrappers
+    def insert_cell(index, error)
+      DOMHTMLElement.new WebKit.dom_html_table_row_element_insert_cell(self, index, error)
+    end
+    
+    def delete_cell(index, error)
+      WebKit.dom_html_table_row_element_delete_cell(self, index, error)
+    end
+    
+    def get_row_index()
+      WebKit.dom_html_table_row_element_get_row_index(self)
+    end
+    
+    def get_section_row_index()
+      WebKit.dom_html_table_row_element_get_section_row_index(self)
+    end
+    
+    def get_cells()
+      DOMHTMLCollection.new WebKit.dom_html_table_row_element_get_cells(self)
+    end
+    
+    def get_align()
+      WebKit.dom_html_table_row_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_table_row_element_set_align(self, value)
+    end
+    
+    def get_bg_color()
+      WebKit.dom_html_table_row_element_get_bg_color(self)
+    end
+    
+    def set_bg_color(value)
+      WebKit.dom_html_table_row_element_set_bg_color(self, value)
+    end
+    
+    def get_ch()
+      WebKit.dom_html_table_row_element_get_ch(self)
+    end
+    
+    def set_ch(value)
+      WebKit.dom_html_table_row_element_set_ch(self, value)
+    end
+    
+    def get_ch_off()
+      WebKit.dom_html_table_row_element_get_ch_off(self)
+    end
+    
+    def set_ch_off(value)
+      WebKit.dom_html_table_row_element_set_ch_off(self, value)
+    end
+    
+    def get_v_align()
+      WebKit.dom_html_table_row_element_get_v_align(self)
+    end
+    
+    def set_v_align(value)
+      WebKit.dom_html_table_row_element_set_v_align(self, value)
+    end
+  end
+  
   class DOMHTMLTableRowElement < FFI::Struct
+    include DOMHTMLTableRowElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -13775,7 +17829,54 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLTableSectionElementWrappers
+    def insert_row(index, error)
+      DOMHTMLElement.new WebKit.dom_html_table_section_element_insert_row(self, index, error)
+    end
+    
+    def delete_row(index, error)
+      WebKit.dom_html_table_section_element_delete_row(self, index, error)
+    end
+    
+    def get_align()
+      WebKit.dom_html_table_section_element_get_align(self)
+    end
+    
+    def set_align(value)
+      WebKit.dom_html_table_section_element_set_align(self, value)
+    end
+    
+    def get_ch()
+      WebKit.dom_html_table_section_element_get_ch(self)
+    end
+    
+    def set_ch(value)
+      WebKit.dom_html_table_section_element_set_ch(self, value)
+    end
+    
+    def get_ch_off()
+      WebKit.dom_html_table_section_element_get_ch_off(self)
+    end
+    
+    def set_ch_off(value)
+      WebKit.dom_html_table_section_element_set_ch_off(self, value)
+    end
+    
+    def get_v_align()
+      WebKit.dom_html_table_section_element_get_v_align(self)
+    end
+    
+    def set_v_align(value)
+      WebKit.dom_html_table_section_element_set_v_align(self, value)
+    end
+    
+    def get_rows()
+      DOMHTMLCollection.new WebKit.dom_html_table_section_element_get_rows(self)
+    end
+  end
+  
   class DOMHTMLTableSectionElement < FFI::Struct
+    include DOMHTMLTableSectionElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -13896,7 +17997,174 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLTextAreaElementWrappers
+    def is_edited()
+      WebKit.dom_html_text_area_element_is_edited(self)
+    end
+    
+    def select()
+      WebKit.dom_html_text_area_element_select(self)
+    end
+    
+    def check_validity()
+      WebKit.dom_html_text_area_element_check_validity(self)
+    end
+    
+    def set_custom_validity(error)
+      WebKit.dom_html_text_area_element_set_custom_validity(self, error)
+    end
+    
+    def set_selection_range(start, end_, direction)
+      WebKit.dom_html_text_area_element_set_selection_range(self, start, end_, direction)
+    end
+    
+    def get_default_value()
+      WebKit.dom_html_text_area_element_get_default_value(self)
+    end
+    
+    def set_default_value(value)
+      WebKit.dom_html_text_area_element_set_default_value(self, value)
+    end
+    
+    def get_form()
+      DOMHTMLFormElement.new WebKit.dom_html_text_area_element_get_form(self)
+    end
+    
+    def get_validity()
+      DOMValidityState.new WebKit.dom_html_text_area_element_get_validity(self)
+    end
+    
+    def get_access_key()
+      WebKit.dom_html_text_area_element_get_access_key(self)
+    end
+    
+    def set_access_key(value)
+      WebKit.dom_html_text_area_element_set_access_key(self, value)
+    end
+    
+    def get_cols()
+      WebKit.dom_html_text_area_element_get_cols(self)
+    end
+    
+    def set_cols(value)
+      WebKit.dom_html_text_area_element_set_cols(self, value)
+    end
+    
+    def get_disabled()
+      WebKit.dom_html_text_area_element_get_disabled(self)
+    end
+    
+    def set_disabled(value)
+      WebKit.dom_html_text_area_element_set_disabled(self, value)
+    end
+    
+    def get_autofocus()
+      WebKit.dom_html_text_area_element_get_autofocus(self)
+    end
+    
+    def set_autofocus(value)
+      WebKit.dom_html_text_area_element_set_autofocus(self, value)
+    end
+    
+    def get_max_length()
+      WebKit.dom_html_text_area_element_get_max_length(self)
+    end
+    
+    def set_max_length(value, error)
+      WebKit.dom_html_text_area_element_set_max_length(self, value, error)
+    end
+    
+    def get_name()
+      WebKit.dom_html_text_area_element_get_name(self)
+    end
+    
+    def set_name(value)
+      WebKit.dom_html_text_area_element_set_name(self, value)
+    end
+    
+    def get_placeholder()
+      WebKit.dom_html_text_area_element_get_placeholder(self)
+    end
+    
+    def set_placeholder(value)
+      WebKit.dom_html_text_area_element_set_placeholder(self, value)
+    end
+    
+    def get_read_only()
+      WebKit.dom_html_text_area_element_get_read_only(self)
+    end
+    
+    def set_read_only(value)
+      WebKit.dom_html_text_area_element_set_read_only(self, value)
+    end
+    
+    def get_required()
+      WebKit.dom_html_text_area_element_get_required(self)
+    end
+    
+    def set_required(value)
+      WebKit.dom_html_text_area_element_set_required(self, value)
+    end
+    
+    def get_rows()
+      WebKit.dom_html_text_area_element_get_rows(self)
+    end
+    
+    def set_rows(value)
+      WebKit.dom_html_text_area_element_set_rows(self, value)
+    end
+    
+    def get_value()
+      WebKit.dom_html_text_area_element_get_value(self)
+    end
+    
+    def set_value(value)
+      WebKit.dom_html_text_area_element_set_value(self, value)
+    end
+    
+    def get_text_length()
+      WebKit.dom_html_text_area_element_get_text_length(self)
+    end
+    
+    def get_will_validate()
+      WebKit.dom_html_text_area_element_get_will_validate(self)
+    end
+    
+    def get_validation_message()
+      WebKit.dom_html_text_area_element_get_validation_message(self)
+    end
+    
+    def get_selection_start()
+      WebKit.dom_html_text_area_element_get_selection_start(self)
+    end
+    
+    def set_selection_start(value)
+      WebKit.dom_html_text_area_element_set_selection_start(self, value)
+    end
+    
+    def get_selection_end()
+      WebKit.dom_html_text_area_element_get_selection_end(self)
+    end
+    
+    def set_selection_end(value)
+      WebKit.dom_html_text_area_element_set_selection_end(self, value)
+    end
+    
+    def get_selection_direction()
+      WebKit.dom_html_text_area_element_get_selection_direction(self)
+    end
+    
+    def set_selection_direction(value)
+      WebKit.dom_html_text_area_element_set_selection_direction(self, value)
+    end
+    
+    def get_labels()
+      DOMNodeList.new WebKit.dom_html_text_area_element_get_labels(self)
+    end
+  end
+  
   class DOMHTMLTextAreaElement < FFI::Struct
+    include DOMHTMLTextAreaElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -14261,7 +18529,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLTitleElementWrappers
+    def get_text()
+      WebKit.dom_html_title_element_get_text(self)
+    end
+    
+    def set_text(value)
+      WebKit.dom_html_title_element_set_text(self, value)
+    end
+  end
+  
   class DOMHTMLTitleElement < FFI::Struct
+    include DOMHTMLTitleElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -14303,7 +18582,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLElement) 
+  module DOMHTMLUListElementWrappers
+    def get_compact()
+      WebKit.dom_htmlu_list_element_get_compact(self)
+    end
+    
+    def set_compact(value)
+      WebKit.dom_htmlu_list_element_set_compact(self, value)
+    end
+  end
+  
   class DOMHTMLUListElement < FFI::Struct
+    include DOMHTMLUListElementWrappers
     layout :parent_instance, DOMHTMLElement.by_value
   end
   
@@ -14345,7 +18635,74 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMHTMLMediaElement) 
+  module DOMHTMLVideoElementWrappers
+    def webkit_enter_fullscreen(error)
+      WebKit.dom_html_video_element_webkit_enter_fullscreen(self, error)
+    end
+    
+    def webkit_exit_fullscreen()
+      WebKit.dom_html_video_element_webkit_exit_fullscreen(self)
+    end
+    
+    def webkit_enter_full_screen(error)
+      WebKit.dom_html_video_element_webkit_enter_full_screen(self, error)
+    end
+    
+    def webkit_exit_full_screen()
+      WebKit.dom_html_video_element_webkit_exit_full_screen(self)
+    end
+    
+    def get_width()
+      WebKit.dom_html_video_element_get_width(self)
+    end
+    
+    def set_width(value)
+      WebKit.dom_html_video_element_set_width(self, value)
+    end
+    
+    def get_height()
+      WebKit.dom_html_video_element_get_height(self)
+    end
+    
+    def set_height(value)
+      WebKit.dom_html_video_element_set_height(self, value)
+    end
+    
+    def get_video_width()
+      WebKit.dom_html_video_element_get_video_width(self)
+    end
+    
+    def get_video_height()
+      WebKit.dom_html_video_element_get_video_height(self)
+    end
+    
+    def get_poster()
+      WebKit.dom_html_video_element_get_poster(self)
+    end
+    
+    def set_poster(value)
+      WebKit.dom_html_video_element_set_poster(self, value)
+    end
+    
+    def get_webkit_supports_fullscreen()
+      WebKit.dom_html_video_element_get_webkit_supports_fullscreen(self)
+    end
+    
+    def get_webkit_displaying_fullscreen()
+      WebKit.dom_html_video_element_get_webkit_displaying_fullscreen(self)
+    end
+    
+    def get_webkit_decoded_frame_count()
+      WebKit.dom_html_video_element_get_webkit_decoded_frame_count(self)
+    end
+    
+    def get_webkit_dropped_frame_count()
+      WebKit.dom_html_video_element_get_webkit_dropped_frame_count(self)
+    end
+  end
+  
   class DOMHTMLVideoElement < FFI::Struct
+    include DOMHTMLVideoElementWrappers
     layout :parent_instance, DOMHTMLMediaElement.by_value
   end
   
@@ -14921,7 +19278,50 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMEvent) 
+  module DOMUIEventWrappers
+    def init_ui_event(type, can_bubble, cancelable, view, detail)
+      WebKit.dom_ui_event_init_ui_event(self, type, can_bubble, cancelable, view, detail)
+    end
+    
+    def get_view()
+      DOMDOMWindow.new WebKit.dom_ui_event_get_view(self)
+    end
+    
+    def get_detail()
+      WebKit.dom_ui_event_get_detail(self)
+    end
+    
+    def get_key_code()
+      WebKit.dom_ui_event_get_key_code(self)
+    end
+    
+    def get_char_code()
+      WebKit.dom_ui_event_get_char_code(self)
+    end
+    
+    def get_layer_x()
+      WebKit.dom_ui_event_get_layer_x(self)
+    end
+    
+    def get_layer_y()
+      WebKit.dom_ui_event_get_layer_y(self)
+    end
+    
+    def get_page_x()
+      WebKit.dom_ui_event_get_page_x(self)
+    end
+    
+    def get_page_y()
+      WebKit.dom_ui_event_get_page_y(self)
+    end
+    
+    def get_which()
+      WebKit.dom_ui_event_get_which(self)
+    end
+  end
+  
   class DOMUIEvent < FFI::Struct
+    include DOMUIEventWrappers
     layout :parent_instance, DOMEvent.by_value
   end
   
@@ -17124,7 +21524,54 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMWebKitAnimationWrappers
+    def play()
+      WebKit.dom_webkit_animation_play(self)
+    end
+    
+    def pause()
+      WebKit.dom_webkit_animation_pause(self)
+    end
+    
+    def get_name()
+      WebKit.dom_webkit_animation_get_name(self)
+    end
+    
+    def get_duration()
+      WebKit.dom_webkit_animation_get_duration(self)
+    end
+    
+    def get_elapsed_time()
+      WebKit.dom_webkit_animation_get_elapsed_time(self)
+    end
+    
+    def set_elapsed_time(value)
+      WebKit.dom_webkit_animation_set_elapsed_time(self, value)
+    end
+    
+    def get_delay()
+      WebKit.dom_webkit_animation_get_delay(self)
+    end
+    
+    def get_paused()
+      WebKit.dom_webkit_animation_get_paused(self)
+    end
+    
+    def get_ended()
+      WebKit.dom_webkit_animation_get_ended(self)
+    end
+    
+    def get_direction()
+      WebKit.dom_webkit_animation_get_direction(self)
+    end
+    
+    def get_fill_mode()
+      WebKit.dom_webkit_animation_get_fill_mode(self)
+    end
+  end
+  
   class DOMWebKitAnimation < FFI::Struct
+    include DOMWebKitAnimationWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -17238,7 +21685,18 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMWebKitAnimationListWrappers
+    def item(index)
+      DOMWebKitAnimation.new WebKit.dom_webkit_animation_list_item(self, index)
+    end
+    
+    def get_length()
+      WebKit.dom_webkit_animation_list_get_length(self)
+    end
+  end
+  
   class DOMWebKitAnimationList < FFI::Struct
+    include DOMWebKitAnimationListWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -17280,7 +21738,26 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMWebKitPointWrappers
+    def get_x()
+      WebKit.dom_webkit_point_get_x(self)
+    end
+    
+    def set_x(value)
+      WebKit.dom_webkit_point_set_x(self, value)
+    end
+    
+    def get_y()
+      WebKit.dom_webkit_point_get_y(self)
+    end
+    
+    def set_y(value)
+      WebKit.dom_webkit_point_set_y(self, value)
+    end
+  end
+  
   class DOMWebKitPoint < FFI::Struct
+    include DOMWebKitPointWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -17339,7 +21816,14 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMXPathExpressionWrappers
+    def evaluate(context_node, type, in_result, error)
+      DOMXPathResult.new WebKit.dom_xpath_expression_evaluate(self, context_node, type, in_result, error)
+    end
+  end
+  
   class DOMXPathExpression < FFI::Struct
+    include DOMXPathExpressionWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -17376,7 +21860,14 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMXPathNSResolverWrappers
+    def lookup_namespace_uri(prefix)
+      WebKit.dom_xpath_ns_resolver_lookup_namespace_uri(self, prefix)
+    end
+  end
+  
   class DOMXPathNSResolver < FFI::Struct
+    include DOMXPathNSResolverWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -17410,7 +21901,46 @@ module WebKit
   # = Fields:
   # :parent_instance ::
   #   (DOMObject) 
+  module DOMXPathResultWrappers
+    def iterate_next(error)
+      DOMNode.new WebKit.dom_xpath_result_iterate_next(self, error)
+    end
+    
+    def snapshot_item(index, error)
+      DOMNode.new WebKit.dom_xpath_result_snapshot_item(self, index, error)
+    end
+    
+    def get_result_type()
+      WebKit.dom_xpath_result_get_result_type(self)
+    end
+    
+    def get_number_value(error)
+      WebKit.dom_xpath_result_get_number_value(self, error)
+    end
+    
+    def get_string_value(error)
+      WebKit.dom_xpath_result_get_string_value(self, error)
+    end
+    
+    def get_boolean_value(error)
+      WebKit.dom_xpath_result_get_boolean_value(self, error)
+    end
+    
+    def get_single_node_value(error)
+      DOMNode.new WebKit.dom_xpath_result_get_single_node_value(self, error)
+    end
+    
+    def get_invalid_iterator_state()
+      WebKit.dom_xpath_result_get_invalid_iterator_state(self)
+    end
+    
+    def get_snapshot_length(error)
+      WebKit.dom_xpath_result_get_snapshot_length(self, error)
+    end
+  end
+  
   class DOMXPathResult < FFI::Struct
+    include DOMXPathResultWrappers
     layout :parent_instance, DOMObject.by_value
   end
   
@@ -17515,6 +22045,8 @@ module WebKit
   # <em>This entry is only for documentation and no real method. The FFI::Enum can be accessed via #enum_type(:web_kit_download_status).</em>
   # 
   # === Options:
+  # :webkit_download_status_error ::
+  #   
   # :webkit_download_status_created ::
   #   
   # :webkit_download_status_started ::
@@ -17528,6 +22060,7 @@ module WebKit
   # @return [Symbol]
   # @scope class
   enum :web_kit_download_status, [
+    :webkit_download_status_error, - 1,
     :webkit_download_status_created, 0,
     :webkit_download_status_started,
     :webkit_download_status_cancelled,
@@ -18041,11 +22574,29 @@ module WebKit
   # <em>This entry is only for documentation and no real method. The FFI::Enum can be accessed via #enum_type(:web_kit_hit_test_result_context).</em>
   # 
   # === Options:
+  # :webkit_hit_test_result_context_document ::
+  #   
+  # :webkit_hit_test_result_context_link ::
+  #   
+  # :webkit_hit_test_result_context_image ::
+  #   
+  # :webkit_hit_test_result_context_media ::
+  #   
+  # :webkit_hit_test_result_context_selection ::
+  #   
+  # :webkit_hit_test_result_context_editable ::
+  #   
   # 
   # @method _enum_web_kit_hit_test_result_context_
   # @return [Symbol]
   # @scope class
   enum :web_kit_hit_test_result_context, [
+    :webkit_hit_test_result_context_document, 1 << 1,
+    :webkit_hit_test_result_context_link, 1 << 2,
+    :webkit_hit_test_result_context_image, 1 << 3,
+    :webkit_hit_test_result_context_media, 1 << 4,
+    :webkit_hit_test_result_context_selection, 1 << 5,
+    :webkit_hit_test_result_context_editable, 1 << 6
   ]
   
   # (Not documented)

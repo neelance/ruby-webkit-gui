@@ -110,11 +110,20 @@ module GTK
   # <em>This entry is only for documentation and no real method. The FFI::Enum can be accessed via #enum_type(:gtk_attach_options).</em>
   # 
   # === Options:
+  # :expand ::
+  #   
+  # :shrink ::
+  #   
+  # :fill ::
+  #   
   # 
   # @method _enum_gtk_attach_options_
   # @return [Symbol]
   # @scope class
   enum :gtk_attach_options, [
+    :expand, 1 << 0,
+    :shrink, 1 << 1,
+    :fill, 1 << 2
   ]
   
   # GtkButtonBoxStyle:
@@ -1491,14 +1500,32 @@ module GTK
   # <em>This entry is only for documentation and no real method. The FFI::Enum can be accessed via #enum_type(:gtk_state_flags).</em>
   # 
   # === Options:
-  # :state_flag_normal ::
+  # :flag_normal ::
+  #   
+  # :flag_active ::
+  #   
+  # :flag_prelight ::
+  #   
+  # :flag_selected ::
+  #   
+  # :flag_insensitive ::
+  #   
+  # :flag_inconsistent ::
+  #   
+  # :flag_focused ::
   #   
   # 
   # @method _enum_gtk_state_flags_
   # @return [Symbol]
   # @scope class
   enum :gtk_state_flags, [
-    :state_flag_normal, 0
+    :flag_normal, 0,
+    :flag_active, 1 << 0,
+    :flag_prelight, 1 << 1,
+    :flag_selected, 1 << 2,
+    :flag_insensitive, 1 << 3,
+    :flag_inconsistent, 1 << 4,
+    :flag_focused, 1 << 5
   ]
   
   # GtkRegionFlags:
@@ -1513,11 +1540,26 @@ module GTK
   # <em>This entry is only for documentation and no real method. The FFI::Enum can be accessed via #enum_type(:gtk_region_flags).</em>
   # 
   # === Options:
+  # :even ::
+  #   
+  # :odd ::
+  #   
+  # :first ::
+  #   
+  # :last ::
+  #   
+  # :sorted ::
+  #   
   # 
   # @method _enum_gtk_region_flags_
   # @return [Symbol]
   # @scope class
   enum :gtk_region_flags, [
+    :even, 1 << 0,
+    :odd, 1 << 1,
+    :first, 1 << 2,
+    :last, 1 << 3,
+    :sorted, 1 << 5
   ]
   
   # GtkJunctionSides:
@@ -1536,14 +1578,26 @@ module GTK
   # <em>This entry is only for documentation and no real method. The FFI::Enum can be accessed via #enum_type(:gtk_junction_sides).</em>
   # 
   # === Options:
-  # :junction_none ::
+  # :none ::
+  #   
+  # :corner_topleft ::
+  #   
+  # :corner_topright ::
+  #   
+  # :corner_bottomleft ::
+  #   
+  # :corner_bottomright ::
   #   
   # 
   # @method _enum_gtk_junction_sides_
   # @return [Symbol]
   # @scope class
   enum :gtk_junction_sides, [
-    :junction_none, 0
+    :none, 0,
+    :corner_topleft, 1 << 0,
+    :corner_topright, 1 << 1,
+    :corner_bottomleft, 1 << 2,
+    :corner_bottomright, 1 << 3
   ]
   
   # GtkBorderStyle:

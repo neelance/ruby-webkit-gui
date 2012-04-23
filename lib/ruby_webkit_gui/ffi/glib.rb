@@ -109,6 +109,10 @@ module GLIB
   # === Options:
   # :none ::
   #   < skip >
+  # :objects ::
+  #   
+  # :signals ::
+  #   
   # :mask ::
   #   
   # 
@@ -117,6 +121,8 @@ module GLIB
   # @scope class
   enum :g_type_debug_flags, [
     :none, 0,
+    :objects, 1 << 0,
+    :signals, 1 << 1,
     :mask, 0x03
   ]
   
@@ -1275,11 +1281,35 @@ module GLIB
   # <em>This entry is only for documentation and no real method. The FFI::Enum can be accessed via #enum_type(:g_signal_flags).</em>
   # 
   # === Options:
+  # :run_first ::
+  #   
+  # :run_last ::
+  #   
+  # :run_cleanup ::
+  #   
+  # :no_recurse ::
+  #   
+  # :detailed ::
+  #   
+  # :action ::
+  #   
+  # :no_hooks ::
+  #   
+  # :must_collect ::
+  #   
   # 
   # @method _enum_g_signal_flags_
   # @return [Symbol]
   # @scope class
   enum :g_signal_flags, [
+    :run_first, 1 << 0,
+    :run_last, 1 << 1,
+    :run_cleanup, 1 << 2,
+    :no_recurse, 1 << 3,
+    :detailed, 1 << 4,
+    :action, 1 << 5,
+    :no_hooks, 1 << 6,
+    :must_collect, 1 << 7
   ]
   
   # GConnectFlags:
@@ -1294,11 +1324,17 @@ module GLIB
   # <em>This entry is only for documentation and no real method. The FFI::Enum can be accessed via #enum_type(:g_connect_flags).</em>
   # 
   # === Options:
+  # :after ::
+  #   
+  # :swapped ::
+  #   
   # 
   # @method _enum_g_connect_flags_
   # @return [Symbol]
   # @scope class
   enum :g_connect_flags, [
+    :after, 1 << 0,
+    :swapped, 1 << 1
   ]
   
   # GSignalMatchType:
@@ -1316,11 +1352,29 @@ module GLIB
   # <em>This entry is only for documentation and no real method. The FFI::Enum can be accessed via #enum_type(:g_signal_match_type).</em>
   # 
   # === Options:
+  # :id ::
+  #   
+  # :detail ::
+  #   
+  # :closure ::
+  #   
+  # :func ::
+  #   
+  # :data ::
+  #   
+  # :unblocked ::
+  #   
   # 
   # @method _enum_g_signal_match_type_
   # @return [Symbol]
   # @scope class
   enum :g_signal_match_type, [
+    :id, 1 << 0,
+    :detail, 1 << 1,
+    :closure, 1 << 2,
+    :func, 1 << 3,
+    :data, 1 << 4,
+    :unblocked, 1 << 5
   ]
   
   # GSignalInvocationHint:
