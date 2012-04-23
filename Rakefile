@@ -7,7 +7,7 @@ task :generate_ffi do
     headers:       ["glib-object.h", /(gtype|gsignal)\.h/],
     cflags:        `pkg-config --cflags gobject-2.0`.split,
     prefixes:      ["g_", "G_"],
-    output:        "ffi/glib.rb"
+    output:        "lib/ruby_webkit_gui/ffi/glib.rb"
   )
   
   FFIGen.generate(
@@ -16,7 +16,7 @@ task :generate_ffi do
     headers:       ["gtk/gtk.h", /(gtkmain|gtkwindow|gtkwidget|gtkcontainer|gtkscrolledwindow|gtkenums)\.h/],
     cflags:        `pkg-config --cflags gtk+-3.0`.split,
     prefixes:      ["gtk_", "_Gtk", "GTK_"],
-    output:        "ffi/gtk.rb"
+    output:        "lib/ruby_webkit_gui/ffi/gtk.rb"
   )
   
   FFIGen.generate(
@@ -25,7 +25,7 @@ task :generate_ffi do
     headers:       ["webkit/webkit.h", /webkit\/.*\.h/],
     cflags:        `pkg-config --cflags webkitgtk-3.0`.split,
     prefixes:      ["webkit_", "_WebKit"],
-    output:        "ffi/webkit.rb"
+    output:        "lib/ruby_webkit_gui/ffi/webkit.rb"
   )
   
 end
