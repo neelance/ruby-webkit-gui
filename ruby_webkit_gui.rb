@@ -44,6 +44,7 @@ class WebKitInterface
     class Style < Wrapper
       def method_missing(name, *args, &block)
         return super if [:to_ary].include? name
+        
         if name.to_s.end_with? "="
           WebKit.dom_css_style_declaration_set_property @native, name.to_s[0..-2], args.first, "", nil
         else
@@ -65,6 +66,8 @@ class WebKitInterface
     end
     
     def method_missing(name, *args, &block)
+      return super if [:to_ary].include? name
+      
       if name.to_s.end_with? "="
         if name.to_s.start_with? "on"
           @native.add_event_listener name.to_s[2..-2], FFI::Function.new(:void, [], &(block || args.first)), 0, nil
@@ -73,42 +76,72 @@ class WebKitInterface
         end
         args.first
       else
-        super
+        @native.get_attribute name.to_s
+      end
+    end
+  end
+  
+  class DynamicArray
+    def initialize(context)
+      @context = context
+      @targets = []
+      @content = []
+    end
+    
+    def each(&block)
+      @targets << [@context.current_target, block]
+    end
+    
+    def <<(entry)
+      @content << entry
+      @targets.each do |(target, block)|
+        @context.with_target target do
+          @context.instance_exec(entry, &block)
+        end
       end
     end
   end
   
   class DSLContext
+    attr_reader :current_target
+    
     def initialize(dom)
       @dom = dom
       html = dom.get_first_child
       head = html.get_first_child
       body = head.get_next_sibling
-      @stack = [Node.new(body)]
+      @current_target = Node.new body
+    end
+    
+    def with_target(target)
+      previous_target = @current_target
+      @current_target = target
+      yield
+      @current_target = previous_target
     end
     
     def text(content)
       node = @dom.create_text_node content
-      @stack.last << node
+      current_target << node
       node
     end
     
-    def method_missing(name, *args, &block)
+    def method_missing(name, *args)
       element = Element.new @dom, name
-      @stack.last << element
-      @stack.push element
-      args.each do |arg|
-        case arg
-        when String
-          text arg
-        when Hash
-          arg.each do |attribute, value|
-            element.__send__ "#{attribute}=", value
+      current_target << element
+      with_target element do
+        args.each do |arg|
+          case arg
+          when Hash
+            arg.each do |attribute, value|
+              element.__send__ "#{attribute}=", value
+            end
+          else
+            text arg.to_s
           end
         end
+        yield if block_given?
       end
-      yield if block_given?
-      @stack.pop
       element
     end    
   end
