@@ -65,6 +65,14 @@ class WebKitInterface
       Style.new @native.get_style
     end
     
+    def text
+      @native.get_text_content
+    end
+    
+    def text=(content)
+      @native.set_text_content content, nil
+    end
+    
     def method_missing(name, *args, &block)
       return super if [:to_ary].include? name
       
