@@ -19,6 +19,12 @@ module WebKit
     include DOMNodeWrappers
     include DOMEventTargetWrappers
   end
+  
+  class DOMHTMLInputElement
+    include DOMNodeWrappers
+    include DOMEventTargetWrappers
+    include DOMElementWrappers
+  end
 end
 
 GTK.init nil, nil
@@ -89,6 +95,21 @@ class WebKitInterface
     end
   end
   
+  class InputElement < Element
+    def initialize(*args)
+      super
+      @native = WebKit::DOMHTMLInputElement.new @native.to_ptr
+    end
+    
+    def value
+      @native.get_value
+    end
+    
+    def value=(content)
+      @native.set_value content
+    end
+  end
+  
   class DynamicArray
     def initialize(context)
       @context = context
@@ -135,7 +156,12 @@ class WebKitInterface
     end
     
     def method_missing(name, *args)
-      element = Element.new @dom, name
+      element = case name
+      when :input
+        InputElement.new @dom, name
+      else
+        Element.new @dom, name
+      end
       current_target << element
       with_target element do
         args.each do |arg|

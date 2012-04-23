@@ -10,9 +10,11 @@ button "Get Text", onclick: -> { puts @label.text }
 button "Set Text", onclick: -> { @label.text = "bbb" }
 br
 
-@input = input type: "text"
+@input = input type: "text", value: "something"
 button "Get Input Type", onclick: -> { puts @input.type }
 button "Set Input Type", onclick: -> { @input.type = "hidden" }
+button "Get Input Value", onclick: -> { puts @input.value }
+button "Set Input Value", onclick: -> { @input.value = "nothing" }
 br
 
 @list = DynamicArray.new self
