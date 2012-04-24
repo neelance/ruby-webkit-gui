@@ -40,6 +40,19 @@ class WebKitInterface
     end
   end
   
+  class DOM < Wrapper
+    attr_reader :callbacks
+    
+    def initialize(native)
+      super
+      @callbacks = []
+    end
+    
+    def method_missing(name, *args, &block)
+      @native.send name, *args, &block
+    end
+  end
+  
   class Node < Wrapper
     def <<(child)
       @native.append_child child, nil
@@ -65,6 +78,7 @@ class WebKitInterface
     
     def initialize(dom, name)
       super dom.create_element(name.to_s, nil)
+      @dom = dom
     end
     
     def style
@@ -84,7 +98,10 @@ class WebKitInterface
       
       if name.to_s.end_with? "="
         if name.to_s.start_with? "on"
-          @native.add_event_listener name.to_s[2..-2], FFI::Function.new(:void, [], &(block || args.first)), 0, nil
+          block ||= args.first
+          function = FFI::Function.new :void, [], &block
+          @dom.callbacks << function # avoid garbage collection
+          @native.add_event_listener name.to_s[2..-2], function, 0, nil
         else
           @native.set_attribute name.to_s[0..-2], args.first.to_s, nil
         end
@@ -192,7 +209,8 @@ class WebKitInterface
     GTK.container_add scrolled_window, @web_view
     GTK.container_add @window, scrolled_window
     
-    @context = DSLContext.new @web_view.get_dom_document
+    @dom = DOM.new @web_view.get_dom_document
+    @context = DSLContext.new @dom
     @context.instance_eval File.read(filename), filename, 1
   end
   
