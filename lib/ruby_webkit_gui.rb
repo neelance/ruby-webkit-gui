@@ -197,9 +197,9 @@ class WebKitInterface
     end    
   end
   
-  def initialize(filename)
+  def initialize(filename, options = {})
     @window = GTK.window_new :toplevel
-    GTK.window_set_default_size @window, 800, 600
+    GTK.window_set_default_size @window, options[:window_width] || 800, options[:window_height] || 600
     
     callback = FFI::Function.new(:void, [:pointer, :pointer]) { GTK.main_quit }
     GLIB.signal_connect @window, "destroy", callback, nil
